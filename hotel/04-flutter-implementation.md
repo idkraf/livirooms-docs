@@ -339,56 +339,42 @@ void _handleUri(Uri uri) {
 
 ## 5. Pendaftaran Route pada `DummyApiClient` & Client HTTP Real
 
-Seluruh request API baru diikutsertakan pada pendaftaran route tabel di [`flutter/lib/services/dummy_api_client.dart`](file:///d:/Project/Fastwork/rental.apartemen/flutter/lib/services/dummy_api_client.dart) dan penyediaan fixture mock JSON di `assets/json/properties_hotel_search.json`.
+Seluruh request API baru diikutsertakan pada pendaftaran route tabel di [`flutter/lib/services/dummy_api_client.dart`](file:///d:/Project/Fastwork/rental.apartemen/flutter/lib/services/dummy_api_client.dart) dan penyediaan fixture mock JSON di `assets/json/`.
 
 ### A. Registrasi `DummyApiClient`
 
 ```dart
-// Pendaftaran route di DummyApiClient
-final Map<String, String> _routes = {
-  'GET /api/v1/properties': 'properties_search.json',
-  'GET /api/v1/properties/hotel': 'properties_hotel_search.json',
-  'POST /api/v1/bookings': 'booking_create.json',
+// Pendaftaran route di DummyApiClient (flutter/lib/services/dummy_api_client.dart)
+static const Map<String, String> routes = <String, String>{
+  'GET properties': 'GET_properties',
+  'GET properties/{id}': 'GET_properties_id',
+  'GET insurance/plans': 'GET_insurance_plans',
+  'GET bookings': 'GET_bookings',
+  'GET bookings/{id}': 'GET_bookings_id',
+  'POST bookings': 'POST_bookings',
+  // ...
 };
 ```
 
-### B. Fixture Mock Asset JSON (`assets/json/properties_hotel_search.json`)
+### B. Fixture Mock Assets JSON (`assets/json/`)
 
-```json
-{
-  "status": true,
-  "code": 200,
-  "message": "Berhasil mengambil daftar properti dan hotel",
-  "data": [
-    {
-      "id": 101,
-      "name": "Grand Savero Hotel Bogor",
-      "slug": "grand-savero-hotel-bogor",
-      "property_type": "hotel",
-      "booking_mode": "room",
-      "city": "Bogor",
-      "address": "Jl. Pajajaran No. 27, Bogor Tengah",
-      "star_rating": 4,
-      "check_in_time": "14:00:00",
-      "check_out_time": "12:00:00",
-      "price_from": 750000.0,
-      "rating": 4.8,
-      "reviews_count": 320,
-      "cover_image": "https://ipanzipang.pro/storage/hotels/savero.jpg",
-      "facilities": ["wifi", "pool", "breakfast", "ac", "parking"],
-      "has_breakfast": true
-    }
-  ],
-  "meta": {
-    "pagination": {
-      "current_page": 1,
-      "last_page": 1,
-      "per_page": 15,
-      "total": 1
-    }
-  }
-}
-```
+Seluruh fixture mock JSON telah diperbarui sesuai skema data terbaru:
+
+1. **`GET_properties.json`**:
+   Mendukung pencarian properti unit maupun hotel OTA (`booking_mode: "room"`, `star_rating: 4`, `check_in_time`, `check_out_time`, `has_breakfast: true`, `price_from: 750000`).
+
+2. **`GET_properties_id.json`**:
+   Detail properti lengkap dengan metadata hotel dan `cover_image`.
+
+3. **`GET_insurance_plans.json`**:
+   Daftar paket proteksi menginap aktif (`zurich_stay_basic`, `zurich_stay_deluxe`) beserta rincian premi & santunan.
+
+4. **`GET_bookings.json` & `GET_bookings_id.json`**:
+   Riwayat & detail pemesanan hotel (`booking_type: "room"`, `rooms_count`, `adults`, `children`, `has_insurance`, `insurance_fee`, `booking_rooms`, dan objek `insurance` tertanggung).
+
+5. **`POST_bookings.json`**:
+   Respon pembuatan booking + order baru yang menyertakan rincian proteksi dan subtotal order.
+
 
 ---
 
