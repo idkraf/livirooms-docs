@@ -1,221 +1,234 @@
-# Flutter Screen Reference
+﻿# Flutter Screen Reference
 
-Dokumen ini berisi daftar seluruh layar aplikasi Flutter Sewain yang **benar-benar ada** di kode (`flutter/lib/screens/`), sebagai referensi visual & navigasi untuk pengembangan aplikasi Flutter (mobile — Konsumen & Mitra/Vendor).
+Dokumen ini berisi daftar seluruh layar aplikasi Flutter Sewain berdasarkan **kondisi kode aktual** di `flutter/lib/` per 2026-08-13. Kolom **Status** menunjukkan apakah file `.dart` sudah ada atau belum.
+
+> **Legend**: ✅ Sudah ada dan terdaftar di router · ❌ Belum dibuat
 
 ## Kebijakan Guest Browsing
 
 Aplikasi mengizinkan pengguna melakukan *browsing* properti tanpa login/daftar:
 - **Publik:** Homepage, pencarian, detail properti, dan filter dapat diakses tanpa token.
 - **Login Required:** Booking/pembayaran, wishlist, chat, riwayat transaksi, dan profil memerlukan `auth:sanctum`.
-- **Flow startup:** `SplashScreen` → `Routes.home` (guest) atau `MainShell` (logged-in).
+- **Flow startup:** `SplashScreen` -> `Routes.home` (guest) atau `MainShell` (logged-in).
 
-Seluruh file gambar berada di `flutter/screens_flutter/`, dengan format penamaan:
-```
-<no_urut>_<nama_layar>.png
-```
-
-Total layar aktual: **40 layar** — 28 layar Konsumen + 9 Mitra + 1 Registrasi Host + 2 layar Payment tambahan + Notification.
-
-> ⚠️ **Catatan drift:** Dokumen sebelumnya mencatat 37 layar. Tiga layar tambahan ditemukan di kode namun belum terdokumentasi: `payment_result_screen.dart`, `payment_webview_screen.dart`, dan `notification_screen.dart`.
+---
 
 ## Daftar Isi
 
 - [A. Sisi Konsumen (Consumer App)](#a-sisi-konsumen-consumer-app)
-  - [1. Onboarding & Autentikasi](#1-onboarding--autentikasi)
-  - [2. Registrasi, Profil & Pencarian Properti](#2-registrasi-profil--pencarian-properti)
-  - [3. Detail Properti, Booking & Pesan](#3-detail-properti-booking--pesan)
-  - [4. Chat, Menu Profil & Wishlist](#4-chat-menu-profil--wishlist)
-  - [5. Pembayaran & Ringkasan Pemesanan](#5-pembayaran--ringkasan-pemesanan)
-  - [6. Profil & Pengaturan](#6-profil--pengaturan)
-  - [7. Notifikasi & Akun Tambahan](#7-notifikasi--akun-tambahan)
 - [B. Sisi Mitra / Vendor (Partner App)](#b-sisi-mitra--vendor-partner-app)
-  - [8. Rental Management](#8-rental-management)
-  - [9. Order Management](#9-order-management)
-- [C. Phase 4 — Hotel OTA (Planned)](#c-phase-4--hotel-ota-planned)
-- [Struktur Folder Aktual (Flutter)](#struktur-folder-aktual-flutter)
+- [C. Hotel OTA (Planned -- Belum Dibuat)](#c-hotel-ota-planned--belum-dibuat)
+- [Struktur Lengkap Flutter](#struktur-lengkap-flutter-flutterlib)
+- [Ringkasan Status](#ringkasan-status)
 - [Catatan](#catatan)
+
+---
 
 ## A. Sisi Konsumen (Consumer App)
 
 ### 1. Onboarding & Autentikasi
 
-| File Kode | Mockup | Nama Layar | Route | Deskripsi |
-|-----------|--------|------------|-------|-----------|
-| `auth/splash_screen.dart` | `01_splash_screen.png` | Splash Screen | `/splash` | Layar pembuka — logo & nama brand saat aplikasi pertama dibuka |
-| `auth/onboarding_screen.dart` | `02_onboarding_slide_intro.png` | Onboarding | `/onboarding` | Slide perkenalan dengan tagline "Find Your Perfect Stay" |
-| `auth/welcome_screen.dart` | `03_welcome_screen.png` | Welcome Screen | `/welcome` | Pilihan masuk (Sign In) atau daftar (Sign Up) |
-| `auth/login_screen.dart` | `04_login_sign_in.png` | Login | `/login` | Form masuk: Email, Password, Forgot Password |
+| Status | File Kode | Route | Nama Layar | Deskripsi |
+|--------|-----------|-------|------------|-----------|
+| ✅ | `auth/splash_screen.dart` | `/splash` | Splash Screen | Logo & brand saat app pertama dibuka |
+| ✅ | `auth/onboarding_screen.dart` | `/onboarding` | Onboarding | Slide perkenalan "Find Your Perfect Stay" |
+| ✅ | `auth/welcome_screen.dart` | `/welcome` | Welcome Screen | Pilih Sign In atau Sign Up |
+| ✅ | `auth/login_screen.dart` | `/login` | Login | Form masuk: Email, Password, Forgot Password |
+| ✅ | `auth/register_screen.dart` | `/register` | Create Account | Form daftar: Nama, Email, Password |
+| ✅ | `auth/register_profile_screen.dart` | `/register/profile` | Create Profile | Foto, nama, lahir, telepon, gender |
 
-### 2. Registrasi, Profil & Pencarian Properti
+### 2. Home & Pencarian
 
-| File Kode | Mockup | Nama Layar | Route | Deskripsi |
-|-----------|--------|------------|-------|-----------|
-| `auth/register_screen.dart` | `05_create_account.png` | Create Account | `/register` | Form daftar akun baru: Nama, Email, Password |
-| `auth/register_profile_screen.dart` | `06_create_your_profile.png` | Create Your Profile | `/register/profile` | Lengkapi profil: foto, nama, lahir, telepon, gender |
-| `home/home_screen.dart` | `07_home_beranda.png` | Home / Beranda | `/home` | Beranda: pencarian, notifikasi, seksi rekomendasi properti |
-| `home/filter_screen.dart` | `08_filter_by.png` | Filter By | `/search/filter` | Filter pencarian: harga, rating, fasilitas, lokasi |
+| Status | File Kode | Route | Nama Layar | Deskripsi |
+|--------|-----------|-------|------------|-----------|
+| ✅ | `home/main_shell.dart` | `/home` | Main Shell | Bottom navigation shell Konsumen (4 tab) |
+| ✅ | `home/home_screen.dart` | `/home` (tab) | Home / Beranda | Pencarian, banner promo, seksi rekomendasi properti |
+| ✅ | `home/filter_screen.dart` | `/search/filter` | Filter By | Filter: harga, rating, fasilitas, tipe properti, lokasi |
+| ✅ | `property/search_results_screen.dart` | `/search/results` | Hasil Pencarian | Kartu properti dari hasil filter/keyword |
+| ✅ | `property/property_detail_screen.dart` | `/property/detail` | Property Detail | Galeri, fasilitas, peta, harga, tombol Book Now |
 
-### 3. Detail Properti, Booking & Pesan
+### 3. Booking
 
-| File Kode | Mockup | Nama Layar | Route | Deskripsi |
-|-----------|--------|------------|-------|-----------|
-| `property/property_detail_screen.dart` | `09_hotel_details.png` | Property / Hotel Detail | `/property/detail` | Detail properti: galeri, fasilitas, peta, harga, tombol Book Now |
-| `property/search_results_screen.dart` | `10_daftar_hasil_pencarian.png` | Hasil Pencarian | `/search/results` | Kartu properti hasil filter/pencarian |
-| `booking/booking_detail_screen.dart` | `11_booking_detail.png` | Booking Detail | `/booking/detail` | Ringkasan booking: properti, tanggal, tamu, kode (barcode), status host confirm, tombol bayar |
-| `chat/chat_list_screen.dart` | `12_daftar_pesan_chat_list.png` | Daftar Pesan | `/chat` | Inbox percakapan: kontak, pesan terakhir, unread count |
+| Status | File Kode | Route | Nama Layar | Deskripsi |
+|--------|-----------|-------|------------|-----------|
+| ✅ | `booking/booking_detail_screen.dart` | `/booking/detail` | Booking Detail | Tanggal, tamu, status, barcode, bayar. Tampilkan asuransi jika `has_insurance = true` |
+| ✅ | `booking/booking_list_screen.dart` | `/booking/list` | My Bookings | Riwayat pesanan dengan filter status |
+| ✅ | `booking/booking_success_screen.dart` | `/booking/success` | Booking Success | Konfirmasi berhasil, tombol lihat detail |
 
-### 4. Chat, Menu Profil & Wishlist
+### 4. Pembayaran
 
-| File Kode | Mockup | Nama Layar | Route | Deskripsi |
-|-----------|--------|------------|-------|-----------|
-| `chat/chat_room_screen.dart` | `13_chat_percakapan.png` | Chat / Percakapan | `/chat/room` | Ruang obrolan Konsumen–Host |
-| `account/account_menu_screen.dart` | `14_menu_profil_account_menu.png` | Menu Akun | `/account` | Menu: Favorite, Security, Notification, Language, Help, Logout |
-| `account/edit_profile_screen.dart` | `15_edit_profile_flow.png` | Edit Profile | `/account/edit-profile` | Pembaruan data pribadi: foto, nama, lahir, email, telepon, gender |
-| `account/wishlist_screen.dart` | `16_my_favorite_wishlist.png` | My Favorite (Wishlist) | `/wishlist` | Properti favorit dengan filter kategori |
+| Status | File Kode | Route | Nama Layar | Deskripsi |
+|--------|-----------|-------|------------|-----------|
+| ✅ | `payment/payment_method_screen.dart` | `/payment/method` | Select Payment Method | Pilih metode bayar; panggil `BookingService.create()` |
+| ✅ | `payment/payment_webview_screen.dart` | `/payment/webview` | Payment WebView | WebView Midtrans Snap in-app |
+| ✅ | `payment/payment_result_screen.dart` | `/payment/result` | Payment Result | Hasil pembayaran via deep link `sewain://payment-result` |
+| ✅ | `payment/add_card_screen.dart` | `/payment/add-card` | Add New Card | Form kartu kredit/debit |
+| ✅ | `payment/promo_code_screen.dart` | `/payment/promo` | Promo Code | Input & daftar voucher tersedia |
 
-### 5. Pembayaran & Ringkasan Pemesanan
+### 5. Chat
 
-| File Kode | Mockup | Nama Layar | Route | Deskripsi |
-|-----------|--------|------------|-------|-----------|
-| `payment/payment_method_screen.dart` | `17_select_payment_method.png` | Select Payment Method | `/payment/method` | Pilih metode bayar; Buat Pesanan → `BookingService.create()` |
-| `payment/add_card_screen.dart` | `18_add_new_card.png` | Add New Card | `/payment/add-card` | Form tambah kartu: nama pemegang, nomor, tanggal, CVV |
-| `payment/promo_code_screen.dart` | `19_promo_code.png` | Promo Code | `/payment/promo` | Input & daftar kode promo/voucher tersedia |
-| `booking/booking_success_screen.dart` | `20_booking_success.png` | Booking Success | `/booking/success` | Konfirmasi booking berhasil, tombol lihat detail |
-| `booking/booking_list_screen.dart` | `21_my_bookings.png` | My Bookings | `/booking/list` | Riwayat pemesanan pengguna |
-| `booking/booking_detail_screen.dart` | `22_booking_details.png` | Booking Details | `/booking/detail` | Rincian lengkap booking (sama dengan layar 11) |
-| `payment/payment_webview_screen.dart` | — | Payment WebView | `/payment/webview` | 🆕 WebView Midtrans Snap in-app (alternatif browser eksternal) |
-| `payment/payment_result_screen.dart` | — | Payment Result | `/payment/result` | 🆕 Layar hasil pembayaran — dipanggil via deep link `sewain://payment-result` |
+| Status | File Kode | Route | Nama Layar | Deskripsi |
+|--------|-----------|-------|------------|-----------|
+| ✅ | `chat/chat_list_screen.dart` | `/chat` | Daftar Pesan | Inbox: kontak, pesan terakhir, unread count |
+| ✅ | `chat/chat_room_screen.dart` | `/chat/room` | Chat / Percakapan | Ruang obrolan Konsumen-Host |
 
-### 6. Profil & Pengaturan
+### 6. Akun & Profil
 
-| File Kode | Mockup | Nama Layar | Route | Deskripsi |
-|-----------|--------|------------|-------|-----------|
-| `account/edit_profile_screen.dart` | `23_edit_profile_settings.png` | Edit Profile (Settings) | `/account/edit-profile` | Form pengaturan data pribadi (sama dengan layar 15) |
-| `account/wishlist_screen.dart` | `24_favorite_hotels.png` | Favorite Hotels | `/wishlist` | Koleksi properti favorit (sama dengan layar 16) |
-| `settings/security_settings_screen.dart` | `25_security_settings.png` | Security Settings | `/settings/security` | Sakelar Face ID, Remember Password, Touch ID |
-| `settings/notification_settings_screen.dart` | `26_notification_preferences.png` | Notification Preferences | `/settings/notifications` | Preferensi notifikasi per kategori |
-| `settings/help_support_screen.dart` | `27_help_support.png` | Help & Support | `/settings/help` | FAQ yang dapat di-expand/collapse |
-| `settings/language_settings_screen.dart` | `28_language.png` | Language | `/settings/language` | Pengaturan bahasa multi-bahasa |
+| Status | File Kode | Route | Nama Layar | Deskripsi |
+|--------|-----------|-------|------------|-----------|
+| ✅ | `account/account_menu_screen.dart` | `/account` | Menu Akun | Favorite, Security, Notification, Language, Help, Logout |
+| ✅ | `account/edit_profile_screen.dart` | `/account/edit-profile` | Edit Profile | Foto, nama, lahir, email, telepon, gender |
+| ✅ | `account/wishlist_screen.dart` | `/wishlist` | My Favorite (Wishlist) | Properti favorit |
+| ✅ | `account/referral_screen.dart` | `/referral` | Referral | Kode referral, riwayat reward, share kode |
+| ✅ | `account/validation_screen.dart` | `/account/validation` | Validasi Akun (KYC) | Upload dokumen identitas |
 
-### 7. Notifikasi & Akun Tambahan
+### 7. Notifikasi & Pengaturan
 
-| File Kode | Mockup | Nama Layar | Route | Deskripsi |
-|-----------|--------|------------|-------|-----------|
-| `notification/notification_screen.dart` | — | Notifications | `/notifications` | 🆕 Daftar in-app notification (booking, pembayaran, promo) |
-| `account/referral_screen.dart` | — | Referral | `/account/referral` | 🆕 Kode referral, riwayat reward, share kode |
-| `account/validation_screen.dart` | — | Validasi Akun (KYC) | `/account/validation` | 🆕 Upload dokumen identitas untuk verifikasi akun |
+| Status | File Kode | Route | Nama Layar | Deskripsi |
+|--------|-----------|-------|------------|-----------|
+| ✅ | `notification/notification_screen.dart` | `/notifications` | Notifications | In-app notification: booking, pembayaran, promo |
+| ✅ | `settings/security_settings_screen.dart` | `/settings/security` | Security Settings | Face ID, Remember Password, Touch ID |
+| ✅ | `settings/notification_settings_screen.dart` | `/settings/notifications` | Notification Preferences | Preferensi per kategori |
+| ✅ | `settings/help_support_screen.dart` | `/settings/help` | Help & Support | FAQ expand/collapse |
+| ✅ | `settings/language_settings_screen.dart` | `/settings/language` | Language | Pengaturan bahasa |
 
 ---
 
 ## B. Sisi Mitra / Vendor (Partner App)
 
-### 8. Rental Management
-
-| File Kode | Mockup | Nama Layar | Route | Deskripsi |
-|-----------|--------|------------|-------|-----------|
-| `mitra/mitra_shell.dart` | — | Mitra Shell | `/mitra` | Bottom navigation shell untuk layar Mitra |
-| `mitra/mitra_dashboard_screen.dart` | `29_mitra_dashboard.png` | Dashboard Mitra | `/mitra/dashboard` | Total properti, pesanan hari ini, pendapatan, rating, grafik |
-| `mitra/property_management_screen.dart` | `30_mitra_manajemen_properti.png` | Manajemen Properti | `/mitra/properties` | Daftar unit, status, pencarian, tombol tambah |
-| `mitra/property_form_screen.dart` | `31_mitra_tambah_edit_properti.png` | Tambah / Edit Properti | `/mitra/properties/form` | Form properti: foto, nama, tipe, alamat, harga, kapasitas, fasilitas |
-| `mitra/availability_calendar_screen.dart` | `32_mitra_kalender_ketersediaan.png` | Kalender Ketersediaan | `/mitra/calendar` | Kalender bulanan: blokir tanggal, atur harga khusus |
-
-### 9. Order Management
-
-| File Kode | Mockup | Nama Layar | Route | Deskripsi |
-|-----------|--------|------------|-------|-----------|
-| `mitra/order_management_screen.dart` | `33_mitra_manajemen_order.png` | Manajemen Order | `/mitra/orders` | Tab Baru/Dikonfirmasi/Selesai, aksi Terima/Tolak |
-| `mitra/order_detail_screen.dart` | `34_mitra_detail_order.png` | Detail Order | `/mitra/orders/detail` | Timeline status, data tamu, rincian pembayaran, konfirmasi |
-| `mitra/wallet_screen.dart` | `35_mitra_saldo_penarikan.png` | Saldo & Penarikan | `/mitra/wallet` | Saldo tersedia/tertahan, riwayat penarikan, tombol Tarik Dana |
-| `mitra/mitra_profile_screen.dart` | `36_mitra_profil_mitra.png` | Profil Mitra | `/mitra/profile` | Identitas, verifikasi, statistik, rekening bank, dokumen |
-
-### Registrasi Host
-
-| File Kode | Mockup | Nama Layar | Route | Deskripsi |
-|-----------|--------|------------|-------|-----------|
-| *(belum ada)* | `37_register_host.png` | Daftar Menjadi Host | `/register/host` | ⚠️ Mockup ada di `screens_flutter/` tapi file `.dart` belum dibuat |
+| Status | File Kode | Route | Nama Layar | Deskripsi |
+|--------|-----------|-------|------------|-----------|
+| ✅ | `mitra/mitra_shell.dart` | `/mitra` | Mitra Shell | Bottom navigation shell Mitra (4 tab) |
+| ✅ | `mitra/mitra_dashboard_screen.dart` | `/mitra/dashboard` | Dashboard Mitra | Properti, pesanan, pendapatan, rating, grafik |
+| ✅ | `mitra/property_management_screen.dart` | `/mitra/properties` | Manajemen Properti | Daftar unit, status, pencarian, tambah |
+| ✅ | `mitra/property_form_screen.dart` | `/mitra/properties/form` | Tambah / Edit Properti | Form: foto, nama, tipe, alamat, harga, fasilitas |
+| ✅ | `mitra/availability_calendar_screen.dart` | `/mitra/calendar` | Kalender Ketersediaan | Blokir tanggal, harga khusus |
+| ✅ | `mitra/order_management_screen.dart` | `/mitra/orders` | Manajemen Order | Tab Baru/Dikonfirmasi/Selesai, Terima/Tolak |
+| ✅ | `mitra/order_detail_screen.dart` | `/mitra/orders/detail` | Detail Order | Timeline, data tamu, rincian pembayaran |
+| ✅ | `mitra/wallet_screen.dart` | `/mitra/wallet` | Saldo & Penarikan | Saldo, riwayat, Tarik Dana |
+| ✅ | `mitra/mitra_profile_screen.dart` | `/mitra/profile` | Profil Mitra | Identitas, verifikasi, statistik, rekening bank |
+| ❌ | *(belum dibuat)* | `/register/host` | Daftar Menjadi Host | Mockup `37_register_host.png` ada, file `.dart` belum dibuat |
 
 ---
 
-## C. Phase 4 — Hotel OTA (Planned)
+## C. Hotel OTA (Planned -- Belum Dibuat)
 
-Layar-layar berikut **belum dibuat** namun dirancang untuk modul Hotel OTA (Phase 4). Lihat [hotel/04-flutter-implementation.md](../hotel/04-flutter-implementation.md) untuk spesifikasi lengkap.
+Screen belum dibuat. Infrastruktur Laravel & Flutter sudah tersedia dan teruji 100%. Lihat [hotel/04-flutter-implementation.md](../hotel/04-flutter-implementation.md).
 
-| File Kode (Planned) | Nama Layar | Route | Deskripsi |
-|---------------------|------------|-------|-----------|
-| `hotel/hotel_search_screen.dart` | Hotel Search | `/hotel/search` | Pencarian hotel dengan filter OTA: tanggal, kamar, tamu, bintang |
-| `hotel/hotel_results_screen.dart` | Hotel Results | `/hotel/results` | Hasil pencarian hotel dengan quick filter chips |
-| `hotel/hotel_detail_screen.dart` | Hotel Detail | `/hotel/detail` | Detail hotel: info bintang, tipe kamar, fasilitas, jam check-in/out |
-| `hotel/room_type_screen.dart` | Room Types | `/hotel/rooms` | Daftar tipe kamar dengan harga, kapasitas, fasilitas |
-| `hotel/hotel_booking_screen.dart` | Hotel Booking Checkout | `/hotel/booking` | Form pemesanan kamar + pilih asuransi menginap |
-| `mitra/hotel_inventory_screen.dart` | Inventaris Kamar Hotel | `/mitra/hotel/inventory` | Kalender allotment & tarif harian per tipe kamar |
+| Status | File Kode (Planned) | Route | Nama Layar | Infrastruktur Siap |
+|--------|---------------------|-------|------------|--------------------|
+| ❌ | `hotel/hotel_search_screen.dart` | `/hotel/search` | Hotel Search | `HotelSearchProvider`, `HotelSearchQuery`, `searchHotels()` |
+| ❌ | `hotel/hotel_results_screen.dart` | `/hotel/results` | Hotel Results | `HotelSearchProvider.hotels` list |
+| ❌ | `hotel/hotel_detail_screen.dart` | `/hotel/detail` | Hotel Detail | `Property.isHotel`, `starRating`, `checkInTime` |
+| ❌ | `hotel/room_type_screen.dart` | `/hotel/rooms` | Room Types | `RoomType` model di `booking.dart` |
+| ❌ | `hotel/hotel_booking_screen.dart` | `/hotel/booking` | Hotel Booking Checkout | `InsuranceSelectionWidget`, `BookingService.create()` hotel params |
+| ❌ | `mitra/hotel_inventory_screen.dart` | `/mitra/hotel/inventory` | Inventaris Kamar Hotel | `RoomInventory` Laravel API |
 
 ---
 
-## Struktur Folder Aktual (Flutter)
-
-Sesuai `flutter/lib/screens/` per 2026-08-13:
+## Struktur Lengkap Flutter (`flutter/lib/`)
 
 ```
-lib/
-├── screens/
-│   ├── auth/
-│   │   ├── splash_screen.dart
-│   │   ├── onboarding_screen.dart
-│   │   ├── welcome_screen.dart
-│   │   ├── login_screen.dart
-│   │   ├── register_screen.dart
-│   │   └── register_profile_screen.dart
-│   ├── home/
-│   │   ├── home_screen.dart
-│   │   ├── filter_screen.dart
-│   │   └── main_shell.dart               ← bottom nav shell (Konsumen)
-│   ├── property/
-│   │   ├── property_detail_screen.dart
-│   │   └── search_results_screen.dart
-│   ├── booking/
-│   │   ├── booking_detail_screen.dart
-│   │   ├── booking_list_screen.dart
-│   │   └── booking_success_screen.dart
-│   ├── chat/
-│   │   ├── chat_list_screen.dart
-│   │   └── chat_room_screen.dart
-│   ├── account/
-│   │   ├── account_menu_screen.dart
-│   │   ├── edit_profile_screen.dart
-│   │   ├── wishlist_screen.dart
-│   │   ├── referral_screen.dart          ← 🆕 belum terdokumentasi sebelumnya
-│   │   └── validation_screen.dart        ← 🆕 belum terdokumentasi sebelumnya
-│   ├── notification/
-│   │   └── notification_screen.dart      ← 🆕 belum terdokumentasi sebelumnya
-│   ├── payment/
-│   │   ├── payment_method_screen.dart
-│   │   ├── add_card_screen.dart
-│   │   ├── promo_code_screen.dart
-│   │   ├── payment_result_screen.dart    ← 🆕 dipanggil via deep link
-│   │   └── payment_webview_screen.dart   ← 🆕 WebView Midtrans in-app
-│   ├── settings/
-│   │   ├── security_settings_screen.dart
-│   │   ├── notification_settings_screen.dart
-│   │   ├── help_support_screen.dart
-│   │   └── language_settings_screen.dart
-│   └── mitra/
-│       ├── mitra_shell.dart              ← bottom nav shell (Mitra)
-│       ├── mitra_dashboard_screen.dart
-│       ├── property_management_screen.dart
-│       ├── property_form_screen.dart
-│       ├── availability_calendar_screen.dart
-│       ├── order_management_screen.dart
-│       ├── order_detail_screen.dart
-│       ├── wallet_screen.dart
-│       └── mitra_profile_screen.dart
+flutter/lib/
+├── main.dart
+├── router.dart                                   (41 route terdaftar)
+│
+├── config/
+│   └── app_config.dart
+│
+├── models/                                        (23 model)
+│   ├── api_response.dart
+│   ├── app_banner.dart
+│   ├── app_notification.dart
+│   ├── booking.dart                               + BookingRoom, RoomType, BookingInsuranceSummary
+│   ├── chat.dart
+│   ├── city.dart
+│   ├── host_dashboard.dart
+│   ├── host_info.dart
+│   ├── hotel_search_query.dart                    Hotel OTA value object
+│   ├── insurance_plan.dart                        Stay Protection model
+│   ├── order.dart
+│   ├── paginated.dart
+│   ├── payment.dart
+│   ├── payment_method.dart
+│   ├── property.dart                              + bookingMode, starRating, checkIn/OutTime
+│   ├── property_recommendation.dart
+│   ├── referral.dart
+│   ├── remote_config_model.dart
+│   ├── review.dart
+│   ├── user.dart
+│   ├── validation_status.dart
+│   ├── voucher.dart
+│   └── wallet.dart
+│
+├── providers/                                     (2 provider)
+│   ├── auth_provider.dart
+│   └── hotel_search_provider.dart                 Hotel OTA: 300ms debounce, race-safe token
+│
+├── services/                                      (18 service)
+│   ├── api_client.dart
+│   ├── auth_service.dart
+│   ├── auth_storage.dart
+│   ├── booking_service.dart                       + hotel & insurance params di create()
+│   ├── chat_service.dart
+│   ├── city_service.dart
+│   ├── content_service.dart
+│   ├── deep_link_handler.dart                     + sewain://search parsing
+│   ├── dummy_api_client.dart                      + GET insurance/plans route
+│   ├── home_service.dart
+│   ├── host_service.dart
+│   ├── notification_service.dart
+│   ├── profile_service.dart
+│   ├── property_service.dart                      + searchHotels(), getInsurancePlans()
+│   ├── referral_service.dart
+│   ├── remote_config_service.dart
+│   ├── voucher_service.dart
+│   └── wishlist_service.dart
+│
+├── utils/                                         (1 util)
+│   └── formatters.dart
+│
+├── widgets/                                       (5 widget)
+│   ├── app_network_image.dart
+│   ├── city_list.dart
+│   ├── insurance_selection_widget.dart            Stay Protection checkout UI
+│   ├── property_card.dart
+│   └── state_views.dart
+│
+└── screens/                                       (41 file, semua terdaftar di router)
+    ├── auth/          (6 file)  ✅ splash, onboarding, welcome, login, register, register_profile
+    ├── home/          (3 file)  ✅ main_shell, home_screen, filter_screen
+    ├── property/      (2 file)  ✅ property_detail, search_results
+    ├── booking/       (3 file)  ✅ booking_detail, booking_list, booking_success
+    ├── chat/          (2 file)  ✅ chat_list, chat_room
+    ├── account/       (5 file)  ✅ account_menu, edit_profile, wishlist, referral, validation
+    ├── payment/       (5 file)  ✅ payment_method, payment_webview, payment_result, add_card, promo
+    ├── settings/      (4 file)  ✅ security, notification_settings, help_support, language
+    ├── notification/  (1 file)  ✅ notification_screen
+    ├── mitra/         (9 file)  ✅ shell, dashboard, property_mgmt, property_form, calendar,
+    │                               order_mgmt, order_detail, wallet, mitra_profile
+    └── hotel/         (0 file)  ❌ 6 screen planned, infrastruktur siap
 ```
+
+---
+
+## Ringkasan Status
+
+| Kategori | Selesai | Belum |
+|----------|---------|-------|
+| **Screens (terdaftar di router)** | **41** | 6 Hotel OTA + 1 Register Host |
+| **Models** | 23 | 0 |
+| **Services** | 18 | 0 |
+| **Providers** | 2 | 0 |
+| **Widgets** | 5 | 0 |
+| **Routes di `router.dart`** | 41 | 6 Hotel OTA belum didaftarkan |
 
 ---
 
 ## Catatan
 
-- Seluruh nama, foto, dan data pada tangkapan layar bersifat contoh (dummy) untuk demonstrasi desain.
-- Layar 29–36 (Mitra/Vendor) mengikuti gaya visual dan palet warna yang sama dengan aplikasi Konsumen (Navy `#0E2340` dan Gold `#F4A93B`).
-- `register_host_screen.dart` (**layar 37**) ada mockup-nya (`screens_flutter/37_register_host.png`) namun file `.dart` belum dibuat.
-- Layar `payment_webview_screen.dart` dan `payment_result_screen.dart` adalah bagian dari alur pembayaran Midtrans in-app yang sudah ada di kode namun belum didokumentasikan.
-- Layar `notification_screen.dart`, `referral_screen.dart`, dan `validation_screen.dart` sudah ada di kode sebagai fitur Phase 3.
+- `register_host_screen.dart` belum dibuat -- mockup ada di `screens_flutter/37_register_host.png`.
+- **Hotel OTA screens (6)** belum dibuat. Infrastruktur penuh sudah live & teruji 100%.
+- `InsuranceSelectionWidget` siap dipakai saat `hotel_booking_screen.dart` dibangun.
+- Route Hotel OTA perlu ditambahkan ke `router.dart` saat masing-masing screen dibuat.
+- Bahasa kode: **Inggris**. Bahasa docs: **Indonesia**.
