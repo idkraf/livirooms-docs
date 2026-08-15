@@ -211,3 +211,13 @@ class InsuranceController extends Controller
 1. **Fleksibilitas Paket**: Mendukung premi tetap per malam/tamu (*fixed per night*) maupun persentase dari harga kamar.
 2. **Keandalan Sistem**: Menggunakan Queue Job dengan proteksi retry serta fallback Manual Request di Web Admin.
 3. **Auditing Lengkap**: Menyimpan seluruh payload request & response JSON API provider di database (`booking_insurances`).
+
+---
+
+## 6. Integrasi dengan Form Multi-Kamar (Checkout Flutter)
+
+Pada alur pemesanan kombo multi-kamar di [`flutter/lib/screens/property/hotel/hotel_booking_screen.dart`](file:///D:/Project/Fastwork/rental.apartemen/flutter/lib/screens/property/hotel/hotel_booking_screen.dart):
+1. **Nama Tertanggung**: Menggunakan nama tamu kamar pertama (`Kamar 1: Family Suite` -> `MOH Baswan`) secara otomatis sebagai pemegang polis utama (*Primary Policy Holder*).
+2. **Kalkulasi Premi Multi-Tamu**: Premi dihitung otomatis berdasarkan total malam menginap dikali jumlah total tamu dewasa (`adults`).
+3. **Klaim & Perlindungan**: Mencakup kompensasi keterlambatan check-in hotel, santunan rawat inap darurat selama menginap, serta kerusakan/kehilangan bagasi di area hotel.
+

@@ -302,81 +302,99 @@ public function store(Request $request): JsonResponse
         $checkIn = Carbon::parse($validated['check_in']);
         $checkOut = Carbon::parse($validated['check_out']);
         $nights = $checkIn->diffInDays($checkOut);
-        $roomsCount = $validated['rooms_count'] ?? 1;
+        $roomsCount = $validated['rooms_count'] ?? count($validated['guests'] ?? [1]);
 
-        $roomType = RoomType::findOrFail($validated['room_type_id']);
-
-        // Lock stok inventaris kamar harian (Pencegahan Race Condition / Overselling)
-        $inventories = RoomInventory::where('room_type_id', $roomType->id)
-            ->whereBetween('date', [$checkIn->toDateString(), $checkOut->copy()->subDay()->toDateString()])
-            ->lockForUpdate()
-            ->get();
-
-        if ($inventories->count() < $nights) {
-            return ApiResponse::error('Stok kamar tidak tersedia pada tanggal yang dipilih', 422);
-        }
+        $hotelId = $validated['hotel_id'] ?? $validated['property_id'];
+        $hotel = Hotel::with('roomTypes')->findOrFail($hotelId);
 
         $roomSubtotal = 0;
-        foreach ($inventories as $inv) {
-            if ($inv->is_closed || ($inv->allotment - $inv->booked_count) < $roomsCount) {
-                return ApiResponse::error("Kamar penuh pada tanggal {$inv->date->format('Y-m-d')}", 422);
+        $bookingRoomsData = [];
+
+        // Support single roomType atau multiple guest room assignment
+        if (!empty($validated['guests']) && is_array($validated['guests'])) {
+            foreach ($validated['guests'] as $idx => $guest) {
+                $roomTypeName = $guest['room_name'] ?? 'Superior Room';
+                $roomType = $hotel->roomTypes->firstWhere('name', $roomTypeName) ?? $hotel->roomTypes->first();
+                $pricePerNight = $roomType ? $roomType->base_price : 446637;
+                $subtotal = $pricePerNight * $nights;
+                $roomSubtotal += $subtotal;
+
+                $bookingRoomsData[] = [
+                    'room_type_id'     => $roomType ? $roomType->id : 1,
+                    'room_number'      => $guest['room_number'] ?? ($idx + 1),
+                    'room_name'        => $roomTypeName,
+                    'guest_first_name' => $guest['first_name'] ?? '',
+                    'guest_last_name'  => $guest['last_name'] ?? '',
+                    'quantity'         => 1,
+                    'price_per_night'  => $pricePerNight,
+                    'subtotal'         => $subtotal,
+                ];
             }
-            $roomSubtotal += ($inv->price * $roomsCount);
+        } else {
+            $roomType = RoomType::findOrFail($validated['room_type_id']);
+            $roomSubtotal = $roomType->base_price * $nights * $roomsCount;
+            $bookingRoomsData[] = [
+                'room_type_id'     => $roomType->id,
+                'room_number'      => 1,
+                'room_name'        => $roomType->name,
+                'guest_first_name' => $validated['holder_name'] ?? 'Tamu Utama',
+                'guest_last_name'  => '',
+                'quantity'         => $roomsCount,
+                'price_per_night'  => $roomType->base_price,
+                'subtotal'         => $roomSubtotal,
+            ];
         }
 
-        // Kalkulasi Premi Asuransi
+        // Kalkulasi Premi Asuransi (Stay Protection)
         $insuranceFee = 0;
         $insurancePlan = null;
-        if (!empty($validated['include_insurance']) && !empty($validated['insurance_plan_id'])) {
+        if (!empty($validated['has_insurance']) && !empty($validated['insurance_plan_id'])) {
             $insurancePlan = InsurancePlan::findOrFail($validated['insurance_plan_id']);
             $insuranceFee = $insurancePlan->calculatePremium($nights, $validated['adults'] ?? 1, $roomSubtotal);
         }
 
         $totalPrice = $roomSubtotal + $insuranceFee;
+        $coinsEarned = (int) round($totalPrice * 0.005); // 0.5% Trip Coins
 
         // Create Booking
         $booking = Booking::create([
-            'booking_code'  => 'HTL-' . strtoupper(Str::random(8)),
-            'property_id'   => $validated['property_id'],
-            'user_id'       => $request->user()->id,
-            'check_in'      => $checkIn->toDateString(),
-            'check_out'     => $checkOut->toDateString(),
-            'duration_type' => 'daily',
-            'booking_type'  => 'room',
-            'rooms_count'   => $roomsCount,
-            'adults'        => $validated['adults'] ?? 1,
-            'children'      => $validated['children'] ?? 0,
-            'status'        => 'waiting_payment',
-            'has_insurance' => !empty($insurancePlan),
-            'insurance_fee' => $insuranceFee,
-            'total_price'   => $totalPrice,
+            'booking_code'       => 'HTL-' . date('Ymd') . '-' . strtoupper(Str::random(4)),
+            'property_id'        => $hotel->property_id ?? $hotel->id,
+            'user_id'            => $request->user()->id,
+            'check_in'           => $checkIn->toDateString(),
+            'check_out'          => $checkOut->toDateString(),
+            'duration_type'      => 'daily',
+            'booking_type'       => 'room',
+            'rooms_count'        => $roomsCount,
+            'adults'             => $validated['adults'] ?? 1,
+            'children'           => $validated['children'] ?? 0,
+            'contact_email'      => $validated['contact_email'] ?? $request->user()->email,
+            'contact_phone'      => $validated['contact_phone'] ?? $request->user()->phone,
+            'special_requests'   => $validated['special_requests'] ?? null,
+            'trip_coins_earned'  => $coinsEarned,
+            'receive_promos'     => $validated['receive_promos'] ?? true,
+            'status'             => 'waiting_payment',
+            'has_insurance'      => !empty($insurancePlan),
+            'insurance_fee'      => $insuranceFee,
+            'total_price'        => $totalPrice,
         ]);
 
-        // Detail Kamar
-        BookingRoom::create([
-            'booking_id'      => $booking->id,
-            'room_type_id'    => $roomType->id,
-            'quantity'        => $roomsCount,
-            'price_per_night' => ($roomSubtotal / ($nights * $roomsCount)),
-            'subtotal'        => $roomSubtotal,
-        ]);
+        // Simpan Detail Kamar & Data Tamu per Kamar
+        foreach ($bookingRoomsData as $bRoom) {
+            $booking->bookingRooms()->create($bRoom);
+        }
 
-        // Buat record Polis status PENDING
+        // Buat record Polis status PENDING jika memilih proteksi
         if ($insurancePlan) {
             BookingInsurance::create([
                 'booking_id'             => $booking->id,
-                'insurance_plan_id'     => $insurancePlan->id,
-                'holder_name'           => $validated['holder_name'],
-                'holder_identity_number'=> $validated['holder_identity'] ?? null,
-                'premium_amount'        => $insuranceFee,
-                'coverage_amount'       => $insurancePlan->coverage_amount,
-                'status'                => 'pending',
+                'insurance_plan_id'      => $insurancePlan->id,
+                'holder_name'            => $validated['holder_name'] ?? ($bookingRoomsData[0]['guest_first_name'] . ' ' . $bookingRoomsData[0]['guest_last_name']),
+                'holder_identity_number' => $validated['holder_identity'] ?? null,
+                'premium_amount'         => $insuranceFee,
+                'coverage_amount'        => $insurancePlan->coverage_amount,
+                'status'                 => 'pending',
             ]);
-        }
-
-        // Increment booked_count pada inventaris
-        foreach ($inventories as $inv) {
-            $inv->increment('booked_count', $roomsCount);
         }
 
         // Generate Midtrans Payment Order (Eksisting)

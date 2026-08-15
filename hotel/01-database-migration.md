@@ -82,12 +82,22 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('property_id')->constrained('properties')->cascadeOnDelete()->unique();
             $table->unsignedTinyInteger('star_rating')->default(3)->comment('1 sampai 5 bintang');
+            $table->unsignedSmallInteger('open_year')->default(1994)->comment('Tahun operasional buka hotel');
             $table->time('check_in_time')->default('14:00:00');
             $table->time('check_out_time')->default('12:00:00');
-            $table->jsonb('policies')->nullable()->comment('Aturan pembatalan, ranjang tambahan, anak');
+            $table->decimal('score', 3, 1)->default(8.1)->comment('Skor agregat ulasan 0.0 - 10.0');
+            $table->string('score_label')->default('Luar Biasa');
+            $table->unsignedInteger('review_count')->default(0);
+            $table->jsonb('review_quotes')->nullable()->comment('Kutipan ulasan unggulan, e.g. ["Berlokasi di pusat kota", "Harga sesuai kualitas"]');
+            $table->jsonb('facility_groups')->nullable()->comment('Fasilitas terkelompok: Makanan & Minuman, Kolam Renang, Transportasi, Kebugaran');
+            $table->jsonb('transport_points')->nullable()->comment('Poin transit & jarak: Stasiun Kereta, Stasiun Metro, Bandara, Terminal Bus');
+            $table->jsonb('policies')->nullable()->comment('Aturan: check_in_info, check_out_info, reception_hours, min_age, child_policy, extra_bed_policy');
+            $table->jsonb('faqs')->nullable()->comment('Tanya jawab umum & jawaban manager akomodasi');
+            $table->decimal('deposit_amount', 12, 2)->default(100000)->comment('Deposit tunai saat check-in');
             $table->timestamps();
 
             $table->index('star_rating');
+            $table->index('score');
         });
     }
 
@@ -102,7 +112,7 @@ return new class extends Migration {
 
 ### C. Tabel Tipe Kamar / `room_types` (`2026_08_13_000003_create_room_types_table.php`)
 
-Definisi tipe kamar dalam satu hotel (misal: Standard Twin, Deluxe King, Suite).
+Definisi tipe kamar dalam satu hotel (misal: Family Suite, Kamar Superior, Deluxe King).
 
 ```php
 <?php
@@ -117,17 +127,23 @@ return new class extends Migration {
         Schema::create('room_types', function (Blueprint $table) {
             $table->id();
             $table->foreignId('hotel_id')->constrained('hotels')->cascadeOnDelete();
-            $table->string('name');
+            $table->string('name'); // Family Suite, Kamar Superior
             $table->string('slug');
             $table->text('description')->nullable();
             $table->unsignedInteger('capacity_adults')->default(2);
             $table->unsignedInteger('capacity_children')->default(1);
             $table->unsignedInteger('max_guests')->default(3);
-            $table->unsignedInteger('room_size_sqm')->nullable()->comment('Luas kamar m2');
-            $table->string('bed_configuration')->nullable()->comment('1 King Bed / 2 Twin Beds');
+            $table->string('size_sqm')->default('30 m²')->comment('Luas kamar, e.g. 30 m², 21 m²');
+            $table->string('bed_type')->default('1 Queen Bed')->comment('e.g. 2 queen bed, 1 queen bed atau 2 single bed');
+            $table->boolean('has_window')->default(true);
+            $table->boolean('no_smoking')->default(true);
+            $table->boolean('free_wifi')->default(true);
             $table->decimal('base_price', 12, 2);
+            $table->decimal('price_original', 12, 2)->nullable()->comment('Harga coret sebelum diskon');
             $table->boolean('breakfast_included')->default(false);
-            $table->unsignedInteger('total_inventory')->default(1);
+            $table->unsignedInteger('total_inventory')->default(5);
+            $table->unsignedInteger('remaining_count')->default(3);
+            $table->jsonb('images')->nullable()->comment('Daftar URL foto kamar');
             $table->jsonb('facilities')->nullable()->comment('Mirror fasilitas cepat tipe kamar');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
@@ -249,9 +265,15 @@ return new class extends Migration {
             $table->unsignedInteger('children')->default(0)->after('adults');
             $table->time('check_in_time')->nullable()->after('check_in');
             $table->time('check_out_time')->nullable()->after('check_out');
+            $table->string('contact_email')->nullable()->after('total_price');
+            $table->string('contact_phone')->nullable()->after('contact_email');
+            $table->text('special_requests')->nullable()->after('contact_phone');
+            $table->unsignedInteger('trip_coins_earned')->default(0)->after('special_requests');
+            $table->unsignedInteger('trip_coins_used')->default(0)->after('trip_coins_earned');
+            $table->boolean('receive_promos')->default(true)->after('trip_coins_used');
             
             // Tambahan Fitur Asuransi Hotel (Stay Protection)
-            $table->boolean('has_insurance')->default(false)->after('total_price');
+            $table->boolean('has_insurance')->default(false)->after('receive_promos');
             $table->decimal('insurance_fee', 12, 2)->default(0)->after('has_insurance');
 
             $table->index(['booking_type', 'status']);
@@ -271,6 +293,12 @@ return new class extends Migration {
                 'children',
                 'check_in_time',
                 'check_out_time',
+                'contact_email',
+                'contact_phone',
+                'special_requests',
+                'trip_coins_earned',
+                'trip_coins_used',
+                'receive_promos',
                 'has_insurance',
                 'insurance_fee',
             ]);
@@ -281,9 +309,9 @@ return new class extends Migration {
 
 ---
 
-### G. Tabel Detail Kamar Dipesan / `booking_rooms` (`2026_08_13_000007_create_booking_rooms_table.php`)
+### G. Tabel Detail Kamar & Data Tamu / `booking_rooms` (`2026_08_13_000007_create_booking_rooms_table.php`)
 
-Menghubungkan `bookings` dengan `room_types` yang dipilih pengguna.
+Menghubungkan `bookings` dengan `room_types` yang dipilih pengguna serta nama tamu masing-masing kamar.
 
 ```php
 <?php
@@ -299,6 +327,10 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('booking_id')->constrained('bookings')->cascadeOnDelete();
             $table->foreignId('room_type_id')->constrained('room_types')->cascadeOnDelete();
+            $table->unsignedInteger('room_number')->default(1)->comment('Nomor urut kamar: 1, 2, dst.');
+            $table->string('room_name')->nullable()->comment('e.g. Family Suite, Kamar Superior');
+            $table->string('guest_first_name')->nullable()->comment('Nama depan tamu');
+            $table->string('guest_last_name')->nullable()->comment('Nama belakang tamu');
             $table->unsignedInteger('quantity')->default(1);
             $table->decimal('price_per_night', 12, 2);
             $table->decimal('subtotal', 12, 2);

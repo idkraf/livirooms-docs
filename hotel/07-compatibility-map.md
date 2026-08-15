@@ -138,21 +138,33 @@ Sesuai kebutuhan audit, integrasi tampilan proteksi menginap dipastikan aktif pa
    - Widget `InsuranceSelectionWidget` di-embed pada layar konfirmasi booking (`HotelBookingCheckoutScreen` / `BookingConfirmScreen`).
    - Menampilkan harga premi transparan berbasis durasi menginap ($N$ malam) dan jumlah tamu ($M$ dewasa).
    - Form input dinamis untuk **Nama Lengkap Tertanggung** (wajib) dan **NIK / No. KTP** (opsional) muncul saat switch toggle diaktifkan.
-3. **Payload Request Submit Booking**:
+3. **Payload Request Submit Booking (Multi-Room OTA Flow)**:
    ```json
    {
-     "property_id": 101,
-     "booking_type": "room",
-     "room_type_id": 5,
-     "check_in": "2026-08-28",
-     "check_out": "2026-08-30",
-     "rooms_count": 1,
-     "adults": 2,
-     "children": 0,
-     "include_insurance": true,
-     "insurance_plan_id": 1,
-     "holder_name": "Budi Santoso",
-     "holder_identity": "3171012345670001"
+     "hotel_id": 101,
+     "check_in": "2026-08-15",
+     "check_out": "2026-08-16",
+     "rooms_count": 2,
+     "adults": 5,
+     "children": 2,
+     "guests": [
+       {
+         "room_number": 1,
+         "room_name": "Family Suite",
+         "first_name": "MOH",
+         "last_name": "Baswan"
+       },
+       {
+         "room_number": 2,
+         "room_name": "Kamar Superior",
+         "first_name": "Baswan",
+         "last_name": "Degorie"
+       }
+     ],
+     "contact_email": "mohbaswandegorie@gmail.com",
+     "contact_phone": "8123456789",
+     "has_insurance": false,
+     "receive_promos": true
    }
    ```
 

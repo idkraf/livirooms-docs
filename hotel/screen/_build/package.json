@@ -1,0 +1,1 @@
+﻿{"name":"hotel-screen-build","type":"module","scripts":{"build":"node build.mjs","render":"node render.mjs"},"dependencies":{"puppeteer-core":"^21.0.0"}}

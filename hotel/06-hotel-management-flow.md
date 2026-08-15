@@ -17,22 +17,30 @@ Penambahan produk hotel pada portal web dikembangkan menggunakan komponen Larave
 
 ### Rincian Tahapan Form Wizard Web Admin:
 
-#### Step 1: Informasi Utama Hotel & Mode Properti
+#### Step 1: Informasi Utama Hotel & Mode Properti (8 Tab Metadata)
 - **Mode Properti (`booking_mode`)**: Pilih `room` (Sewa Kamar Hotel Harian).
 - **Tipe Properti (`property_type`)**: Pilih `hotel` atau `hotel_residence`.
 - **Nama & Lokasi**: Nama Hotel, Kota (`city_id`), Alamat Lengkap, Koordinat Latitude/Longitude.
-- **Bintang Hotel (`star_rating`)**: Pilih 1 sampai 5 Bintang.
-- **Jam Operasional**: Jam Check-in (Default `14:00:00`), Jam Check-out (Default `12:00:00`).
-- **Fasilitas Hotel & Galeri**: Pilih Fasilitas Utama (Kolam Renang, Restoran, Parking, Gym) & Upload Foto Utama / Galeri.
+- **Bintang Hotel (`star_rating`)**: Pilih 1 sampai 5 Bintang & Tahun Pembukaan (`open_year`).
+- **Jam Operasional & Kebijakan**: Jam Check-in (Default `14:00:00`), Jam Check-out (Default `12:00:00`), Resepsionis 24 jam, Kebijakan Anak & Ranjang Tambahan.
+- **Fasilitas Terkelompok (`facility_groups`)**:
+  - *Makanan & Minuman*: Minimarket/kios, Restoran, Bar Lobi.
+  - *Kolam Renang*: Indoor, Outdoor.
+  - *Transportasi*: Rental Mobil, Area Parkir Gratis, Layanan Mobil Concierge.
+  - *Kesehatan & Kebugaran*: Spa, Pusat Kebugaran / Gym.
+- **Poin Transit Transportasi (`transport_points`)**: Stasiun Kereta (e.g. Gondangdia, Gambir), Stasiun Metro (Bundaran HI, Dukuh Atas), Bandara, Terminal Bus beserta estimasi jarak.
+- **Tanya Jawab Manager (`faqs`)**: FAQ seputar sarapan berbayar/gratis, antar-jemput bandara, deposit tunai, dll.
+- **Galeri Foto**: Upload Foto Utama / Cover, Foto Fasilitas, dan Foto Kamar.
 
-#### Step 2: Manajemen Tipe Kamar (`room_types`)
+#### Step 2: Manajemen Tipe Kamar & Kombo Rekomendasi (`room_types`)
 Mitra/Admin dapat menambahkan satu atau lebih tipe kamar:
-- **Nama Tipe Kamar**: e.g., *Deluxe Twin Bed*, *Executive King Suite*.
-- **Kapasitas Tamu**: Kapasitas Dewasa (Default 2), Anak (Default 1), Maksimal Tamu.
-- **Tarif Dasar (`base_price`)**: Tarif standar per malam (Rp).
+- **Nama Tipe Kamar**: e.g., *Family Suite*, *Kamar Superior*, *Deluxe King*.
+- **Kapasitas Tamu**: Kapasitas Dewasa (Default 2-4), Anak (Default 1-2), Maksimal Tamu.
+- **Tarif Dasar (`base_price`) & Harga Coret (`price_original`)**: Tarif standar per malam & diskon promo.
 - **Inklusi Sarapan (`breakfast_included`)**: Toggle *Termasuk Sarapan Gratis*.
-- **Luas Kamar & Konfigurasi Bed**: Luas m², Tipe Ranjang (*1 King Bed / 2 Single Beds*).
-- **Total Stok Kamar (`total_inventory`)**: Jumlah total kamar fisik tipe ini.
+- **Luas Kamar & Konfigurasi Bed**: Luas m² (*30 m²*, *21 m²*), Tipe Ranjang (*2 Queen Bed* / *1 Queen Bed atau 2 Single Bed*).
+- **Fasilitas Kamar Cepat**: Memiliki Jendela (`has_window`), Bebas Rokok (`no_smoking`), Wi-Fi Gratis (`free_wifi`).
+- **Total Stok Kamar (`total_inventory`) & Sisa Kamar (`remaining_count`)**: Pengaturan ketersediaan kuota.
 
 #### Step 3: Pendaftaran Unit Kamar Fisik (`rooms`)
 - Penentuan Nomor Kamar (e.g. Room 101, 102, 201, 202) dan Lantai.

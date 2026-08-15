@@ -514,5 +514,33 @@ class _InsuranceSelectionWidgetState extends State<InsuranceSelectionWidget> {
     );
   }
 }
-```
+---
+
+## 8. Berkas Implementasi Layar Flutter Selesai (`flutter/lib/screens/property/hotel/`)
+
+Empat layar utama telah selesai diimplementasikan sesuai acuan mockup dan build HTML Trip.com style:
+
+### A. `HotelSearchScreen` (`hotel_search_screen.dart` — Route `/hotel/search`)
+- **Fitur:** Hero gradient background, modal pemilihan kota/destinasi populer ber-gradien, picker tanggal check-in/out, modal stepper Kamar & Tamu (Dewasa, Anak), quick filter chips (Sarapan, Bintang 4), icon shortcut (Disimpan, Pemesanan, Promo saya, Dilihat).
+
+### B. `HotelResultsScreen` (`hotel_results_screen.dart` — Route `/hotel/results`)
+- **Fitur:** Summary topbar interaktif, horizontal filter chips bar (Urutkan, Filter, Lokasi, Kebutuhan), banner promo diskon dengan sheet **Trust Modal Keuntungan Booking**, daftar card hotel (badge skor, bintang, kutipan review, harga coret & diskon), dan floating bottom bar (Peta & Disimpan).
+
+### C. `HotelDetailScreen` (`hotel_detail_screen.dart` — Route `/hotel/detail`)
+- **Fitur:** Hero gallery preview (`1/43`), info umum (nama, bintang, tahun buka, alamat, rating skor & kutipan ulasan), **8 Tab Lengkap**:
+  1. *Kamar*: Ringkasan rekomendasi kombo kamar dan daftar detail tipe kamar (`Family Suite`, `Kamar Superior`).
+  2. *Ulasan*: Daftar FAQ horizontal, ulasan staff manager, dan tombol ajukan pertanyaan.
+  3. *Pertanyaan Umum*: Tanya jawab seputar operasional hotel.
+  4. *Lokasi*: Snapshot peta dan jarak titik transit (Stasiun Kereta, Metro, Bandara, Bus).
+  5. *Fasilitas*: Kategori ber-ikon (Makanan/Minuman, Kolam Renang, Transportasi, Spa).
+  6. *Kebijakan*: Jam check-in/out, resepsionis 24 jam, kebijakan tamu anak, dan tempat tidur tambahan.
+  7. *Keterangan*: Deskripsi lengkap properti dan UGC Blog card ide tempat menginap.
+  8. *Trip Moments & Akomodasi Terdekat*: Rekomendasi hotel sekitar dan benefit garansi *Kami Samakan Harga*.
+- **Bottom Bar:** Harga kamar diskon & tombol *Pilih kamar*.
+
+### D. `HotelBookingScreen` (`hotel_booking_screen.dart` — Route `/hotel/booking`)
+- **Fitur:** Ringkasan tanggal & detail kombo kamar yang dipesan, form pengisian data tamu per kamar (Nama Depan & Belakang per kamar 1 & 2), form info kontak (Email validasi & No. Telepon), box info perolehan Trip Coins & deposit tunai, checkbox persetujuan syarat & ketentuan, banner jaminan harga *Kami Samakan Harga*, dan sticky bottom bar *Prabayar Online* + tombol *Pesan*.
+
+### E. `HotelService` (`flutter/lib/services/hotel_service.dart`)
+- Terintegrasi penuh dengan `ApiClient` dan `DummyApiClient` dengan mock response fixture di `assets/json/` (`GET_hotels.json`, `GET_hotels_id.json`, `POST_hotel_bookings.json`).
 

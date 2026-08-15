@@ -216,14 +216,31 @@ class Hotel extends Model
     protected $fillable = [
         'property_id',
         'star_rating',
+        'open_year',
         'check_in_time',
         'check_out_time',
+        'score',
+        'score_label',
+        'review_count',
+        'review_quotes',
+        'facility_groups',
+        'transport_points',
         'policies',
+        'faqs',
+        'deposit_amount',
     ];
 
     protected $casts = [
         'star_rating' => 'integer',
+        'open_year' => 'integer',
+        'score' => 'decimal:1',
+        'review_count' => 'integer',
+        'review_quotes' => 'array',
+        'facility_groups' => 'array',
+        'transport_points' => 'array',
         'policies' => 'array',
+        'faqs' => 'array',
+        'deposit_amount' => 'decimal:2',
     ];
 
     public function property(): BelongsTo
@@ -268,11 +285,17 @@ class RoomType extends Model
         'capacity_adults',
         'capacity_children',
         'max_guests',
-        'room_size_sqm',
-        'bed_configuration',
+        'size_sqm',
+        'bed_type',
+        'has_window',
+        'no_smoking',
+        'free_wifi',
         'base_price',
+        'price_original',
         'breakfast_included',
         'total_inventory',
+        'remaining_count',
+        'images',
         'facilities',
         'is_active',
     ];
@@ -281,9 +304,15 @@ class RoomType extends Model
         'capacity_adults' => 'integer',
         'capacity_children' => 'integer',
         'max_guests' => 'integer',
+        'has_window' => 'boolean',
+        'no_smoking' => 'boolean',
+        'free_wifi' => 'boolean',
         'base_price' => 'decimal:2',
+        'price_original' => 'decimal:2',
         'breakfast_included' => 'boolean',
         'total_inventory' => 'integer',
+        'remaining_count' => 'integer',
+        'images' => 'array',
         'facilities' => 'array',
         'is_active' => 'boolean',
     ];
@@ -406,12 +435,17 @@ class BookingRoom extends Model
     protected $fillable = [
         'booking_id',
         'room_type_id',
+        'room_number',
+        'room_name',
+        'guest_first_name',
+        'guest_last_name',
         'quantity',
         'price_per_night',
         'subtotal',
     ];
 
     protected $casts = [
+        'room_number' => 'integer',
         'quantity' => 'integer',
         'price_per_night' => 'decimal:2',
         'subtotal' => 'decimal:2',

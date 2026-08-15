@@ -1,0 +1,152 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=390,height=844">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+  html,body{width:390px;height:844px}
+  body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#1A1A2E;overflow:hidden}
+  .screen{width:390px;height:844px;overflow:hidden;position:relative;display:flex;flex-direction:column;background:#fff}
+  .statusbar{height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:13px;font-weight:700;flex:0 0 auto;z-index:30;color:#1A1A2E}
+  .body{flex:1 1 auto;overflow:hidden;position:relative;display:flex;flex-direction:column}
+  .scroll{flex:1;overflow:hidden}
+  .btn{height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;border:none;width:100%;cursor:pointer}
+  .btn-primary{background:#2962FF;color:#fff}
+  .btn-outline{background:transparent;border:1.5px solid #2962FF;color:#2962FF}
+  .divider{height:1px;background:#EEEEEE;margin:0}
+  .muted{color:#757575}
+  .chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid #E0E0E0}
+  </style></head>
+<body><div class="screen">
+      <div class="statusbar" style="color:#1A1A2E">
+    <span>10:51</span>
+    <div style="display:flex;gap:6px;align-items:center">
+      <svg width="16" height="12" viewBox="0 0 17 12" fill="#1A1A2E"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+      <span style="font-weight:800;font-size:12px">4G</span>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none" stroke="#1A1A2E" stroke-width="1.3"><rect x="1" y="1" width="20" height="10" rx="2.6"/><rect x="3" y="3" width="13" height="6" rx="1" fill="#1A1A2E"/><path d="M23 4v4" stroke-width="1.8"/></svg>
+    </div>
+  </div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:12px 16px;border-bottom:1px solid #EEEEEE;position:relative">
+        <div style="position:absolute;left:16px"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><path d="M18 6 6 18M6 6l12 12"/></svg></div>
+        <span style="font-size:17px;font-weight:700">Kamar Superior</span>
+      </div>
+      <div class="body">
+        <div class="scroll" style="padding:16px">
+          <!-- Photo -->
+          <div style="width:100%;height:180px;border-radius:12px;overflow:hidden;margin-bottom:14px">
+            <div style="height:180px;border-radius:12px;background:linear-gradient(135deg,#c8a96e,#8d6e63);position:relative;overflow:hidden;display:flex;align-items:flex-end;color:#fff;flex:0 0 auto">
+    <div style="position:absolute;inset:0;opacity:0.18;background:radial-gradient(circle at 80% 20%,#fff 0,transparent 45%),radial-gradient(circle at 10% 90%,#fff 0,transparent 40%)"></div>
+    
+  </div>
+          </div>
+          <!-- Title + tabs -->
+          <div style="font-size:20px;font-weight:800;margin-bottom:12px">Kamar Superior</div>
+          <div style="display:flex;gap:8px;margin-bottom:16px">
+            <div style="padding:8px 16px;border-radius:20px;border:1.5px solid #2962FF;font-size:13px;font-weight:600;background:#F0F4FF;color:#2962FF">Kamar Superior</div>
+            <div style="padding:8px 16px;border-radius:20px;border:1.5px solid #E0E0E0;font-size:13px;font-weight:600;background:#fff">Family Suite</div>
+          </div>
+          <!-- Room specs -->
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:5px;font-size:13px"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg> 21 m²</div><div style="display:flex;align-items:center;gap:5px;font-size:13px"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg> Memiliki jendela</div><div style="display:flex;align-items:center;gap:5px;font-size:13px"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><circle cx="12" cy="12" r="9"/><path d="M2 2l20 20"/><path d="M9 8h5a2 2 0 0 1 2 2v2"/><path d="M7 16h10v-2"/></svg> Bebas rokok</div><div style="display:flex;align-items:center;gap:5px;font-size:13px"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 16 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg> Wi-Fi gratis</div>
+          </div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:4px">Jenis kamar disediakan selama persediaan masih ada</div>
+          <div style="border:1px solid #EEEEEE;border-radius:8px;overflow:hidden;margin-bottom:12px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #EEEEEE">
+              <div style="padding:12px 16px;font-size:13px;font-weight:700;border-right:1px solid #EEEEEE">Opsi 1</div>
+              <div style="padding:12px 16px;font-size:13px;color:#757575">1 queen bed (lebar 1,6 m)</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr">
+              <div style="padding:12px 16px;font-size:13px;font-weight:700">Opsi 2</div>
+              <div style="padding:12px 16px;font-size:13px;color:#757575">2 single bed (lebar 0,8 m)</div>
+            </div>
+          </div>
+          <div style="font-size:13px;color:#757575;line-height:1.6;margin-bottom:20px">
+            Anda tidak dapat memesan tempat tidur tambahan dan ranjang bayi di tipe kamar ini
+          </div>
+          <!-- Pilihan Anda -->
+          <div style="font-size:18px;font-weight:800;margin-bottom:12px">Pilihan Anda</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+            <span style="font-size:14px;font-weight:700">2 dewasa, 1 anak (Usia 0-5 tahun)</span>
+          </div>
+          <div style="font-size:13px;color:#757575;line-height:1.6;margin-bottom:16px">
+            Kamar ini cocok untuk grup Anda karena dapat mengakomodasi hingga 3 tamu
+          </div>
+          <div style="font-size:13px;color:#757575;margin-bottom:8px">Tidak termasuk makanan</div>
+          <div style="font-size:13px;color:#757575;margin-bottom:16px">Berikut adalah biaya untuk sarapan tambahan</div>
+          <div style="display:flex;gap:8px;margin-bottom:20px">
+            <div style="padding:10px 16px;border:1.5px solid #E0E0E0;border-radius:8px;font-size:14px;font-weight:600">Dewasa</div>
+            <div style="padding:10px 16px;border:1.5px solid #E0E0E0;border-radius:8px;font-size:14px;color:#757575">Buffet:Rp108.900 per orang</div>
+          </div>
+          <!-- Konfirmasi Langsung -->
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;color:#14B8A6;font-weight:700;font-size:15px">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="#14B8A6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><path d="M4 12l5 5L20 6"/></svg> Konfirmasi Langsung
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:24px;font-size:14px;color:#757575">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><rect x="6" y="7" width="12" height="14" rx="2"/><path d="M9 7V5a3 3 0 0 1 6 0v2M6 14h12"/></svg> Prabayar Online
+          </div>
+          <!-- Fasilitas Kamar -->
+          <div style="font-size:18px;font-weight:800;margin-bottom:12px">Fasilitas Kamar</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+            <div style="font-size:13px;color:#1A1A2E">Kamar mandi pribadi</div><div style="font-size:13px;color:#1A1A2E">AC</div><div style="font-size:13px;color:#1A1A2E">TV LCD</div><div style="font-size:13px;color:#1A1A2E">Pengering rambut</div><div style="font-size:13px;color:#1A1A2E">Minibar</div><div style="font-size:13px;color:#1A1A2E">Bathtub atau shower</div>
+          </div>
+          <div style="font-size:14px;color:#2962FF;font-weight:700;text-decoration:underline;margin-bottom:24px">Tampilkan semua fasilitas</div>
+          <!-- Kebijakan & layanan -->
+          <div style="font-size:18px;font-weight:800;margin-bottom:12px">Kebijakan & layanan</div>
+          <div style="font-size:16px;font-weight:700;color:#14B8A6;margin-bottom:8px">Pembatalan Gratis</div>
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px">
+            <div style="width:20px;height:20px;border-radius:50%;background:#14B8A6;display:flex;align-items:center;justify-content:center;color:#fff;flex:0 0 20px"><svg viewBox="0 0 24 24" width="12" height="12" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:#14B8A6">Pembatalan Gratis</div>
+              <div style="font-size:13px;color:#757575">Sebelum 16 Agt 2026, 23.59</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px">
+            <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid #E0E0E0;display:flex;align-items:center;justify-content:center;flex:0 0 20px"></div>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:#757575">Tidak dapat di-refund</div>
+              <div style="font-size:13px;color:#757575">Setelah 16 Agt 2026, 23.59</div>
+            </div>
+          </div>
+          <div style="font-size:13px;color:#757575;line-height:1.6;margin-bottom:16px">
+            · Anda akan dikenakan biaya pembatalan jika Anda tidak check-in.<br>
+            · Mengacu pada zona waktu di lokasi hotel.
+          </div>
+          <div style="font-size:14px;color:#14B8A6;font-weight:700;margin-bottom:6px">Konfirmasi Langsung</div>
+          <div style="font-size:13px;color:#757575;line-height:1.6;margin-bottom:24px">Pemesanan akan langsung dikonfirmasi.</div>
+          <!-- Kebijakan Anak -->
+          <div style="font-size:18px;font-weight:800;margin-bottom:12px">Kebijakan Anak dan Tempat Tidur Tambahan</div>
+          <div style="font-size:16px;font-weight:700;margin-bottom:8px">Kebijakan Tamu Anak</div>
+          <div style="font-size:13px;color:#757575;line-height:1.6;margin-bottom:16px">
+            · Anak dari segala usia dapat menginap di kamar ini.<br>
+            · Harap tambahkan jumlah pasti anak-anak dan usia mereka ke dalam kriteria pencarian, dan kami akan memberi Anda tipe kamar yang sesuai.
+          </div>
+          <div style="font-size:16px;font-weight:700;margin-bottom:8px">Ranjang Bayi dan Tempat Tidur Tambahan</div>
+          <div style="font-size:13px;color:#757575;line-height:1.6;margin-bottom:24px">Anda tidak dapat memesan tempat tidur tambahan dan ranjang bayi di tipe kamar ini</div>
+          <!-- Sarapan -->
+          <div style="font-size:18px;font-weight:800;margin-bottom:12px">Sarapan</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:4px">Gaya</div>
+          <div style="font-size:13px;color:#757575;margin-bottom:4px">Buffet</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:4px">Jam buka</div>
+          <div style="font-size:13px;color:#757575;margin-bottom:16px">[Sen - Min] 07:00-10:00 Buka</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px">Biaya</div>
+          <div style="border:1px solid #EEEEEE;border-radius:8px;overflow:hidden;margin-bottom:16px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #EEEEEE">
+              <div style="padding:12px 16px;font-size:13px;font-weight:700;border-right:1px solid #EEEEEE">Usia</div>
+              <div style="padding:12px 16px;font-size:13px;font-weight:700">Biaya</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #EEEEEE">
+              <div style="padding:12px 16px;font-size:13px;font-weight:700">Anak usia 5-17 tahun</div>
+              <div style="padding:12px 16px;font-size:13px;color:#757575">Rp65.000 per orang</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr">
+              <div style="padding:12px 16px;font-size:13px;font-weight:700">Dewasa</div>
+              <div style="padding:12px 16px;font-size:13px;color:#757575">Buffet:Rp108.900 per orang</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:#757575;line-height:1.6;margin-bottom:24px">
+            Biaya sarapan tambahan tidak termasuk dalam total biaya dan harus dibayar secara terpisah di akomodasi.
+          </div>
+        </div>
+      </div>
+    </div></body></html>

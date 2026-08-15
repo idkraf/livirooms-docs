@@ -1,4 +1,4 @@
-﻿# Flutter Screen Reference
+# Flutter Screen Reference
 
 Dokumen ini berisi daftar seluruh layar aplikasi Flutter Sewain berdasarkan **kondisi kode aktual** di `flutter/lib/` per 2026-08-13. Kolom **Status** menunjukkan apakah file `.dart` sudah ada atau belum.
 
@@ -111,18 +111,18 @@ Aplikasi mengizinkan pengguna melakukan *browsing* properti tanpa login/daftar:
 
 ---
 
-## C. Hotel OTA (Planned -- Belum Dibuat)
+## C. Hotel OTA (Screens Selesai Dibuat)
 
-Screen belum dibuat. Infrastruktur Laravel & Flutter sudah tersedia dan teruji 100%. Lihat [hotel/04-flutter-implementation.md](../hotel/04-flutter-implementation.md).
+Modul pencarian hotel, hasil filter, detail 8 tab, dan form booking checkout telah dibuat lengkap dengan service & sample JSON mock. Lihat [hotel/04-flutter-implementation.md](../hotel/04-flutter-implementation.md) dan [hotel/screen/readme_screen.md](../hotel/screen/readme_screen.md).
 
-| Status | File Kode (Planned) | Route | Nama Layar | Infrastruktur Siap |
-|--------|---------------------|-------|------------|--------------------|
-| ❌ | `hotel/hotel_search_screen.dart` | `/hotel/search` | Hotel Search | `HotelSearchProvider`, `HotelSearchQuery`, `searchHotels()` |
-| ❌ | `hotel/hotel_results_screen.dart` | `/hotel/results` | Hotel Results | `HotelSearchProvider.hotels` list |
-| ❌ | `hotel/hotel_detail_screen.dart` | `/hotel/detail` | Hotel Detail | `Property.isHotel`, `starRating`, `checkInTime` |
-| ❌ | `hotel/room_type_screen.dart` | `/hotel/rooms` | Room Types | `RoomType` model di `booking.dart` |
-| ❌ | `hotel/hotel_booking_screen.dart` | `/hotel/booking` | Hotel Booking Checkout | `InsuranceSelectionWidget`, `BookingService.create()` hotel params |
-| ❌ | `mitra/hotel_inventory_screen.dart` | `/mitra/hotel/inventory` | Inventaris Kamar Hotel | `RoomInventory` Laravel API |
+| Status | File Kode | Route | Nama Layar | Deskripsi & Infrastruktur |
+|--------|-----------|-------|------------|---------------------------|
+| ✅ | `property/hotel/hotel_search_screen.dart` | `/hotel/search` | Hotel Search & Filter | Destinasi populer, tanggal check-in/out, counter kamar/tamu, modal filter harga/bintang |
+| ✅ | `property/hotel/hotel_results_screen.dart` | `/hotel/results` | Hotel Results | List hotel card, filter chips, banner diskon, trust modal sheet |
+| ✅ | `property/hotel/hotel_detail_screen.dart` | `/hotel/detail` | Hotel Detail (8 Tab) | Hero gallery, Kamar, Ulasan, Lokasi, Fasilitas, Kebijakan, Keterangan, Trip Moments, Akomodasi Terdekat |
+| ✅ | `property/hotel/hotel_booking_screen.dart` | `/hotel/booking` | Hotel Booking Checkout | Ringkasan kamar, form data tamu per kamar, info kontak, Trip Coins, jaminan harga |
+| ✅ | `mitra/hotel_form_screen.dart` | `/mitra/hotels/form` | Form Wizard Registrasi Hotel | 5-Step pendaftaran hotel & kamar mitra (Info, Fasilitas, Kamar, Inventaris, Galeri) |
+
 
 ---
 

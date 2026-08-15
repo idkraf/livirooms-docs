@@ -1,0 +1,282 @@
+[
+  {
+    "screen": "filter_location",
+    "file": "filter_location.html",
+    "outName": "filter_by_location_screen.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "filter_screen",
+    "file": "filter_screen.html",
+    "outName": "filter_screen.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "filter_kamar_tamu",
+    "file": "filter_kamar_tamu.html",
+    "outName": "filter_by_kamar_dan_tamu.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "filter_kamar_tamu_bottom_modal_select_anak",
+    "file": "filter_kamar_tamu_bottom_modal_select_anak.html",
+    "outName": "filter_by_kamar_dan_tamu_bottom_modal_select_anak.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "filter_kalendar",
+    "file": "filter_kalendar.html",
+    "outName": "filter_by_tab_kalendar_screen.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "filter_kalendar_tanggal_flexibel",
+    "file": "filter_kalendar_tanggal_flexibel.html",
+    "outName": "filter_by_tab_tanggal_flexibel_screen.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "result_pencarian",
+    "file": "result_pencarian.html",
+    "outName": "result_pencarian_hotel_screen.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "result_pencarian_bottom_modal_filter",
+    "file": "result_pencarian_bottom_modal_filter.html",
+    "outName": "result_pencarian_hotel_screen_bottom_modal_filter.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "result_pencarian_bottom_modal_filter_urutkan",
+    "file": "result_pencarian_bottom_modal_filter_urutkan.html",
+    "outName": "result_pencarian_hotel_screen_bottom_modal_filter_urutkan.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "result_pencarian_bottom_modal_filter_lokasi",
+    "file": "result_pencarian_bottom_modal_filter_lokasi.html",
+    "outName": "result_pencarian_hotel_screen_bottom_modal_filter_lokasi.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "result_pencarian_bottom_modal_filter_kebutuhan",
+    "file": "result_pencarian_bottom_modal_filter_kebutuhan.html",
+    "outName": "result_pencarian_hotel_screen_bottom_modal_filter_kebutuhan.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "result_pencarian_top_modal_filter_date_and_tamu",
+    "file": "result_pencarian_top_modal_filter_date_and_tamu.html",
+    "outName": "result_pencarian_hotel_screen_top_modal_filter_date_and_tamu.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "result_pencarian_top_modal_filter_date_and_tamu_kalendar",
+    "file": "result_pencarian_top_modal_filter_date_and_tamu_kalendar.html",
+    "outName": "result_pencarian_hotel_screen_top_modal_filter_date_and_tamu_klik_1st_to_new_screen_with_tab_kalendar_screen.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "result_pencarian_top_modal_filter_date_and_tamu_tanggal_flexibel",
+    "file": "result_pencarian_top_modal_filter_date_and_tamu_tanggal_flexibel.html",
+    "outName": "result_pencarian_hotel_screen_top_modal_filter_date_and_tamu_klik_1st_to_new_screen_with_tab_tanggal_flexibel_screen.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "result_pencarian_top_modal_filter_date_and_tamu_2nd",
+    "file": "result_pencarian_top_modal_filter_date_and_tamu_2nd.html",
+    "outName": "result_pencarian_hotel_screen_top_modal_filter_date_and_tamu_klik_2nd.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "result_pencarian_top_modal_filter_date_and_tamu_2nd_bottom_modal_select_anak",
+    "file": "result_pencarian_top_modal_filter_date_and_tamu_2nd_bottom_modal_select_anak.html",
+    "outName": "result_pencarian_hotel_screen_top_modal_filter_date_and_tamu_klik_2nd_bottom_modal_select_anak.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "detail_hotel",
+    "file": "detail_hotel.html",
+    "outName": "detail_hotel.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "detail_tab_kamar",
+    "file": "detail_tab_kamar.html",
+    "outName": "detail_tab_kamar.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "detail_tab_ulasan",
+    "file": "detail_tab_ulasan.html",
+    "outName": "detail_tab_ulasan.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "detail_tab_lokasi",
+    "file": "detail_tab_lokasi.html",
+    "outName": "detail_tab_lokasi.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "detail_tab_fasilitas",
+    "file": "detail_tab_fasilitas.html",
+    "outName": "detail_tab_fasilitas.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "detail_tab_kebijakan",
+    "file": "detail_tab_kebijakan.html",
+    "outName": "detail_tab_kebijakan.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "detail_tab_keterangan",
+    "file": "detail_tab_keterangan.html",
+    "outName": "detail_tab_keterangan.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "detail_tab_trip_moments",
+    "file": "detail_tab_trip_moments.html",
+    "outName": "detail_tab_trip_moments.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "detail_tab_akomodasi_terdekat",
+    "file": "detail_tab_akomodasi_terdekat.html",
+    "outName": "detail_tab_akomodasi_terdekat.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "pesan_kamar_section",
+    "file": "pesan_kamar_section.html",
+    "outName": "detail_hotel_screen_saat_mau_pilih_button_pesan_kamar.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "sheet_pesan_kamar",
+    "file": "sheet_pesan_kamar.html",
+    "outName": "sheet_pesan_kamar.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "form_pengisian_kamar",
+    "file": "form_pengisian_kamar.html",
+    "outName": "form_pesan_kamar_form_pengisian_kamar.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "form_pengisian_kamar_scroll",
+    "file": "form_pengisian_kamar_scroll.html",
+    "outName": "form_pesan_kamar_form_pengisian_kamar_scroll.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "form_pesan_kamar_step1",
+    "file": "form_pesan_kamar_step1.html",
+    "outName": "form_pesan_kamar_1.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "form_pesan_kamar_step2",
+    "file": "form_pesan_kamar_step2.html",
+    "outName": "form_pesan_kamar_2.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "form_pesan_kamar_step3",
+    "file": "form_pesan_kamar_step3.html",
+    "outName": "form_pesan_kamar_3.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "bottom_sheet_informasi_tambahan",
+    "file": "bottom_sheet_informasi_tambahan.html",
+    "outName": "bottom_sheet_informasi_tambahan.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "room_detail_family_suite",
+    "file": "room_detail_family_suite.html",
+    "outName": "room_detail_family_suite.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "room_detail_kamar_superior",
+    "file": "room_detail_kamar_superior.html",
+    "outName": "room_detail_kamar_superior.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "bottom_sheet_kode_promo",
+    "file": "bottom_sheet_kode_promo.html",
+    "outName": "bottom_sheet_kode_promo.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "bottom_sheet_permintaan",
+    "file": "bottom_sheet_permintaan.html",
+    "outName": "bottom_sheet_permintaan.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "booking_list_screen",
+    "file": "booking_list_screen.html",
+    "outName": "booking_list_screen.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "booking_pembayaran_screen",
+    "file": "booking_pembayaran_screen.html",
+    "outName": "booking_pembayaran_screen.png",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "booking_hotel_detail_screen",
+    "file": "booking_hotel_detail_screen.html",
+    "outName": "booking_hotel_detail_screen.png",
+    "w": 390,
+    "h": 844
+  }
+]

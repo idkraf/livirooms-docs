@@ -1,0 +1,136 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=390,height=844">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+  html,body{width:390px;height:844px}
+  body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#1A1A2E;overflow:hidden}
+  .screen{width:390px;height:844px;overflow:hidden;position:relative;display:flex;flex-direction:column;background:#fff}
+  .statusbar{height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:13px;font-weight:700;flex:0 0 auto;z-index:30;color:#1A1A2E}
+  .body{flex:1 1 auto;overflow:hidden;position:relative;display:flex;flex-direction:column}
+  .scroll{flex:1;overflow:hidden}
+  .btn{height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;border:none;width:100%;cursor:pointer}
+  .btn-primary{background:#2962FF;color:#fff}
+  .btn-outline{background:transparent;border:1.5px solid #2962FF;color:#2962FF}
+  .divider{height:1px;background:#EEEEEE;margin:0}
+  .muted{color:#757575}
+  .chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid #E0E0E0}
+  </style></head>
+<body><div class="screen">
+      <div class="statusbar" style="color:#1A1A2E">
+    <span>10:51</span>
+    <div style="display:flex;gap:6px;align-items:center">
+      <svg width="16" height="12" viewBox="0 0 17 12" fill="#1A1A2E"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+      <span style="font-weight:800;font-size:12px">4G</span>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none" stroke="#1A1A2E" stroke-width="1.3"><rect x="1" y="1" width="20" height="10" rx="2.6"/><rect x="3" y="3" width="13" height="6" rx="1" fill="#1A1A2E"/><path d="M23 4v4" stroke-width="1.8"/></svg>
+    </div>
+  </div>
+      <!-- Topbar -->
+      <div style="display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid #EEEEEE;background:#fff;flex:0 0 auto">
+        <div style="width:36px;height:36px;border-radius:50%;background:#F5F5F5;display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><path d="M15 6l-6 6 6 6"/></svg></div>
+      </div>
+      <div style="padding:14px 16px;background:#fff;border-bottom:1px solid #EEEEEE;text-align:center;flex:0 0 auto">
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px">
+          <div style="width:20px;height:20px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;color:#4caf50"><svg viewBox="0 0 24 24" width="12" height="12" fill="#4caf50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><path d="M4 12l5 5L20 6"/></svg></div>
+          <span style="font-size:13px;color:#14B8A6;font-weight:600">Anda telah menghemat Rp277.224 pada pemesanan ini</span>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:#14B8A6;margin-bottom:4px">Transaksi Aman</div>
+        <div style="font-size:13px;color:#757575">Selesaikan pembayaran dalam <span style="font-weight:700;color:#1A1A2E">00:29:43</span></div>
+      </div>
+      <div class="body">
+        <div class="scroll" style="padding:16px">
+          <!-- Total -->
+          <div style="text-align:center;padding:8px 0 20px;border-bottom:1px solid #EEEEEE">
+            <div style="font-size:32px;font-weight:800;color:#1A1A2E">Rp1.498.990</div>
+          </div>
+          <!-- Booking info -->
+          <div style="padding:14px 0;border-bottom:1px solid #EEEEEE">
+            <div style="font-size:14px;font-weight:700;margin-bottom:6px">Sen, 17 Agt–Sel, 18 Agt | 1 malam <span style="font-size:12px;color:#757575;font-weight:400;text-decoration:underline;margin-left:8px">Detail</span></div>
+            <div style="font-size:13px;color:#757575;margin-bottom:2px">Grand Cemara Hotel</div>
+            <div style="font-size:13px;color:#757575">Info Tamu: Tea Wan</div>
+          </div>
+          <!-- Payment methods -->
+          
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #EEEEEE">
+              <div style="width:28px;height:28px;border-radius:8px;background:#F5F5F5;display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+                <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a5fbb"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">BCA</text></svg>
+                
+                
+                
+              </div>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;margin-bottom:4px">Virtual Account</div>
+                
+                <div style="display:flex;gap:4px;margin-top:4px"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a5fbb"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">BCA</text></svg><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#003399"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">BRI</text></svg><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fff" stroke="#003399" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" fill="#003399" font-size="9" font-weight="700">BNI</text></svg><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#f7b731"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">MDR</text></svg><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#d32f2f"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">CIMB</text></svg><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1e88e5"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">PMT</text></svg><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fff" stroke="#ed1c24" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" fill="#ed1c24" font-size="8" font-weight="700">DAN</text></svg></div>
+                
+              </div>
+              <div style="width:22px;height:22px;border-radius:50%;border:2px solid #2962FF;display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+                <div style="width:12px;height:12px;border-radius:50%;background:#2962FF"></div>
+              </div>
+            </div>
+          
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #EEEEEE">
+              <div style="width:28px;height:28px;border-radius:8px;background:#F5F5F5;display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+                
+                <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#eb001b"/><circle cx="16" cy="12" r="5" fill="#f79e1b" opacity="0.8"/></svg>
+                
+                
+              </div>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;margin-bottom:0">Tambah Kartu Kredit/Debit</div>
+                
+                
+                <div style="display:flex;gap:4px;margin-top:4px"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#eb001b"/><circle cx="16" cy="12" r="5" fill="#f79e1b" opacity="0.8"/></svg><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a1f71"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">VISA</text></svg><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0e4c96"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">JCB</text></svg><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2e77bc"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">AMEX</text></svg></div>
+              </div>
+              <div style="width:22px;height:22px;border-radius:50%;border:2px solid #E0E0E0;display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+                
+              </div>
+            </div>
+          
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #EEEEEE">
+              <div style="width:28px;height:28px;border-radius:8px;background:#F5F5F5;display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+                
+                
+                <svg width="24" height="24" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3" fill="#4c4cce"/><text x="12" y="14" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">OVO</text></svg>
+                
+              </div>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;margin-bottom:0">OVO</div>
+                <div style="font-size:12px;color:#757575">Tautkan akun Anda ke Trip.com agar lebih praktis</div>
+                
+                
+              </div>
+              <div style="width:22px;height:22px;border-radius:50%;border:2px solid #E0E0E0;display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+                
+              </div>
+            </div>
+          
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #EEEEEE">
+              <div style="width:28px;height:28px;border-radius:8px;background:#F5F5F5;display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+                
+                
+                
+                <svg width="24" height="24" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3" fill="#fff" stroke="#4285f4" stroke-width="1.5"/><text x="12" y="14" text-anchor="middle" fill="#4285f4" font-size="7" font-weight="700">G Pay</text></svg>
+              </div>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;margin-bottom:0">Google Pay</div>
+                
+                
+                
+              </div>
+              <div style="width:22px;height:22px;border-radius:50%;border:2px solid #E0E0E0;display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+                
+              </div>
+            </div>
+          
+        </div>
+      </div>
+      <div style="padding:0 16px 20px;background:#fff;border-top:1px solid #EEEEEE">
+        <div class="btn btn-primary" style="font-size:16px">Bayar Sekarang</div>
+        <div style="display:flex;justify-content:center;gap:16px;margin-top:12px">
+          <span style="font-size:11px;color:#757575;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" width="12" height="12" fill="#14B8A6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><path d="M4 12l5 5L20 6"/></svg> Berbagai metode pembayaran</span>
+          <span style="font-size:11px;color:#757575;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" width="12" height="12" fill="#14B8A6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0"><path d="M4 12l5 5L20 6"/></svg> Cakupan global</span>
+        </div>
+      </div>
+    </div></body></html>
