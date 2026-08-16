@@ -7,6 +7,7 @@ import '../../config/theme.dart';
 import '../../models/host_info.dart';
 import '../../models/property.dart';
 import '../../models/review.dart';
+import '../../models/unit_pricing.dart';
 import '../../providers/auth_provider.dart';
 import '../../router.dart';
 import '../../services/chat_service.dart';
@@ -28,6 +29,7 @@ import '../../widgets/review_summary_card.dart';
 import '../../widgets/section_tab_strip.dart';
 import '../../widgets/sticky_price_bar.dart';
 import '../chat/chat_room_screen.dart';
+import 'rincian_unit_screen.dart';
 import 'sheets/building_facilities_sheet.dart';
 import 'sheets/description_sheet.dart';
 import 'sheets/qna_sheet.dart';
@@ -152,8 +154,12 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
     super.dispose();
   }
 
-  List<GlobalKey> get _anchors =>
-      [_facilitiesKey, _infoKey, _detailsKey, _locationKey];
+  List<GlobalKey> get _anchors => [
+    _facilitiesKey,
+    _infoKey,
+    _detailsKey,
+    _locationKey,
+  ];
 
   void _onScroll() {
     if (_jumping) return;
@@ -282,16 +288,14 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
       QnaSheet.show(context, questions: _detail.questions);
 
   void _openBuildingFacilities() => BuildingFacilitiesSheet.show(
-        context,
-        facilities: _detail.buildingFacilitiesAll.isNotEmpty
-            ? _detail.buildingFacilitiesAll
-            : _detail.buildingFacilities.map((f) => f.label).toList(),
-      );
+    context,
+    facilities: _detail.buildingFacilitiesAll.isNotEmpty
+        ? _detail.buildingFacilitiesAll
+        : _detail.buildingFacilities.map((f) => f.label).toList(),
+  );
 
-  void _openRoomFurniture() => RoomFurnitureSheet.show(
-        context,
-        groups: _detail.roomFurnitureGroups,
-      );
+  void _openRoomFurniture() =>
+      RoomFurnitureSheet.show(context, groups: _detail.roomFurnitureGroups);
 
   void _openDescription() => DescriptionSheet.show(context, _detail);
 
@@ -334,17 +338,45 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
       return;
     }
 
-    final now = DateTime.now();
-    final range = await showDateRangePicker(
-      context: context,
-      firstDate: now,
-      lastDate: now.add(const Duration(days: 365)),
-      initialDateRange: DateTimeRange(
-        start: now,
-        end: now.add(const Duration(days: 1)),
-      ),
-    );
-    if (range == null || !mounted) return;
+    final uniqueTypes = p.prices.map((e) => e.priceType).toSet();
+    if (uniqueTypes.isEmpty) return;
+
+    final periods = uniqueTypes
+        .map((t) => RentalPeriodX.fromApi(t))
+        .toSet()
+        .toList();
+
+    setState(() => _loading = true);
+    try {
+      final entries = <RentalPeriod, UnitPricing>{};
+      for (final period in periods) {
+        final pricing = await _service.pricing(p.id, priceType: period.apiValue);
+        if (mounted) entries[period] = pricing;
+      }
+      if (!mounted) return;
+      final initial = periods.isNotEmpty ? periods.first : RentalPeriod.daily;
+      if (!mounted) return;
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => RincianUnitScreen(
+            pricing: entries,
+            initialPeriod: initial,
+            onSubmit: (draft) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Pesanan ${draft.period.label} diajukan')),
+              );
+            },
+          ),
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Gagal memuat rincian harga: $e')),
+      );
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
   }
 
   @override
