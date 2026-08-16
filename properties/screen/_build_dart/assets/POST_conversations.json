@@ -1,0 +1,28 @@
+{
+  "status": true,
+  "code": 201,
+  "message": "Percakapan berhasil dibuka.",
+  "data": {
+    "id": 1,
+    "property": {
+      "id": 1,
+      "name": "Sunset Beach Apartment"
+    },
+    "other_user": {
+      "id": 11,
+      "name": "Ani Lestari"
+    },
+    "last_message": {
+      "id": 1,
+      "conversation_id": 1,
+      "sender_id": 11,
+      "body": "Halo, apakah properti masih tersedia?",
+      "attachment": null,
+      "is_read": true,
+      "created_at": "2026-07-26T08:30:00+07:00"
+    },
+    "last_message_at": "2026-07-26T08:30:00+07:00"
+  },
+  "meta": null,
+  "errors": null
+}

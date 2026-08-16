@@ -1,0 +1,92 @@
+{
+  "status": true,
+  "code": 200,
+  "message": "Wishlist berhasil dimuat.",
+  "data": [
+    {
+      "id": 1,
+      "host_id": 10,
+      "property_type": "apartment",
+      "name": "Sunset Beach Apartment",
+      "building_name": "Sunset Towers",
+      "description": "A beautiful apartment with ocean view",
+      "address": "Jl. Pantai Indah No. 10, Bali",
+      "latitude": -8.65,
+      "longitude": 115.2167,
+      "guest_capacity": 4,
+      "bedrooms": 2,
+      "facilities": [
+        "WiFi",
+        "Pool",
+        "Gym",
+        "Parking"
+      ],
+      "gallery": [
+        "https://example.com/gallery1/1.jpg",
+        "https://example.com/gallery1/2.jpg"
+      ],
+      "cover": "https://example.com/gallery1/1.jpg",
+      "status": "active",
+      "price_from": 500000,
+      "rating": 4.8,
+      "review_count": 12,
+      "prices": [
+        {
+          "price_type": "daily",
+          "amount": 500000,
+          "cleaning_fee": 50000,
+          "deposit": 500000,
+          "service_fee": 50000
+        }
+      ],
+      "host": {
+        "id": 10,
+        "name": "Budi Santoso"
+      }
+    },
+    {
+      "id": 3,
+      "host_id": 12,
+      "property_type": "villa",
+      "name": "Cliff View Villa",
+      "building_name": "Cliff Edge",
+      "description": "A luxury villa with cliff view and infinity pool",
+      "address": "Jl. Raya Uluwatu No. 20, Bali",
+      "latitude": -8.825,
+      "longitude": 115.11,
+      "guest_capacity": 8,
+      "bedrooms": 4,
+      "facilities": [
+        "WiFi",
+        "Pool",
+        "Kitchen"
+      ],
+      "gallery": [
+        "https://example.com/gallery3/1.jpg",
+        "https://example.com/gallery3/2.jpg"
+      ],
+      "cover": "https://example.com/gallery3/1.jpg",
+      "status": "active",
+      "price_from": 2000000,
+      "rating": 4.9,
+      "review_count": 15,
+      "prices": [
+        {
+          "price_type": "daily",
+          "amount": 2000000,
+          "cleaning_fee": 200000,
+          "deposit": 2000000,
+          "service_fee": 200000
+        }
+      ],
+      "host": {
+        "id": 12,
+        "name": "Dewi Sartika"
+      }
+    }
+  ],
+  "meta": {
+    "total": 2
+  },
+  "errors": null
+}

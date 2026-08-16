@@ -1,0 +1,58 @@
+{
+  "status": true,
+  "code": 200,
+  "message": "Daftar properti Anda berhasil dimuat.",
+  "data": [
+    {
+      "id": 1,
+      "host_id": 10,
+      "property_type": "apartment",
+      "name": "Sunset Beach Apartment",
+      "building_name": "Sunset Towers",
+      "description": "A beautiful apartment with ocean view",
+      "address": "Jl. Pantai Indah No. 10, Bali",
+      "latitude": -8.65,
+      "longitude": 115.2167,
+      "guest_capacity": 4,
+      "bedrooms": 2,
+      "facilities": [
+        "WiFi",
+        "Pool",
+        "Gym",
+        "Parking"
+      ],
+      "gallery": [
+        "https://example.com/gallery1/1.jpg",
+        "https://example.com/gallery1/2.jpg"
+      ],
+      "cover": "https://example.com/gallery1/1.jpg",
+      "status": "active",
+      "price_from": 500000,
+      "rating": 4.8,
+      "review_count": 12,
+      "prices": [
+        {
+          "price_type": "daily",
+          "amount": 500000,
+          "cleaning_fee": 50000,
+          "deposit": 500000,
+          "service_fee": 50000
+        }
+      ],
+      "host": {
+        "id": 10,
+        "name": "Budi Santoso"
+      }
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "last_page": 1,
+    "per_page": 15,
+    "total": 1,
+    "from": null,
+    "to": null,
+    "has_more": false
+  },
+  "errors": null
+}

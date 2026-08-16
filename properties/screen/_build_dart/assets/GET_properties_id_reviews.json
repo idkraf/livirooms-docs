@@ -1,0 +1,51 @@
+{
+  "status": true,
+  "code": 200,
+  "message": "Ulasan berhasil dimuat.",
+  "data": [
+    {
+      "id": 1,
+      "property_id": 1,
+      "user_id": 2,
+      "booking_id": 1,
+      "rating": 5,
+      "comment": "Properti sangat bagus dan bersih!",
+      "host_reply": "Terima kasih atas review positifnya!",
+      "photos": [
+        "https://example.com/reviews/1/1.jpg",
+        "https://example.com/reviews/1/2.jpg"
+      ],
+      "created_at": "2026-07-20T14:30:00+07:00",
+      "user": {
+        "id": 2,
+        "name": "Siti Nurhaliza"
+      }
+    },
+    {
+      "id": 2,
+      "property_id": 1,
+      "user_id": 3,
+      "booking_id": 2,
+      "rating": 4,
+      "comment": "Bagus, tapi check-in agak lama.",
+      "host_reply": null,
+      "photos": [],
+      "created_at": "2026-07-18T09:15:00+07:00",
+      "user": {
+        "id": 3,
+        "name": "Rizky Ramadhan"
+      }
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "last_page": 1,
+    "per_page": 15,
+    "total": 2,
+    "from": 1,
+    "to": 2,
+    "has_more": false,
+    "average_rating": 4.7
+  },
+  "errors": null
+}

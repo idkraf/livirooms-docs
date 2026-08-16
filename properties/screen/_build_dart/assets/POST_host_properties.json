@@ -1,0 +1,48 @@
+{
+  "status": true,
+  "code": 201,
+  "message": "Properti berhasil dibuat.",
+  "data": {
+    "id": 4,
+    "host_id": 10,
+    "property_type": "house",
+    "name": "Cozy Family House",
+    "building_name": "Green Residence",
+    "description": "Cozy house for family vacation",
+    "address": "Jl. Raya Bogor No. 88, Jakarta",
+    "latitude": -6.3,
+    "longitude": 106.8,
+    "guest_capacity": 5,
+    "bedrooms": 3,
+    "facilities": [
+      "WiFi",
+      "Kitchen",
+      "Garden",
+      "Parking"
+    ],
+    "gallery": [
+      "https://example.com/gallery4/1.jpg",
+      "https://example.com/gallery4/2.jpg"
+    ],
+    "cover": "https://example.com/gallery4/1.jpg",
+    "status": "active",
+    "price_from": 750000,
+    "rating": null,
+    "review_count": 0,
+    "prices": [
+      {
+        "price_type": "daily",
+        "amount": 750000,
+        "cleaning_fee": 80000,
+        "deposit": 750000,
+        "service_fee": 75000
+      }
+    ],
+    "host": {
+      "id": 10,
+      "name": "Budi Santoso"
+    }
+  },
+  "meta": null,
+  "errors": null
+}

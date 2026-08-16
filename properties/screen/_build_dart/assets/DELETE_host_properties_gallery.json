@@ -1,0 +1,10 @@
+{
+  "status": true,
+  "code": 200,
+  "message": "Foto berhasil dihapus.",
+  "data": {
+    "deleted": true
+  },
+  "meta": null,
+  "errors": null
+}

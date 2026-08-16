@@ -1,0 +1,15 @@
+{
+  "status": true,
+  "code": 200,
+  "message": "Foto berhasil dihapus.",
+  "data": {
+    "gallery": [
+      "properties/gallery/1-b.jpg",
+      "properties/gallery/1-c.jpg"
+    ],
+    "cover": "properties/gallery/1-b.jpg",
+    "deleted": true
+  },
+  "meta": null,
+  "errors": null
+}

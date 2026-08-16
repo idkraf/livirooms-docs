@@ -1,0 +1,37 @@
+{
+  "status": true,
+  "code": 200,
+  "message": "Ketersediaan berhasil dimuat.",
+  "data": [
+    {
+      "date": "2026-08-01",
+      "is_available": true,
+      "price_override": null,
+      "min_stay": null,
+      "max_stay": null
+    },
+    {
+      "date": "2026-08-02",
+      "is_available": true,
+      "price_override": 600000,
+      "min_stay": 2,
+      "max_stay": null
+    },
+    {
+      "date": "2026-08-03",
+      "is_available": false,
+      "price_override": null,
+      "min_stay": null,
+      "max_stay": null
+    },
+    {
+      "date": "2026-08-04",
+      "is_available": true,
+      "price_override": null,
+      "min_stay": null,
+      "max_stay": 5
+    }
+  ],
+  "meta": null,
+  "errors": null
+}

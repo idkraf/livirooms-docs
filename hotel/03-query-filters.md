@@ -298,34 +298,69 @@ class PropertyController extends Controller
 
 File [`laravel/app/Http/Resources/PropertyResource.php`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Http/Resources/PropertyResource.php) diperbarui agar memberikan metadata spesifik hotel untuk UI Flutter:
 
+> ⚠️ **Cuplikan di bawah adalah kode nyata per 16 Agt 2026, bukan rancangan.** Versi lama dokumen ini menuliskan `$this->hotel->roomTypes->min('base_price')` **tanpa** filter `is_active` — itu memang kode yang dulu berjalan, dan justru itulah [A-D13](screen/readme_screen.md#113-drift-kontrak-flutter--laravel): `GET properties` dan `GET hotels` menjawab harga berbeda untuk hotel yang sama. Sejak [L-9](screen/readme_screen.md#151-laravel) resource ini **mendelegasikan** ke accessor `Hotel::price_from`/`price_original`, jadi tidak ada lagi dua implementasi harga hotel. Bila Anda mengubah salah satunya, ubah accessor-nya — bukan resource ini.
+
 ```php
-public function toArray($request): array
+public function toArray(Request $request): array
 {
-    $cheapestRoomPrice = null;
-    if ($this->booking_mode === 'room' && $this->relationLoaded('hotel') && $this->hotel) {
-        $cheapestRoomPrice = $this->hotel->roomTypes->min('base_price');
+    $cheapestPrice = null;
+    $priceOriginal = null;
+
+    // `booking_mode === 'room'` adalah diskriminator kanonik (bukan keberadaan baris
+    // `hotels`), dan `relationLoaded('roomTypes')` wajib diperiksa — tanpa itu
+    // accessor akan memicu lazy-load 1 query per properti.
+    $hotelLoaded = $this->booking_mode === 'room'
+        && $this->relationLoaded('hotel')
+        && $this->hotel
+        && $this->hotel->relationLoaded('roomTypes');
+
+    if ($hotelLoaded) {
+        $cheapestPrice = $this->hotel->price_from;      // float | null — tipe kamar AKTIF termurah
+        $priceOriginal = $this->hotel->price_original;  // harga coret tipe kamar YANG SAMA
+    }
+
+    // `property_prices` adalah tabel tarif mode unit, jadi tidak boleh menyelamatkan
+    // hotel yang tak punya tipe kamar aktif — `null` adalah kontrak "tak ada tarif".
+    if ($cheapestPrice === null && $this->booking_mode !== 'room' && $this->relationLoaded('prices')) {
+        $cheapestPrice = optional($this->prices->sortBy('amount')->first())->amount;
     }
 
     return [
-        'id'                 => $this->id,
-        'name'               => $this->name,
-        'slug'               => $this->slug,
-        'property_type'      => $this->property_type,
-        'booking_mode'       => $this->booking_mode, // 'unit' | 'room'
-        'city'               => $this->city ? $this->city->name : null,
-        'address'            => $this->address,
-        'star_rating'        => $this->hotel ? $this->hotel->star_rating : null,
-        'check_in_time'      => $this->hotel ? $this->hotel->check_in_time : null,
-        'check_out_time'     => $this->hotel ? $this->hotel->check_out_time : null,
-        'price_from'         => $cheapestRoomPrice ?? $this->prices->min('amount'),
-        'rating'             => round($this->reviews_avg_rating ?? 0, 1),
-        'reviews_count'      => $this->reviews_count ?? 0,
-        'cover_image'        => $this->cover_image_url,
-        'facilities'         => $this->facilities ?? [],
-        'has_breakfast'      => $this->hotel ? $this->hotel->roomTypes->contains('breakfast_included', true) : false,
+        'id'             => $this->id,
+        'name'           => $this->name,
+        'property_type'  => $this->property_type,
+        'booking_mode'   => $this->booking_mode ?? 'unit', // 'unit' | 'room'
+        'city_name'      => $this->relationLoaded('city') ? $this->city?->name : null,
+        'address'        => $this->address,
+        'star_rating'    => $this->relationLoaded('hotel') && $this->hotel ? $this->hotel->star_rating : null,
+        'check_in_time'  => $this->relationLoaded('hotel') && $this->hotel ? $this->hotel->check_in_time : null,
+        'check_out_time' => $this->relationLoaded('hotel') && $this->hotel ? $this->hotel->check_out_time : null,
+        'price_from'     => $cheapestPrice,
+        'price_original' => $priceOriginal,
+        'rating'         => $this->when(isset($this->reviews_avg_rating), fn () => round((float) $this->reviews_avg_rating, 1)),
+        'review_count'   => $this->when(isset($this->reviews_count), fn () => (int) $this->reviews_count),
+        'cover_image'    => $gallery[0] ?? null,
+        'facilities'     => $facilities ?? [],
+        'has_breakfast'  => $hotelLoaded ? $this->hotel->roomTypes->where('is_active', true)->contains('breakfast_included', true) : false,
+        // ...selebihnya lihat file aslinya
     ];
 }
 ```
+
+**Beda dari versi dokumen sebelumnya** (semua sudah dikoreksi di atas):
+
+| Klaim lama | Kenyataan |
+|---|---|
+| `min('base_price')` lintas semua tipe kamar | accessor `Hotel::price_from`, hanya tipe kamar `is_active = true` |
+| `price_from` bertipe **string** (`"450000.00"`, hasil cast `decimal:2` mentah) | **float**, karena accessor meng-`(float)`-kan |
+| tak ada `price_original` | ada, dari tipe kamar yang sama dengan `price_from` |
+| fallback inline `?? $this->prices->min('amount')` | `if` terpisah, dijaga `relationLoaded('prices')` **dan** `booking_mode !== 'room'` |
+| key `slug`, `city`, `reviews_count`, `cover_image_url` | tidak ada; yang ada `city_name`, `review_count`, `cover_image`/`cover` dari `$gallery[0]` |
+| `rating` selalu ada (`?? 0`) | dibungkus `$this->when(isset(...))` → **key hilang** bila agregat `withAvg` tidak di-select |
+| `has_breakfast` menghitung semua tipe kamar | hanya tipe kamar aktif |
+
+> `total_price` **sengaja tidak** dipancarkan di sini, berbeda dari `GET hotels`. Endpoint ini melayani hasil campuran unit+room, dan "total" mode unit ikut menghitung `cleaning_fee`/`deposit`/`service_fee` — angka dengan arti berbeda di bawah nama yang sama lebih berbahaya daripada key yang absen. Detail: [readme_screen.md §11.2](screen/readme_screen.md#112-kontrak-field-harga).
+
 
 ---
 

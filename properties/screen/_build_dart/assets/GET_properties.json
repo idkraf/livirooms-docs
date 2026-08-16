@@ -1,0 +1,159 @@
+{
+  "status": true,
+  "code": 200,
+  "message": "Daftar properti berhasil dimuat.",
+  "data": [
+    {
+      "id": 1,
+      "host_id": 10,
+      "property_type": "apartment",
+      "booking_mode": "unit",
+      "name": "Sunset Beach Apartment",
+      "building_name": "Sunset Towers",
+      "description": "A beautiful apartment with ocean view",
+      "address": "Jl. Pantai Indah No. 10, Bali",
+      "latitude": -8.65,
+      "longitude": 115.2167,
+      "guest_capacity": 4,
+      "bedrooms": 2,
+      "star_rating": null,
+      "check_in_time": null,
+      "check_out_time": null,
+      "has_breakfast": false,
+      "facilities": [
+        "WiFi",
+        "Pool",
+        "Gym",
+        "Parking"
+      ],
+      "gallery": [
+        "https://example.com/gallery1/1.jpg",
+        "https://example.com/gallery1/2.jpg"
+      ],
+      "cover": "https://example.com/gallery1/1.jpg",
+      "cover_image": "https://example.com/gallery1/1.jpg",
+      "status": "active",
+      "price_from": 500000,
+      "rating": 4.8,
+      "review_count": 12,
+      "prices": [
+        {
+          "price_type": "daily",
+          "amount": 500000,
+          "cleaning_fee": 50000,
+          "deposit": 500000,
+          "service_fee": 50000
+        },
+        {
+          "price_type": "weekly",
+          "amount": 3000000,
+          "cleaning_fee": 50000,
+          "deposit": 500000,
+          "service_fee": 300000
+        }
+      ],
+      "host": {
+        "id": 10,
+        "name": "Budi Santoso"
+      }
+    },
+    {
+      "id": 2,
+      "host_id": 11,
+      "property_type": "villa",
+      "booking_mode": "unit",
+      "name": "Tropical Jungle Villa",
+      "building_name": "Jungle Vista",
+      "description": "A private villa surrounded by jungle",
+      "address": "Jl. Raya Ubud No. 5, Bali",
+      "latitude": -8.5065,
+      "longitude": 115.2625,
+      "guest_capacity": 6,
+      "bedrooms": 3,
+      "star_rating": null,
+      "check_in_time": null,
+      "check_out_time": null,
+      "has_breakfast": false,
+      "facilities": [
+        "WiFi",
+        "Pool",
+        "Kitchen",
+        "Garden"
+      ],
+      "gallery": [
+        "https://example.com/gallery2/1.jpg",
+        "https://example.com/gallery2/2.jpg"
+      ],
+      "cover": "https://example.com/gallery2/1.jpg",
+      "cover_image": "https://example.com/gallery2/1.jpg",
+      "status": "active",
+      "price_from": 1200000,
+      "rating": 4.9,
+      "review_count": 8,
+      "prices": [
+        {
+          "price_type": "daily",
+          "amount": 1200000,
+          "cleaning_fee": 100000,
+          "deposit": 1500000,
+          "service_fee": 120000
+        }
+      ],
+      "host": {
+        "id": 11,
+        "name": "Ani Lestari"
+      }
+    },
+    {
+      "id": 3,
+      "host_id": 12,
+      "property_type": "hotel",
+      "booking_mode": "room",
+      "name": "Grand Luxury Hotel & Spa",
+      "building_name": "Grand Tower",
+      "description": "Luxurious 4-star hotel in central Bandung with infinity pool and free breakfast",
+      "address": "Jl. Merdeka No. 10, Bandung",
+      "latitude": -6.9175,
+      "longitude": 107.6191,
+      "guest_capacity": 4,
+      "bedrooms": 1,
+      "star_rating": 4,
+      "check_in_time": "14:00:00",
+      "check_out_time": "12:00:00",
+      "has_breakfast": true,
+      "facilities": [
+        "WiFi",
+        "Pool",
+        "Breakfast",
+        "Gym",
+        "AC",
+        "Parking"
+      ],
+      "gallery": [
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"
+      ],
+      "cover": "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+      "cover_image": "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+      "status": "active",
+      "price_from": 750000,
+      "rating": 4.9,
+      "review_count": 24,
+      "prices": [],
+      "host": {
+        "id": 12,
+        "name": "PT Hospitality Indonesia"
+      }
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "last_page": 1,
+    "per_page": 15,
+    "total": 3,
+    "from": 1,
+    "to": 3,
+    "has_more": false
+  },
+  "errors": null
+}

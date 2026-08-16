@@ -122,20 +122,25 @@ Modul pencarian hotel, hasil filter, detail 8 tab, dan form booking checkout sud
 | ✅ | `property/hotel/hotel_search_screen.dart` | `/hotel/search` | Hotel Search & Filter | #1–#6 | Destinasi populer, tanggal check-in/out, counter kamar/tamu, modal filter harga/bintang |
 | ✅ | `property/hotel/hotel_results_screen.dart` | `/hotel/results` | Hotel Results | #7–#16 | List hotel card, filter chips, banner diskon, trust modal sheet |
 | ✅ | `property/hotel/hotel_detail_screen.dart` | `/hotel/detail` | Hotel Detail (8 Tab) | #17–#25 | Hero gallery, Kamar, Ulasan, Lokasi, Fasilitas, Kebijakan, Keterangan, Trip Moments, Akomodasi Terdekat |
-| ✅ | `property/hotel/hotel_booking_screen.dart` | `/hotel/booking` | Hotel Booking Checkout | #26–#32 | Ringkasan kamar, form data tamu per kamar, info kontak, Trip Coins, jaminan harga |
+| ✅ | `property/hotel/hotel_booking_screen.dart` | `/hotel/booking` | Hotel Booking Checkout | #26–#32 | Ringkasan kamar (data asli `room_types`), form data tamu per kamar, info kontak, Trip Coins, jaminan harga, baris permintaan khusus + baris kode promo |
+| ✅ | `property/hotel/special_request_sheet.dart` | — (bottom sheet) | Permintaan Khusus | #37 | C-31 + C-30. Radio bed/lift (bisa toggle off) + checkbox + catatan ber-`maxLength` **dinamis** dari anggaran 500 char/booking. Publik agar terjangkau widget test |
+| ✅ | `property/hotel/promo_code_sheet.dart` | — (bottom sheet) | Kode Promo | #36 | C-34 + C-35 + C-33. Katalog `GET vouchers`, verifikasi lewat `POST vouchers/apply` (satu-satunya oracle kelayakan), kartu di-dim `opacity 0.6` + alasan server, **1 voucher per booking** |
+| ✅ | `property/hotel/additional_info_sheet.dart` | — (bottom sheet) | Informasi Tambahan | #33 | C-32, read-only. Isi **diturunkan** dari `Hotel` lewat `additionalInfoEntries()` — deposit (`hotels.deposit_amount`), kebijakan anak, ranjang tambahan — sehingga `(N)` di baris pemicu (`AdditionalInfoSection`) tak mungkin berselisih dengan isi sheet. Bagian kosong dibuang |
+| ✅ | `property/hotel/room_detail_sheet.dart` | — (bottom sheet) | Detail Kamar | #34 **+** #35 | C-39, read-only, `heightFactor: 0.92`. **Satu** sheet dengan **baris pil pemindah tipe kamar** — #34 dan #35 adalah dua state pil dari komponen yang sama, bukan dua layar. Galeri, spesifikasi, `Opsi 1`/`Opsi 2` (turunan `bed_configuration`), `Fasilitas Kamar` (6 + "Tampilkan semua"), dan 2 seksi chevron kebijakan; seksi tanpa data **hilang**, bukan dirender kosong. Dipicu dari kartu kamar #27 **dan** baris `Detail kamar` #31 lewat `showRoomDetailSheet()`; pil di-dedup oleh fungsi murni `distinctRoomTypes()` |
 | ✅ | `mitra/hotel_form_screen.dart` | `/mitra/hotels/form` | Form Wizard Registrasi Hotel | — (sisi mitra) | 5-Step pendaftaran hotel & kamar mitra (Info, Fasilitas, Kamar, Inventaris, Galeri) |
 
-**Komponen yang belum ada** (detail di [readme_screen.md §14.2](../hotel/screen/readme_screen.md#142-yang-belum-ada-di-hotel_booking_screendart)):
+**Komponen yang belum ada** — status per 16 Agt 2026, detail di [readme_screen.md §15.2](../hotel/screen/readme_screen.md#152-flutter):
 
-| Kekurangan | Layar Master Ref |
-|---|---|
-| Bottom sheet kode promo | #36 |
-| Bottom sheet permintaan khusus | #37 |
-| Bottom sheet informasi tambahan | #33 |
-| Bottom sheet detail kamar (Family Suite / Kamar Superior) | #34, #35 |
-| Ringkasan kamar masih hardcode via `_roomSummary(...)` | #27 |
-| Seksi Trip Coins expandable | #29, #31, #32 |
-| Top modal tanggal & tamu (paket `top_modal_sheet` **tidak ada** di `pubspec.yaml`) | #12–#16 |
+| Kekurangan | Layar Master Ref | Item |
+|---|---|---|
+| ~~Bottom sheet kode promo~~ | #36 | ✅ **selesai** — F-5, `promo_code_sheet.dart` |
+| ~~Bottom sheet permintaan khusus~~ | #37 | ✅ **selesai** — F-4, `special_request_sheet.dart` |
+| ~~Ringkasan kamar masih hardcode via `_roomSummary(...)`~~ | #27 | ✅ **selesai** — F-8, lewat rantai `HotelDetailArgs` → `HotelBookingArgs` |
+| ~~Bottom sheet informasi tambahan~~ | #33 | ✅ **selesai** — F-6, `additional_info_sheet.dart` (kolom `deposit_amount` ternyata sudah ada di server tapi tak pernah di-parse Flutter) |
+| ~~Bottom sheet detail kamar (Family Suite / Kamar Superior)~~ | #34, #35 | ✅ **selesai** — F-7, `room_detail_sheet.dart`. **Satu** komponen untuk kedua layar (pil pemindah tipe kamar), dan `properties.cancellation_policy` yang tak pernah diratakan `show()` ikut ditambal di Laravel |
+| Top modal tanggal & tamu (paket `top_modal_sheet` **tidak ada** di `pubspec.yaml` → harus dibuat manual) | #12–#16 | ⏳ F-9 |
+| Seksi Trip Coins expandable | #29, #31, #32 | ⏳ F-10 |
+| Kartu daftar booking belum membedakan `booking_type` room vs unit | #38 | ⏳ F-12 |
 
 ---
 
@@ -149,7 +154,7 @@ flutter/lib/
 ├── config/
 │   └── app_config.dart
 │
-├── models/                                        (24 model)
+├── models/                                        (26 model)
 │   ├── api_response.dart
 │   ├── app_banner.dart
 │   ├── app_notification.dart
@@ -165,20 +170,22 @@ flutter/lib/
 │   ├── paginated.dart
 │   ├── payment.dart
 │   ├── payment_method.dart
+│   ├── promo_voucher.dart                          Hotel #36: PromoCandidate + VoucherCheck
 │   ├── property.dart                              + bookingMode, starRating, checkIn/OutTime
 │   ├── property_recommendation.dart
 │   ├── referral.dart
 │   ├── remote_config_model.dart
 │   ├── review.dart
+│   ├── special_request.dart                        Hotel #37: anggaran 500 char/booking
 │   ├── user.dart
 │   ├── validation_status.dart
-│   ├── voucher.dart
+│   ├── voucher.dart                                + startsAt/endsAt (jendela berlaku #36)
 │   └── wallet.dart
 │
 ├── providers/                                     (2 provider)
 │   ├── auth_provider.dart
 │   └── hotel_search_provider.dart                 Hotel OTA: 300ms debounce, race-safe token
-│                                                  ⚠️ memakai PropertyService.searchHotels()
+│                                                  ✅ lewat HotelService (GET hotels) — A-D6 beres
 │
 ├── services/                                      (19 service)
 │   ├── api_client.dart
@@ -198,11 +205,12 @@ flutter/lib/
 │   ├── property_service.dart                      + searchHotels(), getInsurancePlans()
 │   ├── referral_service.dart
 │   ├── remote_config_service.dart
-│   ├── voucher_service.dart
+│   ├── voucher_service.dart                       + check() → POST vouchers/apply (oracle #36)
 │   └── wishlist_service.dart
 │
-├── utils/                                         (1 util)
-│   └── formatters.dart
+├── utils/                                         (2 util)
+│   ├── formatters.dart                            + dayMonthYearDotTime (jendela voucher #36)
+│   └── promo_labels.dart                          label voucher (dipakai #36 & /payment/promo)
 │
 ├── widgets/                                       (5 widget)
 │   ├── app_network_image.dart
@@ -211,12 +219,15 @@ flutter/lib/
 │   ├── property_card.dart
 │   └── state_views.dart
 │
-└── screens/                                       (45 file — 44 punya named route;
-                                                     home_screen.dart = tab di MainShell)
+└── screens/                                       (49 file — 45 layar, 44 punya named route;
+                                                     home_screen.dart = tab di MainShell;
+                                                     4 file bottom sheet Hotel tanpa route)
     ├── auth/          (6 file)  ✅ splash, onboarding, welcome, login, register, register_profile
     ├── home/          (3 file)  ✅ main_shell, home_screen, filter_screen
     ├── property/      (2 file)  ✅ property_detail, search_results
-    │   └── hotel/     (4 file)  ✅ hotel_search, hotel_results, hotel_detail, hotel_booking
+    │   └── hotel/     (8 file)  ✅ hotel_search, hotel_results, hotel_detail, hotel_booking,
+    │                               special_request_sheet (#37), promo_code_sheet (#36),
+    │                               additional_info_sheet (#33), room_detail_sheet (#34+#35)
     ├── booking/       (3 file)  ✅ booking_detail, booking_list, booking_success
     ├── chat/          (2 file)  ✅ chat_list, chat_room
     ├── account/       (5 file)  ✅ account_menu, edit_profile, wishlist, referral, validation
@@ -233,41 +244,55 @@ flutter/lib/
 
 | Kategori | Selesai | Belum |
 |----------|---------|-------|
-| **Screens** | **45** file | 1 Register Host |
+| **File di `screens/`** | **49** file (45 layar + 4 bottom sheet Hotel) | 1 Register Host |
 | **Named route di `router.dart`** | **44** | 0 — semua layar Hotel OTA **sudah** terdaftar |
-| **Models** | 24 | 0 |
+| **Models** | 26 | 0 |
 | **Services** | 19 | 0 |
 | **Providers** | 2 | 0 |
 | **Widgets** | 5 | 0 |
-| **Test (`flutter/test/`)** | **17 file** | lihat catatan cakupan di bawah |
+| **Utils** | 2 | 0 |
+| **Test (`flutter/test/`)** | **20 file** berisi test — 209 deklarasi, **273 test saat dijalankan** | lihat catatan cakupan di bawah |
 
-> `router.dart` punya 44 konstanta route dan 44 `case Routes.*` yang berpasangan tepat. Selisih 45 vs 44 adalah `home_screen.dart`, yang dirender sebagai tab di dalam `MainShell` dan memang tidak punya named route.
+> `router.dart` punya 44 konstanta route dan 44 `case Routes.*` yang berpasangan tepat. Selisih 49 vs 44: `home_screen.dart` dirender sebagai tab di dalam `MainShell`, sedangkan `special_request_sheet.dart`, `promo_code_sheet.dart`, `additional_info_sheet.dart`, dan `room_detail_sheet.dart` adalah bottom sheet yang dibuka dari layar checkout (`showSpecialRequestSheet()` / `showPromoCodeSheet()` / `showAdditionalInfoSheet()` / `showRoomDetailSheet()`) — kelimanya memang tidak punya named route.
 
 ### Cakupan Test Flutter
 
-`flutter/test/` berisi **17 file**, **6 di antaranya sudah menyentuh Hotel/asuransi**:
+`flutter/test/` berisi **20 file berisi test** + 1 helper tanpa test (`support/fake_voucher_api.dart`). Di dalamnya ada **209 deklarasi `test()`/`testWidgets()`**, tetapi jumlah test yang benar-benar dijalankan adalah **273**: satu deklarasi di `api_envelope_test.dart:136` berada di dalam loop `for (final key in requests.keys)` sehingga menghasilkan **65** test — satu per rute di tabel `DummyApiClient`. Jadi 209 − 1 + 65 = 273.
 
-| File test | Cakupan |
-|---|---|
-| `models/hotel_test.dart` | 6 test — parsing `Hotel` minimal & lengkap (metadata 8 tab), `HotelRoomItem`, `HotelPolicy` default, `HotelGuestInput.toJson()`, `HotelFacilityGroup` kosong |
-| `services/hotel_service_test.dart` | 9 test — `searchHotels`, `getHotelDetail`, `getRoomTypes` (**delegasi ke `getHotelDetail`**), `getInsurancePlans`, `createHotelBooking` (payload lengkap & tanpa field opsional), `createHotelForProperty` |
-| `providers/hotel_search_provider_test.dart` | 2 test — initial state, search memperbarui query & memuat hotel |
-| `models/hotel_search_query_test.dart` | 2 test — query params default, parsing deep link `sewain://search` |
-| `widgets/hotel_screens_test.dart` | 8 `testWidgets` — render `HotelSearchScreen`, `HotelResultsScreen`, `HotelDetailScreen`, `HotelBookingScreen`, `HotelFormScreen` (mode tambah/edit, default 3 bintang, 5 label tab) |
-| `models/insurance_plan_test.dart` | 4 test — premi fixed per malam (1 & banyak tamu, samakan dengan Laravel), premi persentase, parsing JSON |
+> 🟡 Angka di atas dihitung statis dari kode (grep deklarasi + hitung entri `requests`), **belum** dari output `flutter test` — suite belum dijalankan di lingkungan ini. Lihat baris "Belum dijalankan" di [readme_screen.md §17](../hotel/screen/readme_screen.md#17-catatan-revisi).
 
-Sisanya (11 file) di luar modul Hotel: `widget_test.dart`, `api_envelope_test.dart`, `utils/formatters_test.dart`, `models/{property,property_recommendation,booking,payment,referral}_test.dart`, `services/{booking,property,referral}_service_test.dart`.
+**11 file menyentuh Hotel / asuransi / voucher:**
 
-> ⚠️ **Celah yang sudah dipastikan:** `models/hotel_search_query_test.dart` selalu mengirim `city_id` pada URI-nya, sedangkan `HotelSearchQuery.fromUri()` memakai `q['city_id']!` tanpa fallback — deep link tanpa `city_id` masih *crash* dan belum tertutup test. Lihat A-D7 di [readme_screen.md §11.3](../hotel/screen/readme_screen.md#113-drift-kontrak-flutter--laravel).
+| File test | Deklarasi | Cakupan |
+|---|---|---|
+| `widgets/hotel_screens_test.dart` | 44 | Render 5 layar Hotel + sheet permintaan khusus #37 + sheet kode promo #36 + sheet informasi tambahan #33 + sheet detail kamar #34/#35 + integrasi end-to-end di layar booking |
+| `models/special_request_test.dart` | 20 | Anggaran 500 char/booking, toggle radio, katalog label, serialisasi #37 |
+| `models/promo_voucher_test.dart` | 15 | `PromoCandidate`, `VoucherCheck`, label & jendela berlaku voucher (#36) |
+| `models/hotel_test.dart` | 15 | Parsing `Hotel` (metadata 8 tab + `deposit_amount` + `cancellation_policy` rata/bersarang), `HotelRoomItem` (harga `decimal:2` berbentuk string, `bedOptions`, `facilities`, `images` objek), `HotelPolicy`, `HotelGuestInput.toJson()` |
+| `models/hotel_search_query_test.dart` | 11 | Query params default, deep link `sewain://search`, `city_id` absen (A-D7) |
+| `services/hotel_service_test.dart` | 10 | `searchHotels`, `getHotelDetail`, `getRoomTypes`, `getInsurancePlans`, `createHotelBooking`, `createHotelForProperty` |
+| `providers/hotel_search_provider_test.dart` | 6 | Initial state, debounce, race-safe token, search memuat hotel via `HotelService` |
+| `services/voucher_service_test.dart` | 6 | `check()` → `POST vouchers/apply`: verdict, penolakan sebagai *value*, `errors.code`, rethrow galat jaringan, cashback nol |
+| `models/insurance_plan_test.dart` | 4 | Premi fixed per malam & persentase, parsing JSON |
+| `utils/formatters_test.dart` | 14 | Termasuk `dayMonthYearDotTime` untuk jendela berlaku voucher (#36) |
+| `support/fake_voucher_api.dart` | 0 | Helper: `FakeVoucherTransport` + fixture voucher, dipakai 2 file test |
+
+> Rincian per-test (ID T-F1…T-F71, T-L1…T-L39) dipelihara **hanya** di [readme_screen.md §15.3](../hotel/screen/readme_screen.md#153-daftar-test) agar tidak ada dua salinan angka yang bisa saling menyimpang.
+
+Sisanya di luar modul Hotel: `widget_test.dart`, `api_envelope_test.dart` (87 test: 22 statis + 65 generated), `models/{property,property_recommendation,booking,payment,referral}_test.dart`, `services/{booking,property,referral}_service_test.dart`.
 
 ---
 
 ## Catatan
 
 - `register_host_screen.dart` belum dibuat -- mockup ada di `screens_flutter/37_register_host.png`.
-- **Hotel OTA:** 4 layar konsumen (`property/hotel/`) + 1 layar mitra (`mitra/hotel_form_screen.dart`) **sudah dibuat dan sudah terdaftar** di `router.dart`. Yang belum lengkap adalah bottom sheet di dalam layar checkout — lihat tabel "Komponen yang belum ada" di [bagian C](#c-hotel-ota-screens-selesai-dibuat).
+- **Hotel OTA:** 4 layar konsumen + 4 bottom sheet (`property/hotel/`) + 1 layar mitra (`mitra/hotel_form_screen.dart`) **sudah dibuat**; keempat layar sudah terdaftar di `router.dart`. Yang belum lengkap: top modal tanggal/tamu (F-9), seksi Trip Coins (F-10), dan kartu booking room-vs-unit (F-12) — lihat tabel "Komponen yang belum ada" di [bagian C](#c-hotel-ota-screens-selesai-dibuat).
 - `InsuranceSelectionWidget` sudah dipakai di alur checkout hotel (Stay Protection).
-- ⚠️ `hotel_search_provider.dart` memanggil `PropertyService.searchHotels()` (`GET properties`), bukan `HotelService` (`GET hotels`) — field khusus hotel (skor, jumlah ulasan, jarak, tag) hilang. Detail & rencana perbaikan: [readme_screen.md §11.3 A-D6](../hotel/screen/readme_screen.md#113-drift-kontrak-flutter--laravel).
-- ⚠️ `HotelService.getHotelFilters()` dan `HotelService.createHotelBooking()` memanggil endpoint yang **tidak ada** di `routes/api_mobile.php` (`GET hotel/filters`, `POST hotel/bookings`) → 404 di mode API nyata. Lihat A-D4 & A-D5 pada dokumen yang sama.
-- ⚠️ Paket `top_modal_sheet` **tidak terpasang** di `flutter/pubspec.yaml` — top modal harus dibuat manual (`showGeneralDialog` + `SlideTransition`).
+- ⚠️ Paket `top_modal_sheet` **tidak terpasang** di `flutter/pubspec.yaml` — top modal harus dibuat manual (`showGeneralDialog` + `SlideTransition`). Ini pekerjaan F-9 yang masih terbuka.
+- ✅ **Sudah beres di Fase 2** (jangan pakai lagi sebagai peringatan aktif):
+  - A-D4 & A-D5 — `HotelService.getHotelFilters()` / `createHotelBooking()` dulu memanggil endpoint yang tidak ada (`GET hotel/filters`, `POST hotel/bookings`). Ditutup L-2/L-3 + F-1.
+  - A-D6 — `hotel_search_provider.dart` dulu memanggil `PropertyService.searchHotels()` (`GET properties`) sehingga field khusus hotel hilang; sekarang lewat `HotelService` (`GET hotels`). Ditutup F-1.
+  - A-D7 — `HotelSearchQuery.fromUri()` dulu memakai `q['city_id']!` tanpa fallback sehingga deep link tanpa `city_id` *crash*. Ditutup F-2, dipatok T-F1.
+  - A-D3 — promo per tipe kamar di mockup #31 vs satu `voucher_code` per booking di API. Ditutup F-5 dengan membatasi UI ke satu baris promo per booking.
+  Riwayat lengkap semua drift: [readme_screen.md §11.3](../hotel/screen/readme_screen.md#113-drift-kontrak-flutter--laravel).
 - Bahasa kode: **Inggris**. Bahasa docs: **Indonesia**.

@@ -1,0 +1,71 @@
+{
+  "status": true,
+  "code": 200,
+  "message": "Rincian harga berhasil dimuat.",
+  "data": {
+    "property_id": 1,
+    "property_name": "Sunset Beach Apartment",
+    "thumbnail": "https://example.com/gallery1/1.jpg",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "check_in": "2026-08-16",
+    "check_out": "2026-08-17",
+    "duration": 1,
+    "duration_options": [1, 2, 3, 6, 12],
+    "base_price": 1020000,
+    "service_fee": 260000,
+    "inclusions": {
+      "included": [
+        "Electricity + Water",
+        "Amenities",
+        "Use of towel and linen"
+      ],
+      "excluded": [
+        "Parking",
+        "Internet"
+      ],
+      "collapsed_rows": 5
+    },
+    "special_prices": [
+      { "min_nights": 4, "discount_percent": 5 },
+      { "min_nights": 7, "discount_percent": 10 },
+      { "min_nights": 14, "discount_percent": 20 }
+    ],
+    "add_ons": [
+      {
+        "id": "insurance",
+        "name": "Personal Insurance",
+        "duration_note": "1 Malam",
+        "price": 4100,
+        "info": "Perlindungan atas kerusakan tidak disengaja selama masa sewa, hingga IDR 5,000,000.",
+        "selected": true
+      }
+    ],
+    "payment_plans": [
+      {
+        "id": "full",
+        "name": "Bayar Penuh",
+        "cadence": null,
+        "installments": 1,
+        "entries": [],
+        "total": 1280000
+      },
+      {
+        "id": "x3",
+        "name": "Cicilan 3x",
+        "cadence": "bayar setiap 4 bulan",
+        "installments": 3,
+        "entries": [
+          { "date": "2026-08-16", "amount": 30260625 },
+          { "date": "2026-12-16", "amount": 42978437 },
+          { "date": "2027-04-16", "amount": 42978438 }
+        ],
+        "total": 116217500
+      }
+    ],
+    "promo": { "code": "AGD30", "savings": 50000 },
+    "schedule_note": "*Simulasi hanya mencakup biaya layanan; diskon dan biaya lainnya tidak termasuk"
+  },
+  "meta": null,
+  "errors": null
+}
