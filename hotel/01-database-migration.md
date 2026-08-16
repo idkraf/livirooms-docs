@@ -242,6 +242,22 @@ return new class extends Migration {
 };
 ```
 
+> 🔴 **PERINGATAN INTEGRITAS — jalur `guests[]` tidak menyentuh tabel ini.**
+>
+> CHECK constraint `booked_count <= allotment` di atas hanya berfungsi bila ada yang **menulis** `booked_count`. Di `BookingController::storeHotelBooking()` ada 3 cabang harga, dan hanya satu yang mengunci inventaris:
+>
+> | Cabang | Kondisi | `lockForUpdate()` | `increment('booked_count')` | Aman? |
+> |---|---|---|---|---|
+> | **B1** | `!empty($guests)` | ❌ tidak | ❌ tidak | 🔴 **bisa overbooking** |
+> | **B2** | `$roomType` (tanpa `guests`) | ✅ ya | ✅ ya | ✅ aman |
+> | **B3** | fallback harga *hardcoded* | ❌ tidak | ❌ tidak | 🔴 tidak terkontrol |
+>
+> Masalahnya: form multi-kamar di aplikasi (layar #28–#32) **selalu** mengirim `guests[]`, sehingga jalur produksi utama justru yang **tidak** dikontrol. Karena tidak ada `UPDATE` sama sekali, CHECK constraint tidak pernah dievaluasi — jadi ini **bukan** sesuatu yang tertangkap di level DB.
+>
+> Perbaikan diagendakan sebagai **L-1** dengan test **T-L1/T-L2/T-L3**. Rujukan kanonik: [screen/readme_screen.md §10.3](screen/readme_screen.md#103-tiga-cabang-penetapan-harga-di-storehotelbooking) dan [§15.1](screen/readme_screen.md#151-laravel).
+>
+> ⚠️ Tambahan: test Laravel berjalan di **SQLite in-memory yang tidak menegakkan CHECK constraint**, sehingga test hijau di SQLite **tidak** membuktikan proteksi ini bekerja. Test batas kolom/constraint harus dijalankan pada `pgsql`.
+
 ---
 
 ### F. Penyesuaian Tabel `bookings` (`2026_08_13_000006_update_bookings_for_hotels.php`)

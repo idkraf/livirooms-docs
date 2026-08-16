@@ -193,6 +193,41 @@ class Property extends Model
 
 ---
 
+## 1.5 Jalur Relasi Khusus Hotel (bukan berlaku untuk properti biasa)
+
+> Rujukan kanonik: [screen/readme_screen.md §10](screen/readme_screen.md#10-pemisahan-domain-booking-hotel-vs-booking-properti).
+
+Kolom `bookings.booking_type` adalah **diskriminator tunggal** antara dua bentuk pemesanan. Ia menentukan relasi mana yang terisi:
+
+| | `booking_type = 'unit'` (properti biasa) | `booking_type = 'room'` (hotel) |
+|---|---|---|
+| Yang disewa | seluruh unit properti | kamar per-tipe di dalam hotel |
+| `booking_rooms` | **tidak ada baris** | **1 baris per kamar** |
+| Rantai relasi | `Booking → Property` | `Booking → bookingRooms → roomType → hotel → property` |
+| `room_type_id` | `null` | terisi |
+| Prefix `booking_code` | `BK-` + 8 karakter | `HTL-` + `Ymd` + 4 karakter |
+| `duration_type` | `daily`/`weekly`/`monthly`/`yearly` | selalu `daily` |
+| `host_confirmed` | mengikuti alur konfirmasi host | selalu `true` (instant booking) |
+| Sumber jam check-in | properti | `hotels.check_in_time`, fallback `14:00` |
+
+**Konsekuensi praktis saat query:**
+
+```php
+// ❌ SALAH — mengasumsikan setiap booking punya booking_rooms
+$booking->bookingRooms->first()->roomType->name;
+
+// ✅ BENAR — cabangkan berdasarkan diskriminator
+if ($booking->booking_type === 'room') {
+    $booking->loadMissing('bookingRooms.roomType.hotel');
+} else {
+    $booking->loadMissing('property');
+}
+```
+
+Jangan pakai `hotel_id` atau keberadaan `guests[]` sebagai penentu di sisi baca — keduanya hanya dipakai saat **inferensi** di `BookingController::store()`; setelah tersimpan, `booking_type` adalah satu-satunya sumber kebenaran.
+
+---
+
 ## 2. Model Entitas Baru
 
 ### A. Model `App\Models\Hotel` (`laravel/app/Models/Hotel.php`)

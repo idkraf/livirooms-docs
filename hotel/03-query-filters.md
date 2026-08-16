@@ -1,12 +1,14 @@
 # 03. Logika Backend & Filter Dinamis (Daily Hotel Booking)
 
-Dokumen ini mendokumentasikan spesifikasi query controller, validasi request, dan optimasi *Query Builder* Laravel untuk menangani pencarian & filter harian hotel berbasis parameter lokasi, rentang tanggal *check-in/check-out*, jumlah kamar & tamu, rating bintang, serta fasilitas cepat. Logika ini diintegrasikan langsung pada [`laravel/app/Http/Controllers/Api/PropertyController.php`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Http/Controllers/Api/PropertyController.php).
+Dokumen ini mendokumentasikan spesifikasi query controller, validasi request, dan optimasi *Query Builder* Laravel untuk menangani pencarian & filter harian hotel berbasis parameter lokasi, rentang tanggal *check-in/check-out*, jumlah kamar & tamu, rating bintang, serta fasilitas cepat.
+
+> 🔴 **Endpoint pencarian hotel bukan `GET properties`.** Dokumen ini semula menempelkan seluruh logika hotel pada [`PropertyController.php`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Http/Controllers/Api/PropertyController.php); yang berjalan sekarang adalah [`HotelApiController::index()`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Http/Controllers/Api/HotelApiController.php) di `GET /api/v1/hotels`. Keduanya **tidak** menerima kumpulan parameter yang sama — mengirim `sort=score_desc` atau `flex_days` ke `GET properties` menghasilkan **422**. Itulah isi item [F-1](screen/readme_screen.md#152-flutter): `HotelSearchProvider` dulu memanggil `PropertyService.searchHotels()` → `GET properties`, dan sudah dialihkan 16 Agt 2026. **Baca [§1.1](#11-kamus-nilai-sort--ui--server-terverifikasi) lebih dulu** — blok skema di §1 adalah spesifikasi historis untuk jalur unit, bukan kontrak hotel yang berlaku.
 
 ---
 
 ## 1. Validasi & Parameter Request API Search
 
-Endpoint API utama yang digunakan oleh aplikasi Flutter adalah `GET /api/v1/properties`.
+Endpoint pencarian **unit** (kos/apartemen/villa) adalah `GET /api/v1/properties`. Pencarian **hotel** memakai `GET /api/v1/hotels` — skemanya ada di [§1.1](#11-kamus-nilai-sort--ui--server-terverifikasi).
 
 ### Skema Validasi Input Request (`FormRequest` / Validator)
 
@@ -44,6 +46,68 @@ $validated = $request->validate([
     'page'                => 'nullable|integer|min:1',
 ]);
 ```
+
+> ⚠️ **`popularity` di atas adalah spesifikasi, BUKAN kondisi kode — dan tidak diterima controller mana pun.** `PropertyController::index()` memakai
+> `'sort' => ['nullable', 'in:newest,price_asc,price_desc,rating']` ([PropertyController.php:42](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Http/Controllers/Api/PropertyController.php)); `HotelApiController::index()` memakai daftar 7 nilai di [§1.1](#11-kamus-nilai-sort--ui--server-terverifikasi). `sort=popularity` **ditolak 422** di keduanya, bukan diabaikan. Nilai ini tidak pernah diimplementasikan — jangan dikirim.
+
+### 1.1 Kamus Nilai `sort` — UI ↔ Server (terverifikasi)
+
+Skema yang berlaku untuk pencarian hotel, dari `HotelApiController::index()` baris 27–47:
+
+```php
+'sort'  => ['nullable', 'in:newest,price_asc,price_desc,rating,distance,star_desc,score_desc'],
+// Titik acuan untuk `sort=distance`. Keduanya wajib ada, atau tidak dipakai sama sekali.
+'lat'   => ['nullable', 'numeric', 'between:-90,90',  'required_with:lng'],
+'lng'   => ['nullable', 'numeric', 'between:-180,180', 'required_with:lat'],
+'q'         => ['nullable', 'string', 'max:100'],
+'flex_days' => ['nullable', 'integer', 'min:1', 'max:3'],
+```
+
+`lat`/`lng` bersifat **berpasangan**: mengirim salah satunya saja → 422 pada field yang hilang (`required_with`). Di luar rentang → 422. Dijaga oleh T-L11.
+
+Bottom sheet **Urutkan** ([mockup](screen/_build/html/result_pencarian_bottom_modal_filter_urutkan.html), layar #9) punya **4 opsi**. Pemetaannya ke `HotelApiController::index()` baris 106–120:
+
+| Label UI | Nilai `sort` | Implementasi server | Status |
+|---|---|---|---|
+| Rekomendasi *(default terpilih)* | kosongkan, atau `score_desc` | `orderByDesc('score')` | ✅ ada — peringkat relevansi, bukan `latest()` |
+| Harga terendah | `price_asc` | `withMin('activeRoomTypes as min_price', 'base_price')->orderBy('min_price')` | ✅ ada |
+| Rating tertinggi | `rating` | `orderByDesc('score')` | ✅ ada |
+| Jarak terdekat | `distance` + `lat` + `lng` | `orderByDistance()` — delta kuadrat lat/lng, sumbu bujur diskalakan `cos²(lat)` | ✅ **ada sejak 16 Agt 2026** ([L-6](screen/readme_screen.md#151-laravel)) |
+
+**Catatan tambahan:** `newest` juga memetakan ke `orderByDesc('score')`, bukan `latest()` — jadi `newest`, `rating`, `score_desc`, dan default menghasilkan urutan **identik** pada endpoint hotel. `star_desc` adalah satu-satunya nilai yang mengurutkan menurut bintang.
+
+**"Jarak terdekat" dulu adalah tombol yang tidak berefek.** Sebelum L-6, `'distance'` jatuh ke arm `orderByDesc('star_rating')` — chip itu mengembalikan **peringkat bintang** yang berpenampilan seperti jawaban benar. Yang berlaku sekarang:
+
+- `distance` **dengan** `lat`+`lng` → diurutkan dari titik acuan; hotel tanpa koordinat dipaksa ke urutan **terakhir** lewat `orderByRaw('case when … is null then 1 else 0 end asc')`, karena posisi `NULL` berbeda antar-engine.
+- `distance` **tanpa** origin → turun ke **relevansi** (`orderByDesc('score')`), bukan bintang. Degradasi ini disengaja dan diuji: T-L10 membandingkan tiga panggilan API hidup dan menuntut hasilnya **sama dengan** `score_desc` serta **berbeda dari** `star_desc`.
+- Rumusnya planar, bukan haversine (tanpa `radians()`/`acos()`): monoton terhadap jarak sebenarnya pada skala kota — cukup untuk `ORDER BY` — dan berperilaku sama di PostgreSQL maupun SQLite tempat suite berjalan.
+
+Test terkait: T-L9…T-L11 di [`HotelSearchSortTest.php`](../../laravel/tests/Feature/Api/HotelSearchSortTest.php). Fixture-nya sengaja menaruh hotel terdekat pada bintang **terendah**, sehingga peringkat bintang tidak bisa lolos menyamar sebagai jarak. Sisi Flutter: `HotelSearchQuery` mengirim `sort=distance` beserta `lat`/`lng` hanya bila origin lengkap ([F-2](screen/readme_screen.md#152-flutter), grup test `sort: distance`).
+
+Lihat juga [A-D9](screen/readme_screen.md#113-drift-kontrak-flutter--laravel) — temuan aslinya, kini tertutup.
+
+### 1.2 Filter "Kebutuhan" (`needs[]`) & `children_ages[]`
+
+Chip **Kebutuhan** pada layar hasil pencarian memakai nilai-nilai berikut (dari mockup; sisi server **belum** memvalidasi daftar ini):
+
+| Nilai | Label UI |
+|---|---|
+| `family_room` | Kamar Keluarga |
+| `kids_activities` | Aktivitas untuk anak |
+| `breakfast_included` | Termasuk sarapan |
+| `family_friendly` | Disukai keluarga |
+| `strategic_location` | Lokasi strategis |
+
+> ✅ **`children_ages[]` sudah didukung sejak 16 Agt 2026** ([L-5](screen/readme_screen.md#151-laravel)). Sebelumnya UI pemilih umur anak (layar #14–#16) mengumpulkan umur per anak tetapi `BookingController::store()` tidak memvalidasi maupun menyimpannya — data **hilang** saat submit, padahal aturan "Anak Menginap Gratis" bergantung padanya ([A-D2](screen/readme_screen.md#113-drift-kontrak-flutter--laravel)). Yang berlaku sekarang:
+>
+> ```php
+> 'children_ages'   => ['nullable', 'array', 'max:10'],
+> 'children_ages.*' => ['integer', 'min:0', 'max:17'],
+> ```
+>
+> Disimpan ke kolom jsonb `bookings.children_ages` (cast `array`). **List kosong menjadi `null`**, bukan `[]` — `array_values($data['children_ages'])` hanya dipanggil bila `!empty()`, karena `[]` akan terbaca sebagai "0 anak dengan umur tak diketahui" sedangkan `null` berarti "tidak dikirim". Umur > 17 → 422 pada `children_ages.0`. Dijaga T-L25; sisi Flutter memastikan list kosong **tidak** dikirim (`hotel_service_test.dart`).
+
+> 🟠 **`needs[]` masih belum divalidasi server.** Daftar nilai di atas berasal dari mockup; `HotelApiController::index()` tidak menerima parameter `needs`. Chip ini belum punya efek apa pun di backend.
 
 ---
 

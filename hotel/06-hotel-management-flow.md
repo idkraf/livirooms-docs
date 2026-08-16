@@ -154,6 +154,19 @@ class ExtendHotelInventoriesJob implements ShouldQueue
 
 Membatalkan booking hotel yang melewati batas pembayaran dan mengembalikan *allotment* stok kamar harian secara otomatis.
 
+> 🔴 **Job ini hanya bisa mengembalikan stok yang memang pernah dipotong.** Di `BookingController::storeHotelBooking()`, hanya cabang **B2** (`$roomType` tanpa `guests[]`) yang memanggil `increment('booked_count')`. Cabang **B1** (`!empty($guests)`) — yaitu jalur yang **selalu** dipakai form multi-kamar di aplikasi — tidak pernah menaikkan `booked_count`.
+>
+> Akibatnya ada dua sisi yang saling memperburuk:
+>
+> | | Saat booking dibuat | Saat booking kadaluarsa |
+> |---|---|---|
+> | Cabang **B2** | `booked_count += rooms_count` | job ini menurunkannya kembali ✅ |
+> | Cabang **B1** (`guests[]`) | tidak berubah 🔴 | tidak ada yang perlu dikembalikan — tapi kamar juga **tidak pernah terkunci**, jadi bisa terjual berulang |
+>
+> Jadi kalender allotment yang dilihat & diatur Mitra (`InventoryCalendarModal`, §2 poin 3, dan tahap Inventaris pada wizard §1) **tidak mencerminkan** pemesanan yang masuk lewat jalur `guests[]`: angka sisa kamar tampak utuh padahal sudah ada tamu. Mitra bisa menaikkan/menurunkan allotment berdasarkan angka yang salah.
+>
+> Perbaikan diagendakan sebagai **L-1** (samakan cabang B1 dengan B2: `lockForUpdate()` + `increment('booked_count')`), dengan test **T-L1**, **T-L2**, dan **T-L3** (konkurensi). Selama L-1 belum dikerjakan, jangan memperlakukan `room_inventories.booked_count` sebagai angka keterisian yang benar. Rujukan: [01-database-migration.md §2.E](01-database-migration.md#e-tabel-inventaris-kalender-harian--room_inventories-2026_08_13_000005_create_room_inventories_tablephp) dan [screen/readme_screen.md §10.3](screen/readme_screen.md#103-tiga-cabang-penetapan-harga-di-storehotelbooking).
+
 ```php
 <?php
 

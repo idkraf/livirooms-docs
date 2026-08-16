@@ -1,6 +1,8 @@
 # Flutter Screen Reference
 
-Dokumen ini berisi daftar seluruh layar aplikasi Flutter Sewain berdasarkan **kondisi kode aktual** di `flutter/lib/` per 2026-08-13. Kolom **Status** menunjukkan apakah file `.dart` sudah ada atau belum.
+Dokumen ini berisi daftar seluruh layar aplikasi Flutter Sewain berdasarkan **kondisi kode aktual** di `flutter/lib/` per 2026-08-16. Kolom **Status** menunjukkan apakah file `.dart` sudah ada atau belum.
+
+> **Modul Hotel:** untuk detail per-layar, aset mockup, payload API, dan design system, lihat **[hotel/screen/readme_screen.md](../hotel/screen/readme_screen.md)** — dokumen itu adalah Master Reference modul Hotel.
 
 > **Legend**: ✅ Sudah ada dan terdaftar di router · ❌ Belum dibuat
 
@@ -17,7 +19,7 @@ Aplikasi mengizinkan pengguna melakukan *browsing* properti tanpa login/daftar:
 
 - [A. Sisi Konsumen (Consumer App)](#a-sisi-konsumen-consumer-app)
 - [B. Sisi Mitra / Vendor (Partner App)](#b-sisi-mitra--vendor-partner-app)
-- [C. Hotel OTA (Planned -- Belum Dibuat)](#c-hotel-ota-planned--belum-dibuat)
+- [C. Hotel OTA (Screens Selesai Dibuat)](#c-hotel-ota-screens-selesai-dibuat)
 - [Struktur Lengkap Flutter](#struktur-lengkap-flutter-flutterlib)
 - [Ringkasan Status](#ringkasan-status)
 - [Catatan](#catatan)
@@ -113,16 +115,27 @@ Aplikasi mengizinkan pengguna melakukan *browsing* properti tanpa login/daftar:
 
 ## C. Hotel OTA (Screens Selesai Dibuat)
 
-Modul pencarian hotel, hasil filter, detail 8 tab, dan form booking checkout telah dibuat lengkap dengan service & sample JSON mock. Lihat [hotel/04-flutter-implementation.md](../hotel/04-flutter-implementation.md) dan [hotel/screen/readme_screen.md](../hotel/screen/readme_screen.md).
+Modul pencarian hotel, hasil filter, detail 8 tab, dan form booking checkout sudah dibuat dan **semuanya sudah terdaftar di `router.dart`**. Lihat [hotel/04-flutter-implementation.md](../hotel/04-flutter-implementation.md) dan **[hotel/screen/readme_screen.md](../hotel/screen/readme_screen.md)** (Master Reference: 40 layar/komponen, aset, payload, design system).
 
-| Status | File Kode | Route | Nama Layar | Deskripsi & Infrastruktur |
-|--------|-----------|-------|------------|---------------------------|
-| ✅ | `property/hotel/hotel_search_screen.dart` | `/hotel/search` | Hotel Search & Filter | Destinasi populer, tanggal check-in/out, counter kamar/tamu, modal filter harga/bintang |
-| ✅ | `property/hotel/hotel_results_screen.dart` | `/hotel/results` | Hotel Results | List hotel card, filter chips, banner diskon, trust modal sheet |
-| ✅ | `property/hotel/hotel_detail_screen.dart` | `/hotel/detail` | Hotel Detail (8 Tab) | Hero gallery, Kamar, Ulasan, Lokasi, Fasilitas, Kebijakan, Keterangan, Trip Moments, Akomodasi Terdekat |
-| ✅ | `property/hotel/hotel_booking_screen.dart` | `/hotel/booking` | Hotel Booking Checkout | Ringkasan kamar, form data tamu per kamar, info kontak, Trip Coins, jaminan harga |
-| ✅ | `mitra/hotel_form_screen.dart` | `/mitra/hotels/form` | Form Wizard Registrasi Hotel | 5-Step pendaftaran hotel & kamar mitra (Info, Fasilitas, Kamar, Inventaris, Galeri) |
+| Status | File Kode | Route | Nama Layar | Layar di Master Ref | Deskripsi & Infrastruktur |
+|--------|-----------|-------|------------|---------------------|---------------------------|
+| ✅ | `property/hotel/hotel_search_screen.dart` | `/hotel/search` | Hotel Search & Filter | #1–#6 | Destinasi populer, tanggal check-in/out, counter kamar/tamu, modal filter harga/bintang |
+| ✅ | `property/hotel/hotel_results_screen.dart` | `/hotel/results` | Hotel Results | #7–#16 | List hotel card, filter chips, banner diskon, trust modal sheet |
+| ✅ | `property/hotel/hotel_detail_screen.dart` | `/hotel/detail` | Hotel Detail (8 Tab) | #17–#25 | Hero gallery, Kamar, Ulasan, Lokasi, Fasilitas, Kebijakan, Keterangan, Trip Moments, Akomodasi Terdekat |
+| ✅ | `property/hotel/hotel_booking_screen.dart` | `/hotel/booking` | Hotel Booking Checkout | #26–#32 | Ringkasan kamar, form data tamu per kamar, info kontak, Trip Coins, jaminan harga |
+| ✅ | `mitra/hotel_form_screen.dart` | `/mitra/hotels/form` | Form Wizard Registrasi Hotel | — (sisi mitra) | 5-Step pendaftaran hotel & kamar mitra (Info, Fasilitas, Kamar, Inventaris, Galeri) |
 
+**Komponen yang belum ada** (detail di [readme_screen.md §14.2](../hotel/screen/readme_screen.md#142-yang-belum-ada-di-hotel_booking_screendart)):
+
+| Kekurangan | Layar Master Ref |
+|---|---|
+| Bottom sheet kode promo | #36 |
+| Bottom sheet permintaan khusus | #37 |
+| Bottom sheet informasi tambahan | #33 |
+| Bottom sheet detail kamar (Family Suite / Kamar Superior) | #34, #35 |
+| Ringkasan kamar masih hardcode via `_roomSummary(...)` | #27 |
+| Seksi Trip Coins expandable | #29, #31, #32 |
+| Top modal tanggal & tamu (paket `top_modal_sheet` **tidak ada** di `pubspec.yaml`) | #12–#16 |
 
 ---
 
@@ -131,12 +144,12 @@ Modul pencarian hotel, hasil filter, detail 8 tab, dan form booking checkout tel
 ```
 flutter/lib/
 ├── main.dart
-├── router.dart                                   (41 route terdaftar)
+├── router.dart                                   (44 named route terdaftar)
 │
 ├── config/
 │   └── app_config.dart
 │
-├── models/                                        (23 model)
+├── models/                                        (24 model)
 │   ├── api_response.dart
 │   ├── app_banner.dart
 │   ├── app_notification.dart
@@ -145,6 +158,7 @@ flutter/lib/
 │   ├── city.dart
 │   ├── host_dashboard.dart
 │   ├── host_info.dart
+│   ├── hotel.dart                                 Hotel OTA model
 │   ├── hotel_search_query.dart                    Hotel OTA value object
 │   ├── insurance_plan.dart                        Stay Protection model
 │   ├── order.dart
@@ -164,8 +178,9 @@ flutter/lib/
 ├── providers/                                     (2 provider)
 │   ├── auth_provider.dart
 │   └── hotel_search_provider.dart                 Hotel OTA: 300ms debounce, race-safe token
+│                                                  ⚠️ memakai PropertyService.searchHotels()
 │
-├── services/                                      (18 service)
+├── services/                                      (19 service)
 │   ├── api_client.dart
 │   ├── auth_service.dart
 │   ├── auth_storage.dart
@@ -177,6 +192,7 @@ flutter/lib/
 │   ├── dummy_api_client.dart                      + GET insurance/plans route
 │   ├── home_service.dart
 │   ├── host_service.dart
+│   ├── hotel_service.dart                         Hotel OTA service
 │   ├── notification_service.dart
 │   ├── profile_service.dart
 │   ├── property_service.dart                      + searchHotels(), getInsurancePlans()
@@ -195,19 +211,20 @@ flutter/lib/
 │   ├── property_card.dart
 │   └── state_views.dart
 │
-└── screens/                                       (41 file, semua terdaftar di router)
+└── screens/                                       (45 file — 44 punya named route;
+                                                     home_screen.dart = tab di MainShell)
     ├── auth/          (6 file)  ✅ splash, onboarding, welcome, login, register, register_profile
     ├── home/          (3 file)  ✅ main_shell, home_screen, filter_screen
     ├── property/      (2 file)  ✅ property_detail, search_results
+    │   └── hotel/     (4 file)  ✅ hotel_search, hotel_results, hotel_detail, hotel_booking
     ├── booking/       (3 file)  ✅ booking_detail, booking_list, booking_success
     ├── chat/          (2 file)  ✅ chat_list, chat_room
     ├── account/       (5 file)  ✅ account_menu, edit_profile, wishlist, referral, validation
     ├── payment/       (5 file)  ✅ payment_method, payment_webview, payment_result, add_card, promo
     ├── settings/      (4 file)  ✅ security, notification_settings, help_support, language
     ├── notification/  (1 file)  ✅ notification_screen
-    ├── mitra/         (9 file)  ✅ shell, dashboard, property_mgmt, property_form, calendar,
-    │                               order_mgmt, order_detail, wallet, mitra_profile
-    └── hotel/         (0 file)  ❌ 6 screen planned, infrastruktur siap
+    └── mitra/         (10 file) ✅ shell, dashboard, property_mgmt, property_form, calendar,
+                                    order_mgmt, order_detail, wallet, mitra_profile, hotel_form
 ```
 
 ---
@@ -216,19 +233,41 @@ flutter/lib/
 
 | Kategori | Selesai | Belum |
 |----------|---------|-------|
-| **Screens (terdaftar di router)** | **41** | 6 Hotel OTA + 1 Register Host |
-| **Models** | 23 | 0 |
-| **Services** | 18 | 0 |
+| **Screens** | **45** file | 1 Register Host |
+| **Named route di `router.dart`** | **44** | 0 — semua layar Hotel OTA **sudah** terdaftar |
+| **Models** | 24 | 0 |
+| **Services** | 19 | 0 |
 | **Providers** | 2 | 0 |
 | **Widgets** | 5 | 0 |
-| **Routes di `router.dart`** | 41 | 6 Hotel OTA belum didaftarkan |
+| **Test (`flutter/test/`)** | **17 file** | lihat catatan cakupan di bawah |
+
+> `router.dart` punya 44 konstanta route dan 44 `case Routes.*` yang berpasangan tepat. Selisih 45 vs 44 adalah `home_screen.dart`, yang dirender sebagai tab di dalam `MainShell` dan memang tidak punya named route.
+
+### Cakupan Test Flutter
+
+`flutter/test/` berisi **17 file**, **6 di antaranya sudah menyentuh Hotel/asuransi**:
+
+| File test | Cakupan |
+|---|---|
+| `models/hotel_test.dart` | 6 test — parsing `Hotel` minimal & lengkap (metadata 8 tab), `HotelRoomItem`, `HotelPolicy` default, `HotelGuestInput.toJson()`, `HotelFacilityGroup` kosong |
+| `services/hotel_service_test.dart` | 9 test — `searchHotels`, `getHotelDetail`, `getRoomTypes` (**delegasi ke `getHotelDetail`**), `getInsurancePlans`, `createHotelBooking` (payload lengkap & tanpa field opsional), `createHotelForProperty` |
+| `providers/hotel_search_provider_test.dart` | 2 test — initial state, search memperbarui query & memuat hotel |
+| `models/hotel_search_query_test.dart` | 2 test — query params default, parsing deep link `sewain://search` |
+| `widgets/hotel_screens_test.dart` | 8 `testWidgets` — render `HotelSearchScreen`, `HotelResultsScreen`, `HotelDetailScreen`, `HotelBookingScreen`, `HotelFormScreen` (mode tambah/edit, default 3 bintang, 5 label tab) |
+| `models/insurance_plan_test.dart` | 4 test — premi fixed per malam (1 & banyak tamu, samakan dengan Laravel), premi persentase, parsing JSON |
+
+Sisanya (11 file) di luar modul Hotel: `widget_test.dart`, `api_envelope_test.dart`, `utils/formatters_test.dart`, `models/{property,property_recommendation,booking,payment,referral}_test.dart`, `services/{booking,property,referral}_service_test.dart`.
+
+> ⚠️ **Celah yang sudah dipastikan:** `models/hotel_search_query_test.dart` selalu mengirim `city_id` pada URI-nya, sedangkan `HotelSearchQuery.fromUri()` memakai `q['city_id']!` tanpa fallback — deep link tanpa `city_id` masih *crash* dan belum tertutup test. Lihat A-D7 di [readme_screen.md §11.3](../hotel/screen/readme_screen.md#113-drift-kontrak-flutter--laravel).
 
 ---
 
 ## Catatan
 
 - `register_host_screen.dart` belum dibuat -- mockup ada di `screens_flutter/37_register_host.png`.
-- **Hotel OTA screens (6)** belum dibuat. Infrastruktur penuh sudah live & teruji 100%.
-- `InsuranceSelectionWidget` siap dipakai saat `hotel_booking_screen.dart` dibangun.
-- Route Hotel OTA perlu ditambahkan ke `router.dart` saat masing-masing screen dibuat.
+- **Hotel OTA:** 4 layar konsumen (`property/hotel/`) + 1 layar mitra (`mitra/hotel_form_screen.dart`) **sudah dibuat dan sudah terdaftar** di `router.dart`. Yang belum lengkap adalah bottom sheet di dalam layar checkout — lihat tabel "Komponen yang belum ada" di [bagian C](#c-hotel-ota-screens-selesai-dibuat).
+- `InsuranceSelectionWidget` sudah dipakai di alur checkout hotel (Stay Protection).
+- ⚠️ `hotel_search_provider.dart` memanggil `PropertyService.searchHotels()` (`GET properties`), bukan `HotelService` (`GET hotels`) — field khusus hotel (skor, jumlah ulasan, jarak, tag) hilang. Detail & rencana perbaikan: [readme_screen.md §11.3 A-D6](../hotel/screen/readme_screen.md#113-drift-kontrak-flutter--laravel).
+- ⚠️ `HotelService.getHotelFilters()` dan `HotelService.createHotelBooking()` memanggil endpoint yang **tidak ada** di `routes/api_mobile.php` (`GET hotel/filters`, `POST hotel/bookings`) → 404 di mode API nyata. Lihat A-D4 & A-D5 pada dokumen yang sama.
+- ⚠️ Paket `top_modal_sheet` **tidak terpasang** di `flutter/pubspec.yaml` — top modal harus dibuat manual (`showGeneralDialog` + `SlideTransition`).
 - Bahasa kode: **Inggris**. Bahasa docs: **Indonesia**.

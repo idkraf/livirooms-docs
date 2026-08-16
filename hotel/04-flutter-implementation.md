@@ -544,3 +544,88 @@ Empat layar utama telah selesai diimplementasikan sesuai acuan mockup dan build 
 ### E. `HotelService` (`flutter/lib/services/hotel_service.dart`)
 - Terintegrasi penuh dengan `ApiClient` dan `DummyApiClient` dengan mock response fixture di `assets/json/` (`GET_hotels.json`, `GET_hotels_id.json`, `POST_hotel_bookings.json`).
 
+### F. Catatan Kondisi Nyata & Peringatan (hasil audit 16 Agt 2026)
+
+Empat layar di atas **ada dan sudah terdaftar** di `flutter/lib/router.dart` (44 named route, semua route hotel berpasangan dengan handler-nya). Namun ada 4 hal yang **wajib** diketahui sebelum melanjutkan implementasi:
+
+**1. 🔴 Dua endpoint yang dipanggil tidak ada di Laravel.**
+
+| Dipanggil dari | Path | Route di `routes/api_mobile.php` |
+|---|---|---|
+| `HotelService.getHotelFilters()` | `GET hotel/filters` | ❌ tidak ada → 404 |
+| `HotelService.createHotelBooking()` | `POST hotel/bookings` | ❌ tidak ada → 404 |
+
+Keduanya "hidup" di mode dummy karena punya fixture (`POST_hotel_bookings.json` di daftar §E di atas) — jadi bug ini **tidak terlihat** selama `--dart-define=DUMMY_API=true`. Entri sebenarnya untuk pemesanan adalah **`POST bookings`** dengan `booking_type='room'`; **jangan** buat endpoint kedua. Lihat [A-D4 & A-D5](screen/readme_screen.md#113-drift-kontrak-flutter--laravel).
+
+**2. 🟠 `HotelSearchProvider` melewati `HotelService`.** Provider memanggil `PropertyService.searchHotels()` (`GET properties`), sehingga menyimpan `Paginated<Property>` alih-alih `Paginated<Hotel>`. Akibatnya field khusus hotel — skor ulasan, jumlah ulasan, jarak dari pusat kota, tag `#14B8A6` — tidak tersedia di layar hasil meski `Hotel` sudah memodelkannya. Lihat [A-D6](screen/readme_screen.md#113-drift-kontrak-flutter--laravel).
+
+**3. 🟠 Paket `top_modal_sheet` TIDAK terpasang.** `flutter/pubspec.yaml` hanya memuat `http`, `provider`, `shared_preferences`, `intl`, `cached_network_image`, `url_launcher`, `image_picker`, `app_links`. Top modal (pemilih tanggal & tamu, layar #12–#16) harus dibangun manual dengan `showGeneralDialog` + `SlideTransition` dari atas, **atau** paketnya ditambahkan lebih dulu. Jangan tulis `import 'package:top_modal_sheet/...'` dengan asumsi tersedia. Lihat [A-08](screen/readme_screen.md#4-log-anomali-aset--dokumentasi).
+
+**4. 🟠 Deep link tanpa `city_id` masih crash.** `HotelSearchQuery.fromUri()` memakai `int.tryParse(q['city_id']!)` — satu-satunya field yang tidak punya fallback `??`, padahal `check_in`, `check_out`, `rooms_count`, `adults`, `children`, dan `star_rating` semuanya punya. `sewain://search?check_in=...` tanpa `city_id` akan *throw*. Lihat [A-D7](screen/readme_screen.md#113-drift-kontrak-flutter--laravel).
+
+#### Komponen yang belum ada di `hotel_booking_screen.dart`
+
+| Kekurangan | Layar di Master Ref |
+|---|---|
+| Bottom sheet kode promo | #36 |
+| Bottom sheet permintaan khusus | #37 |
+| Bottom sheet informasi tambahan | #33 |
+| Bottom sheet detail kamar (Family Suite / Kamar Superior) | #34, #35 |
+| ~~Ringkasan kamar masih *hardcode* lewat `_roomSummary(...)`~~ | #27 — ✅ beres di Fase 2, lihat [§G](#g-status-fase-2-diperbarui-16-agt-2026--apa-yang-sudah-tidak-berlaku-dari-f) |
+| Seksi Trip Coins yang bisa dibuka-tutup | #29, #31, #32 |
+
+#### Cakupan test Flutter yang sudah ada
+
+`flutter/test/` berisi **17 file**, **6 menyentuh Hotel/asuransi** — jangan tulis ulang:
+
+| File | Isi |
+|---|---|
+| `models/hotel_test.dart` | 6 test — parsing `Hotel`, `HotelRoomItem`, `HotelPolicy`, `HotelGuestInput.toJson()`, `HotelFacilityGroup` |
+| `services/hotel_service_test.dart` | 9 test — `searchHotels`, `getHotelDetail`, `getRoomTypes`, `getInsurancePlans`, `createHotelBooking` ×2, `createHotelForProperty` ×2 |
+| `providers/hotel_search_provider_test.dart` | 2 test |
+| `models/hotel_search_query_test.dart` | 2 test |
+| `widgets/hotel_screens_test.dart` | 8 `testWidgets` — **render-level saja** |
+| `models/insurance_plan_test.dart` | 4 test — premi fixed & persentase, samakan dengan Laravel |
+
+> 🔴 `services/hotel_service_test.dart:267` dan `:314` memakai `expectedPath: 'hotel/bookings'` — memaku endpoint hantu di poin 1. Karena transport palsu hanya menangkap body bila path cocok, kedua test akan **gagal** saat pemanggilan diarahkan ke `POST bookings`. Perbaiki keduanya bersamaan. Lihat [A-12](screen/readme_screen.md#4-log-anomali-aset--dokumentasi).
+>
+> 🟡 `getRoomTypes` terbukti **mendelegasikan** ke `getHotelDetail` — itulah sebab endpoint `GET hotels/{hotel}/room-types` yang ada di Laravel tidak pernah terpanggil ([A-D8](screen/readme_screen.md#113-drift-kontrak-flutter--laravel)).
+
+### G. Status Fase 2 (diperbarui 16 Agt 2026) — apa yang sudah tidak berlaku dari §F
+
+**§F adalah snapshot audit Fase 1.** Setelah perbaikan kode Fase 2, statusnya:
+
+| Peringatan §F | Status sekarang |
+|---|---|
+| **1.** Dua endpoint hantu (`GET hotel/filters`, `POST hotel/bookings`) | ✅ **beres** — `GET hotel/filters` dihapus total (tak ada pemanggil); pemesanan diarahkan ke `POST bookings` dengan `booking_type: 'room'` + `duration_type: 'daily'` eksplisit. Fixture `GET_hotel_filters.json` & `POST_hotel_bookings.json` ikut dibuang, jadi §E di atas **tidak lagi akurat** soal fixture ketiga. |
+| **2.** `HotelSearchProvider` melewati `HotelService` | ✅ **beres** — provider memakai `HotelService.searchHotels()` → `GET hotels`, state `Paginated<Hotel>`, dengan `loadMore()` bertoken anti-balapan. Bonus temuan: `PropertyService.searchHotels()` mengirim `sort=score_desc` ke `GET properties` yang hanya menerima `newest\|price_asc\|price_desc\|rating`, jadi **setiap** pencarian lewat provider dijawab 422. Metode itu dihapus. |
+| **3.** `top_modal_sheet` tidak terpasang | ⏳ **masih berlaku** — belum ada paketnya, belum ada `AppTopModalShell` manual. Satu-satunya peringatan §F yang utuh. |
+| **4.** Deep link tanpa `city_id` crash | ✅ **beres** — `int.tryParse(q['city_id'] ?? '')`. Sekalian diperbaiki asimetri `toQueryParams()` (memancarkan `star_rating[0]`) ↔ `fromUri` (dulu hanya membaca CSV). |
+
+**Rantai argumen antar-layar hotel (baru, wajib dipakai).** Sebelumnya tiap layar hotel menebak sendiri tanggal & kamar, dan `HotelResultsScreen` bahkan membuka `Routes.propertyDetail` — layar sewa **unit** — sehingga `HotelDetailScreen` tak terjangkau dari alur pengguna mana pun ([A-15](screen/readme_screen.md#4-log-anomali-aset--dokumentasi)). Sekarang:
+
+```
+HotelSearchScreen
+  └─ Routes.hotelResults ← HotelSearchQuery
+       └─ Routes.hotelDetail ← HotelDetailArgs { hotel?, hotelId?, query? }
+            └─ Routes.hotelBooking ← HotelBookingArgs { hotel, query, selections? }
+                                       selections: List<HotelRoomSelection { roomType, count }>
+```
+
+- Ketiga case di `router.dart` tetap menerima bentuk lama (`Hotel` polos, `int` id) demi deep link & call site yang sudah ada; yang datang tanpa stay jatuh ke **`HotelSearchQuery.defaultStay()`** — satu-satunya fallback tanggal di seluruh modul. Jangan tambahkan fallback kedua.
+- Kelas `*Args` didefinisikan di **kepala file layar yang mengonsumsinya** (konvensi repo), bukan di `models/`.
+- Pemilihan kamar **selalu** lewat `Hotel.cheapestBookableRoom` (memfilter `remaining > 0`). Kartu rekomendasi, bar bawah layar detail, dan fallback layar booking memakai getter yang sama, supaya tak ada layar yang menawarkan kamar yang akan ditolak **422 allotment** oleh `BookingController`.
+- Uang di layar hotel **wajib** lewat `Formatters.rupiah(...)`; `toStringAsFixed(0)` mentah masih tersisa di kartu hasil pencarian dan menjadi bagian dari [F-13](screen/readme_screen.md#152-flutter).
+
+**🔴 Peringatan baru — harga hotel tidak dikirim server ([A-D11](screen/readme_screen.md#113-drift-kontrak-flutter--laravel)).** `GET hotels` dan `GET hotels/{hotel}` **tidak memuat** `price_per_night`, `price_original`, maupun `total_price`; harga hanya ada di `active_room_types[].base_price`. Jadi `Hotel.pricePerNight`/`totalPrice` = `0.0` di API nyata, dan kartu hasil pencarian menampilkan `Rp 0`. Terlihat benar di mode dummy semata-mata karena fixture memuat ketiga kunci itu. Layar detail sudah kebal lewat `_nightlyFrom()`; kartu hasil pencarian belum. **Perbaikan yang benar ada di Laravel** (`HotelApiController::index()` memancarkan `price_from` + `total_price`) — jangan hitung ulang di klien, karena filter harga & sort sudah dihitung server.
+
+**🔴 Setiap kolom `decimal:*` menyeberang sebagai String.** `RoomType::$casts` memberi `base_price` & `price_original` cast `decimal:2`, dan `$rt->toArray()` mengirimkannya sebagai `"446637.00"`. Cast Dart `as num?` pada `String` menghasilkan `null` **tanpa exception** → harga jatuh ke 0 diam-diam ([A-16](screen/readme_screen.md#4-log-anomali-aset--dokumentasi)). Pakai helper toleran-tipe seperti `HotelRoomItem._toDouble()`, jangan `as num?`, untuk **semua** field uang yang datang dari kolom desimal.
+
+**Tanggal: jangan pakai `DateFormat(..., 'id_ID')` di layar hotel.** Dua alasan terbukti: locale non-default **throw** kecuali `initializeDateFormatting()` sudah jalan — dan itu hanya dipanggil di `main.dart:13`, yang tidak pernah dieksekusi widget test; lalu intl menyingkat Agustus `Agu` sedangkan seluruh mockup hotel menulis `Agt`. Gunakan helper bebas-locale di `Formatters`: `dayMonthShort`, `weekdayDayMonthShort`, varian `iso*`-nya, dan `hourMinute` (memangkas detik dari kolom `TIME`). `NumberFormat`/`Formatters.rupiah` **tidak** butuh inisialisasi, jadi uang tetap lewat intl.
+
+**Cakupan test setelah Fase 2:** suite Flutter **133 test / 17 file** (dari 117). Yang berubah dari tabel §F di atas: `models/hotel_test.dart` 6→**9**, `services/hotel_service_test.dart` 8→**10** (`expectedPath` diperbaiki ke `bookings`), `providers/hotel_search_provider_test.dart` 2→**6**, `models/hotel_search_query_test.dart` 2→**11**, `widgets/hotel_screens_test.dart` 8→**15** (tidak lagi render-level saja), `utils/formatters_test.dart` 10→**16**, `api_envelope_test.dart` +3. Status per ID: [§15.3 Master Reference](screen/readme_screen.md#153-test--wajib-permintaan-eksplisit-pengguna).
+
+> ⚠️ Seluruh angka test di atas hasil **pembacaan kode**, belum dieksekusi — `flutter test` & `flutter analyze` belum bisa dijalankan (shell terkunci). Jalankan keduanya sebelum menandai item apa pun selesai; suite ini pernah merah tanpa disadari ([A-14](screen/readme_screen.md#4-log-anomali-aset--dokumentasi)).
+
+Rujukan lengkap per layar, payload, dan design system: **[screen/readme_screen.md](screen/readme_screen.md)**.
+

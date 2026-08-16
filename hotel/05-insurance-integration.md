@@ -214,6 +214,49 @@ class InsuranceController extends Controller
 
 ---
 
+## 5.1 Kontrak Request & Urutan Perhitungan (terverifikasi di kode)
+
+Sumber: `BookingController::storeHotelBooking()` baris 183–194 & 225–232.
+
+### Dua flag yang identik
+
+```php
+$hasInsurance = !empty($data['has_insurance']) || !empty($data['include_insurance']);
+```
+
+`has_insurance` dan `include_insurance` **ekuivalen** — di-OR, bukan diproses terpisah. Kirim salah satu saja; mengirim keduanya tidak menggandakan premi. Keduanya sama-sama tervalidasi `nullable|boolean`.
+
+**Syarat premi benar-benar terpasang** (keduanya wajib):
+
+| Yang dikirim | Hasil |
+|---|---|
+| flag `true` **dan** `insurance_plan_id` valid | ✅ premi dihitung, baris `booking_insurances` dibuat |
+| flag `true`, `insurance_plan_id` kosong | ❌ premi `0`, **`bookings.has_insurance` tersimpan `false`** |
+| flag `true`, `insurance_plan_id` tidak ditemukan | ❌ idem — `InsurancePlan::find()` mengembalikan `null` |
+| `insurance_plan_id` valid, flag tidak dikirim | ❌ diabaikan seluruhnya |
+
+Baris 215 menyimpan `'has_insurance' => $hasInsurance && !empty($insurancePlan)` — jadi kolom DB mencerminkan **hasil akhir**, bukan permintaan klien. Jangan pakai flag request sebagai asumsi keadaan tersimpan.
+
+### Urutan rumus uang — premi ditambahkan SETELAH diskon
+
+```php
+$insuranceFee = $insurancePlan->calculatePremium($nights, $adults, $roomSubtotal);  // basis: subtotal PENUH
+$total        = max(0, $roomSubtotal - $discount) + $insuranceFee;                  // premi di LUAR diskon
+$tripCoins    = (int) round($total * 0.005);                                        // 0.5% dari total termasuk premi
+```
+
+Tiga konsekuensi yang mudah salah dipahami:
+
+1. **Basis premi adalah `$roomSubtotal` sebelum diskon.** Voucher **tidak** mengecilkan premi — untuk paket berjenis persentase, diskon Rp100.000 tidak mengurangi premi sepeser pun.
+2. **Premi tidak ikut didiskon.** `max(0, ...)` hanya membungkus `$roomSubtotal - $discount`; premi ditambahkan di luar tanda kurung, sehingga total **tidak akan pernah** turun di bawah nilai premi meski diskon melebihi subtotal.
+3. **Trip Coins dihitung dari total yang sudah termasuk premi**, jadi membeli asuransi menambah koin yang didapat.
+
+Urutan ini wajib dipertahankan di UI Flutter agar angka di layar sama dengan server. Test terkait: **T-L6** (urutan rumus), **T-L9** (`booking_insurances` status `pending` + `premium_amount`). Rujukan: [screen/readme_screen.md §10.4](screen/readme_screen.md#104-rumus-uang-urutan-wajib).
+
+> Premi dihitung dengan `InsurancePlan::calculatePremium($nights, $adults, $roomSubtotal)`. Sisi Flutter sudah punya padanannya dan diuji di `flutter/test/models/insurance_plan_test.dart` (4 test, termasuk *"fixed per night multiple guests (matches Laravel)"*) — jaga kedua implementasi tetap sinkron; bila rumus di Laravel berubah, test Flutter itulah yang harus ikut diperbarui.
+
+---
+
 ## 6. Integrasi dengan Form Multi-Kamar (Checkout Flutter)
 
 Pada alur pemesanan kombo multi-kamar di [`flutter/lib/screens/property/hotel/hotel_booking_screen.dart`](file:///D:/Project/Fastwork/rental.apartemen/flutter/lib/screens/property/hotel/hotel_booking_screen.dart):

@@ -1,0 +1,170 @@
+[
+  {
+    "screen": "property_detail_screen_1",
+    "file": "property_detail_screen_1.html",
+    "outName": "property_detail_screen_1.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_1_with_reviews",
+    "file": "property_detail_screen_1_with_reviews.html",
+    "outName": "property_detail_screen_1_with_reviews.jpeg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_1_bottom_sheet_diskusi",
+    "file": "property_detail_screen_1_bottom_sheet_diskusi.html",
+    "outName": "property_detail_screen_1_bottom_sheet_diskusi.jpeg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_1_bottom_sheet_ulasan",
+    "file": "property_detail_screen_1_bottom_sheet_ulasan.html",
+    "outName": "property_detail_screen_1_bottom_sheet_ulasan.jpeg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_2_tab_facilities",
+    "file": "property_detail_screen_2_tab_facilities.html",
+    "outName": "property_detail_screen_2_tab_facilities.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_2_tab_facilities_show_bottom_sheet_fasilitas_gedung",
+    "file": "property_detail_screen_2_tab_facilities_show_bottom_sheet_fasilitas_gedung.html",
+    "outName": "property_detail_screen_2_tab_facilities_show_bottom_sheet_fasilitas_gedung.jpeg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_2_tab_facilities_show_bottom_sheet_furniture_ruangan",
+    "file": "property_detail_screen_2_tab_facilities_show_bottom_sheet_furniture_ruangan.html",
+    "outName": "property_detail_screen_2_tab_facilities_show_bottom_sheet_fruniture_ruangan.jpeg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_3_tab_info_tab_check_in_info",
+    "file": "property_detail_screen_3_tab_info_tab_check_in_info.html",
+    "outName": "property_detail_screen_3_tab_info_tab_check_in_info.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_3_tab_info_tab_deposit",
+    "file": "property_detail_screen_3_tab_info_tab_deposit.html",
+    "outName": "property_detail_screen_3_tab_info_tab_deposit.jpeg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_3_tab_info_tab_unit_detail",
+    "file": "property_detail_screen_3_tab_info_tab_unit_detail.html",
+    "outName": "property_detail_screen_3_tab_info_tab_unit_detail.jpeg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_4_tab_details",
+    "file": "property_detail_screen_4_tab_details.html",
+    "outName": "property_detail_screen_4_tab_details.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_5_tab_location",
+    "file": "property_detail_screen_5_tab_location.html",
+    "outName": "property_detail_screen_5_tab_location.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_6",
+    "file": "property_detail_screen_6.html",
+    "outName": "property_detail_screen_6.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_6_show_bottom_sheet_description",
+    "file": "property_detail_screen_6_show_bottom_sheet_description.html",
+    "outName": "property_detail_screen_6_show_bottom_sheet_descripton.jpeg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "property_detail_screen_7",
+    "file": "property_detail_screen_7.html",
+    "outName": "property_detail_screen_7.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "tab_harian_1",
+    "file": "tab_harian_1.html",
+    "outName": "tab_harian_1.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "tab_harian_2",
+    "file": "tab_harian_2.html",
+    "outName": "tab_harian_2.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "tab_bulanan_1",
+    "file": "tab_bulanan_1.html",
+    "outName": "tab_bulanan_1.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "tab_bulanan_2",
+    "file": "tab_bulanan_2.html",
+    "outName": "tab_bulanan_2.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "tab_tahunan_default",
+    "file": "tab_tahunan_default.html",
+    "outName": "tab_tahunan_default.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "tab_tahunan_filter",
+    "file": "tab_tahunan_filter.html",
+    "outName": "tab_tahunan_filter.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "tab_tahunan_filter_1",
+    "file": "tab_tahunan_filter_1.html",
+    "outName": "tab_tahunan_filter_1.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "tab_tahunan_filter_2",
+    "file": "tab_tahunan_filter_2.html",
+    "outName": "tab_tahunan_filter_2.jpg",
+    "w": 390,
+    "h": 844
+  },
+  {
+    "screen": "tab_tahunan_filter_show_select_screen_cicilan",
+    "file": "tab_tahunan_filter_show_select_screen_cicilan.html",
+    "outName": "tab_tahunan_filter_show_select_screen_cicilan.jpg",
+    "w": 390,
+    "h": 844
+  }
+]

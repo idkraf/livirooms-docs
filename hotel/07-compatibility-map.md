@@ -16,6 +16,46 @@ Seluruh spesifikasi modul Hotel dirancang dengan prinsip **Non-Breaking Extensio
 
 ## 2. Integrasi & Kompatibilitas Modul Hotel ↔ Properties (`docs/properties/system.md`)
 
+### A0. Matriks Diskriminator — Tabel Kanonik Hotel vs Properti Biasa
+
+> Ini adalah **tabel acuan tunggal** untuk membedakan kedua bentuk pemesanan. Bila dokumen lain bertentangan dengan tabel ini, tabel ini yang berlaku. Sumber: `BookingController` + skema `bookings`. Salinan di [screen/readme_screen.md §10.1](screen/readme_screen.md#101-diskriminator).
+
+| Aspek | Properti biasa | Hotel |
+|---|---|---|
+| `properties.booking_mode` | `unit` | `room` |
+| `bookings.booking_type` | `unit` | `room` |
+| Objek yang disewa | seluruh unit | kamar per-tipe |
+| `bookings.room_type_id` | `null` | terisi |
+| Baris `booking_rooms` | **tidak ada** | **1 per kamar** |
+| Rantai relasi baca | `Booking → Property` | `Booking → bookingRooms → roomType → hotel → property` |
+| Prefix `booking_code` | `BK-` + 8 char acak | `HTL-` + `Ymd` + 4 char acak |
+| `duration_type` | `daily`/`weekly`/`monthly`/`yearly` | selalu `daily` |
+| Sumber harga | `property_prices.amount` | `room_inventories.price` (harian), fallback `room_types.base_price` |
+| Kontrol stok | `availabilities` | `room_inventories` (`allotment` − `booked_count`) |
+| `host_confirmed` saat dibuat | mengikuti alur konfirmasi host | selalu `true` (instant booking) |
+| Jam check-in | properti | `hotels.check_in_time`, fallback `14:00:00` |
+| Deposit | `+ deposit` masuk total | tidak; yang ada `insurance_fee` |
+| Asuransi | tidak | opsional (`booking_insurances`) |
+| Trip Coins | tidak | `round(total × 0.005)` |
+| Data tamu per kamar | tidak | `guests[]` → `booking_rooms` |
+
+**Inferensi `booking_type` di `BookingController::store()`** — dipakai hanya saat menulis; setelah tersimpan, `bookings.booking_type` adalah satu-satunya sumber kebenaran:
+
+```php
+$data['booking_type'] ?? (
+    $property->booking_mode === 'room'
+    || !empty($data['room_type_id'])
+    || !empty($data['hotel_id'])
+    || !empty($data['guests'])
+        ? 'room'
+        : 'unit'
+)
+```
+
+Artinya `room` menang bila **salah satu** dari 4 sinyal itu ada; `booking_type` eksplisit dari klien mengalahkan semuanya. Test: **T-L4** (5 jalur inferensi), **T-L5** (prefix kode). Jangan mengandalkan `hotel_id` atau `guests[]` sebagai penanda di sisi baca — lihat [02-models-relationships.md §1.5](02-models-relationships.md#15-jalur-relasi-khusus-hotel-bukan-berlaku-untuk-properti-biasa).
+
+---
+
 ### A. Skema Database & Model Eloquent
 
 ```
