@@ -8,6 +8,7 @@ Ukuran dicantumkan supaya bisa memperkirakan biaya baca sebelum membuka.
 
 | Kalau kamu ingin… | Baca ini |
 |---|---|
+| **Mengerjakan hotel atau properti** | 🔴 **[domain/hotel-vs-property.md](domain/hotel-vs-property.md) — WAJIB, baca dulu** |
 | Gambaran umum sistem & 25 modul | [README.md](README.md) · 14 KB |
 | Menyiapkan environment dev | `/CLAUDE.md` (root) → bagian "Cara mulai" |
 | Konvensi backend | `/laravel/CLAUDE.md` |
@@ -43,6 +44,7 @@ Ukuran dicantumkan supaya bisa memperkirakan biaya baca sebelum membuka.
 
 | File | Ukuran | Isi | Kode terkait |
 |---|---|---|---|
+| 🔴 [domain/hotel-vs-property.md](domain/hotel-vs-property.md) | 14 KB | **Master context — pintu masuk domain.** Definisi Property vs Hotel, diskriminator `booking_mode`, peta relasi, inventaris migration/model/API/resource, 9 invarian, template prompt | `laravel/app/Models/Property.php`, `Hotel.php`, `Api/PropertyController.php`, `Api/HotelApiController.php` |
 | [properties/system.md](properties/system.md) | 47 KB | Model properti unit (kos/apartemen), tipe, harga per periode, ketersediaan (`availabilities`), pencarian & filter | `laravel/app/Models/Property.php`, `PropertyPrice.php`, `Availability.php` |
 | [properties/recommendations.md](properties/recommendations.md) | 17 KB | Mesin rekomendasi, skoring, POI & jarak geo | `laravel/app/Services/RecommendationService.php`, `app/Models/Poi.php` |
 | [hotel/01-database-migration.md](hotel/01-database-migration.md) | 20 KB | ✅ **Selesai** — Migrasi DB hotel harian OTA: `hotels`, `room_types`, `rooms`, `room_inventories`, `booking_rooms`, `facilities`, `insurance_*` | `laravel/database/migrations/2026_08_13_*` |
