@@ -23,7 +23,7 @@ Platform penyewaan properti multi-tipe berbasis subscription yang mendukung peny
 
 | Aspek | Detail |
 |-------|--------|
-| **Nama proyek** | Rental Apartemen (Sewain / LiviRooms) |
+ | **Nama proyek** | Rental Apartemen (Livirooms) |
 | **Tipe properti** | Apartemen, Rumah, Villa, Hotel Residence, Guest House, Kost Eksklusif, **Hotel (OTA Mode)** |
 | **Periode sewa** | Harian · Mingguan · Bulanan · Tahunan |
 | **Platform** | Mobile App (Flutter) + Admin Panel (Web/Livewire) + Corporate Web |
@@ -88,7 +88,7 @@ Platform penyewaan properti multi-tipe berbasis subscription yang mendukung peny
 | **provider** | `^6.1.2` | State management |
 | **http** | `^1.2.1` | HTTP client |
 | **webview_flutter** | `^4.13.0` | WebView untuk Midtrans Snap in-app |
-| **app_links** | `^6.3.2` | Deep link handler (`sewain://`) |
+ | **app_links** | `^6.3.2` | Deep link handler (`livirooms://`) |
 | **url_launcher** | `^6.3.1` | Buka browser eksternal |
 | **image_picker** | `^1.2.0` | Upload foto galeri/kamera |
 | **cached_network_image** | `^3.3.1` | Cache gambar dari URL |
@@ -194,7 +194,7 @@ Pengguna dapat menjelajahi properti tanpa login/daftar:
 - Multi Role & Permission (Spatie)
 - Dashboard Statistik
 - Remote Config
-- Deep Link (`sewain://payment-result`)
+- Deep Link (`livirooms://payment-result`)
 - Asuransi (dasar)
 - Cities & POI System
 - User Validation (KYC)
@@ -204,7 +204,7 @@ Pengguna dapat menjelajahi properti tanpa login/daftar:
 - Manajemen Tipe Kamar & Stok Harian (Allotment/Inventory Calendar) — `RoomInventory`, `RoomTypeObserver`
 - Filter OTA: tanggal check-in/check-out, jumlah kamar, kapasitas tamu, bintang, fasilitas — dual-mode query builder
 - Asuransi Menginap Hotel (Stay Protection) — `InsurancePlan`, `BookingInsurance`, `IssueInsurancePolicyJob`
-- Deep Link Hotel Search (`sewain://search?...`) — `DeepLinkHandler`, `HotelSearchQuery`, `HotelSearchProvider`
+- Deep Link Hotel Search (`livirooms://search?...`) — `DeepLinkHandler`, `HotelSearchQuery`, `HotelSearchProvider`
 - Queue Job & Cronjob otomasi: `ExtendHotelInventoriesJob`, `CancelExpiredBookingsJob`, `SyncInsuranceStatusJob`, `IssueInsurancePolicyJob`
 - Flutter: `InsuranceSelectionWidget`, fixture JSON diperbarui, unit tests hotel & asuransi
 - **Test coverage**: 115 Laravel tests ✅ · 133 Flutter tests ✅

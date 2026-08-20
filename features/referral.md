@@ -1,6 +1,6 @@
 # Referral System Documentation
 
-Dokumentasi sistem referral pada Sewain, meliputi database schema, API endpoints, implementasi Flutter, alur kerja, status implementasi, dan rekomendasi teknis.
+Dokumentasi sistem referral pada Livirooms, meliputi database schema, API endpoints, implementasi Flutter, alur kerja, status implementasi, dan rekomendasi teknis.
 
 ## Daftar Isi
 
@@ -125,7 +125,7 @@ class Referral extends Model
 ### Flow 3: User Baru Mendaftar dengan Kode Referral
 
 ```
-1. User B buka aplikasi Sewain
+1. User B buka aplikasi Livirooms
 2. User B navigasi ke halaman Register
 3. User B input data diri (nama, email, password, kode referral opsional)
 4. Flutter kirim POST /api/v1/auth/register dengan field referral_code
@@ -419,7 +419,7 @@ class _ReferralScreenState extends State<ReferralScreen> {
     if (_myCode == null) return;
     final user = context.read<AuthProvider>().user;
     final text =
-        'Ayo Sewain properti Sewain! Gunakan kode referral saya $_myCode dan dapatkan reward bersama. Download app di https://sewain.app';
+        'Ayo Livirooms properti Livirooms! Gunakan kode referral saya $_myCode dan dapatkan reward bersama. Download app di https://livirooms.app';
     await Share.share(text);
   }
 

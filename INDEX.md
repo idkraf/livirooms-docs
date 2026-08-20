@@ -2,109 +2,132 @@
 
 Peta rute: **topik → file docs → path kode**. Mulai dari sini, lalu buka hanya file yang relevan.
 
-Ukuran dicantumkan supaya bisa memperkirakan biaya baca sebelum membuka.
+> ## 🟢 Untuk AI: mulai dari `ai/00-orientation.md`
+>
+> Paket **[ai/](ai/)** adalah hasil pembacaan menyeluruh `laravel/` + `flutter/`
+> per **2026-08-20**, disusun supaya sesi AI **tidak perlu membaca ulang seluruh
+> kedua codebase** untuk menjawab prompt baru.
+>
+> | File | Isi |
+> |---|---|
+> | 🟢 [ai/00-orientation.md](ai/00-orientation.md) | **Titik masuk.** Tabel dispatch: prompt seperti apa → baca pack yang mana → jangan buka apa |
+> | [ai/01-backend-map.md](ai/01-backend-map.md) | Laravel: layer, inventaris, state machine, payment, admin panel, job, permission |
+> | [ai/02-frontend-map.md](ai/02-frontend-map.md) | Flutter: 45 layar, 45 route, 19 service, 44 model, lapisan API, dummy mode |
+> | [ai/03-api-contract.md](ai/03-api-contract.md) | 84 endpoint → `Controller::method` → service Dart → fixture dummy. Jembatan dua sisi |
+> | [ai/04-drift-register.md](ai/04-drift-register.md) | 20 selisih terverifikasi docs vs kode, termasuk 5 bug integrasi |
+>
+> Untuk domain properti/hotel, `ai/` **menunjuk** ke
+> [domain/hotel-vs-property.md](domain/hotel-vs-property.md) — itu tetap masternya.
 
 ## Mulai dari mana
 
 | Kalau kamu ingin… | Baca ini |
 |---|---|
+| **AI menjawab prompt baru di repo ini** | 🟢 **[ai/00-orientation.md](ai/00-orientation.md)** |
 | **Mengerjakan hotel atau properti** | 🔴 **[domain/hotel-vs-property.md](domain/hotel-vs-property.md) — WAJIB, baca dulu** |
-| Gambaran umum sistem & 25 modul | [README.md](README.md) · 14 KB |
+| Gambaran umum sistem | [README.md](README.md) ⚠️ punya drift stack — cek [ai/04-drift-register.md](ai/04-drift-register.md) dulu |
 | Menyiapkan environment dev | `/CLAUDE.md` (root) → bagian "Cara mulai" |
-| Konvensi backend | `/laravel/CLAUDE.md` |
-| Konvensi mobile | `/flutter/CLAUDE.md` |
+| Konvensi backend | `/laravel/CLAUDE.md` ⚠️ 4 angka inventaris basi — angka benar di [ai/01-backend-map.md](ai/01-backend-map.md) §3 |
+| Konvensi mobile | `/flutter/CLAUDE.md` ⚠️ jumlah layar & gotcha `dummy` basi — lihat [ai/02-frontend-map.md](ai/02-frontend-map.md) |
 | Membuat modul admin baru | [configuration/admin-panel.md](configuration/admin-panel.md) + [configuration/ui-patterns.md](configuration/ui-patterns.md) |
-| Mengerjakan pembayaran | [payments/trial_fix_payment.md](payments/trial_fix_payment.md) lalu [payments/flow.md](payments/flow.md) lalu [payments/remediation.md](payments/remediation.md) |
-| Menambah layar Flutter | [flutter/screens.md](flutter/screens.md) |
-| Memahami modul hotel OTA | [hotel/01-database-migration.md](hotel/01-database-migration.md) → urutan 01–07 |
+| **Mengerjakan pembayaran** | [ai/01-backend-map.md](ai/01-backend-map.md) §8 + [ai/03-api-contract.md](ai/03-api-contract.md) §6 |
+| **Menambah layar Flutter** | [ai/02-frontend-map.md](ai/02-frontend-map.md) §4 |
+| **Memahami modul hotel OTA** | [domain/hotel-vs-property.md](domain/hotel-vs-property.md) |
 
 ## Per domain
 
 ### Admin Panel & UI
 
-| File | Ukuran | Isi | Kode terkait |
-|---|---|---|---|
-| [configuration/admin-panel.md](configuration/admin-panel.md) | 43 KB | Pola modul admin (Pattern A/B/C/D), inventaris controller & DataTable, alur CRUD | `laravel/app/Http/Controllers/Admin/` (32 controller), `laravel/app/Livewire/` (26), `laravel/app/DataTables/` (27) |
-| [configuration/ui-patterns.md](configuration/ui-patterns.md) | 15 KB | Markup Blade standar: layout wrapper, card DataTable, action column, form modal, halaman detail | `laravel/resources/views/admin/`, `laravel/resources/views/livewire/` |
-| [configuration/missing-files.md](configuration/missing-files.md) | 7 KB | ⚠️ Log pekerjaan selesai, **bukan** audit hidup. Nilai historis saja | — |
+| File | Isi | Kode terkait |
+|---|---|---|
+| [configuration/admin-panel.md](configuration/admin-panel.md) | Pola modul admin (Pattern A/B/C/D), alur CRUD | `laravel/app/Http/Controllers/Admin/`, `app/Livewire/`, `app/DataTables/` — jumlah aktual di [ai/01-backend-map.md](ai/01-backend-map.md) §3 |
+| [configuration/ui-patterns.md](configuration/ui-patterns.md) | Markup Blade standar: layout wrapper, card DataTable, action column, form modal, halaman detail | `laravel/resources/views/admin/`, `laravel/resources/views/livewire/` |
+| [configuration/missing-files.md](configuration/missing-files.md) | ⚠️ Log pekerjaan selesai, **bukan** audit hidup. Nilai historis saja | — |
 
 ### Pembayaran (Midtrans)
 
-| File | Ukuran | Isi | Kode terkait |
-|---|---|---|---|
-| [payments/flow.md](payments/flow.md) | 42 KB | Alur end-to-end: booking → host confirm → order → payment → webhook → deep link | `laravel/app/Http/Controllers/Api/PaymentController.php`, `BookingController.php` |
-| [payments/integration.md](payments/integration.md) | 47 KB | Detail integrasi Snap, parameter, channel, signature, host confirmation flow | `laravel/app/Support/MidtransSnap.php`, `MidtransGateway.php` |
-| [payments/setup.md](payments/setup.md) | 16 KB | Konfigurasi kredensial, sandbox vs production, alur booking + bayar | `laravel/app/Models/PaymentSetting.php`, `laravel/app/Livewire/PaymentSettings/` |
-| [payments/kebijakan_pengembalian_pembayaran.md](payments/kebijakan_pengembalian_pembayaran.md) | 8 KB | 🆕 Kebijakan & mekanisme refund 100% untuk pembayaran sukses tapi kamar tidak tersedia | `BookingController.php` (reject), `PaymentController.php` (refund), `ProcessMidtransRefundJob.php` |
-| [payments/remediation.md](payments/remediation.md) | 14 KB | ✅ **Task tracker aktif** — item terbuka: T-5 (test manual), T-14 (migrasi), T-16 (test manual flow) | lihat file |
-| [payments/trial_fix_payment.md](payments/trial_fix_payment.md) | 10 KB | Trial fix: booking flow, host confirmation, availability guard, auto-cancel | `BookingController.php`, `CancelExpiredPayments.php`, `booking_detail_screen.dart` |
-| [payments/MOBILE_API_INSTALL.md](payments/MOBILE_API_INSTALL.md) | 5 KB | ⚠️ Salah tempat (ini soal API mobile menyeluruh, bukan payment) & duplikat dari `rental-properti-modules-laravel/` | `laravel/routes/api_mobile.php` |
+⚠️ **Direktori `docs/payments/` tidak ada.** Tujuh file yang dulu tercantum di
+sini semuanya hilang — lihat [ai/04-drift-register.md](ai/04-drift-register.md) §1
+untuk daftar lengkapnya. Jangan mencoba membacanya.
+
+Ganti yang aktual:
+
+| Kebutuhan | Baca |
+|---|---|
+| Aturan keras webhook, signature, idempoten, kredensial, deep link | [ai/01-backend-map.md](ai/01-backend-map.md) §8 |
+| State machine booking/order/payment + tabel transisi webhook | [ai/01-backend-map.md](ai/01-backend-map.md) §7 |
+| Alur bayar ujung ke ujung app ↔ backend ↔ Midtrans | [ai/03-api-contract.md](ai/03-api-contract.md) §6 |
+| Endpoint pembayaran & pemanggilnya di Dart | [ai/03-api-contract.md](ai/03-api-contract.md) §3 |
+| Kode | `laravel/app/Http/Controllers/Api/PaymentController.php`, `app/Support/{MidtransSnap,MidtransGateway,PaymentDeepLink}.php`, `app/Http/Controllers/Payment/` |
 
 ### Properti & Hotel
 
-| File | Ukuran | Isi | Kode terkait |
-|---|---|---|---|
-| 🔴 [domain/hotel-vs-property.md](domain/hotel-vs-property.md) | 14 KB | **Master context — pintu masuk domain.** Definisi Property vs Hotel, diskriminator `booking_mode`, peta relasi, inventaris migration/model/API/resource, 9 invarian, template prompt | `laravel/app/Models/Property.php`, `Hotel.php`, `Api/PropertyController.php`, `Api/HotelApiController.php` |
-| [properties/system.md](properties/system.md) | 47 KB | Model properti unit (kos/apartemen), tipe, harga per periode, ketersediaan (`availabilities`), pencarian & filter | `laravel/app/Models/Property.php`, `PropertyPrice.php`, `Availability.php` |
-| [properties/recommendations.md](properties/recommendations.md) | 17 KB | Mesin rekomendasi, skoring, POI & jarak geo | `laravel/app/Services/RecommendationService.php`, `app/Models/Poi.php` |
-| [hotel/01-database-migration.md](hotel/01-database-migration.md) | 20 KB | ✅ **Selesai** — Migrasi DB hotel harian OTA: `hotels`, `room_types`, `rooms`, `room_inventories`, `booking_rooms`, `facilities`, `insurance_*` | `laravel/database/migrations/2026_08_13_*` |
-| [hotel/02-models-relationships.md](hotel/02-models-relationships.md) | 16 KB | ✅ **Selesai** — Eloquent models & relasi: `Hotel`, `RoomType`, `RoomInventory`, `BookingRoom`, `InsurancePlan`, `BookingInsurance` | `laravel/app/Models/` |
-| [hotel/03-query-filters.md](hotel/03-query-filters.md) | 17 KB | ✅ **Selesai** — Query Builder dual-mode (unit & room), filter OTA, `BookingController::store()` hotel + kalkulasi asuransi | `laravel/app/Http/Controllers/Api/PropertyController.php`, `BookingController.php` |
-| [hotel/04-flutter-implementation.md](hotel/04-flutter-implementation.md) | 17 KB | ✅ **Selesai** — Flutter: `HotelSearchQuery`, `HotelSearchProvider`, deep link `sewain://search`, `InsuranceSelectionWidget` | `flutter/lib/` |
-| [hotel/05-insurance-integration.md](hotel/05-insurance-integration.md) | 9 KB | ✅ **Selesai** — Asuransi menginap (*Stay Protection*), Queue Job (`IssueInsurancePolicyJob`), Manual Re-issue Admin | `laravel/app/Jobs/` |
-| [hotel/06-hotel-management-flow.md](hotel/06-hotel-management-flow.md) | 11 KB | ✅ **Selesai** — Alur manajemen produk hotel (Web Admin & Flutter Mitra) + Cronjob scheduler | `laravel/routes/console.php`, `app/Jobs/` |
-| [hotel/07-compatibility-map.md](hotel/07-compatibility-map.md) | — | 🆕 Peta kompatibilitas hotel ↔ payments ↔ properties (integrasi, backward compat, dual-mode) | lihat file |
+| File | Isi | Kode terkait |
+|---|---|---|
+| 🔴 [domain/hotel-vs-property.md](domain/hotel-vs-property.md) | **Master context domain.** Property vs Hotel, diskriminator `booking_mode`, peta relasi, inventaris migration/model/API/resource, 9 invarian, template prompt | `laravel/app/Models/Property.php`, `Hotel.php`, `Api/PropertyController.php`, `Api/HotelApiController.php` |
+
+⚠️ **Direktori `docs/properties/` dan `docs/hotel/` tidak ada.** Sembilan file
+yang dulu tercantum (termasuk urutan `hotel/01`–`07`) semuanya hilang —
+[ai/04-drift-register.md](ai/04-drift-register.md) §1. Domain hotel & properti
+sekarang seluruhnya dicakup `domain/hotel-vs-property.md`.
 
 ### Fitur
 
-| File | Ukuran | Isi | Kode terkait |
-|---|---|---|---|
-| [features/referral.md](features/referral.md) | 28 KB | Sistem referral: kode, klaim, reward | `laravel/app/Models/Referral.php`, `Api/ReferralController.php`, `flutter/lib/services/referral_service.dart` |
+| File | Isi | Kode terkait |
+|---|---|---|
+| [features/referral.md](features/referral.md) | Sistem referral: kode, klaim, reward | `laravel/app/Models/Referral.php`, `Api/ReferralController.php`, `flutter/lib/services/referral_service.dart` |
 
 ### Mobile
 
-| File | Ukuran | Isi | Kode terkait |
-|---|---|---|---|
-| [flutter/screens.md](flutter/screens.md) | 13 KB | Pemetaan 40 layar → route (termasuk 3 layar baru: payment_result, payment_webview, notification) | `flutter/lib/screens/`, `flutter/lib/router.dart` |
+⚠️ **`docs/flutter/screens.md` tidak ada.** Digantikan
+[ai/02-frontend-map.md](ai/02-frontend-map.md) — 45 route dengan bentuk argumen,
+45 layar per area, layar yang sengaja tidak punya route, dan jebakan router.
 
 ## Cari cepat di kode (bukan di docs)
 
-Untuk hal-hal yang cepat basi kalau ditulis di docs, baca langsung dari kode:
+Untuk hal yang cepat basi kalau ditulis di docs, baca langsung dari kode.
+Perintah baca-saja beserta angka harapan per 2026-08-20 ada di
+[ai/00-orientation.md](ai/00-orientation.md) §5.
 
-| Pertanyaan | Perintah |
+| Pertanyaan | Perintah / file |
 |---|---|
-| Endpoint API apa saja yang ada? | baca `laravel/routes/api_mobile.php` |
-| Route admin apa saja? | baca `laravel/routes/admin_generated.php` |
+| Endpoint API apa saja yang ada? | [ai/03-api-contract.md](ai/03-api-contract.md) (84 endpoint, sudah lengkap) atau `laravel/routes/api_mobile.php` |
+| Route admin apa saja? | `laravel/routes/admin_generated.php` (142 named route) |
 | Ada model/tabel apa saja? | `ls laravel/app/Models/` · `ls laravel/database/migrations/` |
-| Route Flutter apa saja? | baca `flutter/lib/router.dart` |
+| Route Flutter apa saja? | [ai/02-frontend-map.md](ai/02-frontend-map.md) §4 atau `flutter/lib/router.dart` |
 | Package apa yang benar-benar terpasang? | `laravel/composer.json` · `flutter/pubspec.yaml` |
-| Test apa yang ada? | `ls -R laravel/tests/` · `ls -R flutter/test/` |
-| Hotel model apa yang sudah ada? | `Hotel`, `RoomType`, `RoomInventory`, `Room`, `BookingRoom`, `Facility`, `InsuranceProvider`, `InsurancePlan`, `BookingInsurance` |
+| Hotel model apa yang sudah ada? | `Hotel`, `RoomType`, `RoomInventory`, `BookingRoom`, `Facility`, `InsuranceProvider`, `InsurancePlan`, `BookingInsurance` — plus `Room` (**orphan**, bukan stok) |
 
 ## Drift yang diketahui
 
-Per **2026-08-13** — item yang sudah dikonfirmasi:
+**Daftar lengkap & terverifikasi: [ai/04-drift-register.md](ai/04-drift-register.md)**
+(20 temuan per 2026-08-20, masing-masing dengan bukti `path:baris`).
 
-| Lokasi | Klaim Lama | Realita Aktual |
-|---|---|---|
-| `README.md` stack Flutter | Dio, FCM, Google Maps, Share Plus, Riverpod | `http`, `provider`, `webview_flutter`, `app_links`, `cached_network_image`, `intl` |
-| `README.md` stack Laravel | Livewire 3, Laravel Excel | Livewire **4.3**; no Laravel Excel; `barryvdh/laravel-dompdf` ada |
-| `README.md` Laravel version | `Laravel 10+` (di payments doc) | **Laravel 12** |
-| `README.md` skala DB | ±70–100 tabel | ~50 base migrations; +9 hotel migrations (Selesai & teruji) |
-| `admin-panel.md` inventaris | 25 controller, 24 DataTable, 22 Livewire | **32** Admin controller / **27** DataTable / **26** Livewire |
-| `MOBILE_API_INSTALL.md` | 12 Api controller | **17** Api controller |
-| `flutter/screens.md` total | 37 layar | **40 layar** (+ `payment_result_screen`, `payment_webview_screen`, `notification_screen`) |
-| `flutter/screens.md` route | `/settings/profile`, `/settings/favorites` | Tidak ada di router aktual (layar di-embed di shell/tabs) |
-| `flutter/screens.md` missing | — | `payment_result_screen.dart`, `payment_webview_screen.dart`, `notification_screen.dart` belum terdaftar |
-| `INDEX.md` deep link T-12 | Masih open | ✅ Selesai (`DeepLinkHandler` sudah ada di kode) |
-| Branding | Sewain | `flutter/lib/config/app_config.dart` masih `LIVI.COM` |
-| Hotel models & migrations | — | ✅ Selesai diimplementasikan di Laravel & Flutter |
+Yang paling perlu diwaspadai:
 
-Aturan agar tidak berulang: **jangan tulis daftar file di docs.** Daftar controller/model/endpoint dibaca dari kode (lihat tabel "Cari cepat" di atas).
+| Lokasi | Masalah |
+|---|---|
+| `docs/INDEX.md` (file ini, versi lama) | mereferensikan **17 file yang tidak ada** — sudah ditandai di atas |
+| `flutter/lib/services/hotel_service.dart:58,63` | 🔴 dua `DELETE` dipanggil app, **route backend tidak ada** → selalu 404 |
+| `flutter/lib/services/booking_service.dart:224` | 🔴 klien memanggil webhook server-to-server Midtrans |
+| `flutter/lib/providers/hotel_search_provider.dart` | 🔴 tidak pernah diregistrasi di `MultiProvider` |
+| `DummyApiClient.routes` | 🔴 `PUT host/room-types/{id}` hilang → 404 di mode dummy |
+| Branding | 3 string berbeda: `livirooms` (pubspec) / `Livirooms` (`app_config.dart:24`) / `Livirooms` (`main.dart:61`) |
+| `README.md` stack | Dio/FCM/Riverpod/Livewire 3/Laravel Excel — semuanya **tidak** terpasang |
+| `laravel/CLAUDE.md` inventaris | "33 model / 17 Api / 32 Admin / 26 Livewire" → aktual **74 / 20 / 33 / 30** |
+| `flutter/CLAUDE.md` | "39 layar" → aktual **45**; gotcha `AppConfig.dummy` sudah **stale** |
+
+Aturan lama di sini adalah **"jangan tulis daftar file di docs"** — karena
+daftar cepat basi. Paket `docs/ai/` sengaja melanggarnya, atas permintaan
+eksplisit, supaya AI tidak perlu membaca ulang seluruh codebase. Dua mitigasi
+yang membuatnya tetap aman: **setiap file bertanggal**, dan
+[ai/00-orientation.md](ai/00-orientation.md) §5 memuat perintah baca-saja untuk
+menghitung ulang setiap angka. Kalau hasil hitung berbeda dari yang tertulis,
+perbarui pack dulu sebelum menjawab.
 
 ## Catatan
 
 - `sfds.md` adalah catatan lepas berisi usulan struktur docs yang **tidak dipakai** dan bertentangan dengan struktur nyata. Abaikan atau hapus.
 - Bahasa docs: Indonesia. Bahasa kode & komentar: Inggris.
-- `docs/hotel/` adalah dokumentasi arsitektur dari modul Hotel OTA & Stay Protection Insurance yang telah aktif diimplementasikan dan teruji 100%.
-
+- Setiap perubahan di `laravel/` atau `flutter/` **wajib** diikuti update docs terkait — termasuk paket `docs/ai/` bila yang berubah adalah struktur, endpoint, route, model, atau state machine.
+- **Jangan jalankan test, `php artisan test`, atau migration/seeder** di repo ini.
