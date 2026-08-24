@@ -1,0 +1,893 @@
+﻿{
+    "status":  true,
+    "code":  200,
+    "message":  "Beranda berhasil dimuat.",
+    "data":  {
+                 "cities":  [
+                                {
+                                    "id":  1,
+                                    "name":  "Jakarta",
+                                    "slug":  "jakarta",
+                                    "province":  "DKI Jakarta",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-jakarta-2.png",
+                                    "latitude":  -6.208763,
+                                    "longitude":  106.845599,
+                                    "property_count":  1
+                                },
+                                {
+                                    "id":  2,
+                                    "name":  "Bandung",
+                                    "slug":  "bandung",
+                                    "province":  "Jawa Barat",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-bandung-2.png",
+                                    "latitude":  -6.917464,
+                                    "longitude":  107.619123,
+                                    "property_count":  1
+                                },
+                                {
+                                    "id":  16,
+                                    "name":  "Jakarta Pusat",
+                                    "slug":  "jakarta-pusat",
+                                    "province":  "DKI Jakarta",
+                                    "image":  null,
+                                    "latitude":  -6.1754,
+                                    "longitude":  106.8272,
+                                    "property_count":  5
+                                },
+                                {
+                                    "id":  3,
+                                    "name":  "Bogor",
+                                    "slug":  "bogor",
+                                    "province":  "Jawa Barat",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-bogor-2.png",
+                                    "latitude":  -6.595038,
+                                    "longitude":  106.816635,
+                                    "property_count":  1
+                                },
+                                {
+                                    "id":  4,
+                                    "name":  "Surabaya",
+                                    "slug":  "surabaya",
+                                    "province":  "Jawa Timur",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-surabaya-2.png",
+                                    "latitude":  -7.257472,
+                                    "longitude":  112.752088,
+                                    "property_count":  1
+                                },
+                                {
+                                    "id":  5,
+                                    "name":  "Yogyakarta",
+                                    "slug":  "yogyakarta",
+                                    "province":  "DI Yogyakarta",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-yogyakarta-2.png",
+                                    "latitude":  -7.79558,
+                                    "longitude":  110.36949,
+                                    "property_count":  0
+                                },
+                                {
+                                    "id":  6,
+                                    "name":  "Semarang",
+                                    "slug":  "semarang",
+                                    "province":  "Jawa Tengah",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-semarang-2.png",
+                                    "latitude":  -6.966667,
+                                    "longitude":  110.416664,
+                                    "property_count":  0
+                                },
+                                {
+                                    "id":  7,
+                                    "name":  "Denpasar",
+                                    "slug":  "denpasar",
+                                    "province":  "Bali",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-bali-2.png",
+                                    "latitude":  -8.65,
+                                    "longitude":  115.216667,
+                                    "property_count":  0
+                                },
+                                {
+                                    "id":  8,
+                                    "name":  "Medan",
+                                    "slug":  "medan",
+                                    "province":  "Sumatera Utara",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-medan.png",
+                                    "latitude":  3.595196,
+                                    "longitude":  98.672226,
+                                    "property_count":  0
+                                },
+                                {
+                                    "id":  9,
+                                    "name":  "Makassar",
+                                    "slug":  "makassar",
+                                    "province":  "Sulawesi Selatan",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-makassar-2.png",
+                                    "latitude":  -5.147665,
+                                    "longitude":  119.432732,
+                                    "property_count":  0
+                                },
+                                {
+                                    "id":  10,
+                                    "name":  "Tangerang",
+                                    "slug":  "tangerang",
+                                    "province":  "Banten",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-tangerang-2.png",
+                                    "latitude":  -6.178306,
+                                    "longitude":  106.631889,
+                                    "property_count":  0
+                                },
+                                {
+                                    "id":  11,
+                                    "name":  "Depok",
+                                    "slug":  "depok",
+                                    "province":  "Jawa Barat",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-depok-2.png",
+                                    "latitude":  -6.402484,
+                                    "longitude":  106.819406,
+                                    "property_count":  0
+                                },
+                                {
+                                    "id":  12,
+                                    "name":  "Karawang",
+                                    "slug":  "karawang",
+                                    "province":  "Jawa Barat",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-karawang-2.png",
+                                    "latitude":  -6.322521,
+                                    "longitude":  107.33758,
+                                    "property_count":  0
+                                },
+                                {
+                                    "id":  13,
+                                    "name":  "Bekasi",
+                                    "slug":  "bekasi",
+                                    "province":  "Jawa Barat",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-bekasi-2.png",
+                                    "latitude":  -6.234986,
+                                    "longitude":  106.989574,
+                                    "property_count":  0
+                                },
+                                {
+                                    "id":  14,
+                                    "name":  "Malang",
+                                    "slug":  "malang",
+                                    "province":  "Jawa Timur",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-malang.png",
+                                    "latitude":  -7.979707,
+                                    "longitude":  112.630401,
+                                    "property_count":  0
+                                },
+                                {
+                                    "id":  15,
+                                    "name":  "Balikpapan",
+                                    "slug":  "balikpapan",
+                                    "province":  "Kalimantan Timur",
+                                    "image":  "http://127.0.0.1:8000/storage/cities/background-balikpapan.png",
+                                    "latitude":  -1.237904,
+                                    "longitude":  116.8529,
+                                    "property_count":  0
+                                }
+                            ],
+                 "banners":  [
+
+                             ],
+                 "sections":  {
+                                  "newest":  [
+                                                 {
+                                                     "id":  3,
+                                                     "host_id":  3,
+                                                     "city_id":  3,
+                                                     "city_name":  "Bogor",
+                                                     "province":  "Jawa Barat",
+                                                     "property_type":  "apartment",
+                                                     "name":  "Fabulous 2BR Apartment Lucky Tower Residence By Travelio",
+                                                     "building_name":  "Apartemen Lucky Tower Residence",
+                                                     "description":  "Berlokasi dekat wisata Kota Tua, Apartemen Lucky Tower menawarkan hunian strategis di area Jakarta Barat. Hunian nyaman bertipe dua kamar tidur ini cocok untuk keluarga.",
+                                                     "address":  "Jl. Pajajaran No. 45, Bogor, Jawa Barat",
+                                                     "latitude":  -6.595038,
+                                                     "longitude":  106.816635,
+                                                     "guest_capacity":  4,
+                                                     "bedrooms":  2,
+                                                     "facilities":  [
+                                                                        "wifi",
+                                                                        "ac",
+                                                                        "kitchen",
+                                                                        "parking",
+                                                                        "swimming_pool",
+                                                                        "tv",
+                                                                        "security",
+                                                                        "elevator"
+                                                                    ],
+                                                     "gallery":  [
+                                                                     "http://127.0.0.1:8000/storage/properties/gallery/fabulous-2br-1.jpg",
+                                                                     "http://127.0.0.1:8000/storage/properties/gallery/fabulous-2br-2.jpg"
+                                                                 ],
+                                                     "cover":  "http://127.0.0.1:8000/storage/properties/gallery/fabulous-2br-1.jpg",
+                                                     "status":  "active",
+                                                     "price_from":  845000,
+                                                     "rating":  null,
+                                                     "review_count":  0,
+                                                     "prices":  [
+                                                                    {
+                                                                        "price_type":  "daily",
+                                                                        "amount":  845000,
+                                                                        "cleaning_fee":  125000,
+                                                                        "deposit":  845000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "weekly",
+                                                                        "amount":  5915000,
+                                                                        "cleaning_fee":  125000,
+                                                                        "deposit":  845000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "monthly",
+                                                                        "amount":  21125000,
+                                                                        "cleaning_fee":  125000,
+                                                                        "deposit":  845000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "yearly",
+                                                                        "amount":  238000000,
+                                                                        "cleaning_fee":  125000,
+                                                                        "deposit":  845000,
+                                                                        "service_fee":  25000
+                                                                    }
+                                                                ],
+                                                     "created_at":  "2026-08-19T11:57:06.000000Z"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "host_id":  1,
+                                                     "city_id":  16,
+                                                     "city_name":  "Jakarta Pusat",
+                                                     "province":  "DKI Jakarta",
+                                                     "property_type":  "hotel",
+                                                     "name":  "Artotel Harmoni Jakarta",
+                                                     "building_name":  "ARTOTEL Tower Harmoni",
+                                                     "description":  "Artotel Harmoni Jakarta adalah hotel butik seni kontemporer bintang 4 di kawasan Gambir. Menampilkan instalasi seni orisinil karya seniman lokal terkemuka di setiap lantai dan kamar, dilengkapi kolam renang outdoor, ROCA Restaurant \u0026 Bar yang trendi, dan ARTSPACE galeri pameran seni.",
+                                                     "address":  "Jl. Suryopranoto No. 1-9, Petojo Selatan, Gambir, Jakarta Pusat 10160",
+                                                     "latitude":  -6.167821,
+                                                     "longitude":  106.818934,
+                                                     "guest_capacity":  4,
+                                                     "bedrooms":  150,
+                                                     "facilities":  [
+                                                                        "Kolam Renang Outdoor",
+                                                                        "ROCA Restaurant \u0026 Lounge Bar",
+                                                                        "ARTSPACE Galeri Seni",
+                                                                        "Gym Modern",
+                                                                        "Wi-Fi Cepat"
+                                                                    ],
+                                                     "gallery":  [
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/artotel_1.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/artotel_2.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/artotel_3.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/artotel_4.jpg"
+                                                                 ],
+                                                     "cover":  "http://127.0.0.1:8000/storage/hotels/gallery/artotel_1.jpg",
+                                                     "status":  "active",
+                                                     "price_from":  650000,
+                                                     "rating":  2.3,
+                                                     "review_count":  0,
+                                                     "prices":  [
+                                                                    {
+                                                                        "price_type":  "daily",
+                                                                        "amount":  650000,
+                                                                        "cleaning_fee":  0,
+                                                                        "deposit":  300000,
+                                                                        "service_fee":  0
+                                                                    }
+                                                                ],
+                                                     "created_at":  "2026-08-19T11:57:07.000000Z"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "host_id":  1,
+                                                     "city_id":  16,
+                                                     "city_name":  "Jakarta Pusat",
+                                                     "province":  "DKI Jakarta",
+                                                     "property_type":  "hotel",
+                                                     "name":  "MaxOne Platinum Hayam Wuruk",
+                                                     "building_name":  "MaxOne Platinum Building",
+                                                     "description":  "MaxOne Platinum Hayam Wuruk adalah hotel bernilai tinggi di jalan protokol Hayam Wuruk, Jakarta Pusat. Menawarkan restoran rooftop SkyMax dengan pemandangan kota yang menawan, Max Spa untuk relaksasi, dan kamar modern berdesain pop-art khas MaxOne.",
+                                                     "address":  "Jl. Hayam Wuruk No. 5, Gambir, Jakarta Pusat 10120",
+                                                     "latitude":  -6.16611,
+                                                     "longitude":  106.82099,
+                                                     "guest_capacity":  4,
+                                                     "bedrooms":  140,
+                                                     "facilities":  [
+                                                                        "SkyMax Rooftop Resto \u0026 Bar",
+                                                                        "Max Spa \u0026 Pijat",
+                                                                        "Wi-Fi Gratis",
+                                                                        "Resepsionis 24 Jam"
+                                                                    ],
+                                                     "gallery":  [
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/maxone_1.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/maxone_2.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/maxone_3.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/maxone_4.jpg"
+                                                                 ],
+                                                     "cover":  "http://127.0.0.1:8000/storage/hotels/gallery/maxone_1.jpg",
+                                                     "status":  "active",
+                                                     "price_from":  450000,
+                                                     "rating":  2.3,
+                                                     "review_count":  0,
+                                                     "prices":  [
+                                                                    {
+                                                                        "price_type":  "daily",
+                                                                        "amount":  450000,
+                                                                        "cleaning_fee":  0,
+                                                                        "deposit":  150000,
+                                                                        "service_fee":  0
+                                                                    }
+                                                                ],
+                                                     "created_at":  "2026-08-19T11:57:07.000000Z"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "host_id":  3,
+                                                     "city_id":  4,
+                                                     "city_name":  "Surabaya",
+                                                     "province":  "Jawa Timur",
+                                                     "property_type":  "apartment",
+                                                     "name":  "Modern Look 2BR at Lucky Tower Residence Apartment By Travelio",
+                                                     "building_name":  "Apartemen Lucky Tower Residence",
+                                                     "description":  "Akomodasi nyaman dengan 2 kamar tidur ini cocok anda huni hingga 4 orang. Nikmati akomodasi ini sekarang juga, hanya di Travelio!",
+                                                     "address":  "Jl. Pemuda No. 33, Surabaya, Jawa Timur",
+                                                     "latitude":  -7.257472,
+                                                     "longitude":  112.752088,
+                                                     "guest_capacity":  4,
+                                                     "bedrooms":  2,
+                                                     "facilities":  [
+                                                                        "wifi",
+                                                                        "ac",
+                                                                        "kitchen",
+                                                                        "parking",
+                                                                        "swimming_pool",
+                                                                        "tv",
+                                                                        "security",
+                                                                        "elevator",
+                                                                        "water_heater"
+                                                                    ],
+                                                     "gallery":  [
+                                                                     "http://127.0.0.1:8000/storage/properties/gallery/modern-2br-1.jpg",
+                                                                     "http://127.0.0.1:8000/storage/properties/gallery/modern-2br-2.jpg"
+                                                                 ],
+                                                     "cover":  "http://127.0.0.1:8000/storage/properties/gallery/modern-2br-1.jpg",
+                                                     "status":  "active",
+                                                     "price_from":  845000,
+                                                     "rating":  null,
+                                                     "review_count":  0,
+                                                     "prices":  [
+                                                                    {
+                                                                        "price_type":  "daily",
+                                                                        "amount":  845000,
+                                                                        "cleaning_fee":  125000,
+                                                                        "deposit":  845000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "weekly",
+                                                                        "amount":  5915000,
+                                                                        "cleaning_fee":  125000,
+                                                                        "deposit":  845000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "monthly",
+                                                                        "amount":  21125000,
+                                                                        "cleaning_fee":  125000,
+                                                                        "deposit":  845000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "yearly",
+                                                                        "amount":  238000000,
+                                                                        "cleaning_fee":  125000,
+                                                                        "deposit":  845000,
+                                                                        "service_fee":  25000
+                                                                    }
+                                                                ],
+                                                     "created_at":  "2026-08-19T11:57:06.000000Z"
+                                                 },
+                                                 {
+                                                     "id":  1,
+                                                     "host_id":  1,
+                                                     "city_id":  16,
+                                                     "city_name":  "Jakarta Pusat",
+                                                     "province":  "DKI Jakarta",
+                                                     "property_type":  "hotel",
+                                                     "name":  "Merlynn Park Hotel",
+                                                     "building_name":  "Merlynn Park Tower",
+                                                     "description":  "Merlynn Park Hotel adalah hotel bintang 5 bergaya megah di kawasan Gambir, Jakarta Pusat. Menawarkan kamar luas dengan bathtub di setiap kamar, 3 kolam renang spektakuler di lantai 5 (termasuk infinity pool dengan pemandangan cakrawala kota Jakarta), pusat kebugaran modern, spa mewah, dan restoran internasional Grand Central serta Grand City.",
+                                                     "address":  "Jl. K.H. Hasyim Ashari No. 29-31, Petojo Utara, Gambir, Jakarta Pusat 10130",
+                                                     "latitude":  -6.166667,
+                                                     "longitude":  106.816667,
+                                                     "guest_capacity":  6,
+                                                     "bedrooms":  300,
+                                                     "facilities":  [
+                                                                        "3 Kolam Renang (Infinity Pool \u0026 Kolam Anak)",
+                                                                        "Pusat Kebugaran / Gym Modern",
+                                                                        "Man Salon \u0026 Spa with Sauna",
+                                                                        "Wi-Fi Kecepatan Tinggi Gratis",
+                                                                        "Resepsionis \u0026 Keamanan 24 Jam",
+                                                                        "Parkir Valet Gratis",
+                                                                        "Bathtub di Semua Kamar",
+                                                                        "Grand Central Restaurant (Prasmanan Nusantara \u0026 Western)",
+                                                                        "Grand City Restaurant (Authentic Chinese Cuisine)",
+                                                                        "Times Square Bar \u0026 Lounge",
+                                                                        "Layanan Kamar 24 Jam",
+                                                                        "Minimarket / Kios",
+                                                                        "Kolam Renang Lantai 5 (Semi-Outdoor \u0026 Sun Lounger)",
+                                                                        "Pusat Kebugaran dengan Instruktur",
+                                                                        "Ruang Sauna \u0026 Steam Room",
+                                                                        "Layanan Pijat \u0026 Perawatan Spa Tradisional",
+                                                                        "Layanan Antar-Jemput Bandara CGK / Halim",
+                                                                        "Rental Mobil Berpengemudi",
+                                                                        "Akses Taksi \u0026 Transportasi Online 24 Jam",
+                                                                        "Merlynn Grand Ballroom (Kapasitas hingga 1.500 Orang)",
+                                                                        "15 Ruang Rapat \u0026 Konferensi Modern",
+                                                                        "Pusat Bisnis \u0026 Layanan Fotokopi/Pencetakan"
+                                                                    ],
+                                                     "gallery":  [
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/merlynn_1.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/merlynn_2.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/merlynn_3.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/merlynn_4.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/merlynn_5.jpg"
+                                                                 ],
+                                                     "cover":  "http://127.0.0.1:8000/storage/hotels/gallery/merlynn_1.jpg",
+                                                     "status":  "active",
+                                                     "price_from":  685000,
+                                                     "rating":  2.4,
+                                                     "review_count":  0,
+                                                     "prices":  [
+                                                                    {
+                                                                        "price_type":  "daily",
+                                                                        "amount":  685000,
+                                                                        "cleaning_fee":  0,
+                                                                        "deposit":  500000,
+                                                                        "service_fee":  0
+                                                                    }
+                                                                ],
+                                                     "created_at":  "2026-08-19T11:57:06.000000Z"
+                                                 },
+                                                 {
+                                                     "id":  1,
+                                                     "host_id":  2,
+                                                     "city_id":  1,
+                                                     "city_name":  "Jakarta",
+                                                     "province":  "DKI Jakarta",
+                                                     "property_type":  "apartment",
+                                                     "name":  "Peaceful Living in Spacious 3BR at Apartment Lucky Tower Residence By Travelio",
+                                                     "building_name":  "Apartemen Lucky Tower Residence",
+                                                     "description":  "Cari hunian 3BR yang nyaman? Sewa unit di Apartemen Lucky Tower Residence untuk pengalaman tinggal praktis, luas, dan menyenangkan! Reservasi hari ini hanya di Travelio!",
+                                                     "address":  "Jl. Pancoran Raya No.42A, RT.2/RW.6, Pinangsia, Taman Sari, Jakarta Barat, DKI Jakarta, 11110",
+                                                     "latitude":  -6.1668,
+                                                     "longitude":  106.7978,
+                                                     "guest_capacity":  6,
+                                                     "bedrooms":  3,
+                                                     "facilities":  [
+                                                                        "wifi",
+                                                                        "ac",
+                                                                        "kitchen",
+                                                                        "parking",
+                                                                        "swimming_pool",
+                                                                        "tv",
+                                                                        "washing_machine",
+                                                                        "security",
+                                                                        "elevator"
+                                                                    ],
+                                                     "gallery":  [
+                                                                     "http://127.0.0.1:8000/storage/properties/gallery/peaceful-3br-1.jpg",
+                                                                     "http://127.0.0.1:8000/storage/properties/gallery/peaceful-3br-2.jpg"
+                                                                 ],
+                                                     "cover":  "http://127.0.0.1:8000/storage/properties/gallery/peaceful-3br-1.jpg",
+                                                     "status":  "active",
+                                                     "price_from":  1155000,
+                                                     "rating":  null,
+                                                     "review_count":  0,
+                                                     "prices":  [
+                                                                    {
+                                                                        "price_type":  "daily",
+                                                                        "amount":  1155000,
+                                                                        "cleaning_fee":  150000,
+                                                                        "deposit":  1155000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "weekly",
+                                                                        "amount":  8085000,
+                                                                        "cleaning_fee":  150000,
+                                                                        "deposit":  1155000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "monthly",
+                                                                        "amount":  28900000,
+                                                                        "cleaning_fee":  150000,
+                                                                        "deposit":  1155000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "yearly",
+                                                                        "amount":  325000000,
+                                                                        "cleaning_fee":  150000,
+                                                                        "deposit":  1155000,
+                                                                        "service_fee":  25000
+                                                                    }
+                                                                ],
+                                                     "created_at":  "2026-08-19T11:57:06.000000Z"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "host_id":  1,
+                                                     "city_id":  16,
+                                                     "city_name":  "Jakarta Pusat",
+                                                     "province":  "DKI Jakarta",
+                                                     "property_type":  "hotel",
+                                                     "name":  "YELLO Hotel Harmoni",
+                                                     "building_name":  "YELLO Tower Harmoni",
+                                                     "description":  "YELLO Hotel Harmoni adalah hotel bergaya urban lifestyle dan tech-savvy di pusat Harmoni, Jakarta Pusat. Menampilkan desain seni jalanan (street art) kontemporer yang ceria, fasilitas gaming station, NetZone, restoran WOKnTOK 24 jam, dan terhubung langsung ke area bisnis Hayam Wuruk.",
+                                                     "address":  "Jl. Hayam Wuruk No. 6, Gambir, Jakarta Pusat 10120",
+                                                     "latitude":  -6.166412,
+                                                     "longitude":  106.820713,
+                                                     "guest_capacity":  4,
+                                                     "bedrooms":  372,
+                                                     "facilities":  [
+                                                                        "Restoran WOKnTOK 24 Jam",
+                                                                        "Gaming Station \u0026 NetZone",
+                                                                        "Gym Modern",
+                                                                        "Wi-Fi Kecepatan Tinggi",
+                                                                        "Resepsionis 24 Jam",
+                                                                        "Gaming Zone PlayStation \u0026 Gadget",
+                                                                        "Chill Spot \u0026 Co-Working Corner",
+                                                                        "Koleksi Street Art Gallery"
+                                                                    ],
+                                                     "gallery":  [
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/yello_1.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/yello_2.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/yello_3.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/yello_4.jpg"
+                                                                 ],
+                                                     "cover":  "http://127.0.0.1:8000/storage/hotels/gallery/yello_1.jpg",
+                                                     "status":  "active",
+                                                     "price_from":  520000,
+                                                     "rating":  2.4,
+                                                     "review_count":  0,
+                                                     "prices":  [
+                                                                    {
+                                                                        "price_type":  "daily",
+                                                                        "amount":  520000,
+                                                                        "cleaning_fee":  0,
+                                                                        "deposit":  200000,
+                                                                        "service_fee":  0
+                                                                    }
+                                                                ],
+                                                     "created_at":  "2026-08-19T11:57:06.000000Z"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "host_id":  1,
+                                                     "city_id":  16,
+                                                     "city_name":  "Jakarta Pusat",
+                                                     "province":  "DKI Jakarta",
+                                                     "property_type":  "hotel",
+                                                     "name":  "Grand Cemara Hotel",
+                                                     "building_name":  "Grand Cemara Menteng",
+                                                     "description":  "Grand Cemara Hotel adalah hotel bintang 4 favorit di kawasan Menteng yang asri dan tenang, hanya 5 menit berjalan kaki ke Stasiun Gondangdia dan pusat kuliner Jalan Sabang.",
+                                                     "address":  "Jl. Cemara No. 1, Gondangdia, Menteng, Jakarta Pusat 10350",
+                                                     "latitude":  -6.1884,
+                                                     "longitude":  106.8322,
+                                                     "guest_capacity":  5,
+                                                     "bedrooms":  105,
+                                                     "facilities":  [
+                                                                        "Kolam Renang Luar Ruangan",
+                                                                        "Cemara Resto \u0026 Bar",
+                                                                        "Wi-Fi Gratis",
+                                                                        "Resepsionis 24 Jam"
+                                                                    ],
+                                                     "gallery":  [
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/cemara_1.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/cemara_2.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/cemara_3.jpg",
+                                                                     "http://127.0.0.1:8000/storage/hotels/gallery/cemara_4.jpg"
+                                                                 ],
+                                                     "cover":  "http://127.0.0.1:8000/storage/hotels/gallery/cemara_1.jpg",
+                                                     "status":  "active",
+                                                     "price_from":  446637,
+                                                     "rating":  2.3,
+                                                     "review_count":  0,
+                                                     "prices":  [
+                                                                    {
+                                                                        "price_type":  "daily",
+                                                                        "amount":  446637,
+                                                                        "cleaning_fee":  0,
+                                                                        "deposit":  100000,
+                                                                        "service_fee":  0
+                                                                    }
+                                                                ],
+                                                     "created_at":  "2026-08-19T11:57:06.000000Z"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "host_id":  2,
+                                                     "city_id":  2,
+                                                     "city_name":  "Bandung",
+                                                     "province":  "Jawa Barat",
+                                                     "property_type":  "apartment",
+                                                     "name":  "Big and Cozy 3BR Apartment Lucky Tower Residence By Travelio",
+                                                     "building_name":  "Apartemen Lucky Tower Residence",
+                                                     "description":  "Apartemen Lucky Tower Residence menawarkan hunian tipe 3 kamar dengan ukuran yang luas dan cocok untuk 5 orang. Nikmati hunian ini hanya di Travelio!",
+                                                     "address":  "Jl. Dago No. 12, Bandung, Jawa Barat",
+                                                     "latitude":  -6.917464,
+                                                     "longitude":  107.619123,
+                                                     "guest_capacity":  5,
+                                                     "bedrooms":  3,
+                                                     "facilities":  [
+                                                                        "wifi",
+                                                                        "ac",
+                                                                        "kitchen",
+                                                                        "parking",
+                                                                        "swimming_pool",
+                                                                        "tv",
+                                                                        "washing_machine",
+                                                                        "security",
+                                                                        "elevator",
+                                                                        "gym"
+                                                                    ],
+                                                     "gallery":  [
+                                                                     "http://127.0.0.1:8000/storage/properties/gallery/big-3br-1.jpg",
+                                                                     "http://127.0.0.1:8000/storage/properties/gallery/big-3br-2.jpg"
+                                                                 ],
+                                                     "cover":  "http://127.0.0.1:8000/storage/properties/gallery/big-3br-1.jpg",
+                                                     "status":  "active",
+                                                     "price_from":  1190000,
+                                                     "rating":  null,
+                                                     "review_count":  0,
+                                                     "prices":  [
+                                                                    {
+                                                                        "price_type":  "daily",
+                                                                        "amount":  1190000,
+                                                                        "cleaning_fee":  150000,
+                                                                        "deposit":  1190000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "weekly",
+                                                                        "amount":  8330000,
+                                                                        "cleaning_fee":  150000,
+                                                                        "deposit":  1190000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "monthly",
+                                                                        "amount":  29750000,
+                                                                        "cleaning_fee":  150000,
+                                                                        "deposit":  1190000,
+                                                                        "service_fee":  25000
+                                                                    },
+                                                                    {
+                                                                        "price_type":  "yearly",
+                                                                        "amount":  335000000,
+                                                                        "cleaning_fee":  150000,
+                                                                        "deposit":  1190000,
+                                                                        "service_fee":  25000
+                                                                    }
+                                                                ],
+                                                     "created_at":  "2026-08-19T11:57:06.000000Z"
+                                                 }
+                                             ],
+                                  "best_seller":  [
+                                                      {
+                                                          "id":  2,
+                                                          "host_id":  2,
+                                                          "city_id":  2,
+                                                          "city_name":  "Bandung",
+                                                          "province":  "Jawa Barat",
+                                                          "property_type":  "apartment",
+                                                          "name":  "Big and Cozy 3BR Apartment Lucky Tower Residence By Travelio",
+                                                          "building_name":  "Apartemen Lucky Tower Residence",
+                                                          "description":  "Apartemen Lucky Tower Residence menawarkan hunian tipe 3 kamar dengan ukuran yang luas dan cocok untuk 5 orang. Nikmati hunian ini hanya di Travelio!",
+                                                          "address":  "Jl. Dago No. 12, Bandung, Jawa Barat",
+                                                          "latitude":  -6.917464,
+                                                          "longitude":  107.619123,
+                                                          "guest_capacity":  5,
+                                                          "bedrooms":  3,
+                                                          "facilities":  [
+                                                                             "wifi",
+                                                                             "ac",
+                                                                             "kitchen",
+                                                                             "parking",
+                                                                             "swimming_pool",
+                                                                             "tv",
+                                                                             "washing_machine",
+                                                                             "security",
+                                                                             "elevator",
+                                                                             "gym"
+                                                                         ],
+                                                          "gallery":  [
+                                                                          "http://127.0.0.1:8000/storage/properties/gallery/big-3br-1.jpg",
+                                                                          "http://127.0.0.1:8000/storage/properties/gallery/big-3br-2.jpg"
+                                                                      ],
+                                                          "cover":  "http://127.0.0.1:8000/storage/properties/gallery/big-3br-1.jpg",
+                                                          "status":  "active",
+                                                          "price_from":  1190000,
+                                                          "rating":  null,
+                                                          "review_count":  0,
+                                                          "prices":  [
+                                                                         {
+                                                                             "price_type":  "daily",
+                                                                             "amount":  1190000,
+                                                                             "cleaning_fee":  150000,
+                                                                             "deposit":  1190000,
+                                                                             "service_fee":  25000
+                                                                         },
+                                                                         {
+                                                                             "price_type":  "weekly",
+                                                                             "amount":  8330000,
+                                                                             "cleaning_fee":  150000,
+                                                                             "deposit":  1190000,
+                                                                             "service_fee":  25000
+                                                                         },
+                                                                         {
+                                                                             "price_type":  "monthly",
+                                                                             "amount":  29750000,
+                                                                             "cleaning_fee":  150000,
+                                                                             "deposit":  1190000,
+                                                                             "service_fee":  25000
+                                                                         },
+                                                                         {
+                                                                             "price_type":  "yearly",
+                                                                             "amount":  335000000,
+                                                                             "cleaning_fee":  150000,
+                                                                             "deposit":  1190000,
+                                                                             "service_fee":  25000
+                                                                         }
+                                                                     ],
+                                                          "created_at":  "2026-08-19T11:57:06.000000Z"
+                                                      }
+                                                  ],
+                                  "premium":  [
+                                                  {
+                                                      "id":  1,
+                                                      "host_id":  2,
+                                                      "city_id":  1,
+                                                      "city_name":  "Jakarta",
+                                                      "province":  "DKI Jakarta",
+                                                      "property_type":  "apartment",
+                                                      "name":  "Peaceful Living in Spacious 3BR at Apartment Lucky Tower Residence By Travelio",
+                                                      "building_name":  "Apartemen Lucky Tower Residence",
+                                                      "description":  "Cari hunian 3BR yang nyaman? Sewa unit di Apartemen Lucky Tower Residence untuk pengalaman tinggal praktis, luas, dan menyenangkan! Reservasi hari ini hanya di Travelio!",
+                                                      "address":  "Jl. Pancoran Raya No.42A, RT.2/RW.6, Pinangsia, Taman Sari, Jakarta Barat, DKI Jakarta, 11110",
+                                                      "latitude":  -6.1668,
+                                                      "longitude":  106.7978,
+                                                      "guest_capacity":  6,
+                                                      "bedrooms":  3,
+                                                      "facilities":  [
+                                                                         "wifi",
+                                                                         "ac",
+                                                                         "kitchen",
+                                                                         "parking",
+                                                                         "swimming_pool",
+                                                                         "tv",
+                                                                         "washing_machine",
+                                                                         "security",
+                                                                         "elevator"
+                                                                     ],
+                                                      "gallery":  [
+                                                                      "http://127.0.0.1:8000/storage/properties/gallery/peaceful-3br-1.jpg",
+                                                                      "http://127.0.0.1:8000/storage/properties/gallery/peaceful-3br-2.jpg"
+                                                                  ],
+                                                      "cover":  "http://127.0.0.1:8000/storage/properties/gallery/peaceful-3br-1.jpg",
+                                                      "status":  "active",
+                                                      "price_from":  1155000,
+                                                      "rating":  null,
+                                                      "review_count":  0,
+                                                      "prices":  [
+                                                                     {
+                                                                         "price_type":  "daily",
+                                                                         "amount":  1155000,
+                                                                         "cleaning_fee":  150000,
+                                                                         "deposit":  1155000,
+                                                                         "service_fee":  25000
+                                                                     },
+                                                                     {
+                                                                         "price_type":  "weekly",
+                                                                         "amount":  8085000,
+                                                                         "cleaning_fee":  150000,
+                                                                         "deposit":  1155000,
+                                                                         "service_fee":  25000
+                                                                     },
+                                                                     {
+                                                                         "price_type":  "monthly",
+                                                                         "amount":  28900000,
+                                                                         "cleaning_fee":  150000,
+                                                                         "deposit":  1155000,
+                                                                         "service_fee":  25000
+                                                                     },
+                                                                     {
+                                                                         "price_type":  "yearly",
+                                                                         "amount":  325000000,
+                                                                         "cleaning_fee":  150000,
+                                                                         "deposit":  1155000,
+                                                                         "service_fee":  25000
+                                                                     }
+                                                                 ],
+                                                      "created_at":  "2026-08-19T11:57:06.000000Z"
+                                                  }
+                                              ],
+                                  "poi_based":  [
+                                                    {
+                                                        "id":  4,
+                                                        "host_id":  3,
+                                                        "city_id":  4,
+                                                        "city_name":  "Surabaya",
+                                                        "province":  "Jawa Timur",
+                                                        "property_type":  "apartment",
+                                                        "name":  "Modern Look 2BR at Lucky Tower Residence Apartment By Travelio",
+                                                        "building_name":  "Apartemen Lucky Tower Residence",
+                                                        "description":  "Akomodasi nyaman dengan 2 kamar tidur ini cocok anda huni hingga 4 orang. Nikmati akomodasi ini sekarang juga, hanya di Travelio!",
+                                                        "address":  "Jl. Pemuda No. 33, Surabaya, Jawa Timur",
+                                                        "latitude":  -7.257472,
+                                                        "longitude":  112.752088,
+                                                        "guest_capacity":  4,
+                                                        "bedrooms":  2,
+                                                        "facilities":  [
+                                                                           "wifi",
+                                                                           "ac",
+                                                                           "kitchen",
+                                                                           "parking",
+                                                                           "swimming_pool",
+                                                                           "tv",
+                                                                           "security",
+                                                                           "elevator",
+                                                                           "water_heater"
+                                                                       ],
+                                                        "gallery":  [
+                                                                        "http://127.0.0.1:8000/storage/properties/gallery/modern-2br-1.jpg",
+                                                                        "http://127.0.0.1:8000/storage/properties/gallery/modern-2br-2.jpg"
+                                                                    ],
+                                                        "cover":  "http://127.0.0.1:8000/storage/properties/gallery/modern-2br-1.jpg",
+                                                        "status":  "active",
+                                                        "price_from":  845000,
+                                                        "rating":  null,
+                                                        "review_count":  0,
+                                                        "prices":  [
+                                                                       {
+                                                                           "price_type":  "daily",
+                                                                           "amount":  845000,
+                                                                           "cleaning_fee":  125000,
+                                                                           "deposit":  845000,
+                                                                           "service_fee":  25000
+                                                                       },
+                                                                       {
+                                                                           "price_type":  "weekly",
+                                                                           "amount":  5915000,
+                                                                           "cleaning_fee":  125000,
+                                                                           "deposit":  845000,
+                                                                           "service_fee":  25000
+                                                                       },
+                                                                       {
+                                                                           "price_type":  "monthly",
+                                                                           "amount":  21125000,
+                                                                           "cleaning_fee":  125000,
+                                                                           "deposit":  845000,
+                                                                           "service_fee":  25000
+                                                                       },
+                                                                       {
+                                                                           "price_type":  "yearly",
+                                                                           "amount":  238000000,
+                                                                           "cleaning_fee":  125000,
+                                                                           "deposit":  845000,
+                                                                           "service_fee":  25000
+                                                                       }
+                                                                   ],
+                                                        "created_at":  "2026-08-19T11:57:06.000000Z"
+                                                    }
+                                                ]
+                              }
+             },
+    "meta":  null,
+    "errors":  null
+}

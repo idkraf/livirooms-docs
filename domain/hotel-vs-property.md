@@ -129,7 +129,7 @@ bookings
 |---|---|
 | `Property hasOne Hotel` | `app/Models/Property.php:186` |
 | `Property hasMany PropertyPrice` | `app/Models/Property.php:66` |
-| `Property hasOne PropertyOtherCore` (nama method: `other()`) | `app/Models/Property.php:96` |
+| `Property hasOne PropertyOther` (nama method: `other()`) | `app/Models/Property.php:96` |
 | `Property morphMany Media` · `morphToMany Facility` | `app/Models/Property.php:54-64` |
 | `Property hasMany Booking` · `hasMany Review` | `app/Models/Property.php:191-199` |
 | `Hotel belongsTo Property` | `app/Models/Hotel.php:43` |
@@ -221,7 +221,7 @@ Jangan hapus kolom JSONB-nya (§9).
 | **Rantai kamar** | `RoomType`, `RoomInventory`, `Room`, `BookingRoom` |
 | **Satelit hotel** | `HotelPolicy`, `HotelScoreComponent`, `HotelTransportPoint`, `HotelFaq`, `HotelReviewQuote` |
 | **Harga & stok** | `PropertyPrice`, `PropertyPricingOption`, `PropertySpecialPrice`, `PropertyPromo`, `PropertyAddOn`, `PropertyPaymentPlan`, `PropertyPaymentPlanEntry`, `Availability` |
-| **Detail properti** | `PropertyOtherCore`, `PropertyOther`, `PropertySpec`, `PropertyUnitDetail`, `PropertyNearbyPlace`, `PropertyBuildingUnit`, `PropertyExtraDescription`, `PropertyCheckInNote`, `PropertyDepositNote`, `PropertyBedFacility`, `PropertyBuildingFacility`, `PropertyBuildingFacilityAll`, `PropertyRoomFurniture` (+`Group`, `Item`), `PropertyReviewSummary`, `PropertyReviewBreakdown`, `PropertyQuestion`, `PropertyGuestMedia` |
+| **Detail properti** | `PropertyOther`, `PropertySpec`, `PropertyUnitDetail`, `PropertyNearbyPlace`, `PropertyBuildingUnit`, `PropertyExtraDescription`, `PropertyCheckInNote`, `PropertyDepositNote`, `PropertyBedFacility`, `PropertyBuildingFacility`, `PropertyBuildingFacilityAll`, `PropertyRoomFurniture` (+`Group`, `Item`), `PropertyReviewSummary`, `PropertyReviewBreakdown`, `PropertyQuestion`, `PropertyGuestMedia` |
 | **Bersama** | `Booking`, `Media`, `Facility`, `ModelHasFacility`, `City` |
 | **Asuransi** | `InsuranceProvider`, `InsurancePlan`, `BookingInsurance` |
 
@@ -376,8 +376,8 @@ handler melayani keduanya.
 | Hal | Realita |
 |---|---|
 | `App\Models\Room` | **Orphan.** Tabel `rooms` ada, tapi `Room::class` tidak direferensikan di mana pun dalam `laravel/app/`. Stok mode room sepenuhnya counter `room_inventories`; penomoran kamar fisik tidak dipakai. |
-| `App\Models\PropertyOther` | **Orphan.** `Property::other()` mengarah ke `PropertyOtherCore` (`property_other_core`). Tabel `properties_other` punya model tapi tidak pernah di-instansiasi. |
-| Komentar `BookingController.php:764` | **Basi.** Menyebut aturan rumah ada di `properties_other`, padahal baris di bawahnya membaca `$property->other?->check_in_time` → `property_other_core`. Kodenya benar, komentarnya salah. |
+| `App\Models\PropertyOther` | **Canonical.** `Property::other()` mengarah ke `PropertyOther` (`properties_other`). Tabel ini menyimpan semua data display properti: gallery, cover, facilities, pricing, dll. |
+| Komentar `BookingController.php:764` | **Basi.** Menyebut aturan rumah ada di `properties_other`, padahal baris di bawahnya membaca `$property->other?->check_in_time` → `properties_other`. Kodenya benar, komentarnya salah. |
 | Timestamp migration ganda | Dua file memakai `2026_08_16_000001` (`add_children_ages_to_bookings` & `create_properties_other_table`). Urutan jatuh ke alfabet nama file — jalan, tapi rapuh. |
 | Admin hotel | Tidak ada controller/DataTable/route mandiri — lihat §7. |
 | `laravel/CLAUDE.md` | Menulis "33 model"; aktual 74. |

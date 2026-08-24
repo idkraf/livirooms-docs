@@ -1,0 +1,10 @@
+﻿{
+    "status":  true,
+    "code":  200,
+    "message":  "Daftar hotel Anda berhasil dimuat.",
+    "data":  [
+
+             ],
+    "meta":  null,
+    "errors":  null
+}

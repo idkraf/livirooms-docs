@@ -1,0 +1,166 @@
+﻿{
+    "status":  true,
+    "code":  200,
+    "message":  "Detail properti berhasil dimuat.",
+    "data":  {
+                 "id":  1,
+                 "host_id":  2,
+                 "city_id":  1,
+                 "property_type":  "apartment",
+                 "booking_mode":  "unit",
+                 "name":  "Peaceful Living in Spacious 3BR at Apartment Lucky Tower Residence By Travelio",
+                 "building_name":  "Apartemen Lucky Tower Residence",
+                 "description":  "Cari hunian 3BR yang nyaman? Sewa unit di Apartemen Lucky Tower Residence untuk pengalaman tinggal praktis, luas, dan menyenangkan! Reservasi hari ini hanya di Travelio!",
+                 "address":  "Jl. Pancoran Raya No.42A, RT.2/RW.6, Pinangsia, Taman Sari, Jakarta Barat, DKI Jakarta, 11110",
+                 "latitude":  -6.1668,
+                 "longitude":  106.7978,
+                 "guest_capacity":  6,
+                 "bedrooms":  3,
+                 "bathrooms":  2,
+                 "star_rating":  null,
+                 "check_in_time":  null,
+                 "check_out_time":  null,
+                 "has_breakfast":  false,
+                 "facilities":  [
+                                    "wifi",
+                                    "AC",
+                                    "kitchen",
+                                    "parking",
+                                    "swimming_pool",
+                                    "tv",
+                                    "washing_machine",
+                                    "security",
+                                    "elevator"
+                                ],
+                 "gallery":  [
+                                 "http://127.0.0.1:8000/storage/properties/gallery/peaceful-3br-1.jpg",
+                                 "http://127.0.0.1:8000/storage/properties/gallery/peaceful-3br-2.jpg"
+                             ],
+                 "cover":  "http://127.0.0.1:8000/storage/properties/gallery/peaceful-3br-1.jpg",
+                 "cover_image":  "http://127.0.0.1:8000/storage/properties/gallery/peaceful-3br-1.jpg",
+                 "status":  "active",
+                 "cancellation_policy":  "flexible",
+                 "city_name":  "Jakarta",
+                 "province":  "DKI Jakarta",
+                 "price_from":  1155000,
+                 "price_original":  null,
+                 "rating":  0,
+                 "review_count":  0,
+                 "prices":  [
+                                {
+                                    "price_type":  "daily",
+                                    "amount":  1155000,
+                                    "cleaning_fee":  150000,
+                                    "deposit":  1155000,
+                                    "service_fee":  25000
+                                },
+                                {
+                                    "price_type":  "monthly",
+                                    "amount":  28900000,
+                                    "cleaning_fee":  150000,
+                                    "deposit":  1155000,
+                                    "service_fee":  25000
+                                },
+                                {
+                                    "price_type":  "weekly",
+                                    "amount":  8085000,
+                                    "cleaning_fee":  150000,
+                                    "deposit":  1155000,
+                                    "service_fee":  25000
+                                },
+                                {
+                                    "price_type":  "yearly",
+                                    "amount":  325000000,
+                                    "cleaning_fee":  150000,
+                                    "deposit":  1155000,
+                                    "service_fee":  25000
+                                }
+                            ],
+                 "host":  {
+                              "id":  2,
+                              "name":  "Budi Santoso"
+                          },
+                 "type_label":  "",
+                 "area_label":  "Jakarta",
+                 "specs":  [
+
+                           ],
+                 "is_favorite":  false,
+                 "intro":  "",
+                 "description_extra":  [
+
+                                       ],
+                 "description_extra_heading":  "",
+                 "map_preview":  null,
+                 "price_caption":  "per bulan mulai dari",
+                 "extra_media_count":  0,
+                 "is_flash_sale":  false,
+                 "bed_facilities":  [
+
+                                    ],
+                 "building_facilities":  [
+
+                                         ],
+                 "building_facilities_all":  [
+
+                                             ],
+                 "room_furniture":  [
+
+                                    ],
+                 "room_furniture_groups":  [
+
+                                           ],
+                 "check_in_notes":  [
+
+                                    ],
+                 "deposit_amount":  null,
+                 "deposit_notes":  [
+
+                                   ],
+                 "unit_detail":  [
+
+                                 ],
+                 "nearby":  [
+
+                            ],
+                 "guest_media":  [
+
+                                 ],
+                 "building_units":  null,
+                 "review_summary":  {
+                                        "average":  0,
+                                        "total":  0,
+                                        "label":  "",
+                                        "breakdown":  [
+
+                                                      ]
+                                    },
+                 "reviews":  [
+
+                             ],
+                 "question_count":  3,
+                 "questions":  [
+                                   {
+                                       "question":  "Apakah ada lift?",
+                                       "answer":  "Ya, ada 2 lift.",
+                                       "asked_by":  "Admin Utama",
+                                       "created_at":  "2026-07-15T10:00:00.000000Z"
+                                   },
+                                   {
+                                       "question":  "Bisa check-in lebih awal?",
+                                       "answer":  null,
+                                       "asked_by":  "Admin Utama",
+                                       "created_at":  "2026-07-14T08:00:00.000000Z"
+                                   },
+                                   {
+                                       "question":  "Boleh bawa hewan?",
+                                       "answer":  "Mohon maaf, belum bisa.",
+                                       "asked_by":  "Admin Utama",
+                                       "created_at":  "2026-07-10T08:00:00.000000Z"
+                                   }
+                               ],
+                 "created_at":  "2026-08-19T11:57:06.000000Z"
+             },
+    "meta":  null,
+    "errors":  null
+}

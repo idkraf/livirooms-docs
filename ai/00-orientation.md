@@ -36,7 +36,7 @@ Cari baris yang paling cocok. Kolom "Baca" sudah urut prioritas.
 | **Properti, hotel, kamar, stok, ketersediaan, pencarian listing, harga** | 🔴 `docs/domain/hotel-vs-property.md` **wajib lebih dulu**, lalu `01-backend-map.md` §Domain | seluruh `app/Models/` |
 | Endpoint API — ada/tidak, request/response, siapa yang memanggil | `03-api-contract.md` (tabel 84 endpoint lengkap) | `routes/api_mobile.php` (sudah disalin utuh ke pack) |
 | Bug/fitur di sisi mobile — layar, navigasi, service | `02-frontend-map.md` | seluruh `lib/` |
-| Booking → order → payment → webhook → deep link | `01-backend-map.md` §Pembayaran + `03-api-contract.md` §Alur bayar | — |
+| Booking → order → payment → webhook → deep link | `01-backend-map.md` §Pembayaran + `docs/payments/system.md` + `03-api-contract.md` §Alur bayar | — |
 | Modul admin baru / DataTable / Livewire | `01-backend-map.md` §Admin Panel + `docs/configuration/admin-panel.md` + `docs/configuration/ui-patterns.md` | `routes/admin_generated.php` |
 | Status booking/order/payment, transisi state | `01-backend-map.md` §State machine | migration enum |
 | Permission, role, guard admin | `01-backend-map.md` §Auth & permission | — |
@@ -66,7 +66,7 @@ yang disebut di bagian "Titik masuk kode" pack itu.
 
 ---
 
-## 4. Isi paket `docs/ai/`
+## 4. Isi paket `docs/ai/` dan docs terkait
 
 | File | Isi | Kapan dibaca |
 |---|---|---|
@@ -75,6 +75,7 @@ yang disebut di bagian "Titik masuk kode" pack itu.
 | `02-frontend-map.md` | Flutter: 45 layar, 45 route, 19 service, 44 model, lapisan API, dummy mode | tugas mobile |
 | `03-api-contract.md` | 84 endpoint → controller::method → service Dart → layar. Jembatan dua sisi | tugas lintas-sisi / integrasi |
 | `04-drift-register.md` | selisih terverifikasi antara docs/klaim vs kode, dan endpoint yang dipanggil app tapi tidak ada di backend | sebelum mempercayai docs lain |
+| `payments/system.md` | Sistem pembayaran: 6 endpoint, payload, Flutter service methods, webhook contract, deep link, dummy fixtures | tugas payment / booking |
 
 ---
 

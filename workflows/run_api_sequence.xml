@@ -1,0 +1,19 @@
+<laravel_cli_workflow>
+  <metadata>
+    <description>Automated terminal workflow: Start server, authenticate, and test endpoints.</description>
+    <base_url>http://127.0.0.1:8000</base_url>
+    <login_endpoint>/api/v1/auth/login</login_endpoint>
+    <credentials>
+      <email>andi@example.com</email>
+      <password>password</password>
+    </credentials>
+  </metadata>
+
+  <execution_steps>
+    Step 1: Start Laravel built-in development server in the background (php artisan serve).
+    Step 2: Send a POST request to <login_endpoint> using curl with the provided credentials.
+    Step 3: Capture the returned authentication token/cookie from the login response dynamically into working memory.
+    Step 4: Use that captured token to test a protected endpoint (e.g., GET /api/v1/orders) to verify if the response structure matches expected parameters.
+    Step 5: If any parameters are mismatched or broken, output the code fixes for the Controller/Resource.
+  </execution_steps>
+</laravel_cli_workflow>
