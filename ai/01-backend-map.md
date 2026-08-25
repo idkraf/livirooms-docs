@@ -5,7 +5,7 @@
 > sebagai ganti menjelajah `app/` secara buta.
 >
 > Untuk arsitektur data Hotel vs Property, dokumen master adalah:
-> 🔴 **`docs/domain/hotel-vs-property.md`**.
+> 🔴 **`docs/domain/accommodations.md`**.
 
 ---
 

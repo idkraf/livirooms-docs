@@ -28,7 +28,7 @@ Stok akomodasi dikelola lewat entitas akar terpadu `accommodations` dengan diskr
 
 | Prompt kamu tentang… | Baca | Jangan buka |
 |---|---|---|
-| **Properti, hotel, kamar, stok, ketersediaan, pencarian listing, harga** | 🔴 `docs/domain/hotel-vs-property.md` **wajib lebih dulu**, lalu `01-backend-map.md` §Domain | seluruh `app/Models/` |
+| **Properti, hotel, kamar, stok, ketersediaan, pencarian listing, harga** | 🔴 `docs/domain/accommodations.md` **wajib lebih dulu**, lalu `01-backend-map.md` §Domain | seluruh `app/Models/` |
 | Endpoint API — ada/tidak, request/response, siapa yang memanggil | `03-api-contract.md` (tabel endpoint lengkap) | `routes/api_mobile.php` |
 | Bug/fitur di sisi mobile — layar, navigasi, service | `02-frontend-map.md` | seluruh `lib/` |
 | Booking → order → payment → webhook → deep link | `01-backend-map.md` §Pembayaran + `docs/payments/system.md` + `03-api-contract.md` §Alur bayar | — |
