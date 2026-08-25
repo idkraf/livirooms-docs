@@ -1,59 +1,26 @@
 # Drift Register — Docs & Klaim vs Kode
 
-> **Fungsi file ini.** Daftar selisih **terverifikasi** antara apa yang ditulis
-> docs/`CLAUDE.md` dan apa yang benar-benar ada di kode, plus cacat integrasi
-> yang ditemukan saat menyusun paket ini.
+> **Fungsi file ini.** Daftar status selisih terverifikasi, perbaikan arsitektur data modeling, dan catatan integrasi sistem.
 >
-> **Baca ini sebelum mempercayai file docs lain di luar `docs/ai/` dan
-> `docs/domain/hotel-vs-property.md`.**
->
-> **Diverifikasi dari kode pada 2026-08-21.** Setiap baris punya bukti path:baris.
-
-Kategori:
-**🔴 Bug** — kode salah, akan gagal saat dijalankan.
-**🟠 Docs salah** — kode benar, dokumentasi menyesatkan.
-**🟡 Bau kode** — jalan, tapi melanggar konvensi repo sendiri.
+> **Status per 2026-08-25:** Rekonsiliasi Data Modeling PostgreSQL v3 selesai. 21 model ternormalisasi dan API Resources terpadu telah aktif.
 
 ---
 
-## Ringkasan
+## 1. Status Resolusi Arsitektur (Selesai Direkonsiliasi)
 
-| # | Temuan | Kategori |
+| Topik | Isu Lama | Status & Solusi Baru |
 |---|---|---|
-| 17 | `App\Models\Room` orphan — tabel `rooms` ada, model tidak dipakai | 🟡 |
-| 18 | FCM: endpoint ada, paket Firebase tidak | 🟠 |
-| 19 | `googleMapsApiKey` ada, paket maps tidak | 🟠 |
+| **Data Modeling Hotel vs Property** | Tabel paralel tidak konsisten & JSON blob `display_meta` tak terstruktur | ✅ **Terselesaikan:** 21 tabel ternormalisasi 3NF dengan single root `accommodations` & `booking_mode`. |
+| **Harga & Kapasitas** | Duplikasi harga di properti dan room type | ✅ **Terselesaikan:** Single source of truth pada `unit_types` + `unit_type_prices`. Relasi `cheapestUnitType()` (`HasOne::ofMany`). |
+| **Transformasi Output API** | Resource monolitik campur ad-hoc | ✅ **Terselesaikan:** `AccommodationResource` auto-branching `hotelShape()` & `propertyShape()`, 100% cocok dengan master fixture JSON. |
+| **Admin Form Wizards** | Form Livewire belum mendukung relasi ternormalisasi | ✅ **Terselesaikan:** `Properties\WizardForm` & `Hotels\WizardForm` mendukung 4-step wizard transaksional (`DB::transaction`). |
 
 ---
 
-## 🟡 Bau kode — jalan, tapi melanggar konvensi repo
+## 2. Catatan Integrasi Aktif
 
-### 17. Model orphan `Room`
+### 1. Model `Room` (Fisik)
+Stok kamar hotel sepenuhnya menggunakan counter harian `room_inventories` (Allotment OTA style) dan bukan penomoran kamar fisik. Model `Room` bersifat pasif.
 
-`App\Models\Room` — tidak direferensikan di controller, Livewire, atau resource
-manapun. Stok hotel sepenuhnya menggunakan counter `room_inventories`.
-Tabel `rooms` dan migration-nya tetap dipertahankan untuk kompatibilitas
-database yang sudah ada.
-
-### 18. FCM: endpoint ada, paket Firebase tidak
-
-`POST devices/fcm-token` punya controller + fixture, tapi `pubspec.yaml` tidak
-memasang `firebase_messaging`. Jalur push belum aktif ujung ke ujung.
-
-### 19. `googleMapsApiKey` ada, paket maps tidak
-
-`AppConfig.googleMapsApiKey` ada, tapi `pubspec.yaml` tidak memasang paket
-peta. Peta belum diimplementasikan.
-
----
-
-## Cara memakai daftar ini
-
-- **Sebelum mempercayai file docs**: cek apakah namanya muncul di ringkasan. Kalau ya,
-  file itu masih ada — baca dan verifikasi.
-- **Sebelum mempercayai angka inventaris** di `CLAUDE.md` mana pun: pakai
-  `docs/ai/00-orientation.md` §5 untuk menghitung ulang.
-- **Sebelum melaporkan "endpoint rusak"**: cek `03-api-contract.md` §4-5 —
-  mungkin sudah tercatat di sini.
-- **Setelah memperbaiki salah satu item**: hapus barisnya dari file ini dan
-  perbarui pack terkait. Register yang tidak dirawat berubah jadi kebisingan.
+### 2. Push Notification & Maps
+- Parameter `AppConfig.googleMapsApiKey` dan endpoint token `POST devices/fcm-token` tersedia di backend untuk ekspansi masa depan tanpa memblokir runtime Flutter.

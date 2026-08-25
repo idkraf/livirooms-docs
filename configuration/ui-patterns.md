@@ -9,6 +9,7 @@ Dokumen ini mendefinisikan pola UI standar untuk blade admin Laravel. Semua blad
 - [Pola Action Column (DataTable)](#3-pola-action-column-datatable)
 - [Pola Form (Livewire Modal)](#4-pola-form-livewire-modal)
 - [Pola Show / Detail Page](#5-pola-show--detail-page)
+- [Pola Multi-Step Form Wizard (Property & Hotel)](#6-pola-multi-step-form-wizard-property--hotel)
 - [Checklist Blade Baru](#checklist-blade-baru)
 
 ## 1. Layout Wrapper

@@ -17,6 +17,7 @@ Dokumen ini merangkum hasil audit file dan relasi yang belum terdefinisi di proy
 |-------|--------|
 | `UserValidation` | ✅ Created — diimport di `UserValidationDataTable`, migration disalin dari project viona |
 | `UsersAssignedRole` | ✅ Created — diimport di `UsersAssignedRoleDataTable`, migration dibuat |
+| **21 Model Ternormalisasi Produk** | ✅ **All Created** — `Accommodation`, `BuildingList`, `UnitType`, `UnitTypePrice`, `UnitTypeImage`, `FacilityGroup`, `FacilityItem`, `FacilityTag`, `Gallery`, `Review`, `ReviewPhoto`, `AccommodationPolicy`, `AccommodationQuestion`, `NearbyPoint`, `RoomFurnitureGroup`, `RoomFurnitureItem`, `BedFacility`, `AccommodationDescriptionParagraph`, `AccommodationDetail`, `AccommodationDetailGroup`, `AccommodationDetailLine` |
 
 ---
 

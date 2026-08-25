@@ -2,12 +2,13 @@
 
 Dokumen ini menjelaskan bagaimana data mengalir dari **Controller → DataTable → Blade View** dan bagaimana **Livewire** menangani operasi add/edit (termasuk file uploads) di admin panel. Dokumen ini berfungsi sebagai **role model untuk membangun semua 24 modul** yang tercantum di project README.
 
-**Canonical reference implementation:** `resources/views/admin/user-management/`. Folder ini berisi 3 working patterns yang digunakan di seluruh project:
+**Canonical reference implementation:** `resources/views/admin/user-management/`. Folder ini berisi working patterns yang digunakan di seluruh project:
 - **Pattern A (Users)**: DataTable + standalone Livewire modal (`AddUserModal`)
 - **Pattern B (Roles)**: Pure Livewire list (`RoleList`) + standalone modal (`RoleModal`), no DataTable
 - **Pattern C (Permissions)**: DataTable + standalone Livewire modal (`PermissionModal`)
+- **Pattern D (Property & Hotel Wizards)**: DataTable + Multi-Step Livewire Form Wizard modal (`Properties\WizardForm`, `Hotels\WizardForm`) yang mengelola relasi kompleks 21 tabel ternormalisasi (3NF) dalam `DB::transaction`.
 
-Semua modul lain harus mengikuti salah satu dari 3 patterns ini.
+Semua modul harus mengikuti salah satu dari 4 patterns ini.
 
 ## Daftar Isi
 
