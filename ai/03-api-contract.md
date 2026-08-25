@@ -15,7 +15,7 @@
 
 ---
 
-## 2. Publik — 22 Endpoint (Tanpa Sanctum)
+## 2. Publik — 23 Endpoint (Tanpa Sanctum)
 
 | # | Method + Path | Controller::method | Dart Service | Dummy Fixture | Keterangan |
 |---|---|---|---|---|---|
@@ -41,6 +41,7 @@
 | 20 | `GET cms/{slug}` | `HomeController::cmsPage` | `content_service.dart:100` | ✅ | Privacy Policy, T&C, About |
 | 21 | `GET faqs` | `HomeController::faqs` | `content_service.dart:85` | ✅ | FAQ Publik |
 | 22 | `POST payments/webhook` | `PaymentController::webhook` | — | 🔒 | **Midtrans Server-to-Server Webhook** |
+| 23 | **`POST search-logs`** | **`SearchLogController::store`** | **`search_log_service.dart`** | ⬜ | **Analytics pencarian — fire-and-forget dari Flutter** |
 
 ---
 

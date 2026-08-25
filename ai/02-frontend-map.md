@@ -33,7 +33,7 @@ lib/
 ├── router.dart            Routes (45 route) + AppRouter.onGenerateRoute
 ├── config/                AppConfig (baseUrl, dummy toggle), theme
 ├── screens/               45 *_screen.dart + 2 shell (MainShell, MitraShell)
-├── services/              19 service (Http, Auth, Property, Hotel, Payment, dll)
+├── services/              20 service (Http, Auth, Property, Hotel, Payment, SearchLog, dll)
 ├── models/                44 model (Property, Hotel, UnitType, Booking, dll)
 ├── providers/             AuthProvider (registered), HotelSearchProvider
 └── utils/                 Formatters, icons, promo helpers
