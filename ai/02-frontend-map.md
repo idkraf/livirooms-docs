@@ -30,9 +30,10 @@
 ```
 lib/
 ├── main.dart              MaterialApp, MultiProvider, DeepLinkHandler
-├── router.dart            Routes (45 route) + AppRouter.onGenerateRoute
+├── router.dart            Routes (46 route) + AppRouter.onGenerateRoute
 ├── config/                AppConfig (baseUrl, dummy toggle), theme
-├── screens/               45 *_screen.dart + 2 shell (MainShell, MitraShell)
+├── screens/               46 *_screen.dart + 2 shell (MainShell, MitraShell)
+│   └── mitra/             PropertyManagementScreen, AccommodationFormScreen (Unified Wizard), etc.
 ├── services/              20 service (Http, Auth, Property, Hotel, Payment, SearchLog, dll)
 ├── models/                44 model (Property, Hotel, UnitType, Booking, dll)
 ├── providers/             AuthProvider (registered), HotelSearchProvider
