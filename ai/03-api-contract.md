@@ -81,14 +81,13 @@
 - `GET host/properties/{property}` (`PropertyController::hostShow`)
 - `PUT host/properties/{property}` (`PropertyController::update`)
 - `DELETE host/properties/{property}` (`PropertyController::destroy`)
-- `GET host/hotels` (`HostHotelController::index`)
-- `POST host/hotels` (`HostHotelController::store`)
-- `GET host/hotels/{hotel}` (`HostHotelController::show`)
-- `PUT host/hotels/{hotel}` (`HostHotelController::update`)
-- `DELETE host/hotels/{hotel}` (`HostHotelController::destroy`)
-- `GET host/hotels/{hotel}/room-types` (`HostHotelController::roomTypes`)
-- `POST host/hotels/{hotel}/room-types` (`HostHotelController::storeRoomType`)
-- `PUT host/room-types/{roomType}` (`HostHotelController::updateRoomType`)
-- `DELETE host/room-types/{roomType}` (`HostHotelController::destroyRoomType`)
+- `GET host/hotels` (`HostHotelController::index`) — `hotel_service.dart` — Daftar hotel mitra
+- `POST host/hotels` (`HostHotelController::store`) — `hotel_service.dart:createHotelForProperty` — Registrasi hotel + facility_groups + policies + faqs + transport_points + gallery
+- `GET host/hotels/{hotel}` (`HostHotelController::show`) — `hotel_service.dart:getHostHotelDetail` — Detail hotel mitra
+- `PUT host/hotels/{hotel}` (`HostHotelController::update`) — `hotel_service.dart:updateHotelForProperty` — Update metadata hotel + room types
+- `DELETE host/hotels/{hotel}` (`HostHotelController::destroy`) — `hotel_service.dart:deleteHotel` — Hapus hotel
+- `POST host/hotels/{hotel}/room-types` (`HostHotelController::storeRoomType`) — `hotel_service.dart` (via createHotelForProperty) — Tambah tipe kamar
+- `PUT host/room-types/{roomType}` (`HostHotelController::updateRoomType`) — `hotel_service.dart` — Edit tipe kamar
+- `DELETE host/room-types/{roomType}` (`HostHotelController::destroyRoomType`) — `hotel_service.dart:deleteRoomType` — Hapus tipe kamar
 - `GET host/wallet` (`HostWalletController::index`)
 - `POST host/wallet/withdraw` (`HostWalletController::withdraw`)
