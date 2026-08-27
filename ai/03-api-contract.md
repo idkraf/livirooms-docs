@@ -67,6 +67,8 @@
 - `POST bookings/{booking}/reject` (`BookingController::reject`)
 - `POST bookings/{booking}/checkin` (`BookingController::checkin`)
 - `POST bookings/{booking}/confirm-checkin` (`BookingController::confirmCheckin`)
+- `POST bookings/{booking}/review` (`ReviewController::store`) — **Buat ulasan hanya untuk booking completed**. Setelah ulasan dibuat, `AccommodationScoreComponent` dengan `component = 'basic'` otomatis diperbarui dengan rata-rata rating baru. Event model `Review` juga menangani update/delete untuk menjaga sinkronisasi.
+- `GET properties/{property}/reviews` (`ReviewController::index`) — Daftar ulasan properti
 
 ### Orders & Payment Snap
 - `GET orders` (`OrderController::index`)

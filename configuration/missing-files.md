@@ -27,13 +27,9 @@ Dokumen ini merangkum hasil audit file dan relasi yang belum terdefinisi di proy
 
 Model ini belum memiliki relasi `hasMany` ke model-model domain. Ini **tidak dikonfigurasi** di setup project saat ini, jadi tidak ditambahkan.
 
-### B. `Property` Model (`app/Models/Property.php`)
+### B. `Accommodation` Model (`app/Models/Accommodation.php`)
 
-Model ini sudah memiliki `host()`, `availabilities()`, `prices()`, `bookings()`, `reviews()`. Relasi berikut **tidak dikonfigurasi** di project saat ini:
-- `recommendations()` — `hasMany(PropertyRecommendation::class)`
-- `conversations()` — `hasMany(Conversation::class)`
-- `wishlists()` — `hasMany(Wishlist::class)`
-- `searchLogs()` — `hasMany(PropertySearchLog::class)`
+Model ini sekarang menjadi single source of truth untuk Hotel dan Property. `Property.php` dan `Hotel.php` telah dihapus. Semua relasi terkonsolidasi di `Accommodation.php` dengan diskriminator `booking_mode` (`room` = Hotel, `unit` = Property).
 
 ### C. `RemoteConfigParameter` Model
 

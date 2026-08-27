@@ -3,6 +3,10 @@
 > **Fungsi file ini.** Daftar status selisih terverifikasi, perbaikan arsitektur data modeling, dan catatan integrasi sistem.
 >
 > **Status per 2026-08-26:** Flutter→Laravel accommodation creation flow audit selesai. Drift kritis ditemukan dan direkonsiliasi.
+> **Update per 2026-08-27:** Relasi `Accommodation::bookings()` ditambahkan untuk menghilangkan `BadMethodCallException` di `ReportController::propertyPerformanceReport()`.
+> **Update per 2026-08-27:** `Property.php` dan `Hotel.php` dihapus. Semua relasi terkonsolidasi di `Accommodation.php`. `HotelFaq` diubah menjadi `AccommodationFaq` (tabel `accommodation_faqs`). `HotelScoreComponent` diubah menjadi `AccommodationScoreComponent` (tabel `accommodation_score_components`). `AccommodationReviewQuote` dihapus; review quotes tidak lagi disimpan secara terpisah.
+> **Update per 2026-08-27:** Resource audit selesai. `PresentsProperty` trait dibersihkan dari referensi `PropertyOther` yang sudah dihapus. `AccommodationQuestionResource::toPropertyArray()` diselaraskan dengan Flutter `HotelFaqItem`. `NearbyPointResource::toPropertyArray()` diselaraskan dengan Flutter `TransportPoint`.
+> **Update per 2026-08-27:** `Accommodation::updateScoreComponents()` ditambahkan untuk men-sinkronkan rata-rata rating review ke tabel `accommodation_score_components` (component `basic`). Event `created`, `updated` (hanya jika `rating` berubah), dan `deleted` pada model `Review` memicu penyaluran otomatis. `ReviewController::store()` juga memanggilnya secara eksplisit sebagai safety net.
 
 ---
 
@@ -31,7 +35,7 @@ Flutter AccommodationFormScreen
   │   │   ├── facility_groups[] → facility_groups table
   │   │   ├── policies{} → accommodation_policies table
   │   │   ├── deposit_amount, cancellation_policy
-  │   │   ├── review_quotes[], faqs[], transport_points[]
+  │   │   ├── faqs[], transport_points[]
   │   │   └── gallery[] → galleries table
   │   └── roomTypesPayload[] → POST host/hotels/{id}/room-types
   │       ├── name, description, capacity_adults, capacity_children
@@ -56,7 +60,6 @@ Flutter AccommodationFormScreen
 | policies (child, extra_bed, smoking) | `store()` processed | `accommodation_policies` | ✅ |
 | faqs | `store()` processed | `accommodation_questions` | ✅ |
 | transport_points | `store()` processed | `nearby_points` | ✅ |
-| review_quotes | `store()` processed | (display-only, not stored) | ✅ |
 | gallery | `store()` processed | `galleries` | ✅ |
 | room_types[] | `storeRoomType()` | `unit_types` | ✅ |
 | room_type.prices | via unit type | `unit_type_prices` | ✅ |

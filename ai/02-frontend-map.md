@@ -3,7 +3,11 @@
 > **Fungsi file ini.** Peta lengkap `flutter/` untuk AI: struktur, 47 route,
 > 110 layar/widget, 20 service, 46 model, lapisan API, deep link, dan fixture mapping.
 >
+> **Catatan arsitektur:** `Property.php` dan `Hotel.php` telah dihapus. Semua relasi terkonsolidasi di `Accommodation.php` dengan diskriminator `booking_mode`.
+>
 > **Master JSON Contracts:** [`GET_hotels_id_new.json`](file:///d:/Project/Fastwork/rental.apartemen/flutter/assets/json/GET_hotels_id_new.json) & [`GET_properties_id_new.json`](file:///d:/Project/Fastwork/rental.apartemen/flutter/assets/json/GET_properties_id_new.json).
+>
+> **Backend model contract:** `App\Models\Accommodation` adalah single source of truth. `Property.php` dan `Hotel.php` telah dihapus. Semua relasi terkonsolidasi di `Accommodation.php` dengan diskriminator `booking_mode` (`room` = Hotel, `unit` = Property).
 
 ---
 
@@ -43,7 +47,7 @@ lib/
 │   ├── chat/              ChatListScreen, ChatRoomScreen
 │   └── settings/          HelpSupportScreen, NotificationSettingsScreen, etc.
 ├── services/              20 service (Http, Auth, Property, Hotel, Payment, SearchLog, dll)
-├── models/                46 model (Property, Hotel, UnitType, Booking, dll)
+├── models/                46 model (Accommodation, UnitType, Booking, dll)
 ├── providers/             AuthProvider (registered), HotelSearchProvider
 └── utils/                 Formatters, icons, promo helpers
 ```
@@ -100,5 +104,7 @@ Flutter AccommodationFormScreen
 | `HotelRoomItem` | `UnitTypeResource` | Room type card |
 | `HotelFacilityGroup` | `FacilityGroupResource` | Facility group |
 | `HotelPolicy` | `AccommodationPolicyResource` | Policy block |
-| `HotelFaqItem` | `AccommodationQuestionResource` | FAQ item |
+| `AccommodationFaqItem` | `AccommodationQuestionResource` | FAQ item |
 | `NearbyPlace` | `NearbyPointResource` | Transport/nearby point |
+| `Review` | `ReviewResource` | Guest review after completed booking |
+| `ReviewPhoto` | `ReviewPhotoResource` | Photo attachment for guest review |

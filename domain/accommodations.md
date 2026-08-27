@@ -174,6 +174,10 @@ Hotel dan Property disatukan dalam satu entitas akar `accommodations` dengan dis
 | 20 | [`AccommodationDetailGroup`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Models/AccommodationDetailGroup.php) | `accommodation_detail_groups` | Sub-grup detail kompleks (mis. "Parkir Mobil", "Parkir Motor"). |
 | 21 | [`AccommodationDetailLine`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Models/AccommodationDetailLine.php) | `accommodation_detail_lines` | Baris tarif dalam sub-grup (label + amount). |
 
+### Relasi Transaksional Tambahan
+
+`Accommodation` juga memiliki relasi `bookings()` ke model [`Booking`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Models/Booking.php) (tabel `bookings`) melalui foreign key legacy `property_id`. Relasi ini digunakan untuk laporan admin seperti `ReportController::propertyPerformanceReport()`.
+
 ---
 
 ## 4. API Resources & Eager Loading Contract (Zero N+1)
