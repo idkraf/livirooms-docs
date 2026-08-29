@@ -6,7 +6,7 @@ Dokumen ini menjelaskan bagaimana data mengalir dari **Controller → DataTable 
 - **Pattern A (Users)**: DataTable + standalone Livewire modal (`AddUserModal`)
 - **Pattern B (Roles)**: Pure Livewire list (`RoleList`) + standalone modal (`RoleModal`), no DataTable
 - **Pattern C (Permissions)**: DataTable + standalone Livewire modal (`PermissionModal`)
-- **Pattern D (Property & Hotel Wizards)**: DataTable + Multi-Step Livewire Form Wizard modal (`Properties\WizardForm`, `Hotels\WizardForm`) yang mengelola relasi kompleks 21 tabel ternormalisasi (3NF) dalam `DB::transaction`.
+- **Pattern D (Accommodation Wizard)**: DataTable + Multi-Step Livewire Form Wizard modal (`Accommodations\WizardForm`) yang mengelola relasi kompleks 21 tabel ternormalisasi (3NF) dalam `DB::transaction`.
 
 Semua modul harus mengikuti salah satu dari 4 patterns ini.
 

@@ -85,8 +85,7 @@ Data modeling akomodasi menggunakan arsitektur 3NF terpadu berbasis 1 tabel akar
 
 ## 5. Administrasi & Livewire Form Wizards
 
-Pendaftaran dan pengeditan properti/hotel dilakukan melalui form wizard multi-step yang intuitif:
-- **Property Wizard:** [`App\Livewire\Properties\WizardForm`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Livewire/Properties/WizardForm.php)
-- **Hotel Wizard:** [`App\Livewire\Hotels\WizardForm`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Livewire/Hotels/WizardForm.php)
+Pendaftaran dan pengeditan akomodasi dilakukan melalui form wizard multi-step yang intuitif:
+- **Accommodation Wizard (Unified):** [`App\Livewire\Accommodations\WizardForm`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Livewire/Accommodations/WizardForm.php)
 
 Setiap wizard mengelola state transaksional yang aman (`DB::transaction`), upload multi-file foto, validasi per-tab, dan otorisasi role Spatie.

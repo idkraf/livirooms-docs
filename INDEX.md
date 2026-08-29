@@ -46,9 +46,8 @@ Peta rute dokumentasi proyek: **Topik → File Dokumentasi → Implementasi Kode
 - **Detail Ruangan:** `room_furniture_groups`, `room_furniture_items`, `bed_facilities`.
 - **Detail Kompleks:** `accommodation_description_paragraphs`, `accommodation_details`, `accommodation_detail_groups`, `accommodation_detail_lines`.
 
-### 2. Livewire 4 Multi-Step Wizards
-- **Property Wizard:** `App\Livewire\Properties\WizardForm` (`livewire.properties.wizard_form`).
-- **Hotel Wizard:** `App\Livewire\Hotels\WizardForm` (`livewire.hotels.wizard_form`).
+### 2. Livewire 4 Multi-Step Wizard
+- **Accommodation Wizard (Unified):** `App\Livewire\Accommodations\WizardForm` (`livewire.accommodations.wizard_form`).
 
 ### 3. API Resources Terpadu
 - **`AccommodationResource`**: Mengembalikan payload `hotelShape()` untuk hotel dan `propertyShape()` untuk properti, 100% presisi dengan contract JSON Flutter.

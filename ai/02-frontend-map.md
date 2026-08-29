@@ -70,15 +70,17 @@ Aplikasi mendukung mode live API dan fallback fixture JSON terstandar di `assets
 ```
 Flutter AccommodationFormScreen
   ├── Mode Selection (room / unit)
-  ├── Hotel Wizard (5 tabs)
-  │   ├── Tab 1: Info Hotel → name, star_rating, open_year, check_in/out, cancellation_policy
-  │   ├── Tab 2: Fasilitas → facility_groups[]
-  │   ├── Tab 3: Tipe Kamar → room_types[] (name, price, capacity, inventory)
-  │   ├── Tab 4: Inventaris → room_type.remaining
-  │   └── Tab 5: Galeri & FAQ → gallery[], faqs[], transport_points[]
-  └── Submit → HotelService.createHotelForProperty()
-      ├── POST host/hotels (hotelPayload)
-      └── POST host/hotels/{id}/room-types (roomTypesPayload)
+  ├── Accommodation Wizard (7 tabs)
+  │   ├── Tab 1: Info Dasar → name, property_type, address, city, building_list, status
+  │   ├── Tab 2: Kapasitas & Kamar (unit) / Tipe Kamar (room) → capacity, bedrooms, bathrooms, room_types[]
+  │   ├── Tab 3: Harga → base_price, price_original, prices[]
+  │   ├── Tab 4: Fasilitas → facility_groups[], facility_tags[], bed_facilities[]
+  │   ├── Tab 5: Konten → gallery[], intro, description_extra
+  │   ├── Tab 6: Kebijakan → cancellation_policy, check_in/out_time, deposit_amount, policies[]
+  │   ├── Tab 7: Lokasi & FAQ → latitude, longitude, map_preview, faqs[], nearby_points[]
+  └── Submit → HostService.createProperty() / HotelService.createHotelForProperty()
+      ├── POST host/properties (propertyPayload) — untuk unit mode
+      └── POST host/hotels (hotelPayload) + POST host/hotels/{id}/room-types — untuk room mode
 ```
 
 ### Service Methods
