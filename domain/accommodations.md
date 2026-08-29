@@ -212,19 +212,27 @@ Accommodation::properties()->with([
 
 ## 5. Livewire 4 Multi-Step Form Wizards (Admin Panel)
 
-1. **[`App\Livewire\Properties\WizardForm`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Livewire/Properties/WizardForm.php):**
-   - **Tab 1 (Info Dasar):** Host, Kota, Gedung/Tower, Tipe Properti, Nama, Alamat, Status.
-   - **Tab 2 (Kapasitas & Fasilitas):** Kapasitas Tamu, Kamar Tidur, Kamar Mandi, Luas m², Checklist Fasilitas.
-   - **Tab 3 (Harga & Biaya):** Periode Sewa, Tarif Pokok, Cleaning Fee, Deposit, Service Fee.
-   - **Tab 4 (Galeri & Konten):** Upload Foto, Intro Marketing, Heading Paragraf, Flash Sale toggle.
-   - **Persistence:** Dalam satu `DB::transaction()`, menyimpan ke `accommodations` (`booking_mode = 'unit'`), `unit_types` (1 baris representasi), `unit_type_prices`, `accommodation_policies` (`section = 'cancellation'`), `facility_items`, dan `galleries`.
+1. **[`App\Livewire\Accommodations\WizardForm`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Livewire/Accommodations/WizardForm.php) (Unified 7-Step PMS Form):**
+   - **Tab 1 (Identitas & Lokasi):** Host, Mode (`room`/`unit`), Jenis Properti, Nama, Gedung/Tower (autocomplete), Kota, Alamat, Lat/Long, Status, Star Rating, Tahun Buka.
+   - **Tab 2 (Inventaris & Ruang):**
+     - *Mode Room:* Manajemen Tipe Kamar (`room_types`): Nama, Bed, Luas m², Stok Allotment, Fitur Kamar, Foto Kamar, Tag Fasilitas Kamar.
+     - *Mode Unit:* Spesifikasi Fisik (Tamu, Bed/Bath, Luas m²), Fasilitas Tempat Tidur (`bed_facilities`), Furnitur per Ruangan (`room_furniture_groups`).
+   - **Tab 3 (Skema Harga):**
+     - *Mode Room:* Matrix Tarif Kamar (Tarif dasar/malam, harga coret, switch sarapan).
+     - *Mode Unit:* Skema Sewa Multi-Durasi (`prices`: daily, weekly, monthly, yearly), Biaya Kebersihan, Deposit, Service Fee, Harga Coret, Caption.
+   - **Tab 4 (Fasilitas Properti):**
+     - *Mode Room:* Grup & Item Fasilitas Hotel (`facility_groups` + `facility_items` context=`facility`).
+     - *Mode Unit:* Fasilitas Gedung/Kompleks (`facilities`) & Spesifikasi Properti Tambahan (`specs`).
+   - **Tab 5 (Media & Cerita):** Foto Cover & Galeri Utama (`galleries`), Intro Singkat, Deskripsi Lengkap, Paragraf Sorotan, Rekomendasi Utama & Flash Sale.
+   - **Tab 6 (Aturan & Kebijakan):** Jam Check-in/out, Ketentuan Resepsionis & Usia Min, Kebijakan Anak/Extra Bed/Rokok, Daftar Kebijakan Pembatalan Dinamis (`cancellation_policies`), Catatan Check-in & Deposit.
+   - **Tab 7 (Sekitar & FAQ):** Preview Peta (`map_preview`), Titik Lokasi Sekitar POI (`nearby_points`), Titik Transit (`transport_points`), Tanya Jawab FAQ (`accommodation_questions`), Detail Properti Tambahan (`accommodation_details`).
+   - **Persistence:** Menyimpan seluruh relasi 3NF PostgreSQL dalam satu `DB::transaction()` atomik.
 
 2. **[`App\Livewire\Hotels\WizardForm`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Livewire/Hotels/WizardForm.php):**
-   - **Tab 1 (Identitas Hotel):** Host, Kota, Nama Hotel, Bintang (1-5), Tahun Buka, Jam Check-in/Out, Deposit, Kebijakan Pembatalan.
-   - **Tab 2 (Tipe Kamar):** Repeater dinamis tipe kamar (nama, ranjang, tarif dasar, harga coret, kapasitas dewasa/anak, sarapan, fasilitas kamar).
-   - **Tab 3 (Fasilitas & Kebijakan):** Checklist fasilitas bertingkat 8 kategori, aturan resepsionis 24 jam, kebijakan anak, extra bed.
-   - **Tab 4 (Transit, FAQ & Galeri):** Repeater titik transit sekitar (jarak, durasi, ikon), FAQ manajer hotel, dan upload galeri.
-   - **Persistence:** Dalam satu `DB::transaction()`, menyimpan ke `accommodations` (`booking_mode = 'room'`), multiple `unit_types`, `accommodation_policies` (`section = 'general'` & `section = 'cancellation'`), `nearby_points`, `accommodation_questions`, dan `galleries`.
+   - Wizard khusus hotel (Mode Room).
+
+3. **[`App\Livewire\Properties\WizardForm`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Livewire/Properties/WizardForm.php):**
+   - Wizard khusus rental properti (Mode Unit).
 
 ---
 
