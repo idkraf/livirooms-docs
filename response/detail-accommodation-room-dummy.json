@@ -1,0 +1,443 @@
+{
+  "id": 1,
+  "property_id": 1,
+  "star_rating": 5,
+  "open_year": 2010,
+  "check_in_time": "14:00:00",
+  "check_out_time": "12:00:00",
+  "rating": 9.4,
+  "rating_label": "Istimewa",
+  "review_count": 428,
+  "review_quotes": [
+    "Lokasi sangat strategis di jantung Jakarta Pusat.",
+    "Pelayanan prima dari resepsionis 24 jam dan housekeeping yang sangat responsif.",
+    "Kolam renang infinity di lantai 5 memiliki pemandangan cakrawala kota yang spektakuler."
+  ],
+  "deposit_amount": 500000,
+  "created_at": "2026-08-13T04:12:33.000000Z",
+  "updated_at": "2026-08-15T09:41:07.000000Z",
+  "name": "Merlynn Park Hotel",
+  "building_list": {
+    "id": 1,
+    "name": "Merlynn Park Hotel",
+    "image": null,
+    "available_units": null
+  },
+  "description": "Merlynn Park Hotel adalah hotel bintang 5 bergaya megah di kawasan Gambir, Jakarta Pusat. Menawarkan kamar luas dengan bathtub di setiap kamar, 3 kolam renang spektakuler di lantai 5 (termasuk infinity pool dengan pemandangan cakrawala kota Jakarta), pusat kebugaran modern, spa mewah, dan restoran internasional Grand Central serta Grand City.",
+  "address": "Jl. K.H. Hasyim Ashari No. 29-31, Petojo Utara, Gambir, Jakarta Pusat 10130",
+  "city_name": "Jakarta Pusat",
+  "latitude": -6.166667,
+  "longitude": 106.816667,
+  "cancellation_policy": "Pembatalan gratis hingga 24 jam sebelum check-in.",
+  "price_from": 685000,
+  "price_original": 950000,
+  "gallery": [
+    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1000&q=80"
+  ],
+  "facilities": [
+    {
+      "category": "Fasilitas Utama",
+      "icon": "star",
+      "items": [
+        {
+          "name": "3 Kolam Renang (Infinity Pool & Kolam Anak)",
+          "is_available": true,
+          "badge": null
+        },
+        {
+          "name": "Pusat Kebugaran / Gym Modern",
+          "is_available": true,
+          "badge": null
+        },
+        {
+          "name": "Man Salon & Spa with Sauna",
+          "is_available": true,
+          "badge": "Biaya tambahan"
+        },
+        {
+          "name": "Wi-Fi Kecepatan Tinggi",
+          "is_available": true,
+          "badge": "Gratis"
+        },
+        {
+          "name": "Resepsionis & Keamanan 24 Jam",
+          "is_available": true,
+          "badge": null
+        },
+        {
+          "name": "Parkir Valet",
+          "is_available": true,
+          "badge": "Gratis"
+        },
+        {
+          "name": "Bathtub di Semua Kamar",
+          "is_available": true,
+          "badge": null
+        }
+      ]
+    },
+    {
+      "category": "Makanan & Minuman",
+      "icon": "restaurant",
+      "items": [
+        {
+          "name": "Grand Central Restaurant (Prasmanan Nusantara & Western)",
+          "is_available": true,
+          "badge": null
+        },
+        {
+          "name": "Grand City Restaurant (Authentic Chinese Cuisine)",
+          "is_available": true,
+          "badge": null
+        },
+        {
+          "name": "Pool Bar & Lounge",
+          "is_available": true,
+          "badge": null
+        }
+      ]
+    }
+  ],
+  "nearby_points": [
+    {
+      "name": "Stasiun Gambir",
+      "type": "train",
+      "distance": "1,2 km",
+      "duration": "15 menit",
+      "icon": "train"
+    },
+    {
+      "name": "Monas",
+      "type": "attraction",
+      "distance": "2,5 km",
+      "duration": "10 menit",
+      "icon": "map-pin"
+    },
+    {
+      "name": "Bandara Halim Perdanakusuma",
+      "type": "airport",
+      "distance": "8,3 km",
+      "duration": "25 menit",
+      "icon": "flight"
+    }
+  ],
+  "questions": [
+    {
+      "question": "Apakah tersedia layanan laundry?",
+      "answer": "Ya, kami menyediakan layanan laundry 24 jam dengan biaya tambahan.",
+      "author_name": "Manager akomodasi",
+      "author_role": "Staff Hotel"
+    },
+    {
+      "question": "Apakah hewan peliharaan diperbolehkan?",
+      "answer": "Maaf, untuk kenyamanan semua tamu, hewan peliharaan tidak diperbolehkan kecuali hewan pendamping (service animal).",
+      "author_name": "Manager akomodasi",
+      "author_role": "Staff Hotel"
+    }
+  ],
+  "policies": {
+    "general": [
+      {
+        "section": "general",
+        "icon": "info",
+        "tone": "neutral",
+        "title": "Informasi Umum",
+        "paragraphs": [
+          "Check-in mulai pukul 14:00. Tamu wajib menunjukkan kartu identitas resmi berfoto saat check-in.",
+          "Check-out sebelum pukul 12:00."
+        ],
+        "sort_order": 1
+      }
+    ],
+    "check_in": [
+      {
+        "section": "check_in",
+        "icon": "login",
+        "tone": "info",
+        "title": "Prosedur Check-in",
+        "paragraphs": [
+          "Tunjukkan KTP/Passport asli.",
+          "Isi kartu tamu dan formulir registrasi.",
+          "Deposit tunai Rp 500.000 untuk biaya tambahan (bisa dibayar dengan kartu kredit)."
+        ],
+        "sort_order": 1
+      }
+    ],
+    "check_out": [
+      {
+        "section": "check_out",
+        "icon": "logout",
+        "tone": "info",
+        "title": "Prosedur Check-out",
+        "paragraphs": [
+          "Kunci kamar serahkan ke resepsionis.",
+          "Periksa tagihan dan dokumen deposit.",
+          "Deposit dikembalikan dalam 7 hari kerja setelah inspeksi kamar."
+        ],
+        "sort_order": 1
+      }
+    ],
+    "cancellation": [
+      {
+        "section": "cancellation",
+        "icon": "cancel",
+        "tone": "warning",
+        "title": "Kebijakan Pembatalan",
+        "paragraphs": [
+          "Pembatalan gratis hingga 24 jam sebelum check-in.",
+          "Pembatalan kurang dari 24 jam sebelum check-in akan dikenakan denda 1 malam pertama.",
+          "No-show akan dikenakan denda 100% dari total reservasi."
+        ],
+        "sort_order": 1
+      }
+    ],
+    "smoking_policy": [
+      {
+        "section": "smoking_policy",
+        "icon": "smoke_free",
+        "tone": "info",
+        "title": "Kebijakan Merokok",
+        "paragraphs": [
+          "Semua kamar adalah area bebas rokok (Non-Smoking).",
+          "Area khusus merokok tersedia di Lobby Lounge dan Balkon Lantai 5.",
+          "Denda Rp 1.500.000 untuk pelanggaran kebijakan merokok di dalam kamar."
+        ],
+        "sort_order": 1
+      }
+    ],
+    "extra_bed_policy": [
+      {
+        "section": "extra_bed_policy",
+        "icon": "bed",
+        "tone": "info",
+        "title": "Kebijakan Ranjang Tambahan",
+        "paragraphs": [
+          "Ranjang tambahan tersedia atas permintaan dengan biaya Rp 250.000 per malam.",
+          "Kapasitas maksimal 1 ranjang tambahan per kamar.",
+          "Harus diminta minimal 24 jam sebelum check-in."
+        ],
+        "sort_order": 1
+      }
+    ],
+    "deposit": [
+      {
+        "section": "deposit",
+        "icon": "account_balance_wallet",
+        "tone": "info",
+        "title": "Kebijakan Deposit",
+        "paragraphs": [
+          "Deposit wajib Rp 500.000 per kamar per malam.",
+          "Dapat dibayar dengan kartu kredit atau tunai.",
+          "Dikembalikan setelah check-out jika tidak ada kerusakan atau biaya tambahan."
+        ],
+        "sort_order": 1
+      }
+    ],
+    "room_policy": [
+      {
+        "section": "room_policy",
+        "icon": "hotel",
+        "tone": "neutral",
+        "title": "Kebijakan Kamar",
+        "paragraphs": [
+          "Check-in mulai pukul 14:00. Check-out sebelum pukul 12:00.",
+          "Tamu wajib menunjukkan kartu identitas resmi berfoto saat check-in.",
+          "Dilarang membawa tamu tidak tercatat tanpa seizin manajemen."
+        ],
+        "sort_order": 1
+      }
+    ]
+  },
+  "unit_types": [
+    {
+      "id": 1,
+      "name": "Executive Room",
+      "description": "Kamar Executive dengan fasilitas lengkap.",
+      "bed_configuration": "1 King Bed atau 2 Single Bed",
+      "room_size_sqm": 35.0,
+      "base_price": 685000.0,
+      "price_original": 950000.0,
+      "capacity_adults": 2,
+      "capacity_children": 1,
+      "max_guests": 3,
+      "breakfast_included": true,
+      "has_window": true,
+      "no_smoking": true,
+      "free_wifi": true,
+      "total_inventory": 20,
+      "is_active": true,
+      "facilities": [
+        "Bathtub Marmer",
+        "AC",
+        "TV Kabel Layar Datar",
+        "Kulkas Mini",
+        "Brankas",
+        "Meja Kerja",
+        "Mini Bar"
+      ],
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
+          "caption": "Executive Room - Main View"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80",
+          "caption": "Executive Room - Bathroom"
+        }
+      ],
+      "prices": [
+        {
+          "price_type": "daily",
+          "amount": 685000,
+          "cleaning_fee": 0,
+          "deposit": 500000,
+          "service_fee": 68500
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Family Suite",
+      "description": "Suite luas untuk keluarga dengan 2 kamar tidur.",
+      "bed_configuration": "2 King Bed",
+      "room_size_sqm": 55.0,
+      "base_price": 1200000.0,
+      "price_original": 1500000.0,
+      "capacity_adults": 4,
+      "capacity_children": 2,
+      "max_guests": 6,
+      "breakfast_included": true,
+      "has_window": true,
+      "no_smoking": true,
+      "free_wifi": true,
+      "total_inventory": 10,
+      "is_active": true,
+      "facilities": [
+        "Living Room",
+        "Dapur",
+        "Bathtub",
+        "AC",
+        "TV 55 Inch",
+        "Brankas",
+        "Balcony"
+      ],
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80",
+          "caption": "Family Suite - Living Room"
+        }
+      ],
+      "prices": [
+        {
+          "price_type": "daily",
+          "amount": 1200000,
+          "cleaning_fee": 0,
+          "deposit": 1000000,
+          "service_fee": 120000
+        }
+      ]
+    }
+  ],
+  "facility_groups": [
+    {
+      "category": "Fasilitas Utama",
+      "icon": "star",
+      "items": [
+        {
+          "name": "3 Kolam Renang (Infinity Pool & Kolam Anak)",
+          "is_available": true,
+          "badge": null
+        },
+        {
+          "name": "Pusat Kebugaran / Gym Modern",
+          "is_available": true,
+          "badge": null
+        },
+        {
+          "name": "Man Salon & Spa with Sauna",
+          "is_available": true,
+          "badge": "Biaya tambahan"
+        },
+        {
+          "name": "Wi-Fi Kecepatan Tinggi",
+          "is_available": true,
+          "badge": "Gratis"
+        },
+        {
+          "name": "Resepsionis & Keamanan 24 Jam",
+          "is_available": true,
+          "badge": null
+        },
+        {
+          "name": "Parkir Valet",
+          "is_available": true,
+          "badge": "Gratis"
+        },
+        {
+          "name": "Bathtub di Semua Kamar",
+          "is_available": true,
+          "badge": null
+        }
+      ]
+    },
+    {
+      "category": "Makanan & Minuman",
+      "icon": "restaurant",
+      "items": [
+        {
+          "name": "Grand Central Restaurant",
+          "is_available": true,
+          "badge": null
+        },
+        {
+          "name": "Grand City Restaurant",
+          "is_available": true,
+          "badge": null
+        }
+      ]
+    }
+  ],
+  "facility_items": [
+    {
+      "id": 1,
+      "name": "AC",
+      "icon": "ac",
+      "context": "facility",
+      "is_available": true,
+      "badge": null
+    },
+    {
+      "id": 2,
+      "name": "WiFi",
+      "icon": "wifi",
+      "context": "facility",
+      "is_available": true,
+      "badge": "Gratis"
+    },
+    {
+      "id": 3,
+      "name": "Swimming Pool",
+      "icon": "pool",
+      "context": "facility",
+      "is_available": true,
+      "badge": null
+    }
+  ],
+  "check_in_info": "Check-in mulai pukul 14:00. Tamu wajib menunjukkan kartu identitas resmi berfoto saat check-in.",
+  "check_out_info": "Check-out sebelum pukul 12:00.",
+  "reception_hours": "Resepsionis beroperasi 24 jam setiap hari.",
+  "min_age": 18,
+  "child_policy": "Anak usia 0-5 tahun menginap gratis jika menggunakan tempat tidur yang ada. Anak-anak dari segala usia dapat menginap di akomodasi ini.",
+  "extra_bed_policy": "Ranjang tambahan tersedia atas permintaan dengan biaya Rp 250.000 per malam. Ketersediaan bervariasi sesuai tipe kamar.",
+  "smoking_policy": "Semua kamar adalah bebas rokok (Non-Smoking). Area khusus merokok tersedia.",
+  "deposit_currency": "IDR",
+  "receptionist_24h": true,
+  "allow_children": true,
+  "extra_bed_available": true,
+  "status": "active",
+  "booking_mode": "room"
+}

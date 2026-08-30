@@ -3,34 +3,33 @@
   "code": 200,
   "message": "Detail hotel berhasil dimuat.",
   "data": {
-    "id": 1,
-    "property_id": 1,
+    "id": 6,
+    "property_id": 6,
     "star_rating": 5,
-    "open_year": 2010,
+    "open_year": 2019,
     "check_in_time": "14:00:00",
     "check_out_time": "12:00:00",
-    "rating": 9.4,
+    "rating": 9.3,
     "rating_label": "Istimewa",
     "review_count": 1,
-    "deposit_amount": "500000.00",
-    "created_at": "2026-08-26T10:24:31+00:00",
-    "updated_at": "2026-08-26T10:24:31+00:00",
-    "name": "Merlynn Park Hotel",
+    "deposit_amount": "300000.00",
+    "created_at": "2026-08-30T06:10:52+00:00",
+    "updated_at": "2026-08-30T06:10:52+00:00",
+    "name": "Artotel Harmoni Jakarta",
     "building_list": null,
-    "description": "Merlynn Park Hotel adalah hotel bintang 5 bergaya megah di kawasan Gambir, Jakarta Pusat. Menawarkan kamar luas dengan bathtub di setiap kamar, 3 kolam renang spektakuler di lantai 5 (termasuk infinity pool dengan pemandangan cakrawala kota Jakarta), pusat kebugaran modern, spa mewah, dan restoran internasional Grand Central serta Grand City.",
-    "address": "Jl. K.H. Hasyim Ashari No. 29-31, Petojo Utara, Gambir, Jakarta Pusat 10130",
+    "description": "Artotel Harmoni Jakarta adalah hotel butik seni kontemporer bintang 4 di kawasan Gambir. Menampilkan instalasi seni orisinil karya seniman lokal terkemuka di setiap lantai dan kamar, dilengkapi kolam renang outdoor, ROCA Restaurant & Bar yang trendi, dan ARTSPACE galeri pameran seni.",
+    "address": "Jl. Suryopranoto No. 1-9, Petojo Selatan, Gambir, Jakarta Pusat 10160",
     "city_name": "Jakarta Pusat",
-    "latitude": -6.166667,
-    "longitude": 106.816667,
+    "latitude": -6.167821,
+    "longitude": 106.818934,
     "cancellation_policy": "Pembatalan gratis hingga 24 jam sebelum waktu check-in.",
-    "price_from": 685000,
-    "price_original": 950000,
+    "price_from": 650000,
+    "price_original": 890000,
     "gallery": [
-      "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_1.jpg",
-      "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_2.jpg",
-      "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_3.jpg",
-      "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_4.jpg",
-      "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_5.jpg"
+      "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_1.jpg",
+      "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_2.jpg",
+      "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_3.jpg",
+      "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_4.jpg"
     ],
     "facilities": [
       {
@@ -38,27 +37,27 @@
         "icon": "star",
         "items": [
           {
-            "name": "Kolam Renang Infinity",
+            "name": "Kolam Renang Outdoor",
             "is_available": false,
             "badge": null
           },
           {
-            "name": "Wi-Fi Gratis Kecepatan Tinggi",
+            "name": "ROCA Restaurant & Bar",
             "is_available": false,
             "badge": null
           },
           {
-            "name": "Pusat Kebugaran & Gym",
+            "name": "ARTSPACE Galeri Seni",
             "is_available": false,
             "badge": null
           },
           {
-            "name": "Spa & Sauna Mewah",
+            "name": "Gym Modern",
             "is_available": false,
             "badge": null
           },
           {
-            "name": "Restoran & Bar Lounge",
+            "name": "Wi-Fi Cepat",
             "is_available": false,
             "badge": null
           },
@@ -72,58 +71,84 @@
     ],
     "nearby_points": [
       {
+        "name": "Halte Harmoni TransJakarta",
+        "type": "bus",
+        "distance": "300 m",
+        "duration": "4 mnt jalan kaki",
+        "icon": "bus"
+      },
+      {
+        "name": "Istana Merdeka",
+        "type": "attraction",
+        "distance": "1.1 km",
+        "duration": "5 mnt berkendara",
+        "icon": "location_city"
+      },
+      {
         "name": "Stasiun Gambir",
         "type": "train",
-        "distance": "2,1 km",
+        "distance": "2.2 km",
         "duration": "8 mnt berkendara",
         "icon": "train"
       },
       {
-        "name": "Monumen Nasional (Monas)",
+        "name": "Monas",
         "type": "attraction",
-        "distance": "1,8 km",
+        "distance": "1.6 km",
         "duration": "6 mnt berkendara",
         "icon": "location_city"
-      },
-      {
-        "name": "Bandara Internasional Soekarno-Hatta",
-        "type": "airport",
-        "distance": "24 km",
-        "duration": "35 mnt via Tol",
-        "icon": "flight"
       }
     ],
-    "policy_notes": null,
+    "check_in_notes": [
+      {
+        "icon": "clock",
+        "tone": "info",
+        "title": "Check-in Policy",
+        "paragraphs": [
+          "Check-in mulai pukul 14:00.",
+          "Tamu wajib menunjukkan kartu identitas resmi berfoto saat check-in."
+        ]
+      }
+    ],
+    "deposit_notes": [
+      {
+        "icon": "money",
+        "tone": "primary",
+        "title": "Deposit Policy",
+        "paragraphs": [
+          "Deposit sebesar Rp 300.000 dikembalikan penuh saat check-out jika tidak ada kerusakan."
+        ]
+      }
+    ],
     "questions": [
       {
-        "question": "Apakah sarapan sudah termasuk dalam harga kamar?",
-        "answer": "Ya, sarapan prasmanan internasional tersedia setiap hari di Grand Central Restaurant untuk paket kamar dengan sarapan.",
-        "author_name": "Manajemen Merlynn Park",
+        "question": "Apakah ada galeri seni di dalam hotel?",
+        "answer": "Ya, ARTSPACE di area lobi menyelenggarakan pameran karya seni berkala.",
+        "author_name": "Manager akomodasi",
         "author_role": "Staff Hotel"
       },
       {
-        "question": "Apakah ada fasilitas antar-jemput bandara?",
-        "answer": "Layanan antar-jemput bandara tersedia dengan biaya tambahan. Silakan hubungi resepsionis minimal 24 jam sebelum kedatangan.",
-        "author_name": "Concierge Desk",
+        "question": "Apakah semua kamar ada mesin kopi?",
+        "answer": "Ya, setiap kamar dilengkapi mesin kopi Dolce Gusto.",
+        "author_name": "Front Desk",
         "author_role": "Staff Hotel"
       }
     ],
     "property": {
-      "id": 1,
-      "name": "Merlynn Park Hotel",
+      "id": 6,
+      "name": "Artotel Harmoni Jakarta",
       "city_id": 16,
-      "address": "Jl. K.H. Hasyim Ashari No. 29-31, Petojo Utara, Gambir, Jakarta Pusat 10130",
-      "description": "Merlynn Park Hotel adalah hotel bintang 5 bergaya megah di kawasan Gambir, Jakarta Pusat. Menawarkan kamar luas dengan bathtub di setiap kamar, 3 kolam renang spektakuler di lantai 5 (termasuk infinity pool dengan pemandangan cakrawala kota Jakarta), pusat kebugaran modern, spa mewah, dan restoran internasional Grand Central serta Grand City.",
-      "latitude": -6.166667,
-      "longitude": 106.816667,
+      "address": "Jl. Suryopranoto No. 1-9, Petojo Selatan, Gambir, Jakarta Pusat 10160",
+      "description": "Artotel Harmoni Jakarta adalah hotel butik seni kontemporer bintang 4 di kawasan Gambir. Menampilkan instalasi seni orisinil karya seniman lokal terkemuka di setiap lantai dan kamar, dilengkapi kolam renang outdoor, ROCA Restaurant & Bar yang trendi, dan ARTSPACE galeri pameran seni.",
+      "latitude": -6.167821,
+      "longitude": 106.818934,
       "status": "active",
       "cancellation_policy": "Pembatalan gratis hingga 24 jam sebelum waktu check-in.",
       "gallery": [
-        "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_1.jpg",
-        "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_2.jpg",
-        "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_3.jpg",
-        "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_4.jpg",
-        "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_5.jpg"
+        "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_1.jpg",
+        "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_2.jpg",
+        "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_3.jpg",
+        "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_4.jpg"
       ],
       "city": {
         "id": 16,
@@ -132,48 +157,78 @@
     },
     "unit_types": [
       {
-        "id": 1,
-        "hotel_id": 1,
-        "name": "Executive Room King",
-        "slug": "executive-room-king",
-        "description": "Kamar luas 34 m² dengan 1 tempat tidur King, bathtub marmer, dan pemandangan kota.",
+        "id": 10,
+        "hotel_id": 6,
+        "name": "Studio 20",
+        "slug": "studio-20-artotel",
+        "description": "Kamar berkonsep seni unik 20 m² dengan mural dinding karya seniman lokal, mesin pembuat kopi Dolce Gusto, dan kasur super nyaman.",
         "capacity_adults": 2,
         "capacity_children": 1,
         "max_guests": 2,
-        "room_size_sqm": 34,
-        "bed_configuration": "1 Tempat Tidur King",
-        "base_price": 685000,
-        "price_original": 950000,
+        "room_size_sqm": 20,
+        "bed_configuration": "1 Queen Bed",
+        "base_price": 650000,
+        "price_original": 890000,
         "has_breakfast": true,
         "has_window": true,
         "no_smoking": true,
         "free_wifi": true,
-        "total_inventory": 10,
-        "remaining": 10,
+        "total_inventory": 18,
+        "remaining": 18,
         "is_active": true,
         "facility_tags": [],
         "images": [
           {
-            "url": "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_2.jpg",
-            "caption": "Executive Room King"
+            "url": "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_1.jpg",
+            "caption": "Studio 20"
           }
         ],
-        "created_at": "2026-08-26T10:24:31+00:00",
-        "updated_at": "2026-08-26T10:24:31+00:00"
+        "created_at": "2026-08-30T06:10:52+00:00",
+        "updated_at": "2026-08-30T06:10:52+00:00"
       },
       {
-        "id": 2,
-        "hotel_id": 1,
-        "name": "Suite Room (Bathtub & City View)",
-        "slug": "suite-room-bathtub-city-view",
-        "description": "Suite mewah 55 m² dengan ruang tamu terpisah, jacuzzi pribadi, dan sarapan buffet.",
+        "id": 11,
+        "hotel_id": 6,
+        "name": "Studio 25",
+        "slug": "studio-25-artotel",
+        "description": "Studio seni seluas 25 m² dengan area kerja kreatif, kamar mandi marmer modern, dan pemandangan kota Gambir.",
+        "capacity_adults": 2,
+        "capacity_children": 1,
+        "max_guests": 3,
+        "room_size_sqm": 25,
+        "bed_configuration": "1 King Bed atau 2 Single Bed",
+        "base_price": 780000,
+        "price_original": 1050000,
+        "has_breakfast": true,
+        "has_window": true,
+        "no_smoking": true,
+        "free_wifi": true,
+        "total_inventory": 14,
+        "remaining": 14,
+        "is_active": true,
+        "facility_tags": [],
+        "images": [
+          {
+            "url": "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_2.jpg",
+            "caption": "Studio 25"
+          }
+        ],
+        "created_at": "2026-08-30T06:10:52+00:00",
+        "updated_at": "2026-08-30T06:10:52+00:00"
+      },
+      {
+        "id": 12,
+        "hotel_id": 6,
+        "name": "Studio 40",
+        "slug": "studio-40-artotel",
+        "description": "Studio suite eksklusif 40 m² dengan bathtub freestanding elegan, ruang duduk santai, dan sentuhan seni kontemporer premium.",
         "capacity_adults": 2,
         "capacity_children": 2,
-        "max_guests": 3,
-        "room_size_sqm": 55,
-        "bed_configuration": "1 Tempat Tidur Super King",
-        "base_price": 1250000,
-        "price_original": 1700000,
+        "max_guests": 4,
+        "room_size_sqm": 40,
+        "bed_configuration": "1 King Bed",
+        "base_price": 1350000,
+        "price_original": 1850000,
         "has_breakfast": true,
         "has_window": true,
         "no_smoking": true,
@@ -184,14 +239,21 @@
         "facility_tags": [],
         "images": [
           {
-            "url": "http://127.0.0.1:8000/storage/accommodations/gallery/merlynn_3.jpg",
-            "caption": "Suite Room (Bathtub & City View)"
+            "url": "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_3.jpg",
+            "caption": "Studio 40"
           }
         ],
-        "created_at": "2026-08-26T10:24:31+00:00",
-        "updated_at": "2026-08-26T10:24:31+00:00"
+        "created_at": "2026-08-30T06:10:52+00:00",
+        "updated_at": "2026-08-30T06:10:52+00:00"
       }
-    ]
+    ],
+    "check_in_info": "Check-in mulai pukul 14:00.",
+    "check_out_info": "Check-out sebelum pukul 12:00.",
+    "min_age": null,
+    "reception_hours": null,
+    "receptionist_24h": false,
+    "allow_children": false,
+    "extra_bed_available": false
   },
   "meta": null,
   "errors": null

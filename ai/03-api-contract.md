@@ -38,6 +38,15 @@
 | 17 | `GET hotels/{hotel}` | `HotelApiController::show` | `hotel_service.dart:26` | ✅ | Detail hotel 8-tab (`hotelShape`) |
 | 18 | `GET hotels/{hotel}/room-types` | `HotelApiController::roomTypes` | — | ⬜ | Allotment tipe kamar |
 | 19 | **`GET accommodations/{id}`** | **`AccommodationController::show`** | — | ✅ | **Unified endpoint (Auto-branching Hotel & Property)** |
+| 19a | **`GET accommodations/{id}/edit`** | **`AccommodationController::edit`** | — | ✅ | **Form prefill — mengembalikan detail dengan `policies` terkelompok per section** |
+| 19b | **`POST accommodations`** | **`AccommodationController::store`** | — | ✅ | **Buat akomodasi (race-condition safe + `DB::transaction`)** |
+| 19c | **`PUT accommodations/{id}`** | **`AccommodationController::update`** | — | ✅ | **Update akomodasi (`lockForUpdate` + `DB::transaction`)** |
+
+> **Resource baru (detail per `booking_mode`):**
+> - `App\Http\Resources\AccommodatonDetailRoomResource` — mode `room` (Hotel). Output identik `hotelShape` + blok `policies` terstruktur per `section` (`general`, `check_in`, `check_out`, `cancellation`, `smoking_policy`, `extra_bed_policy`, `deposit`, `room_policy`).
+> - `App\Http\Resources\AccommodationDetailUnitResource` — mode `unit` (Apartemen/Vila/Kost). Output identik `propertyShape` + blok `policies` terstruktur per `section`.
+>
+> **Kontrak `policies` (stabil, zero-error):** selalu `Map<section, List<{section, icon, tone, title, paragraphs[]}>>`; setiap section selalu hadir sebagai array (bisa kosong). JSON dummy Flutter: `assets/json/accommodation_room_id.json` & `accommodation_unit_id.json`.
 | 20 | `GET cms/{slug}` | `HomeController::cmsPage` | `content_service.dart:100` | ✅ | Privacy Policy, T&C, About |
 | 21 | `GET faqs` | `HomeController::faqs` | `content_service.dart:85` | ✅ | FAQ Publik |
 | 22 | `POST payments/webhook` | `PaymentController::webhook` | — | 🔒 | **Midtrans Server-to-Server Webhook** |

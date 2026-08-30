@@ -110,3 +110,9 @@ Flutter AccommodationFormScreen
 | `NearbyPlace` | `NearbyPointResource` | Transport/nearby point |
 | `Review` | `ReviewResource` | Guest review after completed booking |
 | `ReviewPhoto` | `ReviewPhotoResource` | Photo attachment for guest review |
+| `AccommodationDetailRoom` (JSON dummy) | `AccommodatonDetailRoomResource` | **Baru** — Detail & Booking mode `room` (`lib/screens/accommodation/accommodation_detail_room_screen.dart`) |
+| `AccommodationDetailUnit` (JSON dummy) | `AccommodationDetailUnitResource` | **Baru** — Detail & Booking mode `unit` (`lib/screens/accommodation/accommodation_detail_unit_screen.dart`) |
+
+> **Flutter dummy assets (struktur `policies` per `section`):** `assets/json/accommodation_room_id.json` (mode `room`) & `assets/json/accommodation_unit_id.json` (mode `unit`). Kedua file mereplikasi persis output API Resource, dengan blok `policies` dikelompokkan berdasarkan `section` (`general`, `check_in`, `check_out`, `cancellation`, `smoking_policy`, `extra_bed_policy`, `deposit`, `room_policy`).
+
+> **Seeder aman (chunking):** `AccommodationSeeder` memproses seluruh pekerjaan seed dalam chunk eksplisit (maksimal 100 chunk) dengan jeda `sleep(2)` di akhir setiap chunk untuk mencegah beban puncak CPU/memori saat `migrate:fresh --seed`.
