@@ -84,13 +84,25 @@
 - `GET properties/{property}/reviews` (`ReviewController::index`) — Daftar ulasan properti
 
 ### Orders & Payment Snap
-- `GET orders` (`OrderController::index`)
-- `GET orders/{order}` (`OrderController::show`)
-- `POST payments/pay` (`PaymentController::pay`) — Create Midtrans Snap token & redirect URL
-- `POST payments/retry` (`PaymentController::retry`) — Retry payment
-- `GET payments/check/{order}` (`PaymentController::check`) — Poll payment status
+- `GET orders` (`OrderController::index`) — `booking_service.dart:219` — User's order list (nested `booking`)
+- `GET orders/{order}` (`OrderController::show`) — `booking_service.dart:224` — Order detail
+- `POST orders/{order}/pay` (`PaymentController::pay`) — `payment_service.dart` — Create Midtrans Snap token & redirect URL
+- `POST orders/{order}/pay/retry` (`PaymentController::payUrl`) — `payment_service.dart` — Retry or continue payment
+- `GET payments/check/{order}` (`PaymentController::check`) — `payment_service.dart` — Poll payment status
+- `GET payments/methods` (`PaymentController::methods`) — `payment_service.dart` — Enabled payment methods
+- `GET payments/{payment}` (`PaymentController::show`) — `payment_service.dart` — Payment detail
+- `POST payments/{payment}/reconcile` (`PaymentController::reconcile`) — `payment_service.dart` — Sync status with Midtrans
+- `POST bookings/{booking}/cancel` (`BookingController::cancel`) — `booking_service.dart` — Cancel booking
+- `POST bookings/{booking}/review` (`ReviewController::store`) — `booking_service.dart` — Create review
+- `POST payments/webhook` (`PaymentController::webhook`) — Midtrans S2S webhook (signature SHA-512 verified, not Sanctum)
 
 ### Host Management (Mitra)
+- `GET host/orders` (`OrderController::forHost`) — `host_service.dart:33` — **FIXED:** Orders with nested `booking` object; query supports `page`, `status`, `booking_status`. Returns `Paginated<Order>`.
+- `GET host/orders/{order}` (`OrderController::showForHost`) — `host_service.dart:41` — Host order detail
+- `POST bookings/{booking}/confirm` (`BookingController::confirm`) — `host_service.dart:46` — Confirm booking (Accept order)
+- `POST bookings/{booking}/reject` (`BookingController::reject`) — `host_service.dart:50` — Reject booking (Tolak order)
+- `POST bookings/{booking}/checkin` (`BookingController::checkin`) — `host_service.dart:54` — Mark guest arrived
+- `POST bookings/{booking}/confirm-checkin` (`BookingController::confirmCheckin`) — `host_service.dart:58` — Confirm check-in
 - `GET host/properties` (`PropertyController::hostIndex`)
 - `POST host/properties` (`PropertyController::store`)
 - `GET host/properties/{property}` (`PropertyController::hostShow`)

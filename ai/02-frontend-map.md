@@ -141,3 +141,15 @@ Penyajian status pemesanan dan tombol aksi mengikuti aturan:
   - `lib/screens/booking/booking_detail_hotel_screen.dart` (Hotel Booking Detail)
   - `lib/screens/booking/widgets/booking_widgets_bottom_bar.dart`
   - `lib/screens/booking/widgets/booking_widgets_segment_status.dart`
+
+---
+
+## 8. Authentication & Role Routing (Mitra vs Consumer)
+
+- **Routing Shell:**
+  - `User` dengan status host (`auth.isHost == true`) otomatis diarahkan ke `Routes.mitraHome` (`MitraShell`) baik saat selesai login di `LoginScreen` maupun saat auto-login di `SplashScreen`.
+  - `User` dengan status konsumen biasa diarahkan ke `Routes.home` (`MainShell`).
+- **Resolusi Status Host (`User.isHost`):**
+  - **Flutter (`User.isHost`):** Mengevaluasi `type == 'host'`, array `roles.contains('host')`, serta fallback pola email host (`.host@` / `host@` seperti `budi.host@example.com`).
+  - **Laravel (`AuthController` & `ProfileController`):** Memvalidasi `$user->hasRole('host')`, kepemilikan properti/hotel (`Accommodation::where('host_id', $user->id)->exists()`), atau pola email host. Otomatis memperbarui `UserProfile.type = 'host'` dan menyertakan `roles` dalam response JSON payload `auth/login`, `auth/me`, dan `profile`.
+
