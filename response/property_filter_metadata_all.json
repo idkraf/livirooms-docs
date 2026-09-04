@@ -1,0 +1,71 @@
+﻿{
+    "status":  true,
+    "code":  200,
+    "message":  "Filter metadata berhasil dimuat.",
+    "data":  {
+                 "price_min":  500000,
+                 "price_max":  4800000,
+                 "property_types":  [
+                                        "apartment",
+                                        "villa"
+                                    ],
+                 "max_guests":  6,
+                 "max_bedrooms":  3,
+                 "facilities":  [
+                                    {
+                                        "id":  6,
+                                        "name":  "2 Kamar Mandi"
+                                    },
+                                    {
+                                        "id":  15,
+                                        "name":  "2 King Beds"
+                                    },
+                                    {
+                                        "id":  5,
+                                        "name":  "3 Kamar Tidur"
+                                    },
+                                    {
+                                        "id":  8,
+                                        "name":  "Dapur Lengkap"
+                                    },
+                                    {
+                                        "id":  16,
+                                        "name":  "Dapur Tropis"
+                                    },
+                                    {
+                                        "id":  12,
+                                        "name":  "Gym"
+                                    },
+                                    {
+                                        "id":  7,
+                                        "name":  "Kapasitas 6 Tamu"
+                                    },
+                                    {
+                                        "id":  13,
+                                        "name":  "Parking"
+                                    },
+                                    {
+                                        "id":  11,
+                                        "name":  "Pool"
+                                    },
+                                    {
+                                        "id":  14,
+                                        "name":  "Private Pool"
+                                    },
+                                    {
+                                        "id":  17,
+                                        "name":  "Wi-Fi Cepat"
+                                    },
+                                    {
+                                        "id":  9,
+                                        "name":  "Wi-Fi Gratis"
+                                    },
+                                    {
+                                        "id":  10,
+                                        "name":  "WiFi"
+                                    }
+                                ]
+             },
+    "meta":  null,
+    "errors":  null
+}

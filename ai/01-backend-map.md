@@ -45,9 +45,9 @@ Basis Data: **PostgreSQL** (`pgsql`) dengan 21 tabel ternormalisasi (3NF) untuk 
 | `app/Models/` | 21 model ternormalisasi produk (`Accommodation`, `UnitType`, `UnitTypePrice`, `FacilityItem`, `Gallery`, dll) + model auth, billing, cms |
 | `app/Http/Resources/` | 17 resource produksi terpadu (`AccommodationResource`, `UnitTypeResource`, `FacilityItemResource`, dll) |
 | `app/Http/Controllers/Api/` | 21 controller API mobile (`AccommodationController`, `PropertyController`, `HotelApiController`, `BookingController`, `PaymentController`, dll) |
-| `app/Http/Controllers/Admin/` | 33 controller admin (thin, render index DataTable) |
-| `app/Livewire/` | 30 folder komponen admin panel, termasuk `Properties/WizardForm` dan `Hotels/WizardForm` |
-| `app/DataTables/` | 27 Yajra DataTables |
+| `app/Http/Controllers/Admin/` | 34 controller admin (thin, render index DataTable) |
+| `app/Livewire/` | 31 folder komponen admin panel, termasuk `Properties/WizardForm` dan `Hotels/WizardForm` |
+| `app/DataTables/` | 28 Yajra DataTables |
 | `app/Support/` | `ApiResponse`, `MidtransSnap`, `MidtransGateway`, `PaymentDeepLink`, `HotelNormalizer` |
 | `app/Jobs/` | `CancelExpiredBookingsJob`, `ExtendHotelInventoriesJob`, `IssueInsurancePolicyJob`, `SyncInsuranceStatusJob` |
 

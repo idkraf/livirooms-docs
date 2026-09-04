@@ -298,7 +298,23 @@ Backend API (JSON Envelope)
 - **Perabot & Ruangan (`room_furniture_groups`):** Rincian perlengkapan Master Bedroom, Dapur, Living Room.
 - **Rincian Biaya Unit (`unit_detail`):** Detail biaya sewa, biaya parkir motor/mobil bulanan, biaya kartu akses.
 - **Kebijakan Pembatalan & Catatan Check-in (`check_in_notes`, `cancellation_policy`).
-- **Bottom Bar Sewa:** Menampilkan pilihan opsi sewa (Harian / Bulanan / Tahunan) dan tombol "Sewa Sekarang".
+- **Bottom Bar Sewa:** Menampilkan pilihan opsi sewa (Harian / Bulanan / Tahunan) dan tombol "Sewa Sekarang" yang mengarahkan ke `RincianUnitScreen`.
+
+### 2.1 Alur Layar Checkout: Hotel vs Property
+
+1. **Hotel OTA (`booking_mode = 'room'`):**
+   - Layar: `HotelBookingScreen` (`flutter/lib/screens/property/hotel/hotel_booking_screen.dart`).
+   - Endpoint: `POST /api/v1/booking-hotels`.
+   - Payload: Menerima array `guests[]` (dengan `room_number`, `room_name`, `first_name`, `last_name`), `rooms_count`, `adults`, `children`, `check_in`, `check_out`, `contact_email`, `contact_phone`.
+   - Voucher: Diambil dari `showPromoCodeSheet`, diverifikasi via `VoucherService`.
+
+2. **Property Rental (`booking_mode = 'unit'`):**
+   - Layar: `RincianUnitScreen` (`flutter/lib/screens/property/rincian_unit_screen.dart`).
+   - Endpoint: `POST /api/v1/booking-property`.
+   - Payload: `accommodation_id`, `check_in`, `check_out`, `duration_type` (`daily` | `monthly` | `yearly`), `adults` (minimal 1, default dari `bedrooms` atau 1 untuk tipe studio), `add_on_ids`, `plan_id` (opsional untuk cicilan tahunan), `promo_code` (opsional), `payable_amount`.
+   - Validasi Voucher: Diverifikasi dinamis melalui `VoucherController::resolveDiscount`. Jika voucher tidak valid / kedaluwarsa, kode otomatis dibatalkan dari state dan pesan spesifik ditampilkan ke pengguna.
+   - Pilihan Tanggal: Mendukung pemilihan rentang tanggal stay harian (`showDateRangePicker`) dan tanggal mulai bulanan/tahunan (`showDatePicker`) dengan proteksi tanggal lampau (`after_or_equal:today`).
+   - State Tombol: `BrandButton` mendukung `isLoading` dengan `_isSubmitting` guard untuk mencegah duplikasi order.
 
 ---
 

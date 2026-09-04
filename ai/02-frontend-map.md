@@ -33,8 +33,8 @@
 
 ```
 lib/
-├── main.dart              MaterialApp, MultiProvider, DeepLinkHandler
-├── router.dart            Routes (47 route) + AppRouter.onGenerateRoute
+├── main.dart              MaterialApp, MultiProvider, DeepLinkHandler, navigatorObservers [routeObserver]
+├── router.dart            Routes (47 route) + AppRouter.onGenerateRoute + global routeObserver
 ├── config/                AppConfig (baseUrl, dummy toggle), theme
 ├── screens/               110 *_screen.dart + 2 shell (MainShell, MitraShell)
 │   ├── mitra/             PropertyManagementScreen, AccommodationFormScreen (Unified Wizard), etc.
@@ -116,3 +116,28 @@ Flutter AccommodationFormScreen
 > **Flutter dummy assets (struktur `policies` per `section`):** `assets/json/accommodation_room_id.json` (mode `room`) & `assets/json/accommodation_unit_id.json` (mode `unit`). Kedua file mereplikasi persis output API Resource, dengan blok `policies` dikelompokkan berdasarkan `section` (`general`, `check_in`, `check_out`, `cancellation`, `smoking_policy`, `extra_bed_policy`, `deposit`, `room_policy`).
 
 > **Seeder aman (chunking):** `AccommodationSeeder` memproses seluruh pekerjaan seed dalam chunk eksplisit (maksimal 100 chunk) dengan jeda `sleep(2)` di akhir setiap chunk untuk mencegah beban puncak CPU/memori saat `migrate:fresh --seed`.
+ 
+---
+
+## 6. Lifecycle & Navigation Auto-Refresh
+
+- **`BookingListScreen` (`/bookings` & Tab 1 MainShell):**
+  - Mengimplementasikan `RouteAware` dengan mendaftarkan diri ke `routeObserver` di `didChangeDependencies()`. Ketika user kembali dari halaman detail booking atau pembayaran (`didPopNext()`), data booking otomatis di-fetch ulang (`_load()`).
+  - Mendukung `didUpdateWidget(oldWidget)` dengan parameter `isActive` yang di-pass dari `MainShell` (`isActive: _index == 1`). Pergantian tab di dalam `IndexedStack` otomatis memicu reload tanpa perlu me-recreate state.
+  - Menggunakan `WidgetsBindingObserver` (`didChangeAppLifecycleState`) untuk mendeteksi status `AppLifecycleState.resumed` saat user kembali ke aplikasi setelah menyelesaikan pembayaran di luar aplikasi (misalnya browser Midtrans Snap / e-wallet).
+  - Pada `_BookingTab._openDetail()`, `Navigator.pushNamed(...)` di-`await`, dan pemanggilan `onRefresh()` langsung dieksekusi begitu navigasi ditutup (`pop`).
+  - Mengawasi perubahan user pada `AuthProvider` di dalam `didChangeDependencies()` agar data otomatis ter-refresh saat status autentikasi berubah.
+
+---
+
+## 7. Booking Status Display & Action Button Invariants
+
+Penyajian status pemesanan dan tombol aksi mengikuti aturan:
+- **`completed` (Pesanan Selesai):** Menampilkan penjelasan eksplisit di layar bahwa masa sewa/inap telah selesai (`Pesanan Selesai`, ikon centang hijau `AppColors.success`). Tombol **Bayar** dan **Batalkan Pemesanan** tidak ditampilkan.
+- **`cancelled` & `expired` (Dibatalkan / Kedaluwarsa):** Menampilkan penjelasan status pembatalan atau kedaluwarsa dengan warna `AppColors.danger`. Tombol **Bayar** dan **Batalkan Pemesanan** tidak ditampilkan sama sekali.
+- **`waiting_payment` (Menunggu Pembayaran):** Menampilkan countdown timer serta tombol aktif **Bayar** (dan tombol **Batalkan Pemesanan** jika diizinkan kebijakan pembatalan).
+- **Layar & Komponen Terkait:**
+  - `lib/screens/booking/booking_detail_screen.dart` (Property Booking Detail)
+  - `lib/screens/booking/booking_detail_hotel_screen.dart` (Hotel Booking Detail)
+  - `lib/screens/booking/widgets/booking_widgets_bottom_bar.dart`
+  - `lib/screens/booking/widgets/booking_widgets_segment_status.dart`

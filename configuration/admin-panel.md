@@ -51,6 +51,7 @@ laravel/
 │   │   ├── BannerController.php
 │   │   ├── CmsPageController.php
 │   │   ├── AuditLogController.php
+│   │   ├── BuildingListController.php
 │   │   ├── PropertySearchLogController.php
 │   │   └── ReportController.php
 │   ├── DataTables/
@@ -77,6 +78,7 @@ laravel/
 │   │   ├── BannerDataTable.php
 │   │   ├── CmsPageDataTable.php
 │   │   ├── AuditLogDataTable.php
+│   │   ├── BuildingListDataTable.php
 │   │   └── PropertySearchLogDataTable.php
 │   └── Livewire/
 │       ├── Permission/
@@ -145,6 +147,9 @@ laravel/
 │       ├── AuditLogs/
 │       │   ├── Form.php
 │       │   └── AuditLogModal.php
+│       ├── BuildingLists/
+│       │   ├── Form.php
+│       │   └── BuildingListModal.php
 │       └── PropertySearchLogs/
 │           ├── Form.php
 │           └── PropertySearchLogModal.php
@@ -248,6 +253,12 @@ laravel/
     │   │   ├── index.blade.php
     │   │   └ columns/
     │   │       └── _actions.blade.php
+    │   ├── building_lists/
+    │   │   ├── index.blade.php
+    │   │   ├── create.blade.php
+    │   │   ├── edit.blade.php
+    │   │   └── columns/
+    │   │       └── _actions.blade.php
     │   └── property_search_logs/
     │       ├── index.blade.php
     │       └── columns/
@@ -298,6 +309,8 @@ laravel/
         ├── cms_pages/
         │   └── form.blade.php
         ├── audit_logs/
+        │   └── form.blade.php
+        ├── building-lists/
         │   └── form.blade.php
         └── property_search_logs/
             └── form.blade.php

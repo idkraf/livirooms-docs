@@ -23,7 +23,7 @@
 | 2 | `POST auth/login` | `AuthController::login` | `auth_service.dart:36` | ✅ | Login user & return token |
 | 3 | `GET remote-config` | `RemoteConfigApiController::fetch` | `remote_config_service.dart:35` | ✅ | Parameter remote config |
 | 4 | `GET remote-config/{key}` | `RemoteConfigApiController::fetchOne` | `remote_config_service.dart:55` | ✅ | Nilai tunggal key |
-| 5 | `GET home` | `HomeController::index` | `home_service.dart:35` | ✅ | Banners + recommended listings |
+| 5 | `GET home` | `HomeController::index` | `home_service.dart:35` | ✅ | Banners + recommended listings (menerima `?city_id={id}` untuk memfilter banner & rekomendasi) |
 | 6 | `GET cities` | `CityController::index` | `city_service.dart:18` | ✅ | Daftar kota |
 | 7 | `GET cities/{city}` | `CityController::show` | `city_service.dart:23` | ✅ | Detail kota |
 | 8 | `GET properties` | `PropertyController::index` | `property_service.dart:24` | ✅ | Pencarian & filter properti |
@@ -37,10 +37,14 @@
 | 16 | `GET hotels` | `HotelApiController::index` | `hotel_service.dart:20` | ✅ | Pencarian & filter hotel OTA |
 | 17 | `GET hotels/{hotel}` | `HotelApiController::show` | `hotel_service.dart:26` | ✅ | Detail hotel 8-tab (`hotelShape`) |
 | 18 | `GET hotels/{hotel}/room-types` | `HotelApiController::roomTypes` | — | ⬜ | Allotment tipe kamar |
-| 19 | **`GET accommodations/{id}`** | **`AccommodationController::show`** | — | ✅ | **Unified endpoint (Auto-branching Hotel & Property)** |
+| 19 | **`GET accommodations/{id}`** | **`AccommodationController::show`** | `property_service.dart:62` | ✅ | **Unified endpoint (Auto-branching Hotel & Property)** |
 | 19a | **`GET accommodations/{id}/edit`** | **`AccommodationController::edit`** | — | ✅ | **Form prefill — mengembalikan detail dengan `policies` terkelompok per section** |
 | 19b | **`POST accommodations`** | **`AccommodationController::store`** | — | ✅ | **Buat akomodasi (race-condition safe + `DB::transaction`)** |
 | 19c | **`PUT accommodations/{id}`** | **`AccommodationController::update`** | — | ✅ | **Update akomodasi (`lockForUpdate` + `DB::transaction`)** |
+| 19d | **`GET accommodations/{property}/pricing`** | **`PropertyController::pricing`** | `property_service.dart:66` | ✅ | **Kalkulator harga sewa akomodasi / unit (UnitTypeResource & UnitTypePriceResource typed)** |
+| 19e | **`GET accommodations/{property}/reviews`** | **`ReviewController::index`** | `property_service.dart:77` | ✅ | **Ulasan akomodasi** |
+| 19f | **`GET accommodations/{property}/availability`** | **`PropertyController::availability`** | `property_service.dart:86` | ✅ | **Kalender ketersediaan akomodasi** |
+| 19g | **`GET accommodations/{property}/host`** | **`PropertyController::host`** | `property_service.dart:101` | ✅ | **Profil host akomodasi** |
 
 > **Resource baru (detail per `booking_mode`):**
 > - `App\Http\Resources\AccommodatonDetailRoomResource` — mode `room` (Hotel). Output identik `hotelShape` + blok `policies` terstruktur per `section` (`general`, `check_in`, `check_out`, `cancellation`, `smoking_policy`, `extra_bed_policy`, `deposit`, `room_policy`).

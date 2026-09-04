@@ -1,0 +1,18 @@
+﻿{
+    "status":  true,
+    "code":  200,
+    "message":  "Filter metadata berhasil dimuat.",
+    "data":  {
+                 "price_min":  0,
+                 "price_max":  2500000,
+                 "star_ratings":  [
+
+                                  ],
+                 "max_guests":  10,
+                 "facilities":  [
+
+                                ]
+             },
+    "meta":  null,
+    "errors":  null
+}

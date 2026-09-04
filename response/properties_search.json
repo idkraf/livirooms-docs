@@ -1,0 +1,83 @@
+﻿{
+    "status":  true,
+    "code":  200,
+    "message":  "Daftar properti berhasil dimuat.",
+    "data":  [
+                 {
+                     "id":  4,
+                     "host_id":  3,
+                     "city_id":  18,
+                     "city_name":  "Bali",
+                     "province":  "Bali",
+                     "property_type":  "villa",
+                     "booking_mode":  "unit",
+                     "name":  "Modern Minimalist 2BR Private Pool Villa Seminyak",
+                     "address":  "Jl. Kayu Aya No. 88, Seminyak, Kuta, Kabupaten Badung, Bali 80361",
+                     "latitude":  -8.6882,
+                     "longitude":  115.1584,
+                     "cover_image":  "http://127.0.0.1:8000/storage/accommodations/gallery/modern-2br-1.jpg",
+                     "rating":  9.7,
+                     "rating_label":  "Istimewa",
+                     "review_count":  1,
+                     "price_from":  1850000,
+                     "price_original":  2400000,
+                     "price_caption":  "per malam mulai dari",
+                     "tax_percentage":  0,
+                     "tax_calculation":  "exclusive",
+                     "is_flash_sale":  true,
+                     "guest_capacity":  4,
+                     "bedrooms":  2,
+                     "bathrooms":  2,
+                     "type_label":  "Villa",
+                     "facility_tags":  [
+                                           "Private Pool",
+                                           "2 King Beds",
+                                           "Dapur Tropis",
+                                           "Wi-Fi Cepat"
+                                       ]
+                 },
+                 {
+                     "id":  3,
+                     "host_id":  2,
+                     "city_id":  18,
+                     "city_name":  "Bali",
+                     "province":  "Bali",
+                     "property_type":  "apartment",
+                     "booking_mode":  "unit",
+                     "name":  "Sunset Beach Apartment",
+                     "address":  "Jl. Pantai Indah No. 10, Bali",
+                     "latitude":  -8.65,
+                     "longitude":  115.2167,
+                     "cover_image":  "http://127.0.0.1:8000/storage/accommodations/gallery/yello_1.jpg",
+                     "rating":  8.9,
+                     "rating_label":  "Sangat Baik",
+                     "review_count":  2,
+                     "price_from":  500000,
+                     "price_original":  950000,
+                     "price_caption":  "per bulan mulai dari",
+                     "tax_percentage":  0,
+                     "tax_calculation":  "exclusive",
+                     "is_flash_sale":  true,
+                     "guest_capacity":  4,
+                     "bedrooms":  2,
+                     "bathrooms":  1,
+                     "type_label":  "Apartment",
+                     "facility_tags":  [
+                                           "WiFi",
+                                           "Pool",
+                                           "Gym",
+                                           "Parking"
+                                       ]
+                 }
+             ],
+    "meta":  {
+                 "current_page":  1,
+                 "last_page":  2,
+                 "per_page":  2,
+                 "total":  3,
+                 "from":  1,
+                 "to":  2,
+                 "has_more":  true
+             },
+    "errors":  null
+}

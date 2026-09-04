@@ -1,0 +1,93 @@
+﻿{
+    "status":  true,
+    "code":  200,
+    "message":  "Daftar hotel berhasil dimuat.",
+    "data":  [
+                 {
+                     "id":  8,
+                     "accommodation_id":  8,
+                     "name":  "MaxOne Platinum Hayam Wuruk",
+                     "star_rating":  4,
+                     "address":  "Jl. Hayam Wuruk No. 5, Gambir, Jakarta Pusat 10120",
+                     "city_name":  "Jakarta Pusat",
+                     "latitude":  -6.16611,
+                     "longitude":  106.82099,
+                     "rating":  8.7,
+                     "rating_label":  "Sangat Baik",
+                     "review_count":  1,
+                     "price_per_night":  450000,
+                     "price_original":  620000,
+                     "tax_percentage":  10,
+                     "tax_calculation":  "inclusive",
+                     "cover_image":  "http://127.0.0.1:8000/storage/accommodations/gallery/maxone_1.jpg",
+                     "gallery":  [
+                                     "http://127.0.0.1:8000/storage/accommodations/gallery/maxone_1.jpg",
+                                     "http://127.0.0.1:8000/storage/accommodations/gallery/maxone_2.jpg",
+                                     "http://127.0.0.1:8000/storage/accommodations/gallery/maxone_3.jpg",
+                                     "http://127.0.0.1:8000/storage/accommodations/gallery/maxone_4.jpg"
+                                 ],
+                     "facility_tags":  [
+                                           "SkyMax Rooftop Resto \u0026 Bar",
+                                           "Max Spa \u0026 Pijat",
+                                           "Wi-Fi Gratis",
+                                           "Resepsionis 24 Jam",
+                                           "Ruang Rapat Bisnis"
+                                       ],
+                     "distance_label":  "800m dari pusat kota",
+                     "cheapest_room":  {
+                                           "id":  14,
+                                           "name":  "Happiness Room",
+                                           "price":  450000,
+                                           "remaining":  20
+                                       }
+                 },
+                 {
+                     "id":  7,
+                     "accommodation_id":  7,
+                     "name":  "Artotel Harmoni Jakarta",
+                     "star_rating":  5,
+                     "address":  "Jl. Suryopranoto No. 1-9, Petojo Selatan, Gambir, Jakarta Pusat 10160",
+                     "city_name":  "Jakarta Pusat",
+                     "latitude":  -6.167821,
+                     "longitude":  106.818934,
+                     "rating":  9.3,
+                     "rating_label":  "Istimewa",
+                     "review_count":  1,
+                     "price_per_night":  650000,
+                     "price_original":  890000,
+                     "tax_percentage":  10,
+                     "tax_calculation":  "inclusive",
+                     "cover_image":  "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_1.jpg",
+                     "gallery":  [
+                                     "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_1.jpg",
+                                     "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_2.jpg",
+                                     "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_3.jpg",
+                                     "http://127.0.0.1:8000/storage/accommodations/gallery/artotel_4.jpg"
+                                 ],
+                     "facility_tags":  [
+                                           "Kolam Renang Outdoor",
+                                           "ROCA Restaurant \u0026 Bar",
+                                           "ARTSPACE Galeri Seni",
+                                           "Gym Modern",
+                                           "Wi-Fi Cepat"
+                                       ],
+                     "distance_label":  "800m dari pusat kota",
+                     "cheapest_room":  {
+                                           "id":  11,
+                                           "name":  "Studio 20",
+                                           "price":  650000,
+                                           "remaining":  18
+                                       }
+                 }
+             ],
+    "meta":  {
+                 "current_page":  1,
+                 "last_page":  3,
+                 "per_page":  2,
+                 "total":  5,
+                 "from":  1,
+                 "to":  2,
+                 "has_more":  true
+             },
+    "errors":  null
+}

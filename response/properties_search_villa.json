@@ -1,0 +1,50 @@
+﻿{
+    "status":  true,
+    "code":  200,
+    "message":  "Daftar properti berhasil dimuat.",
+    "data":  [
+                 {
+                     "id":  4,
+                     "host_id":  3,
+                     "city_id":  18,
+                     "city_name":  "Bali",
+                     "province":  "Bali",
+                     "property_type":  "villa",
+                     "booking_mode":  "unit",
+                     "name":  "Modern Minimalist 2BR Private Pool Villa Seminyak",
+                     "address":  "Jl. Kayu Aya No. 88, Seminyak, Kuta, Kabupaten Badung, Bali 80361",
+                     "latitude":  -8.6882,
+                     "longitude":  115.1584,
+                     "cover_image":  "http://127.0.0.1:8000/storage/accommodations/gallery/modern-2br-1.jpg",
+                     "rating":  9.7,
+                     "rating_label":  "Istimewa",
+                     "review_count":  1,
+                     "price_from":  1850000,
+                     "price_original":  2400000,
+                     "price_caption":  "per malam mulai dari",
+                     "tax_percentage":  0,
+                     "tax_calculation":  "exclusive",
+                     "is_flash_sale":  true,
+                     "guest_capacity":  4,
+                     "bedrooms":  2,
+                     "bathrooms":  2,
+                     "type_label":  "Villa",
+                     "facility_tags":  [
+                                           "Private Pool",
+                                           "2 King Beds",
+                                           "Dapur Tropis",
+                                           "Wi-Fi Cepat"
+                                       ]
+                 }
+             ],
+    "meta":  {
+                 "current_page":  1,
+                 "last_page":  1,
+                 "per_page":  2,
+                 "total":  1,
+                 "from":  1,
+                 "to":  1,
+                 "has_more":  false
+             },
+    "errors":  null
+}
