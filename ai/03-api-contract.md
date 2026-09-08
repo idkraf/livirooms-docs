@@ -63,11 +63,19 @@
 ### Auth & Profil
 - `POST auth/logout` (`AuthController::logout`)
 - `GET auth/me` (`AuthController::me`)
-- `GET profile` (`ProfileController::show`)
-- `PUT profile` (`ProfileController::update`)
-- `POST profile/become-host` (`ProfileController::becomeHost`)
+- `GET profile` (`ProfileController::show`) — Mengambil detail profil user (`User` & `UserProfile`)
+- `PUT profile` / `POST profile` (`ProfileController::update`) — Memperbarui data pengguna (nama, telepon, alamat, gender, tanggal lahir, dll.)
+- `POST profile/avatar` (`ProfileController::uploadAvatar`) — Upload foto profil user (`multipart/form-data`: `avatar`, validasi image/max 5MB, disimpan ke storage public `avatars/`, mengembalikan `avatar` & `avatar_url`)
+- `POST profile/become-host` (`ProfileController::becomeHost`) — Mengubah user menjadi host (validasi identitas wajib terpenuhi)
 - `GET user/validation` (`UserValidationController::index`)
 - `POST user/validation` (`UserValidationController::store`)
+
+### Chat & Percakapan
+- `GET conversations` (`ChatController::index`) — `chat_service.dart:10` — Daftar percakapan user (mengembalikan `type` ('booking' | 'accommodation'), `accommodation_id`, `accommodation:id,name`, `booking_id`, `booking:id,booking_code,status,check_in,check_out`, `other_user`, `last_message`, `last_message_at`)
+- `POST conversations` (`ChatController::store`) — `chat_service.dart:15` — Buka percakapan baru dengan `recipient_id`, `accommodation_id`, dan `booking_id` (auto-resolve host/guest jika dibuka dari booking atau listing akomodasi)
+- `GET conversations/{conversation}/messages` (`ChatController::messages`) — `chat_service.dart:23` — Riwayat pesan dalam percakapan (paginated)
+- `POST conversations/{conversation}/messages` (`ChatController::sendMessage`) — `chat_service.dart:30` — Kirim pesan baru dalam percakapan
+*Catatan Relasi Model `Conversation`:* Menggunakan relasi `accommodation()` (`belongsTo(Accommodation::class)`) dan `booking()` (`belongsTo(Booking::class)`). Kolom `booking_id` ditambahkan melalui migrasi `2026_09_05_000004_add_booking_id_to_conversations_table.php`. Relasi inverse `conversations()` terdaftar pada model `Accommodation` dan `Booking`.
 
 ### Booking & Checkout
 - `GET bookings` (`BookingController::index`)
@@ -78,7 +86,8 @@
 - `POST bookings/{booking}/cancel` (`BookingController::cancel`)
 - `POST bookings/{booking}/confirm` (`BookingController::confirm`)
 - `POST bookings/{booking}/reject` (`BookingController::reject`)
-- `POST bookings/{booking}/checkin` (`BookingController::checkin`)
+- `POST bookings/{booking}/checkin` (`BookingController::checkin`) — Check-in tamu (update status ke `staying`)
+- `POST bookings/{booking}/checkout` (`BookingController::checkout`) — Check-out tamu (update status ke `completed` & order `completed`)
 - `POST bookings/{booking}/confirm-checkin` (`BookingController::confirmCheckin`)
 - `POST bookings/{booking}/review` (`ReviewController::store`) — **Buat ulasan hanya untuk booking completed**. Setelah ulasan dibuat, `AccommodationScoreComponent` dengan `component = 'basic'` otomatis diperbarui dengan rata-rata rating baru. Event model `Review` juga menangani update/delete untuk menjaga sinkronisasi.
 - `GET properties/{property}/reviews` (`ReviewController::index`) — Daftar ulasan properti
@@ -97,24 +106,33 @@
 - `POST payments/webhook` (`PaymentController::webhook`) — Midtrans S2S webhook (signature SHA-512 verified, not Sanctum)
 
 ### Host Management (Mitra)
+- `GET host/accommodations` (`PropertyController::hostAccommodations`) — `host_service.dart:18` — **FIXED & AUDITED:** Unified listing of host accommodations (both unit and room/hotel modes) via `AccommodationResource`. Returns `status`, `host_id`, numeric `deposit_amount`, and supports `page`, `per_page`, `status`, `booking_mode`, and `q` search without filtering out unpriced/draft listings.
+- `POST host/accommodations` (`PropertyController::store`) — `host_service.dart:23` — Buat listing akomodasi mitra baru (Mendukung `intro`, `description_extra_heading`, `description_extra` array paragraf, otomatis membuat relasi `accommodation_description_paragraphs`)
+- `GET host/accommodations/{property}` (`PropertyController::hostShow`) — `host_service.dart:116` — Detail akomodasi host (Eager-load `descriptionParagraphs` + fallback kolom JSONB)
+- `PUT host/accommodations/{property}` (`PropertyController::update`) — `host_service.dart:28` — Update akomodasi host (Sinkronisasi penuh `intro`, `description_extra_heading`, dan `description_extra`)
+- `DELETE host/accommodations/{property}` (`PropertyController::destroy`) — `host_service.dart:121` — Hapus akomodasi host
 - `GET host/orders` (`OrderController::forHost`) — `host_service.dart:33` — **FIXED:** Orders with nested `booking` object; query supports `page`, `status`, `booking_status`. Returns `Paginated<Order>`.
 - `GET host/orders/{order}` (`OrderController::showForHost`) — `host_service.dart:41` — Host order detail
 - `POST bookings/{booking}/confirm` (`BookingController::confirm`) — `host_service.dart:46` — Confirm booking (Accept order)
 - `POST bookings/{booking}/reject` (`BookingController::reject`) — `host_service.dart:50` — Reject booking (Tolak order)
-- `POST bookings/{booking}/checkin` (`BookingController::checkin`) — `host_service.dart:54` — Mark guest arrived
-- `POST bookings/{booking}/confirm-checkin` (`BookingController::confirmCheckin`) — `host_service.dart:58` — Confirm check-in
+- `POST bookings/{booking}/checkin` (`BookingController::checkin`) — `host_service.dart:checkin` — Check-in tamu (status -> staying)
+- `POST bookings/{booking}/checkout` (`BookingController::checkout`) — `host_service.dart:checkout` — Check-out tamu (status -> completed)
+- `POST bookings/{booking}/confirm-checkin` (`BookingController::confirmCheckin`) — `host_service.dart:confirmCheckin` — Confirm check-in
 - `GET host/properties` (`PropertyController::hostIndex`)
 - `POST host/properties` (`PropertyController::store`)
 - `GET host/properties/{property}` (`PropertyController::hostShow`)
 - `PUT host/properties/{property}` (`PropertyController::update`)
 - `DELETE host/properties/{property}` (`PropertyController::destroy`)
 - `GET host/hotels` (`HostHotelController::index`) — `hotel_service.dart` — Daftar hotel mitra
-- `POST host/hotels` (`HostHotelController::store`) — `hotel_service.dart:createHotelForProperty` — Registrasi hotel + facility_groups + policies + faqs + transport_points + gallery
-- `GET host/hotels/{hotel}` (`HostHotelController::show`) — `hotel_service.dart:getHostHotelDetail` — Detail hotel mitra
-- `PUT host/hotels/{hotel}` (`HostHotelController::update`) — `hotel_service.dart:updateHotelForProperty` — Update metadata hotel + room types
+- `POST host/hotels` (`HostHotelController::store`) — `hotel_service.dart:createHotelForProperty` — Registrasi hotel + facility_groups + policies + faqs + transport_points + gallery + `intro`, `description_extra_heading`, `description_extra`
+- `GET host/hotels/{hotel}` (`HostHotelController::show`) — `hotel_service.dart:getHostHotelDetail` — Detail hotel mitra (`hotelShape` sekarang menyertakan `intro`, `description_extra_heading`, dan `description_extra`)
+- `PUT host/hotels/{hotel}` (`HostHotelController::update`) — `hotel_service.dart:updateHotelForProperty` — Update metadata hotel + room types + `intro`, `description_extra_heading`, `description_extra`
 - `DELETE host/hotels/{hotel}` (`HostHotelController::destroy`) — `hotel_service.dart:deleteHotel` — Hapus hotel
 - `POST host/hotels/{hotel}/room-types` (`HostHotelController::storeRoomType`) — `hotel_service.dart` (via createHotelForProperty) — Tambah tipe kamar
 - `PUT host/room-types/{roomType}` (`HostHotelController::updateRoomType`) — `hotel_service.dart` — Edit tipe kamar
 - `DELETE host/room-types/{roomType}` (`HostHotelController::destroyRoomType`) — `hotel_service.dart:deleteRoomType` — Hapus tipe kamar
 - `GET host/wallet` (`HostWalletController::index`)
 - `POST host/wallet/withdraw` (`HostWalletController::withdraw`)
+- `GET host/unit-type-prices/{id}` (`UnitTypePriceController::show`) — `host_service.dart` — Detail data tarif UnitTypePrice
+- `PUT host/unit-type-prices/{id}` (`UnitTypePriceController::update`) — `host_service.dart:updateUnitTypePrice` — **Strictly Update-Only (No Create):** Quick update ketersediaan & tarif (`amount`, `cleaning_fee`, `deposit`, `service_fee`, `price_type`, `status`). 404 jika data tidak ditemukan, 422 jika validasi gagal, sinkronisasi otomatis `unit_types.base_price`.
+- `PUT unit-types/{unitType}/prices/{price}` (`UnitTypePriceController::updateForUnitType`) — Nested route update tarif UnitTypePrice.

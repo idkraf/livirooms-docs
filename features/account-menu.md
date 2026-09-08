@@ -68,7 +68,9 @@ Kartu kontainer dengan pemisah vertikal:
 
 | Fitur | Sumber Data / Service | Handler |
 |---|---|---|
-| Autentikasi Pengguna | `AuthProvider.user` | Menampilkan nama dan avatar |
+| Autentikasi Pengguna | `AuthProvider.user` | Menampilkan nama dan avatar foto/ikon |
+| Upload Foto Profil | `ProfileService.uploadAvatar()` | `_pickAndUploadAvatar()` via Kamera/Galeri (`image_picker`) |
+| Pull-to-Refresh Profil | `ProfileService.profile()` | `_refreshProfile()` memperbarui AuthProvider |
 | Status Host / Mitra | `AuthProvider.isHost` | Kondisional kartu mitra / beralih mode |
 | Onboarding Mitra | `ProfileService.becomeHost()` | `_becomeHost()` |
 | Validasi Mitra | `ProfileService.validationStatus()` | `Routes.validation` jika belum tervalidasi |
@@ -81,9 +83,10 @@ Kartu kontainer dengan pemisah vertikal:
 **File Path:** `flutter/lib/screens/account/edit_profile_screen.dart`  
 **Route:** `Routes.editProfile` (`/account/edit-profile`)  
 **Tipe:** Manage User Account & Personal Security Information  
+**API Endpoint:** `GET /api/v1/profile`, `PUT /api/v1/profile`, `POST /api/v1/profile`, `POST /api/v1/profile/avatar`
 
 ### Struktur Komponen UI:
-1. **Avatar Header:** Avatar profil lingkaran kuning (`#FEF3D6`) dengan badge edit biru pensil (`#2563EB`).
+1. **Avatar Header:** Avatar profil lingkaran dengan foto pengguna (`CachedNetworkImage` dari `user.avatarUrl`) atau fallback ikon siluet amber, dilengkapi badge pensil biru (`#2563EB`). Mengetuk badge pensil memunculkan modal pemilihan sumber foto: **Kamera** atau **Galeri Foto** (`image_picker`). Foto diunggah langsung ke endpoint `POST /api/v1/profile/avatar` via multipart request.
 2. **Keamanan Akun:**
    - Email dengan masking keamanan (`mohba******gorie@gmail.com`).
    - Nomor telepon dengan tombol aksi `"Hubungkan"` / `"Ubah"`.
@@ -97,11 +100,8 @@ Kartu kontainer dengan pemisah vertikal:
 5. **Info Pribadi:**
    - Header dengan tombol `"Edit"`.
    - Data: Nama, Jenis kelamin, Negara atau wilayah, Kota tempat tinggal, dan Kota yang sering dikunjungi.
-6. **Kelola Akun (Login Pihak Ketiga):**
-   - Header dengan badge hijau teal `"Login Instan"`.
-   - Akun Google dengan tombol `"Putuskan"`.
-   - Akun Facebook dengan tombol `"Hubungkan"`.
-7. **Aksi Akun & Footer:**
+6. **Aksi Akun & Footer:**
    - Tombol putih lebar `"Keluar"` (Logout).
-   - Tautan `"Hapus Akun Saya"` dengan konfirmasi dan peringatan permanen.
+   - Tautan `"Hapus Akun Saya"` dengan konfirmasi dialog dan peringatan permanen.
+
 

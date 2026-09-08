@@ -588,8 +588,8 @@ Resource: `HostAccommodationResource::unitShape()` atau `AccommodationResource::
 File: `laravel/app/Http/Resources/HostAccommodationResource.php`
 
 Resource ini mengekspos:
-- **Room mode (`roomShape`)**: `facilities`, `facility_items`, `policies`, `unit_types`, `nearby_points`, `questions`, `galleries`, `bed_facilities`, `room_furniture_groups`.
-- **Unit mode (`unitShape`)**: `facility_tags`, `gallery`, `prices`, `host`, `specs`, `intro`, `description_extra`, `bed_facilities`, `building_facilities`, `room_furniture`, `room_furniture_groups`, `check_in_notes`, `deposit_notes`, `unit_detail`, `nearby_points`, `guest_media`, `building_units`, `reviews`, `questions`, `unit_types`.
+- **Room mode (`roomShape`)**: `facilities`, `facility_items`, `policies`, `unit_types`, `nearby_points`, `questions`, `galleries`, `bed_facilities`, `room_furniture_groups`, `intro`, `description_extra`, `description_extra_heading`.
+- **Unit mode (`unitShape`)**: `facility_tags`, `gallery`, `prices`, `host`, `specs`, `intro`, `description_extra`, `description_extra_heading`, `bed_facilities`, `building_facilities`, `room_furniture`, `room_furniture_groups`, `check_in_notes`, `deposit_notes`, `unit_detail`, `nearby_points`, `guest_media`, `building_units`, `reviews`, `questions`, `unit_types`.
 
 ### 6.2 Eager Loading Contract
 
@@ -600,7 +600,8 @@ Accommodation::hotels()->with([
     'policies', 'questions', 'nearbyPoints',
     'facilityGroups.items', 'facilityItems', 'facilityTags',
     'unitTypes.images', 'unitTypes.facilityItems',
-    'bedFacilities', 'roomFurnitureGroups', 'details'
+    'bedFacilities', 'roomFurnitureGroups', 'details',
+    'descriptionParagraphs',
 ])->findOrFail($id);
 ```
 

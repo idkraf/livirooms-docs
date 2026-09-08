@@ -38,6 +38,7 @@ lib/
 ├── config/                AppConfig (baseUrl, dummy toggle), theme
 ├── screens/               110 *_screen.dart + 2 shell (MainShell, MitraShell)
 │   ├── mitra/             PropertyManagementScreen, AccommodationFormScreen (Unified Wizard), etc.
+│   │   └── sheets/        11 modal bottom sheets (room_spec, bed_facility, price_scheme, operational_rule, checkin_checkout_note, policy_item, etc.)
 │   ├── home/              MainShell, FilterScreen, SearchResultsScreen
 │   ├── property/          PropertyDetailScreen, RincianUnitScreen, Hotel screens
 │   ├── booking/           BookingDetailScreen, BookingListScreen, etc.

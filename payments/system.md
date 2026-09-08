@@ -101,9 +101,10 @@ Semua endpoint aksi dibawah memerlukan auth host (kecuali `cancel` yang dibutuhk
 | 1 | `POST bookings/{id}/cancel` | User | Batalkan booking (property & hotel) |
 | 2 | `POST bookings/{id}/confirm` | Host | Konfirmasi booking property |
 | 3 | `POST bookings/{id}/reject` | Host | Tolak booking property |
-| 4 | `POST bookings/{id}/checkin` | Host | Catat check-in tamu (property & hotel) |
-| 5 | `POST bookings/{id}/confirm-checkin` | Host | Konfirmasi check-in tamu (property & hotel) |
-| 6 | `POST bookings/{id}/review` | User | Beri ulasan setelah booking selesai |
+| 4 | `POST bookings/{id}/checkin` | Host | Catat check-in tamu (status -> `staying`) |
+| 5 | `POST bookings/{id}/checkout` | Host | Catat check-out tamu (status -> `completed`) |
+| 6 | `POST bookings/{id}/confirm-checkin` | Host | Konfirmasi check-in tamu (property & hotel) |
+| 7 | `POST bookings/{id}/review` | User | Beri ulasan setelah booking selesai |
 
 #### 4.0.1 `POST bookings/{id}/cancel`
 
@@ -161,7 +162,7 @@ Host menolak booking property. Mengubah `status` menjadi `rejected` dan `host_co
 
 #### 4.0.4 `POST bookings/{id}/checkin`
 
-Host mencatat check-in tamu. Hanya bisa jika status booking adalah `paid`. Mengubah `status` menjadi `checked_in` dan mengisi `checked_in_at`.
+Host mencatat check-in tamu. Hanya bisa jika status booking adalah `confirmed`, `paid`, atau `waiting_checkin`. Mengubah `status` menjadi `staying`.
 
 **Response:**
 ```json
@@ -171,13 +172,29 @@ Host mencatat check-in tamu. Hanya bisa jika status booking adalah `paid`. Mengu
   "message": "Check-in berhasil dicatat.",
   "data": {
     "id": 1,
-    "status": "checked_in",
-    "checked_in_at": "2026-08-15T14:00:00.000000Z"
+    "status": "staying"
   }
 }
 ```
 
-#### 4.0.5 `POST bookings/{id}/confirm-checkin`
+#### 4.0.5 `POST bookings/{id}/checkout`
+
+Host mencatat check-out tamu. Hanya bisa jika status booking adalah `staying`. Mengubah status booking menjadi `completed` dan status order menjadi `completed`.
+
+**Response:**
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Check-out berhasil dicatat. Status booking telah completed.",
+  "data": {
+    "id": 1,
+    "status": "completed"
+  }
+}
+```
+
+#### 4.0.6 `POST bookings/{id}/confirm-checkin`
 
 Host mengkonfirmasi check-in tamu. Hanya bisa jika status booking adalah `checked_in`. Mengubah `host_confirmed_checkin` menjadi `true`.
 
@@ -363,7 +380,8 @@ Midtrans mengirim notifikasi S2S setelah transaksi selesai. Endpoint ini:
 |---|---|---|
 | `confirmBooking(bookingId)` | `POST bookings/{id}/confirm` | `Map<String, dynamic>` |
 | `rejectBooking(bookingId)` | `POST bookings/{id}/reject` | `Map<String, dynamic>` |
-| `checkinBooking(bookingId)` | `POST bookings/{id}/checkin` | `Map<String, dynamic>` |
+| `checkinBooking(bookingId)` / `checkin` | `POST bookings/{id}/checkin` | `Map<String, dynamic>` |
+| `checkout(bookingId)` | `POST bookings/{id}/checkout` | `Map<String, dynamic>` |
 | `confirmCheckin(bookingId)` | `POST bookings/{id}/confirm-checkin` | `Map<String, dynamic>` |
 
 ### 5.2 Payment Initiation by Screen
