@@ -1,0 +1,748 @@
+<h1>USER GUIDE MOBILE APP</h1>
+<h2>Panduan Pengguna &amp; Petunjuk Operasional Lengkap Aplikasi Tamu Livirooms (Flutter)</h2>
+<p><strong>Berkas Sumber:</strong> <code>flutter/</code> (Aplikasi Seluler Android &amp; iOS)<br><strong>Versi Aplikasi:</strong> v2.4.0<br><strong>Target Pengguna:</strong> Tamu Penyewa Apartemen, Konsumen Reservasi Hotel, Traveler, dan Pengguna Umum  </p>
+<hr>
+<h2>DAFTAR ISI PANDUAN</h2>
+<ol>
+<li><a href="#1-tentang-aplikasi-mobile-livirooms">Tentang Aplikasi Mobile Livirooms</a></li>
+<li><a href="#bab-1-pendaftaran-akun-masuk--verifikasi">BAB 1: Pendaftaran Akun, Masuk &amp; Verifikasi</a><ul>
+<li>1.1 Layar Selamat Datang &amp; Pilihan Masuk/Daftar</li>
+<li>1.2 Formulir Registrasi Akun Baru</li>
+<li>1.3 Formulir Masuk (Login) &amp; Pemulihan Kata Sandi</li>
+<li>1.4 Verifikasi Keamanan OTP Email</li>
+<li>1.5 Verifikasi Identitas (KYC) &amp; Peningkatan Akun</li>
+</ul>
+</li>
+<li><a href="#bab-2-eksplorasi-pencarian--filter-akomodasi">BAB 2: Eksplorasi, Pencarian &amp; Filter Akomodasi</a><ul>
+<li>2.1 Memahami Menu Navigasi Bawah (Bottom Navigation)</li>
+<li>2.2 Menjelajahi Beranda Utama (Kategori, Promo &amp; Kota)</li>
+<li>2.3 Pencarian &amp; Filter Kamar Hotel</li>
+<li>2.4 Hasil Pencarian Hotel &amp; Rekomendasi</li>
+<li>2.5 Pencarian &amp; Filter Villa / Apartemen</li>
+<li>2.6 Hasil Pencarian Villa &amp; Apartemen</li>
+</ul>
+</li>
+<li><a href="#bab-3-membaca--memilih-detail-properti--hotel">BAB 3: Membaca &amp; Memilih Detail Properti / Hotel</a><ul>
+<li>3.1 Detail Ringkasan &amp; Pemilihan Kamar Hotel</li>
+<li>3.2 Membaca Ulasan Terverifikasi &amp; FAQ Hotel</li>
+<li>3.3 Memeriksa Kebijakan Akomodasi, Deposit &amp; Pembatalan</li>
+<li>3.4 Melihat Galeri Foto &amp; Rating Villa Mewah</li>
+<li>3.5 Detail Properti Apartemen &amp; Sewa Fleksibel</li>
+<li>3.6 Memeriksa Fasilitas Kamar &amp; Perabot Tidur</li>
+<li>3.7 Memeriksa Peta Lokasi &amp; Akses Sekitar Unit</li>
+<li>3.8 Memeriksa Kebijakan Check-in Mandiri &amp; Deposit Unit</li>
+</ul>
+</li>
+<li><a href="#bab-4-alur-pemesanan-booking-flow">BAB 4: Alur Pemesanan (Booking Flow)</a><ul>
+<li>4.1 Rincian Paket Sewa Harian Apartemen &amp; Diskon Menginap</li>
+<li>4.2 Formulir Checkout &amp; Pengisian Data Identitas Tamu</li>
+</ul>
+</li>
+<li><a href="#bab-5-pembayaran--konfirmasi-instan-checkout">BAB 5: Pembayaran &amp; Konfirmasi Instan (Checkout)</a><ul>
+<li>5.1 Memilih Saluran Pembayaran Berlisensi (Midtrans Snap)</li>
+<li>5.2 Pembayaran via Virtual Account Bank (BCA, Mandiri, BNI, BRI)</li>
+<li>5.3 Pembayaran via QRIS &amp; Dompet Digital (GoPay, ShopeePay)</li>
+<li>5.4 Pembayaran via Kartu Kredit / Debit Online (3D Secure)</li>
+<li>5.5 Konfirmasi Pembayaran Instan &amp; Deep Link Otomatis</li>
+</ul>
+</li>
+<li><a href="#bab-6-mengelola-perjalanan-di-menu-pesanan">BAB 6: Mengelola Perjalanan di Menu &quot;Pesanan&quot;</a><ul>
+<li>6.1 Membuka Daftar Pesanan Aktif, Selesai &amp; Dibatalkan</li>
+<li>6.2 Membaca E-Voucher Digital, Kode Booking &amp; Kebijakan Akomodasi</li>
+<li>6.3 Prosedur Pembatalan Pesanan Mandiri</li>
+</ul>
+</li>
+<li><a href="#bab-7-komunikasi-chat--kotak-masuk-pesan">BAB 7: Komunikasi Chat &amp; Kotak Masuk Pesan</a><ul>
+<li>7.1 Tampilan Tab Pesan saat Tamu Belum Masuk Akun</li>
+<li>7.2 Memahami Tab Kategori Kotak Masuk (Chat, Pemesanan, Promosi, Aktivitas)</li>
+<li>7.3 Daftar Percakapan Terkait Nomor Reservasi</li>
+<li>7.4 Berinteraksi Langsung di Ruang Chat dengan Host Properti</li>
+</ul>
+</li>
+<li><a href="#bab-8-promo-kupon--notifikasi-sistem">BAB 8: Promo Kupon &amp; Notifikasi Sistem</a><ul>
+<li>8.1 Membuka Halaman Promo Saya &amp; Mengklaim Kode Kupon</li>
+<li>8.2 Memeriksa Riwayat Notifikasi Aplikasi</li>
+</ul>
+</li>
+<li><a href="#bab-9-profil-pengguna--manajemen-traveler--kontak">BAB 9: Profil Pengguna &amp; Manajemen Traveler / Kontak</a><ul>
+<li>9.1 Halaman Profil Pengguna Belum Masuk Akun</li>
+<li>9.2 Halaman Profil Pengguna Member Terdaftar</li>
+<li>9.3 Menu Manajemen Traveler &amp; Kontak Tersimpan</li>
+<li>9.4 Buku Kontak Pemesanan &amp; Alamat Pengiriman</li>
+<li>9.5 Menambahkan Kontak Baru (Identitas &amp; Alamat Lengkap)</li>
+<li>9.6 Memilih Negara Asal &amp; Kode Telepon Internasional</li>
+<li>9.7 Mengubah Data Kontak Tersimpan &amp; Menghapus Traveler</li>
+</ul>
+</li>
+<li><a href="#lampiran-verifikasi-berkas-eksternal">Lampiran: Verifikasi Berkas Eksternal</a></li>
+</ol>
+<hr>
+<h1>1. TENTANG APLIKASI MOBILE LIVIROOMS</h1>
+<p>Aplikasi seluler <strong>Livirooms</strong> adalah platform terpadu untuk menyewa apartemen harian, sewa hunian bulanan/tahunan, serta reservasi kamar hotel di berbagai kota di Indonesia. Dibuat menggunakan framework <strong>Flutter</strong> berstandar modern, aplikasi ini mengutamakan kecepatan navigasi, kejelasan informasi biaya transparan, serta keamanan pembayaran instan tanpa biaya siluman.</p>
+<p>Seluruh panduan di bawah ini menyajikan tangkapan layar asli (<em>actual mobile screenshot</em>) dari aplikasi rilis produksi beserta penjelasan elemen fungsionalnya.</p>
+<hr>
+<h1>BAB 1: PENDAFTARAN AKUN, MASUK &amp; VERIFIKASI</h1>
+<h3>1.1 Layar Selamat Datang &amp; Pilihan Masuk/Daftar</h3>
+<p>Saat pertama kali Anda mengunduh dan membuka aplikasi Livirooms, Anda akan disambut oleh layar antarmuka <em>Welcome / Auth Choice Screen</em>.</p>
+<p><img src="mobile/01-welcome-screen.jpeg" alt="Layar Selamat Datang Livirooms">
+<em>Gambar 1.1: Layar Selamat Datang &amp; Pemilihan Masuk atau Daftar Akun</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Header Visual Kota Malam:</strong> Ilustrasi gedung bertingkat modern di bawah rembulan yang melambangkan hunian nyaman dan aman.</li>
+<li><strong>Teks Sambutan:</strong> Memberikan petunjuk jelas: <em>&quot;Selamat datang di LiviRooms, Silakan Masuk atau Daftar untuk Melanjutkan.&quot;</em></li>
+<li><strong>Tombol &quot;Masuk&quot;:</strong> Tombol berlatar belakang putih untuk pengguna yang telah memiliki akun sebelumnya.</li>
+<li><strong>Tombol &quot;Daftar&quot;:</strong> Tombol berbingkai biru untuk pengguna baru yang ingin membuat akun personal.</li>
+</ul>
+<h4>Petunjuk Pengoperasian:</h4>
+<ol>
+<li>Jika Anda sudah pernah mendaftar, ketuk tombol <strong>Masuk</strong> untuk menuju formulir login.</li>
+<li>Jika Anda adalah tamu baru, ketuk tombol <strong>Daftar</strong> untuk melengkapi data registrasi akun.</li>
+</ol>
+<hr>
+<h3>1.2 Formulir Registrasi Akun Baru</h3>
+<p>Jika Anda memilih tombol Daftar, aplikasi menyajikan formulir pendaftaran yang bersih dan mudah diisi.</p>
+<p><img src="mobile/02-register-screen.jpeg" alt="Layar Buat Akun Baru">
+<em>Gambar 1.2: Formulir Buat Akun Baru Livirooms</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Tombol Panah Kembali (<code>&lt;</code>):</strong> Terletak di pojok kiri atas untuk kembali ke layar sambutan sebelumnya.</li>
+<li><strong>Kolom &quot;Nama Lengkap&quot;:</strong> Kolom input teks berikon pengguna (<code>person</code>) untuk mencatat nama lengkap sesuai kartu identitas (KTP / Paspor).</li>
+<li><strong>Kolom &quot;Email&quot;:</strong> Kolom berikon amplop surat untuk menerima invoice, tiket elektronik, dan kode verifikasi keamanan.</li>
+<li><strong>Kolom &quot;Kata Sandi&quot;:</strong> Kolom berikon gembok disertai ikon mata (<em>eye toggle</em>) untuk menampilkan atau menyembunyikan karakter sandi. Sandi wajib minimal 8 karakter demi keamanan akun.</li>
+<li><strong>Kolom &quot;Kode Referral (Opsional)&quot;:</strong> Kolom berikon kado untuk memasukkan kode ajakan dari rekan guna mendapatkan voucher cashback sewa.</li>
+<li><strong>Pernyataan Persetujuan:</strong> Tautan aktif menuju <em>Syarat dan Ketentuan Penggunaan</em> aplikasi.</li>
+<li><strong>Tombol Biru &quot;Buat Akun&quot;:</strong> Tombol konfirmasi utama untuk mendaftarkan akun ke sistem Livirooms.</li>
+<li><strong>Tautan Alternatif:</strong> Teks <em>&quot;Sudah punya akun? Masuk&quot;</em> untuk berpindah cepat ke halaman login jika Anda salah memilih menu.</li>
+</ul>
+<hr>
+<h3>1.3 Formulir Masuk (Login) &amp; Pemulihan Kata Sandi</h3>
+<p>Bagi pengguna yang telah memiliki akun, halaman login menyediakan akses instan.</p>
+<p><img src="mobile/03-login-screen.jpeg" alt="Layar Masuk / Login">
+<em>Gambar 1.3: Formulir Masuk (Login) Pengguna Terdaftar</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Judul &quot;Masuk&quot;:</strong> Disertai teks pengantar <em>&quot;Selamat datang kembali! Silakan masukkan detail Anda.&quot;</em></li>
+<li><strong>Kolom Email:</strong> Masukkan alamat surel yang Anda daftarkan saat registrasi.</li>
+<li><strong>Kolom Kata Sandi:</strong> Masukkan kombinasi kata sandi rahasia Anda.</li>
+<li><strong>Tautan &quot;Lupa kata sandi?&quot;:</strong> Tautan bantuan di bawah kolom sandi untuk mengatur ulang kata sandi melalui tautan reset yang dikirimkan ke kotak masuk email.</li>
+<li><strong>Tombol Biru &quot;Masuk&quot;:</strong> Mengirimkan kredensial login terenkripsi ke backend Sanctum Laravel.</li>
+<li><strong>Tautan Registrasi Cepat:</strong> Teks <em>&quot;Belum punya akun? Daftar&quot;</em> di bagian paling bawah.</li>
+</ul>
+<hr>
+<h3>1.4 Verifikasi Keamanan OTP Email</h3>
+<p>Untuk menjaga akun Anda dari akses pihak ketiga yang tidak bertanggung jawab, Livirooms mengimplementasikan <em>Multi-Factor Authentication</em> melalui verifikasi kode OTP (<em>One-Time Password</em>).</p>
+<p><img src="mobile/05-security-otp-verification.jpeg" alt="Layar Verifikasi Keamanan OTP">
+<em>Gambar 1.4: Layar Permintaan Kode Verifikasi Keamanan (OTP)</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Header &quot;Info Kontak&quot;:</strong> Memastikan Anda berada di modul verifikasi keamanan profil.</li>
+<li><strong>Dialog &quot;Verifikasi Keamanan&quot;:</strong> Teks instruksi: <em>&quot;Silakan lengkapi proses verifikasi untuk melindungi akun Anda.&quot;</em></li>
+<li><strong>Tujuan Pengiriman:</strong> Menampilkan alamat email yang dituju (misal: <code>mohba***@gmail.com</code>).</li>
+<li><strong>Aksi Kirim Kode:</strong> Ketuk kartu email untuk meminta sistem mengirimkan 6 digit angka kode rahasia ke kotak masuk surel Anda.</li>
+</ul>
+<h4>Petunjuk Pengoperasian:</h4>
+<ol>
+<li>Ketuk kartu verifikasi email yang tertera di layar.</li>
+<li>Buka aplikasi email di ponsel Anda dan periksa pesan masuk dari <strong>Livirooms Security</strong>.</li>
+<li>Masukkan 6 angka yang diterima ke kolom verifikasi aplikasi.</li>
+</ol>
+<hr>
+<h3>1.5 Verifikasi Identitas (KYC) &amp; Peningkatan Akun</h3>
+<p>Bagi pengguna yang ingin menyewa unit jangka panjang (bulanan/tahunan) atau mengajukan permohonan menjadi <em>Mitra Host</em>, sistem mewajibkan pengisian identitas resmi sesuai KTP.</p>
+<p><img src="mobile/04-kyc-upgrade-id.jpeg" alt="Layar Verifikasi KTP / Upgrade Identitas">
+<em>Gambar 1.5: Formulir Pemadanan Data Identitas KTP untuk Upgrade Akun</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Pilihan Wilayah Berjenjang:</strong> Dropdown Provinsi (<em>Sumatera Utara</em>), Kota (<em>Kota Medan</em>), Kecamatan (<em>Medan Selayang</em>), dan Kelurahan (<em>Padang Bulan Selayang II</em>).</li>
+<li><strong>Kolom &quot;Alamat sesuai KTP&quot;:</strong> Masukkan nama jalan, nomor rumah, RT/RW persis sesuai dokumen negara.</li>
+<li><strong>Pemilih &quot;Tanggal Lahir&quot;:</strong> Kolom bertanggal berikon kalender untuk memilih hari, bulan, dan tahun kelahiran.</li>
+<li><strong>Pemilih &quot;Jenis Kelamin&quot;:</strong> Pilihan radio tombol (<em>Laki-laki</em> atau <em>Perempuan</em>).</li>
+<li><strong>Notifikasi Sistem:</strong> Status sertifikat digital terikat (<em>digital certificate has been held</em>).</li>
+<li><strong>Tombol &quot;Kembali&quot;:</strong> Tombol berbingkai untuk kembali ke menu sebelumnya.</li>
+<li><strong>Tombol &quot;Upgrade&quot;:</strong> Tombol solid gelap untuk mengirimkan berkas identitas ke tim operasional agar akun Anda mendapatkan lencana verifikasi centang biru.</li>
+</ul>
+<hr>
+<h1>BAB 2: EKSPLORASI, PENCARIAN &amp; FILTER AKOMODASI</h1>
+<h3>2.1 Memahami Menu Navigasi Bawah (Bottom Navigation)</h3>
+<p>Pada bagian bawah seluruh layar utama aplikasi Livirooms, terdapat bilah navigasi dengan 4 menu utama:</p>
+<ol>
+<li>🏠 <strong>Beranda:</strong> Menemukan promo, kategori akomodasi, dan pilihan kota tujuan.</li>
+<li>📄 <strong>Pesanan:</strong> Memantau pesanan aktif, jadwal menginap mendatang, dan e-voucher tiket.</li>
+<li>💬 <strong>Pesan:</strong> Jalur percakapan interaktif langsung dengan host/admin properti dan notifikasi perjalanan.</li>
+<li>👤 <strong>Profil:</strong> Mengelola data akun, traveler tersimpan, kupon promo, dan pusat bantuan.</li>
+</ol>
+<hr>
+<h3>2.2 Menjelajahi Beranda Utama (Kategori, Promo &amp; Kota)</h3>
+<p>Layar Beranda dirancang intuitif untuk mempercepat proses pencarian hunian idaman Anda.</p>
+<p><img src="mobile/06-home-screen.jpeg" alt="Beranda Utama Livirooms">
+<em>Gambar 2.1: Layar Beranda Utama (Home Screen) Aplikasi Livirooms</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Salam Pengguna &amp; Pemilih Kota:</strong> Header <em>&quot;Selamat datang&quot;</em> disertai tombol dropdown <em>&quot;Semua Kota, Indonesia&quot;</em> untuk memfilter properti berdasarkan lokasi geografis.</li>
+<li><strong>Ikon Lonceng Notifikasi:</strong> Terletak di pojok kanan atas untuk membuka pesan pembaruan penting.</li>
+<li><strong>Kartu Kategori Utama (Grid Biru):</strong><ul>
+<li><strong>Hotel:</strong> Untuk pemesanan kamar hotel bintang 3 hingga bintang 5.</li>
+<li><strong>Pesawat:</strong> Navigasi pemesanan tiket penerbangan.</li>
+<li><strong>Pesawat &amp; Hotel:</strong> Paket gabungan perjalanan hemat.</li>
+<li><strong>Villa &amp; Apt.:</strong> Khusus sewa apartemen studio, apartemen keluarga, dan vila liburan.</li>
+</ul>
+</li>
+<li><strong>Banner Carousel Promo:</strong> Geser ke samping untuk melihat diskon menginap dan paket liburan menarik.</li>
+<li><strong>Bagian &quot;Jelajahi Kota&quot;:</strong> Pintasan thumbnail foto kota favorit seperti Jakarta, Jakarta Barat, dan Bali.</li>
+<li><strong>Bagian &quot;Terbaru&quot;:</strong> Kartu properti rekomendasi terbaru lengkap dengan rating skor dan tombol simpan favorit (ikon hati).</li>
+</ul>
+<hr>
+<h3>2.3 Pencarian &amp; Filter Kamar Hotel</h3>
+<p>Saat Anda mengetuk ikon kategori <strong>Hotel</strong>, layar dialog parameter reservasi akan muncul.</p>
+<p><img src="mobile/07-hotel-search-filter.jpeg" alt="Form Dialog Pencarian Hotel">
+<em>Gambar 2.2: Dialog Pemilihan Parameter Pencarian Hotel &amp; Rumah Liburan</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Tujuan Lokasi:</strong> Menampilkan kota target (<em>Jakarta Pusat, Indonesia</em>).</li>
+<li><strong>Rentang Tanggal:</strong> Kalender pemilih tanggal check-in (<em>12 Sep</em>) hingga check-out (<em>13 Sep</em>) dengan durasi menginap (<em>1 malam</em>).</li>
+<li><strong>Kapasitas Tamu &amp; Kamar:</strong> Pengaturan jumlah kamar (<em>1 kamar</em>), tamu dewasa (<em>2 dewasa</em>), dan anak-anak (<em>0 anak</em>).</li>
+<li><strong>Filter Cepat:</strong> Opsi centang kriteria populer seperti <em>&quot;Termasuk Sarapan&quot;</em> dan <em>&quot;Bintang 4&quot;</em>.</li>
+<li><strong>Tombol Biru &quot;Cari&quot;:</strong> Menjalankan pencarian inventaris kamar secara realtime.</li>
+<li><strong>Pintasan Riwayat:</strong> Tombol cepat <em>&quot;Disimpan&quot;</em>, <em>&quot;Pemesanan&quot;</em>, <em>&quot;Promo saya&quot;</em>, dan <em>&quot;Dilihat&quot;</em> untuk membuka catatan pencarian sebelumnya.</li>
+</ul>
+<hr>
+<h3>2.4 Hasil Pencarian Hotel &amp; Rekomendasi</h3>
+<p>Setelah menekan tombol Cari, sistem menyajikan daftar lengkap hotel yang tersedia.</p>
+<p><img src="mobile/08-hotel-search-results.jpeg" alt="Hasil Pencarian Hotel">
+<em>Gambar 2.3: Halaman Hasil Pencarian Hotel di Wilayah Jakarta Pusat</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Header Parameter Ringkas:</strong> Menampilkan tanggal menginap (<em>12 Sep - 13 Sep</em>) dan tombol <strong>Urutkan</strong>, <strong>Filter</strong>, dan <strong>Lokasi</strong>.</li>
+<li><strong>Banner Promosi Homestay:</strong> Pemberitahuan potongan harga eksklusif (misal: <em>Diskon hingga Rp 393.750</em>).</li>
+<li><strong>Informasi Jumlah Temuan:</strong> Teks status <em>&quot;5 akomodasi ditemukan&quot;</em>.</li>
+<li><strong>Kartu Properti MaxOne Platinum:</strong><ul>
+<li>Skor ulasan: <em>Sangat Baik (8.7/10)</em> dari ulasan tamu.</li>
+<li>Jarak strategis: <em>800m dari pusat kota</em>.</li>
+<li>Fasilitas unggulan: <em>SkyMax Rooftop Resto &amp; Bar</em>, <em>Max Spa &amp; Pijat</em>, <em>Wi-Fi Gratis</em>.</li>
+<li>Transparansi harga: <em>Rp 450.000 / kamar / malam (Termasuk pajak &amp; biaya lainnya)</em>.</li>
+</ul>
+</li>
+<li><strong>Kartu Properti Artotel Harmoni:</strong> Menampilkan opsi hotel alternatif bintang tinggi dengan kolam renang outdoor dan galeri seni ARTSPACE (<em>Rp 650.000 / malam</em>).</li>
+</ul>
+<hr>
+<h3>2.5 Pencarian &amp; Filter Villa / Apartemen</h3>
+<p>Jika Anda memerlukan hunian privat atau apartemen keluarga, pilih kategori <strong>Villa &amp; Apt.</strong></p>
+<p><img src="mobile/09-villa-apt-search-filter.jpeg" alt="Form Dialog Pencarian Villa &amp; Apartemen">
+<em>Gambar 2.4: Form Parameter Pencarian Villa &amp; Apartemen</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Filter Wilayah:</strong> Mencakup seluruh wilayah Indonesia (<em>Semua Lokasi, Indonesia</em>).</li>
+<li><strong>Pemilih Tanggal Fleksibel:</strong> Menentukan hari masuk dan hari keluar hunian.</li>
+<li><strong>Komposisi Tamu:</strong> Memilih jumlah orang dewasa dan anak yang akan menempati unit.</li>
+</ul>
+<hr>
+<h3>2.6 Hasil Pencarian Villa &amp; Apartemen</h3>
+<p>Sistem akan memfilter seluruh basis data inventaris unit apartemen dan vila yang berstatus siap sewa.</p>
+<p><img src="mobile/10-villa-apt-search-results.jpeg" alt="Hasil Pencarian Villa &amp; Apartemen">
+<em>Gambar 2.5: Katalog Hasil Pencarian Villa Mewah dan Apartemen Bulanan</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Jumlah Hasil Ditemukan:</strong> <em>&quot;3 properti ditemukan&quot;</em>.</li>
+<li><strong>Kartu Villa Seminyak (Modern Minimalist 2BR Private Pool Villa):</strong><ul>
+<li>Rating super: <em>9.7 / 10 Istimewa</em>.</li>
+<li>Alamat: <em>Jl. Kayu Aya No. 88, Seminyak, Kuta, Bali</em>.</li>
+<li>Fasilitas kunci: <em>Private Pool</em>, <em>2 King Beds</em>, <em>Dapur Tropis</em>.</li>
+<li>Harga per malam: <em>Rp 1.850.000</em>.</li>
+</ul>
+</li>
+<li><strong>Kartu Sunset Beach Apartment:</strong><ul>
+<li>Rating: <em>8.9 / 10</em>.</li>
+<li>Fasilitas: <em>WiFi, Pool, Gym</em>.</li>
+<li>Skema sewa: <em>Rp 500.000 per bulan mulai dari</em>.</li>
+</ul>
+</li>
+<li><strong>Kartu Peaceful Living Apartment:</strong> Pilihan apartemen budget strategis di Jakarta Barat (<em>Rp 450.000 / bulan</em>).</li>
+</ul>
+<hr>
+<h1>BAB 3: MEMBACA &amp; MEMILIH DETAIL PROPERTI / HOTEL</h1>
+<h3>3.1 Detail Ringkasan &amp; Pemilihan Kamar Hotel</h3>
+<p>Mengetuk salah satu kartu hotel akan membawa Anda ke halaman profil properti terperinci.</p>
+<p><img src="mobile/11-hotel-detail-overview.jpeg" alt="Halaman Detail Hotel">
+<em>Gambar 3.1: Halaman Detail Hotel MaxOne Platinum Hayam Wuruk</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Galeri Carousel Foto:</strong> Indikator foto resolusi tinggi (<em>1/4</em>) dengan ikon bagikan dan simpan favorit.</li>
+<li><strong>Informasi Gedung:</strong> Tahun peresmian (<em>Dibuka tahun 2018</em>) dan alamat lengkap (<em>Jl. Hayam Wuruk No. 5, Gambir, Jakarta Pusat</em>).</li>
+<li><strong>Tautan Peta:</strong> Teks interaktif <em>&quot;Lihat di Peta&quot;</em> untuk memeriksa rute langsung.</li>
+<li><strong>Tab Navigasi Halaman:</strong> Terdiri atas tab <strong>Kamar</strong>, <strong>Ulasan</strong>, <strong>Pertanyaan Umum</strong>, dan <strong>Lokasi</strong>.</li>
+<li><strong>Kamar Rekomendasi:</strong> Penawaran <em>1 x Happiness Room</em> seharga <em>Rp 450.000 / malam (Termasuk pajak 10%)</em>.</li>
+<li><strong>Bottom Action Bar:</strong> Menampilkan ringkasan durasi menginap serta tombol biru <strong>&quot;Pilih kamar&quot;</strong>.</li>
+</ul>
+<hr>
+<h3>3.2 Membaca Ulasan Terverifikasi &amp; FAQ Hotel</h3>
+<p>Untuk memastikan kenyamanan menginap, Anda dapat membaca umpan balik nyata dari tamu sebelumnya dan mengajukan pertanyaan kepada pengelola.</p>
+<p><img src="mobile/12-hotel-detail-reviews-faq.jpeg" alt="Ulasan &amp; Pertanyaan Umum Hotel">
+<em>Gambar 3.2: Tab Ulasan Terverifikasi dan Tanya Jawab (FAQ) Pengelola Hotel</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Skor Ulasan Terverifikasi:</strong> Nilai kepuasan tamu (<em>Sangat Baik 8.7/10</em>).</li>
+<li><strong>Kutipan Tanya Jawab Populer (<em>Mungkin Anda Ingin Tahu</em>):</strong><ul>
+<li>Pertanyaan ketersediaan restoran: Dijawab resmi oleh <em>Manager Akomodasi</em> perihal <em>SkyMax Rooftop Bistro</em>.</li>
+<li>Pertanyaan layanan spa: Dijawab oleh pengelola perihal jam operasional <em>Max Spa &amp; Reflexology</em>.</li>
+</ul>
+</li>
+<li><strong>Tombol &quot;Ajukan Pertanyaan&quot;:</strong> Memungkinkan calon tamu mengirimkan pertanyaan spesifik langsung kepada manajemen hotel sebelum memesan.</li>
+</ul>
+<hr>
+<h3>3.3 Memeriksa Kebijakan Akomodasi, Deposit &amp; Pembatalan</h3>
+<p>Ketahui aturan main dan batasan sebelum mengonfirmasi transaksi.</p>
+<p><img src="mobile/13-hotel-detail-policy.jpeg" alt="Kebijakan Akomodasi Hotel">
+<em>Gambar 3.3: Kebijakan Check-in, Batas Usia, Ketentuan Anak, Deposit, dan Pembatalan</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Jam Check-in &amp; Check-out:</strong> Waktu check-in setelah pukul <em>14:00</em>, check-out sebelum pukul <em>12:00</em> (Layanan resepsionis <em>24 jam</em>).</li>
+<li><strong>Batas Usia Minimum:</strong> Wajib berusia minimal <em>18 tahun</em> untuk mendaftar check-in mandiri.</li>
+<li><strong>Kebijakan Anak &amp; Ranjang Tambahan:</strong> Anak dari segala usia diperbolehkan menginap; ranjang ekstra tersedia dengan konfirmasi sebelumnya.</li>
+<li><strong>Ketentuan Deposit Jaminan:</strong> Wajib menyerahkan deposit tunai/kartu sebesar <em>Rp 150.000</em> saat check-in yang akan dikembalikan penuh saat checkout jika tidak terjadi kerusakan.</li>
+<li><strong>Kebijakan Pembatalan:</strong> Jaminan <em>Pembatalan gratis hingga 24 jam</em> sebelum waktu menginap.</li>
+</ul>
+<hr>
+<h3>3.4 Melihat Galeri Foto &amp; Rating Villa Mewah</h3>
+<p>Aplikasi Livirooms juga memfasilitasi penjelajahan vila eksklusif dengan tata letak visual imersif.</p>
+<p><img src="mobile/14-villa-detail-gallery.jpeg" alt="Detail Galeri Villa Seminyak">
+<em>Gambar 3.4: Tampilan Galeri Foto dan Rating Villa Tropis Seminyak</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Skor Istimewa 9.7/10:</strong> Menampilkan kepuasan tamu terhadap kebersihan kolam renang pribadi dan ketenangan lingkungan vila.</li>
+<li><strong>Kutipan Ulasan Nyata:</strong> Testimoni mengenai keramahan staf serta akses yang sangat dekat menuju pantai.</li>
+<li><strong>Tombol &quot;Hubungi Host&quot;:</strong> Menghubungkan Anda langsung ke pemilik vila untuk negosiasi atau permohonan khusus.</li>
+<li><strong>Tombol &quot;Pilih Unit&quot;:</strong> Melanjutkan ke pemilihan tanggal sewa.</li>
+</ul>
+<hr>
+<h3>3.5 Detail Properti Apartemen &amp; Sewa Fleksibel</h3>
+<p>Untuk kebutuhan tempat tinggal praktis, profil apartemen menyajikan pilihan skema bulanan dan harian yang transparan.</p>
+<p><img src="mobile/15-apt-detail-overview.jpeg" alt="Detail Properti Apartemen">
+<em>Gambar 3.5: Detail Unit Apartemen Sunset Beach</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Label Kategori:</strong> Indikator jenis properti (<em>Apartment Bali</em>).</li>
+<li><strong>Ulasan Tamu:</strong> Menampilkan kritik konstruktif dan waktu penilaian (<em>22 Agt 2026</em>).</li>
+<li><strong>Tab Konten:</strong> Tab cepat untuk memeriksa <strong>Facilities</strong>, <strong>Info Details</strong>, dan <strong>Location</strong>.</li>
+<li><strong>Harga Promo Mulai Dari:</strong> Penawaran paket sewa bulanan mulai dari <em>Rp 500.000</em>.</li>
+</ul>
+<hr>
+<h3>3.6 Memeriksa Fasilitas Kamar &amp; Perabot Tidur</h3>
+<p>Pastikan jumlah kasur dan tata ruang kamar sesuai kebutuhan Anda dan keluarga.</p>
+<p><img src="mobile/16-apt-detail-facilities.jpeg" alt="Fasilitas Kamar Apartemen">
+<em>Gambar 3.6: Rincian Fasilitas Kamar Tidur Utama dan Kamar Tidur Kedua</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Fasilitas Kamar Utama:</strong> Kasur empuk berukuran besar (<em>King/Queen</em>), pendingin ruangan AC, lemari pakaian, dan nakas.</li>
+<li><strong>Fasilitas Kamar Kedua:</strong> Kasur tipe <em>single bed</em> untuk anak atau rekan menginap tambahan.</li>
+<li><strong>Kebutuhan Linen:</strong> Informasi ketersediaan sprei bersih, bantal, dan selimut sanitasi.</li>
+</ul>
+<hr>
+<h3>3.7 Memeriksa Peta Lokasi &amp; Akses Sekitar Unit</h3>
+<p>Menghindari salah arah dengan panduan lokasi akurat yang tersemat pada aplikasi.</p>
+<p><img src="mobile/17-apt-detail-location-map.jpeg" alt="Peta Lokasi Apartemen">
+<em>Gambar 3.7: Peta Lokasi Interaktif dan Alamat Lengkap Unit</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Peta Lokasi Terintegrasi:</strong> Menampilkan titik koordinat gedung apartemen terhadap jalan utama dan bibir pantai.</li>
+<li><strong>Alamat Resmi:</strong> <em>Jl. Pantai Indah No. 10, Bali</em>.</li>
+<li><strong>Deskripsi Properti:</strong> <em>&quot;A beautiful apartment with ocean view&quot;</em> lengkap dengan opsi tombol <em>&quot;Lihat Semua&quot;</em> untuk membaca panduan lingkungan sekitar gedung.</li>
+</ul>
+<hr>
+<h3>3.8 Memeriksa Kebijakan Check-in Mandiri &amp; Deposit Unit</h3>
+<p>Apartemen modern di Livirooms menerapkan panduan mandiri (<em>self check-in</em>) yang terstruktur.</p>
+<p><img src="mobile/18-apt-detail-checkin-deposit-policy.jpeg" alt="Kebijakan Check-in &amp; Deposit Apartemen">
+<em>Gambar 3.8: Kebijakan Check-In Mandiri, Pembersihan Linen, dan Deposit Apartemen</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Aturan Pengaturan Waktu Check-In:</strong> Tamu diwajibkan mengatur konfirmasi kedatangan di aplikasi setidaknya <em>4 jam sebelum tiba di lokasi</em>.</li>
+<li><strong>Kebijakan Pembersihan Unit:</strong> Standar operasional pembersihan unit dan pergantian sprei/linen dilakukan menyeluruh setelah jadwal check-out tamu berakhir.</li>
+<li><strong>Ketentuan Deposit:</strong> Besaran dana jaminan kunci akses gedung dan kartu fasilitas lift.</li>
+</ul>
+<hr>
+<h1>BAB 4: ALUR PEMESANAN (BOOKING FLOW)</h1>
+<h3>4.1 Rincian Paket Sewa Harian Apartemen &amp; Diskon Menginap</h3>
+<p>Saat Anda siap memesan unit apartemen, aplikasi menyajikan lembar konfirmasi transparan berisi apa saja yang termasuk dan tidak termasuk dalam biaya sewa.</p>
+<p><img src="mobile/19-apt-unit-booking-summary.jpeg" alt="Rincian Unit Sewa Harian">
+<em>Gambar 4.1: Lembar Rincian Unit Sewa Harian dan Penawaran Diskon Durasi Menginap</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Header Skema Sewa:</strong> Menampilkan opsi sewa terpilih (<em>Harian</em>).</li>
+<li><strong>Informasi Unit &amp; Kapasitas:</strong> <em>Sunset Beach Apartment</em> dengan spesifikasi <em>2 Tempat Tidur, 1 Kamar Mandi</em>.</li>
+<li><strong>Jadwal Check-in s/d Check-out:</strong> <em>11 Sep 2026 - 12 Sep 2026</em>.</li>
+<li><strong>Kolom &quot;Termasuk&quot; (<em>Included</em>):</strong><ul>
+<li>Listrik &amp; Air (<em>Electricity + Water</em>)</li>
+<li>Perlengkapan Mandi (<em>Amenities</em>)</li>
+<li>Handuk &amp; Sprei Bersih (<em>Use of towel and linen</em>)</li>
+</ul>
+</li>
+<li><strong>Kolom &quot;Tidak Termasuk&quot; (<em>Excluded</em>):</strong> Biaya parkir kendaraan khusus dan biaya paket internet pribadi.</li>
+<li><strong>Tabel Diskon Durasi Menginap (<em>Special Discount</em>):</strong><ul>
+<li>Menginap 4 hari atau lebih: Diskon otomatis <strong>5%</strong>.</li>
+<li>Menginap 7 hari atau lebih: Diskon otomatis <strong>10%</strong>.</li>
+</ul>
+</li>
+<li><strong>Tombol Biru &quot;PESAN&quot;:</strong> Tombol konfirmasi untuk langsung melanjutkan ke formulir identitas tamu.</li>
+</ul>
+<hr>
+<h3>4.2 Formulir Checkout &amp; Pengisian Data Identitas Tamu</h3>
+<p>Pada pemesanan hotel, layar checkout meminta rincian data tamu yang akan menginap di kamar.</p>
+<p><img src="mobile/20-hotel-checkout-guest-form.jpeg" alt="Formulir Checkout Data Tamu">
+<em>Gambar 4.2: Formulir Checkout Kamar Hotel MaxOne Hayam Wuruk</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Ringkasan Jadwal Menginap:</strong><ul>
+<li>Check-in: <em>Sabtu, 12 Sep (setelah 14:00)</em>.</li>
+<li>Check-out: <em>Minggu, 13 Sep (sebelum 12:00)</em>.</li>
+<li>Durasi: <em>1 malam</em>.</li>
+</ul>
+</li>
+<li><strong>Rincian Kamar:</strong> <em>Happiness Room (1 Kamar)</em>, kapasitas <em>2 dewasa + 1 anak</em>, tempat tidur <em>1 Queen Bed atau 2 Single Bed</em>, luas ruangan <em>32 m²</em>, <em>Bebas rokok</em>, <em>Wi-Fi gratis</em>, <em>Sarapan termasuk</em>.</li>
+<li><strong>Struktur Harga:</strong> <em>Rp 450.000 / malam x 1 kamar x 1 malam (Termasuk pajak 10%)</em>.</li>
+<li><strong>Formulir Data Tamu Kamar 1:</strong> Kolom input <em>Nama depan</em>, <em>Nama belakang</em>, disertai tombol pintasan <em>&quot;Pilih tersimpan&quot;</em> untuk mengambil data kontak traveler secara instan tanpa mengetik ulang.</li>
+<li><strong>Badge Jaminan:</strong> Lencana <em>&quot;Kami Samakan Harga&quot;</em> yang menjamin tarif terbaik.</li>
+<li><strong>Bottom Bar:</strong> Menampilkan status <em>Prabayar Online Rp 450.000</em> dan tombol konfirmasi <strong>&quot;Pesan&quot;</strong>.</li>
+</ul>
+<hr>
+<h1>BAB 5: PEMBAYARAN &amp; KONFIRMASI INSTAN (CHECKOUT)</h1>
+<h3>5.1 Memilih Saluran Pembayaran Berlisensi (Midtrans Snap)</h3>
+<p>Setelah menekan tombol <strong>Pesan</strong>, aplikasi Livirooms secara aman membuka gerbang pembayaran terenkripsi <strong>Midtrans Snap SDK</strong> dengan waktu jatuh tempo 24 jam:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Saluran Pembayaran</th>
+<th align="left">Metode</th>
+<th align="left">Waktu Verifikasi</th>
+<th align="left">Biaya Admin</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Virtual Account BCA</strong></td>
+<td align="left">Nomor VA Otomatis</td>
+<td align="left">Instan (&lt; 5 detik)</td>
+<td align="left">Gratis</td>
+</tr>
+<tr>
+<td align="left"><strong>Mandiri Bill Payment</strong></td>
+<td align="left">Kode Perusahaan + VA</td>
+<td align="left">Instan (&lt; 5 detik)</td>
+<td align="left">Gratis</td>
+</tr>
+<tr>
+<td align="left"><strong>Virtual Account BNI / BRI</strong></td>
+<td align="left">Nomor VA Bank</td>
+<td align="left">Instan (&lt; 5 detik)</td>
+<td align="left">Gratis</td>
+</tr>
+<tr>
+<td align="left"><strong>QRIS Dinamis</strong></td>
+<td align="left">Scan via BCA Mobile, Livin, GoPay, OVO, Dana</td>
+<td align="left">Instan (&lt; 5 detik)</td>
+<td align="left">Gratis</td>
+</tr>
+<tr>
+<td align="left"><strong>GoPay &amp; ShopeePay</strong></td>
+<td align="left">App-to-App Redirection</td>
+<td align="left">Instan (&lt; 3 detik)</td>
+<td align="left">Gratis</td>
+</tr>
+<tr>
+<td align="left"><strong>Kartu Kredit / Debit</strong></td>
+<td align="left">Visa, MasterCard, JCB dengan 3D Secure OTP</td>
+<td align="left">Instan (&lt; 10 detik)</td>
+<td align="left">Standar Bank</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>5.2 Cara Membayar via Virtual Account Bank</h3>
+<ol>
+<li>Pada menu pembayaran Midtrans, pilih opsi <strong>BCA Virtual Account</strong> (atau bank rekanan Anda).</li>
+<li>Salin nomor rekening Virtual Account unik yang tercantum di layar ponsel.</li>
+<li>Buka m-Banking atau ATM bank Anda, masuk ke menu <strong>Transfer Virtual Account</strong>, lalu tempel nomor tersebut.</li>
+<li>Periksa kecocokan nama pesanan Anda (contoh: <em>LIVIROOMS - BOOKING #HTL-20260904</em>).</li>
+<li>Masukkan PIN transaksi perbankan Anda hingga notifikasi pembayaran sukses terbit.</li>
+</ol>
+<hr>
+<h3>5.3 Pembayaran via QRIS &amp; Dompet Digital (GoPay)</h3>
+<ol>
+<li>Pilih opsi <strong>GoPay</strong> atau <strong>QRIS</strong>.</li>
+<li>Jika memilih GoPay, aplikasi Gojek di ponsel Anda akan otomatis terbuka. Konfirmasikan pembayaran dengan sidik jari atau PIN dompet digital Anda.</li>
+<li>Jika memilih QRIS, pindai kode QR dinamis di layar menggunakan aplikasi e-wallet apa pun yang mendukung QRIS Standar Bank Indonesia.</li>
+</ol>
+<hr>
+<h3>5.4 Konfirmasi Pembayaran Instan &amp; Deep Link Otomatis</h3>
+<ul>
+<li>Segera setelah bank/e-wallet memproses transfer, sistem Midtrans mengirimkan sinyal Webhook aman (<em>Server-to-Server</em>) ke backend Livirooms.</li>
+<li>Layar aplikasi secara otomatis merespons melalui Deep Link <code>livirooms://payment-result</code> dan langsung mengubah status pesanan menjadi <strong>&quot;Lunas / Terkonfirmasi&quot;</strong> tanpa perlu mengunggah bukti struk transfer fisik!</li>
+</ul>
+<hr>
+<h1>BAB 6: MENGELOLA PERJALANAN DI MENU &quot;PESANAN&quot;</h1>
+<h3>6.1 Membuka Daftar Pesanan Aktif, Selesai &amp; Dibatalkan</h3>
+<p>Seluruh riwayat perjalanan dan reservasi kamar Anda dikelola secara terpusat pada tab kedua navigasi bawah yaitu menu <strong>Pesanan</strong>.</p>
+<p><img src="mobile/21-pesanan-saya-orders-list.jpeg" alt="Halaman Pesanan Saya">
+<em>Gambar 6.1: Halaman Pesanan Saya Menampilkan Pesanan Aktif Sedang Menginap</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Tab Klasifikasi Status:</strong><ul>
+<li><strong>Aktif:</strong> Pesanan yang sedang berlangsung atau jadwal menginap mendatang.</li>
+<li><strong>Selesai:</strong> Riwayat pesanan yang telah rampung dan siap diberikan ulasan.</li>
+<li><strong>Dibatalkan:</strong> Riwayat reservasi yang dibatalkan oleh tamu atau sistem.</li>
+</ul>
+</li>
+<li><strong>Kartu Pesanan Hotel Aktif:</strong><ul>
+<li>Jenis properti: Berikon tempat tidur dengan label <em>Hotel</em>.</li>
+<li>Badge status hijau: <strong>Sedang Menginap</strong> (menandakan tamu telah sukses check-in).</li>
+<li>Nama akomodasi: <em>Merlynn Park Hotel</em>.</li>
+<li>Detail jadwal: <em>6 Sep - 7 Sep, 1 kamar, 1 malam, 2 tamu</em>.</li>
+<li>Total transaksi: <em>Rp 1.250.000</em>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>6.2 Membaca E-Voucher Digital, Kode Booking &amp; Kebijakan Akomodasi</h3>
+<p>Mengetuk kartu pesanan akan membuka lembar tiket digital lengkap (<em>E-Voucher</em>).</p>
+<p><img src="mobile/22-order-detail-e-voucher.jpeg" alt="Lembar Detail E-Voucher Pesanan">
+<em>Gambar 6.2: E-Voucher Digital Lengkap dengan Nomor Pemesanan dan Aturan Check-in</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Nomor Pemesanan:</strong> Kode alfanumerik resmi (<em>No. Pemesanan HTL-20260904-YE7K</em>) disertai PIN reservasi tersembunyi yang dapat dibuka dengan ikon mata.</li>
+<li><strong>Status Sedang Menginap:</strong> Penanda status aktif yang sah di resepsionis gedung.</li>
+<li><strong>Lencana Jaminan:</strong> <em>Kami Samakan Harga</em> dan <em>Jaminan Menginap di Hotel</em>.</li>
+<li><strong>Rincian Total Biaya:</strong> Total tagihan <em>Rp 1.250.000</em> disertai tombol <em>Detail harga</em> untuk melihat komponen pajak.</li>
+<li><strong>Peringatan Kebijakan Pembatalan:</strong> Kotak oranye yang menjelaskan ketentuan pengembalian dana (<em>Non-refundable</em> atau batas waktu pembatalan gratis).</li>
+<li><strong>Profil Akomodasi &amp; Tombol Komunikasi:</strong><ul>
+<li>Nama dan rating bintang hotel (<em>Merlynn Park Hotel, Bintang 5</em>).</li>
+<li>Tombol <strong>&quot;Kirim Pesan&quot;</strong>: Mengirimkan chat langsung kepada front desk akomodasi.</li>
+<li>Tombol <strong>&quot;Hubungi Akomodasi&quot;</strong>: Membuka dialer telepon resmi pihak hotel.</li>
+</ul>
+</li>
+<li><strong>Jadwal Jam Check-in &amp; Check-out:</strong> Waktu check-in setelah <em>14:00</em> dan check-out sebelum <em>12:00</em>.</li>
+<li><strong>Tombol &quot;Batalkan Pemesanan&quot;:</strong> Tautan teks biru di bagian bawah untuk mengajukan permohonan pembatalan sesuai aturan yang berlaku.</li>
+</ul>
+<hr>
+<h1>BAB 7: KOMUNIKASI CHAT &amp; KOTAK MASUK PESAN</h1>
+<h3>7.1 Tampilan Tab Pesan saat Tamu Belum Masuk Akun</h3>
+<p>Bagi pengguna yang menjelajah aplikasi tanpa masuk ke akun, tab Pesan menyajikan himbauan keamanan.</p>
+<p><img src="mobile/23-chat-tab-unlogged.jpeg" alt="Tab Pesan Belum Login">
+<em>Gambar 7.1: Tampilan Tab Pesan untuk Pengguna yang Belum Masuk Akun</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Header Kategori:</strong> Tab navigasi <em>Chat</em>, <em>Pemesanan</em>, <em>Promosi</em>, dan <em>Aktivitas</em>.</li>
+<li><strong>Ilustrasi Kotak Surat:</strong> Visual ramah bertuliskan <em>&quot;Belum Ada Notifikasi&quot;</em>.</li>
+<li><strong>Pesan Edukasi:</strong> <em>&quot;Login atau daftar untuk memastikan Anda mendapatkan update perjalanan terbaru.&quot;</em></li>
+<li><strong>Tombol Biru &quot;Login / Daftar&quot;:</strong> Pintasan satu ketukan untuk segera masuk atau membuat akun.</li>
+</ul>
+<hr>
+<h3>7.2 Memahami Tab Kategori Kotak Masuk (Chat, Pemesanan, Promosi, Aktivitas)</h3>
+<p>Setelah masuk ke akun, tab Pesan bertransformasi menjadi pusat komunikasi perjalanan terpadu.</p>
+<p><img src="mobile/24-chat-inbox-list.jpeg" alt="Daftar Kotak Masuk Pesan">
+<em>Gambar 7.2: Pusat Kotak Masuk Pesan dengan Kategori Komunikasi Lengkap</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Kategori Tab Atas:</strong><ul>
+<li>💬 <strong>Chat:</strong> Riwayat obrolan langsung dengan pemilik properti (host) dan staf operasional.</li>
+<li>📅 <strong>Pemesanan:</strong> Notifikasi konfirmasi booking, pengingat check-in, dan e-voucher.</li>
+<li>🎁 <strong>Promosi:</strong> Informasi diskon mingguan, flash sale, dan kupon reward cashback.</li>
+<li>🧾 <strong>Aktivitas:</strong> Pemberitahuan perubahan akun, bukti pembayaran, dan log login.</li>
+</ul>
+</li>
+<li><strong>Daftar Kontak Percakapan:</strong> Menampilkan pesan masuk dari staf/host (misal: <em>Budi Santoso</em>) dengan cuplikan pesan terakhir dan penanda waktu kirim (<em>6h</em> yang lalu).</li>
+<li><strong>Tautan &quot;Lihat selengkapnya&quot;:</strong> Membuka arsip obrolan terdahulu.</li>
+</ul>
+<hr>
+<h3>7.3 Daftar Percakapan Terkait Nomor Reservasi</h3>
+<p>Untuk mempermudah identifikasi pesanan, obrolan otomatis ditandai dengan kode reservasi kamar terkait.</p>
+<p><img src="mobile/26-chat-inbox-detail-list.jpeg" alt="Daftar Pesan Masuk Tertaut Reservasi">
+<em>Gambar 7.4: Daftar Percakapan Terkait Kode Reservasi Spesifik</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Percakapan Booking Apartemen:</strong> Ditandai dengan kode unik booking apartemen (<em>#BK-1KTFTPNK</em>).</li>
+<li><strong>Percakapan Booking Hotel:</strong> Ditandai dengan kode booking hotel (<em>#HTL-20260904-YE7K</em>).</li>
+<li><strong>Avatar Inisial Pengirim:</strong> <em>BS</em> (Budi Santoso - Host) dan <em>AU</em> (Admin Utama - Customer Service Livirooms) sehingga tamu dapat membedakan pihak yang sedang diajak berkomunikasi.</li>
+</ul>
+<hr>
+<h3>7.4 Berinteraksi Langsung di Ruang Chat dengan Host Properti</h3>
+<p>Tamu dapat mengobrol secara leluasa dengan pemilik unit sebelum dan selama masa menginap.</p>
+<p><img src="mobile/27-chat-conversation-with-host.jpeg" alt="Ruang Obrolan dengan Host">
+<em>Gambar 7.5: Ruang Obrolan Interaktif dengan Host Sunset Beach Apartment</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Header Obrolan:</strong> Nama host (<em>Budi Santoso</em>) lengkap dengan indikator status hijau (<em>Online</em>).</li>
+<li><strong>Label Properti Terkait:</strong> Teks penanda <em>&quot;Properti terkait: Sunset Beach Apartment&quot;</em> yang memastikan konteks pembicaraan tidak tertukar.</li>
+<li><strong>Gelembung Pesan (Chat Bubbles):</strong> Pesan keluar di sisi kanan dan pesan masuk di sisi kiri lengkap dengan penanda waktu (<em>00:36</em>).</li>
+<li><strong>Kolom Tulis Pesan:</strong> Kolom teks interaktif <em>&quot;Tulis pesan...&quot;</em> disertai tombol kirim dan lampiran berkas.</li>
+</ul>
+<hr>
+<h1>BAB 8: PROMO KUPON &amp; NOTIFIKASI SISTEM</h1>
+<h3>8.1 Membuka Halaman Promo Saya &amp; Mengklaim Kode Kupon</h3>
+<p>Aplikasi Livirooms menyediakan halaman khusus untuk melihat seluruh kupon diskon yang siap Anda pakai saat checkout.</p>
+<p><img src="mobile/28-promo-saya-coupons-list.jpeg" alt="Halaman Promo Saya">
+<em>Gambar 8.1: Daftar Kupon Diskon dan Kode Promo Aktif di Menu &quot;Promo Saya&quot;</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Kupon &quot;Weekly Hot Deal 10%&quot;:</strong><ul>
+<li>Kode Kupon: <code>HOTWEEK10</code></li>
+<li>Potongan: Diskon 10%</li>
+<li>Masa Berlaku: <em>3 Sep 2026 s/d 4 Okt 2026</em>.</li>
+</ul>
+</li>
+<li><strong>Kupon &quot;Staycation Cashback 50rb&quot;:</strong><ul>
+<li>Kode Kupon: <code>STAYCATION50K</code></li>
+<li>Nilai: Cashback saldo dompet Rp 50.000.</li>
+</ul>
+</li>
+<li><strong>Kupon &quot;Flash Sale Diskon 25%&quot;:</strong><ul>
+<li>Kode Kupon: <code>FLASH25</code></li>
+<li>Nilai: Potongan harga langsung 25%.</li>
+</ul>
+</li>
+<li><strong>Kupon &quot;Promo Diskon Rp 50.000&quot;:</strong><ul>
+<li>Kode Kupon: <code>AGD30</code></li>
+<li>Nilai: Potongan flat Rp 50.000 untuk pengguna baru.</li>
+</ul>
+</li>
+</ul>
+<h4>Cara Menggunakan Kupon Promo:</h4>
+<ol>
+<li>Catat kode promo di atas (contoh: <code>FLASH25</code>).</li>
+<li>Saat berada di layar pemesanan / checkout, ketuk kolom <strong>Gunakan Kode Promo</strong>.</li>
+<li>Tempelkan kode tersebut lalu tekan tombol <strong>Terapkan</strong>. Tagihan Anda akan terpotong seketika!</li>
+</ol>
+<hr>
+<h3>8.2 Memeriksa Riwayat Notifikasi Aplikasi</h3>
+<p>Halaman Notifikasi mencatat pembaruan status sistem dan pengingat jadwal check-in.</p>
+<p><img src="mobile/29-notifications-screen.jpeg" alt="Halaman Notifikasi">
+<em>Gambar 8.2: Halaman Notifikasi Aplikasi Livirooms</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Header &quot;Notifikasi&quot;:</strong> Disertai tombol kembali.</li>
+<li><strong>Tampilan Status Bersih:</strong> Ilustrasi smartphone minimalis dengan pesan ramah <em>&quot;Belum ada notifikasi&quot;</em> jika seluruh pengingat telah selesai dibaca.</li>
+</ul>
+<hr>
+<h1>BAB 9: PROFIL PENGGUNA &amp; MANAJEMEN TRAVELER / KONTAK</h1>
+<h3>9.1 Halaman Profil Pengguna Belum Masuk Akun</h3>
+<p>Bagi pengguna dalam mode tamu (<em>guest mode</em>), tab Profil menampilkan keuntungan bergabung.</p>
+<p><img src="mobile/30-profile-guest-unlogged.jpeg" alt="Profil Pengguna Belum Login">
+<em>Gambar 9.1: Tab Profil dalam Mode Tamu (Belum Masuk Akun)</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Kartu Promo Eksklusif:</strong> Visual kartu keanggotaan biru dengan teks ajakan: <em>&quot;Penghematan eksklusif tersedia hanya untuk Anda - cukup dengan satu langkah...&quot;</em></li>
+<li><strong>Tombol Utama &quot;Login / Daftar&quot;:</strong> Tombol biru berukuran penuh untuk pendaftaran cepat.</li>
+<li><strong>Grid Menu Pintasan Cepat:</strong><ul>
+<li>🔍 <strong>Cari pemesanan:</strong> Mencari reservasi menggunakan kode booking fisik.</li>
+<li>📋 <strong>Semua Pemesanan:</strong> Melihat arsip seluruh reservasi.</li>
+<li>🕒 <strong>Terakhir Dilihat:</strong> Melihat kembali unit apartemen yang baru saja Anda buka.</li>
+<li>💬 <strong>My Posts:</strong> Catatan ulasan atau pertanyaan yang pernah Anda kirimkan.</li>
+<li>❤️ <strong>Disimpan:</strong> Daftar hunian favorit (Wishlist).</li>
+<li>💳 <strong>Kartu Saya:</strong> Pengelolaan metode kartu kredit/debit tersimpan.</li>
+<li>👤 <strong>Traveler &amp; Kontak:</strong> Pengelolaan buku kontak penginap.</li>
+<li>🎧 <strong>Dukungan Pelanggan:</strong> Akses cepat ke pusat bantuan 24 jam.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>9.2 Halaman Profil Pengguna Member Terdaftar</h3>
+<p>Setelah Anda masuk ke akun, halaman Profil berubah menampilkan data identitas keanggotaan Anda.</p>
+<p><img src="mobile/31-profile-user-logged-in.jpeg" alt="Profil Pengguna Member Terdaftar">
+<em>Gambar 9.2: Halaman Profil Pengguna Member Aktif (Livirooms Member)</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Header Pengguna:</strong> Avatar profil, nama akun (<em>wawn</em>), serta tautan <em>&quot;Kelola Akun Saya &gt;&quot;</em> untuk mengubah kata sandi dan alamat surel.</li>
+<li><strong>Ikon Bantuan &amp; Pengaturan:</strong> Tombol headset (Customer Care) dan roda gigi (Pengaturan Notifikasi &amp; Bahasa) di pojok kanan atas.</li>
+<li><strong>Banner Manfaat Keanggotaan:</strong><ul>
+<li>🛏️ <strong>Promo Member Hotel:</strong> Potongan harga khusus pelanggan setia.</li>
+<li>🧳 <strong>Jaminan Pembatalan Fleksibel:</strong> Opsi pembatalan aman dengan pengembalian saldo.</li>
+</ul>
+</li>
+<li><strong>Menu Navigasi Utama:</strong><ul>
+<li><strong>Semua Pemesanan:</strong> Arsip lengkap seluruh transaksi reservasi.</li>
+<li><strong>Terakhir Dilihat:</strong> Rekam jejak unit yang baru dibuka.</li>
+<li><strong>Traveler &amp; Kontak:</strong> Pengelolaan data tamu penginap.</li>
+<li><strong>Disimpan:</strong> Properti yang diberi tanda suka.</li>
+</ul>
+</li>
+<li><strong>Bagian &quot;Tentang &amp; Ketentuan&quot;:</strong> Informasi legal perusahaan (<em>Tentang livirooms.com</em>), <em>Beri nilai Aplikasi</em>, dan <em>Syarat &amp; Ketentuan Layanan</em>.</li>
+</ul>
+<hr>
+<h3>9.3 Menu Manajemen Traveler &amp; Kontak Tersimpan</h3>
+<p>Fitur unggulan Livirooms untuk mempercepat pengisian formulir checkout saat memesan untuk keluarga atau rekan kerja tanpa mengetik ulang berulang kali.</p>
+<p><img src="mobile/32-traveler-menu-options.jpeg" alt="Menu Pilihan Traveler &amp; Kontak">
+<em>Gambar 9.3: Menu Pengaturan Traveler, Kontak Pemesanan &amp; Opsi Faktur (Invoice)</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Menu &quot;Info Frequent Flyer&quot;:</strong> Menyimpan kewarganegaraan, nomor identitas, tanggal lahir, dan jenis kelamin untuk penerbangan.</li>
+<li><strong>Menu &quot;Info Kontak&quot;:</strong> Mengelola email, nomor telepon WhatsApp, dan alamat surat-menyurat untuk konfirmasi reservasi dan serah terima kunci.</li>
+<li><strong>Menu &quot;Opsi Receipt &amp; Invoice&quot;:</strong> Pengelolaan data nama perusahaan (<em>billing company</em>), NPWP, dan alamat penagihan resmi untuk keperluan <em>reimbursement</em> kantor.</li>
+</ul>
+<hr>
+<h3>9.4 Buku Kontak Pemesanan &amp; Alamat Pengiriman</h3>
+<p>Melihat daftar seluruh kontak yang telah berhasil Anda simpan di memori akun.</p>
+<p><img src="mobile/34-traveler-contacts-list.jpeg" alt="Daftar Kontak Tersimpan">
+<em>Gambar 9.5: Buku Kontak Tersimpan dengan Opsi Tambah Kontak Baru</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Tombol &quot;Tambahkan Kontak Baru&quot;:</strong> Tombol biru untuk mendaftarkan nama penginap baru.</li>
+<li><strong>Kartu Kontak Tersimpan:</strong><ul>
+<li>Nama: <em>Wan Tea</em></li>
+<li>Email: <em><a href="mailto:gorie@gmail.com">gorie@gmail.com</a></em></li>
+<li>Telepon &amp; Alamat: Indikator status kelengkapan data (<em>Silakan perbarui info</em>).</li>
+</ul>
+</li>
+<li><strong>Aksi Cepat:</strong> Ketuk kartu kontak untuk mengedit atau memperbarui informasi alamat.</li>
+</ul>
+<hr>
+<h3>9.5 Menambahkan Kontak Baru (Identitas &amp; Alamat Lengkap)</h3>
+<p>Formulir terpadu untuk mendaftarkan identitas penginap atau rekan yang sering Anda pesankan kamar.</p>
+<p><img src="mobile/35-add-contact-form-top.jpeg" alt="Form Tambah Kontak Identitas">
+<em>Gambar 9.6: Formulir Tambah Kontak - Data Kontak Utama &amp; Checkbox Default</em></p>
+<p><img src="mobile/37-add-contact-form-bottom-filled.jpeg" alt="Form Tambah Kontak Alamat">
+<em>Gambar 9.7: Formulir Tambah Kontak - Pengisian Detail Alamat Domisili</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ol>
+<li><strong>Atur sebagai kontak default untuk pemesanan:</strong> Centang opsi ini agar data kontak ini otomatis terisi pada setiap formulir checkout baru.</li>
+<li><strong>Nama Kontak (*):</strong> Nama lengkap penyewa sesuai KTP.</li>
+<li><strong>Email (*):</strong> Alamat email aktif untuk menerima salinan voucher.</li>
+<li><strong>Nomor Telepon (*):</strong> Kode negara (<em>+62</em>) diikuti nomor WhatsApp aktif.</li>
+<li><strong>Info Alamat Pengiriman Tiket/Merchandise:</strong><ul>
+<li><strong>Negara atau wilayah:</strong> Pilihan negara asal (<em>Indonesia</em>).</li>
+<li><strong>Kota:</strong> Nama kota tempat tinggal.</li>
+<li><strong>Alamat Detail:</strong> Nama jalan, nomor rumah, lantai/unit apartemen.</li>
+<li><strong>Kode Pos:</strong> 5 digit kode pos domisili.</li>
+</ul>
+</li>
+<li><strong>Tombol &quot;Simpan&quot;:</strong> Terletak di pojok kanan atas untuk menyimpan kontak ke server.</li>
+</ol>
+<hr>
+<h3>9.6 Memilih Negara Asal &amp; Kode Telepon Internasional</h3>
+<p>Bagi tamu mancanegara, Livirooms mendukung kode panggilan dan kewarganegaraan global.</p>
+<p><img src="mobile/38-select-country-dialog.jpeg" alt="Modal Pemilihan Negara">
+<em>Gambar 9.8: Dialog Pemilihan Negara Asal dan Kode Wilayah Telepon Internasional</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Bilah Pencarian Cepat:</strong> Ketik nama negara pada kolom <em>&quot;Nama negara/wilayah&quot;</em>.</li>
+<li><strong>Pilihan Negara Teratas:</strong> Akses satu ketukan untuk <em>Indonesia</em>, <em>China</em>, <em>Filipina (Philippines)</em>, <em>Amerika Serikat (United States)</em>, dan <em>Malaysia</em>.</li>
+<li><strong>Daftar Lengkap Abjad (A-Z):</strong> Navigasi cepat dari huruf A (<em>Afganistan, Afrika Selatan, Albania, Aljazair</em>) hingga Z.</li>
+</ul>
+<hr>
+<h3>9.7 Mengubah Data Kontak Tersimpan &amp; Menghapus Traveler</h3>
+<p>Jika rekan Anda berpindah nomor telepon atau Anda ingin membersihkan buku kontak lama:</p>
+<p><img src="mobile/39-edit-contact-form-top.jpeg" alt="Form Edit Kontak Data Utama">
+<em>Gambar 9.9: Mengubah Data Kontak Tersimpan (Nama, Surel, Nomor HP)</em></p>
+<p><img src="mobile/40-edit-contact-form-bottom-delete.jpeg" alt="Form Edit Kontak Hapus Traveler">
+<em>Gambar 9.10: Form Edit Kontak dan Tombol Hapus Traveler Ini</em></p>
+<h4>Penjelasan Elemen Antarmuka:</h4>
+<ul>
+<li><strong>Pembaruan Kolom:</strong> Anda dapat langsung mengganti data <em>Nama kontak</em>, <em>Email</em>, atau <em>Nomor Telepon</em>.</li>
+<li><strong>Tombol &quot;Simpan&quot;:</strong> Menyimpan perubahan terbaru pada data traveler.</li>
+<li><strong>Tombol Merah &quot;Hapus Traveler Ini&quot;:</strong> Terletak di bagian bawah formulir untuk menghapus kontak secara permanen dari buku alamat profil Anda jika data tersebut sudah tidak lagi diperlukan.</li>
+</ul>
+<hr>
+<h1>LAMPIRAN: VERIFIKASI BERKAS EKSTERNAL</h1>
+<p>Dalam rangka menjaga transparansi audit berkas repositori dokumentasi, berikut adalah catatan status berkas lampiran pendukung:</p>
+<p><img src="mobile/41-unrelated-external-message.jpeg" alt="Berkas Pesan Eksternal Non-Aplikasi">
+<em>Gambar Lampiran: Identifikasi Berkas Tangkapan Layar Eksternal Non-Aplikasi</em></p>
+<blockquote>
+<p>[!NOTE]
+Berkas tangkapan layar di atas (<code>41-unrelated-external-message.jpeg</code>) merupakan berkas pesan masuk LinkedIn pribadi non-aplikasi (<em>pesan rekrutmen dari Vijay Ramasamy / Ampstek</em>) yang tersimpan dalam folder tangkapan layar ponsel pengguna. Berkas ini secara sengaja diidentifikasi, dikarantina, dan dipisahkan dari alur operasional utama aplikasi Livirooms untuk memastikan dokumentasi tetap 100% akurat dan profesional.</p>
+</blockquote>
+<hr>
+<p><em>Buku Panduan Pengguna Aplikasi Mobile Livirooms ini merupakan hak cipta resmi Livirooms Hospitality. Seluruh ilustrasi dan alur diselaraskan persis dengan versi aplikasi rilis produksi.</em></p>

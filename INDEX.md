@@ -27,6 +27,10 @@ Peta rute dokumentasi proyek: **Topik → File Dokumentasi → Implementasi Kode
 | **Arsitektur Global & Stack Teknologi** | [README.md](README.md) |
 | **Konvensi & Panduan Backend Laravel 12** | `/laravel/CLAUDE.md` + [ai/01-backend-map.md](ai/01-backend-map.md) |
 | **Konvensi & Arsitektur Mobile Flutter** | `/flutter/CLAUDE.md` + [ai/02-frontend-map.md](ai/02-frontend-map.md) |
+| **User Guide Mobile App** | [manual/user-guide-mobile-app.md](manual/user-guide-mobile-app.md) |
+| **User Guide Web Administrator** | [manual/user-guide-web-administrator.md](manual/user-guide-web-administrator.md) |
+| **User Manual Web Administrator** | [manual/user-manual-web-administrator.md](manual/user-manual-web-administrator.md) |
+| **User Manual Mobile App** | [manual/user-manual-mobile-app.md](manual/user-manual-mobile-app.md) |
 | **Livewire Form Wizards (Add/Edit Property & Hotel)** | [configuration/admin-panel.md](configuration/admin-panel.md) + [configuration/ui-patterns.md](configuration/ui-patterns.md) |
 | **Sistem Pembayaran Midtrans Snap & Webhook** | [payments/system.md](payments/system.md) + [features/payments.md](features/payments.md) |
 | **Sistem Referral & Reward** | [features/referral.md](features/referral.md) |

@@ -89,3 +89,19 @@ Pendaftaran dan pengeditan akomodasi dilakukan melalui form wizard multi-step ya
 - **Accommodation Wizard (Unified):** [`App\Livewire\Accommodations\WizardForm`](file:///d:/Project/Fastwork/rental.apartemen/laravel/app/Livewire/Accommodations/WizardForm.php)
 
 Setiap wizard mengelola state transaksional yang aman (`DB::transaction`), upload multi-file foto, validasi per-tab, dan otorisasi role Spatie.
+
+## 6. Skill (Optional will added later)
+1. Adversarial 
+Mengui dan "menyerang" hasil kerjaan untuk mencari kelemahan, celah keamanan, bug, dan lain-lain
+
+2. Multi-Agent Debate
+Beberpaa agent mencoba pendekatan berbeda dan saling mengkritik sebelum mengambil kesimpulan
+
+3. Safety Net
+Membaut checkpoint supaya perubahan berisiko bisa di rollback kalau ada error
+
+4. Skill Security Scan
+Memeriksa skill/plugin pihak ketiga sebelum kamu install
+
+5. Scheduled SOP 
+Mengubah workflow/SOP menjadi routine yang bisa di jalankan secara terjadwal

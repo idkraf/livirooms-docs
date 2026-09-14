@@ -112,6 +112,9 @@ Transformasi output ditangani oleh **`AccommodationResource`**:
 ### `payments.status` (5 Nilai)
 `pending` → `success` / `settlement` (atau `failed` / `expired` / `refunded`)
 
+### Kebijakan Soft Deletes
+Model transaksi dan akun pengguna (`User`, `Booking`, `Order`, `Payment`) mengimplementasikan `Illuminate\Database\Eloquent\SoftDeletes` dengan kolom `deleted_at`. Penghapusan tidak menghilangkan histori transaksi keuangan secara permanen dari basis data.
+
 ---
 
 ## 8. Pembayaran Midtrans Snap & Webhook
@@ -130,3 +133,36 @@ Transformasi output ditangani oleh **`AccommodationResource`**:
 2. **`App\Livewire\Hotels\WizardForm`:**
    - 4 tab: Info Hotel & Bintang, Tipe Kamar (Repeater), Fasilitas & Aturan, Transit & FAQ.
    - Mengelola relasi `accommodations` (`booking_mode='room'`), multiple `unit_types`, `accommodation_policies` (`section='general'`), `nearby_points`, `accommodation_questions`, dan `galleries`.
+
+---
+
+## 10. Entitas User & Manajemen Pengguna Admin
+
+### Relasi Model `App\Models\User`
+| Relasi | Model Terkait | Foreign Key | Keterangan |
+|---|---|---|---|
+| `userProfile()` | `UserProfile` | `user_id` (hasOne) | Profil identitas (telepon, gender, tanggal lahir, alamat, avatar, data perusahaan) |
+| `userValidation()` | `UserValidation` | `user_id` (hasOne) | Dokumen verifikasi identitas KYC (KTP, selfie + KTP, status validasi) |
+| `accommodations()` | `Accommodation` | `host_id` (hasMany) | Listing properti / hotel yang dimiliki atau dikelola oleh Host |
+| `bookings()` | `Booking` | `user_id` (hasMany) | Riwayat pemesanan tamu |
+| `orders()` | `Order` | `user_id` (hasMany) | Transaksi pembayaran pemesanan |
+| `withdrawals()` | `Withdrawal` | `host_id` (hasMany) | Pengajuan pencairan dana (payout) pendapatan Host |
+| `contactInfos()` | `ContactInfo` | `user_id` (hasMany) | Buku kontak darurat dan penginapan |
+| `invoiceProfiles()` | `InvoiceProfile` | `user_id` (hasMany) | Profil faktur pajak & penagihan (Perusahaan / Individu) |
+| `wishlists()` | `Wishlist` | `user_id` (hasMany) | Daftar akomodasi favorit pengguna |
+| `buildingLists()` | `BuildingList` | `user_id` (hasMany) | Komplek gedung / tower apartemen yang dikelola |
+| `referralsGiven()` | `Referral` | `referrer_id` (hasMany) | Program referral / afiliasi |
+| `deviceTokens()` | `DeviceToken` | `user_id` (hasMany) | Token FCM perangkat push notification |
+| `auditLogs()` | `AuditLog` | `user_id` (hasMany) | Jejak audit aktivitas keamanan sistem |
+
+### Tampilan Detail Admin (`admin/user-management/users/show.blade.php`)
+- **Desain Read-Only**: Seluruh tombol aksi mutasi data (`Actions`, `Edit`, `Manage`, dan `Edit Profile`) ditiadakan sesuai kebutuhan agar halaman murni berfungsi sebagai tampilan analitis detail pengguna.
+- **Sidebar Kiri**: Identitas pengguna, badge role, status KYC terverifikasi, biodata profil, preview dokumen KTP & selfie.
+- **Tab Overview**: Counter ringkasan metrik (Total Pemesanan & Belanja, Listing Dikelola, Total Transaksi, Payout), tabel pemesanan terbaru, dan properti aktif.
+- **Tab Bookings**: Riwayat lengkap reservasi dengan status, durasi menginap, rincian biaya, tanpa tombol aksi/invoice.
+- **Tab Properties**: Daftar properti dan gedung apartemen binaan host dalam format tabel murni.
+- **Tab Finance**: Riwayat pesanan penagihan (`Order`) dan riwayat penarikan dana host (`Withdrawal`).
+- **Tab Contacts & Invoices**: Daftar kontak pemesan serta profil faktur pajak (`InvoiceProfile`).
+- **Tab Activity & Wishlist**: Daftar favorit akomodasi, device tokens aktif, dan log audit terkini.
+- **Tab Security**: Tampilan status kredensial akun, 2FA, dan channel langganan notifikasi email (read-only).
+
