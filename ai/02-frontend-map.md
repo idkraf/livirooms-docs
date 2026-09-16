@@ -155,3 +155,31 @@ Penyajian status pemesanan dan tombol aksi mengikuti aturan:
   - **Flutter (`User.isHost`):** Mengevaluasi `type == 'host'`, array `roles.contains('host')`, serta fallback pola email host (`.host@` / `host@` seperti `budi.host@example.com`).
   - **Laravel (`AuthController` & `ProfileController`):** Memvalidasi `$user->hasRole('host')`, kepemilikan properti/hotel (`Accommodation::where('host_id', $user->id)->exists()`), atau pola email host. Otomatis memperbarui `UserProfile.type = 'host'` dan menyertakan `roles` dalam response JSON payload `auth/login`, `auth/me`, dan `profile`.
 
+---
+
+## 9. Chat Screen Navigation & Leading BackButton
+
+- **`ChatListScreen` (`/chat` & Tab 3 `MitraShell`):**
+  - Mendukung parameter opsional `showBackButton` (`final bool? showBackButton;`).
+  - `AppBar.leading` dievaluasi secara kondisional melalui `final canPop = widget.showBackButton ?? Navigator.canPop(context);`.
+  - Jika `canPop` bernilai `true`, `AppBar` menampilkan `BackButton(color: Color(0xFF0F172A), onPressed: () => Navigator.maybePop(context))`.
+  - Jika `canPop` bernilai `false`, `AppBar.leading` disetel ke `null` dengan `automaticallyImplyLeading: false` agar tombol kembali tidak muncul ketika menjadi tab root dalam shell navigasi.
+  - Di dalam `MitraShell` (Tab 3), `ChatListScreen` diinstansiasi dengan `showBackButton: false` sehingga seragam dengan tab root mitra lainnya yang tidak memiliki back button.
+
+---
+
+## 10. Mitra Accommodation Form: Building Selection & Map Preview Persistence
+
+- **Building Dropdown Selection (`_buildingLists`):**
+  - Pada mode edit, data gedung (`_buildingListId` dan `_buildingNameCtrl`) dipopulasikan dari payload properti/hotel (`building_list_id`, `building_name`, atau relasi `building_list`).
+  - Fungsi sinkronisasi `_syncBuildingSelection()` otomatis mencocokkan `_buildingListId` dengan daftar `_buildingLists` (baik berdasarkan `id` maupun nama gedung secara case-insensitive) segera setelah `_buildingLists` selesai di-fetch atau setelah data edit dimuat.
+  - Dropdown widget menggunakan nilai aman `value: _buildingLists.any((b) => b.id == _buildingListId) ? _buildingListId : null` untuk mencegah assertion error pada Flutter saat item belum selesai dimuat.
+- **Map Preview URL Persistence (`_mapPreviewCtrl`):**
+  - Nilai field `_mapPreviewCtrl` dimuat langsung dari `map_preview` / `map_preview_url`.
+  - Jika nilai `map_preview` dari backend kosong namun koordinat `latitude` dan `longitude` tersedia, controller otomatis meng-generate fallback URL Google Maps (`https://maps.google.com/?q=lat,lng`).
+  - Backend `AccommodationResource` (`hotelShape()` dan `propertyShape()`) serta `HostHotelController` (`store` & `update`) kini menyertakan dan memvalidasi `map_preview`, `building_list_id`, `building_name`, dan `city_id` agar data tersimpan dan terbaca konsisten di Flutter.
+
+
+
+
+

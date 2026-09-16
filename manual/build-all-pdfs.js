@@ -35,6 +35,12 @@ const files = [
     output: 'user_guide_worker.pdf',
     title: 'User Guide Worker & Scheduler - Livirooms',
     category: 'PANDUAN OPERASIONAL WORKER & SCHEDULER'
+  },
+  {
+    input: 'user_guide_host_mobile_app.md',
+    output: 'user_guide_host_mobile_app.pdf',
+    title: 'User Guide Host Mobile App - Livirooms',
+    category: 'PANDUAN OPERASIONAL MITRA & HOST MOBILE APP'
   }
 ];
 
@@ -251,9 +257,19 @@ const css = `
     break-inside: avoid;
   }
 
-  img[src*="mobile/"] {
+  img[src*="mobile/"], img[src*="mobileHost/"] {
     max-width: 240px;
     max-height: 420px;
+  }
+
+  img[src*="41-security-lock-badge.jpeg"] {
+    max-width: 120px !important;
+    max-height: 120px !important;
+  }
+
+  img[src*="42-context-engineering-architecture.jpeg"] {
+    max-width: 90% !important;
+    max-height: 480px !important;
   }
 
   img[src*="website/"] {

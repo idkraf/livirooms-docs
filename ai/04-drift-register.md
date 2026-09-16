@@ -25,6 +25,7 @@
 > 3. **Flutter `property_form_payload.dart`:** Mengekspos field kebijakan & deposit pada root payload agar langsung tervalidasi dan tersimpan di database.
 > 4. **Flutter `property_form_screen.dart` & `hotel_form_screen.dart`:** Penambahan pass pengunggahan gambar lokal via `uploadGallery()` sebelum submit agar database menerima URL server yang valid; migrasi seluruh parsing angka ke `Formatters.parseInt`/`parseDouble` untuk mencegah `TypeError`; pembersihan seluruh linting dan deprecation.
 > 5. **Flutter `availability_price_edit_screen.dart`:** Parser angka defensif terhadap Postgres numeric strings dan injeksi `HostService` untuk pengujian widget terisolasi (`availability_price_edit_screen_test.dart`). Seluruh 44 test Flutter mitra dan 18 test Laravel lolos 100%.
+> **Update per 2026-09-16:** Penambahan method alias `Formatters.formatIdr(num? amount)` pada `Formatters` (`lib/utils/formatters.dart`) yang mendelegasikan ke `Formatters.rupiah(amount)`. Menyelaraskan seluruh pemanggilan format mata uang pada `hotel_form_screen.dart`, `property_form_screen.dart`, dan `availability_price_edit_screen.dart` agar konsisten dan bebas error `undefined_method`.
 
 
 

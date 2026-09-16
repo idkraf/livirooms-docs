@@ -202,3 +202,21 @@ Untuk mempercepat perubahan ketersediaan dan harga tanpa harus membuka wizard ed
   2. Ketika pengguna memilih gedung dari dropdown `_buildingLists` (atau menambahkan baru via `showBuildingFormSheet`), nama gedung otomatis disinkronkan ke state controller `_buildingNameCtrl`.
   3. Disediakan helper method `_getBuildingName()` yang memprioritaskan nama dari `_buildingLists` terpilih, dan jatuh kembali ke nilai `_buildingNameCtrl` bila ada data lama.
   4. Pada saat submit ke endpoint API `host/accommodations`, field `'building_name'` dan `'building_list_id'` tetap dikirim secara utuh dan valid sehingga konsistensi data di tabel `accommodations` backend Laravel tetap terjaga 100%.
+
+---
+
+## 8. Sinkronisasi End-to-End Harga Coret / Normal (`price_original`)
+
+### 1. Akar Masalah (Root Causes)
+1. **HostHotelController (Backend)**:
+   - Endpoint `PUT /api/v1/host/hotels/{id}` dan `POST /api/v1/host/hotels` tidak mendaftarkan `price_original` dalam rule `$request->validate()`. Akibatnya, Laravel membuang `price_original` sebelum masuk ke proses penyimpanan.
+   - Tidak ada pembaruan kolom `price_original` pada `unit_types` saat hotel diperbarui tanpa array `room_types`.
+2. **PropertyController (Backend)**:
+   - Pada pembaruan kamar hotel (`room_types`), jika `rt.price_original` kosong dan tidak ada `price_original` baru di level hotel, controller sebelumnya menetapkan `null` secara membabi buta alih-alih mempertahankan `$existing?->price_original`, sehingga harga coret terhapus saat mengedit tab lain.
+   - Pada pembuatan hotel (`store`), room types awal tidak mewarisi `price_original` dari level hotel.
+3. **Payload Builder Flutter (`property_form_payload.dart`)**:
+   - Pengecekan `if (form['price_original'] != null)` membuang key saat bernilai `null` (misal saat host ingin menghapus harga coret). Diganti menggunakan `if (form.containsKey('price_original'))` agar pengosongan nilai terkirim sebagai `null` eksplisit.
+4. **Binding Controller & UI (`property_form_screen.dart`, `hotel_form_screen.dart`, `availability_price_edit_screen.dart`)**:
+   - `_priceOriginalCtrl` pada `PropertyFormScreen` sebelumnya di-hardcode ke `'4500000'` saat inisialisasi dan tidak di-reset ke string kosong saat data bernilai `null`.
+   - Parsing dan display UI kini menggunakan `Formatters.rupiah(...)` yang rapi dan memformat angka nominal secara konsisten.
+
