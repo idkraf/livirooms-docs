@@ -158,5 +158,47 @@ Untuk mempercepat perubahan ketersediaan dan harga tanpa harus membuka wizard ed
   - Menampilkan matrix tipe kamar (nama kamar, kapasitas, harga dasar, simulasi harga + pajak, stok kamar, badge status ketersediaan, rincian biaya).
   - Tombol edit memanggil `showPriceSchemeSheet(bookingType: 'room')`.
   - Nilai yang diperbarui langsung dikirim via `HostService.updateUnitTypePrice(priceId, payload)`.
+- **Harga Coret & Ketentuan Pajak (`_editPricingTax()`)**:
+  - Mengadopsi arsitektur dari baris 2083–2263 `property_form_screen.dart` via `showPricingTaxSheet()`.
+  - Sanitasi komprehensif pada input pengguna: membersihkan titik ribuan (`.`), koma desimal (`,`), dan spasi sebelum parsing (`double.tryParse`) untuk mencegah kegagalan format numerik.
+  - Mengirim pembaruan langsung via `HostService.updateProperty(id, payload)` dengan field: `price_original`, `price_caption`, `tax_percentage`, `tax_calculation`.
+  - Pada Laravel `PropertyController@update`:
+    - Menggunakan pengecekan `array_key_exists('price_original', $validated)` (bukan `isset`) agar pengosongan nominal coret (nilai `null`) tersimpan ke database.
+    - Menghilangkan kopling `elseif` ke `transport_points` pada mode room, sehingga pembaruan harga coret hotel selalu dieksekusi secara independen pada seluruh `unit_types`.
+    - Menyinkronkan pembaruan `unit_types.price_original` pada unit mode dan memuat relasi `cheapestUnitType.prices` pada respon `AccommodationResource` fresh.
+    - Menambahkan `price_caption` ke output `hotelShape()` di `AccommodationResource`.
+  - Sinkronisasi UI & Navigasi:
+    - Nilai `_priceOriginal`, `_priceCaption`, `_taxPercentage`, dan `_taxCalculation` langsung diperbarui dari respon `Property` API.
+    - Melacak state `_hasChanges = true` dan mengembalikan nilai boolean via `PopScope` serta tombol kembali AppBar sehingga `PropertyManagementScreen` otomatis menyegarkan data (`_load()`).
 - **Feedback & State**:
-  - Validasi feedback interaktif (SnackBar sukses/gagal, indikator loading per item, dan refresh otomatis daftar saat navigasi kembali).
+  - Validasi feedback interaktif (SnackBar sukses/gagal, modal overlay loading `_saving`, dan refresh otomatis daftar saat navigasi kembali).
+
+---
+
+## 7. Lokasi Koordinat Peta & Picker Interaktif (Google Maps / Leaflet) & Star Rating Overflow Fix
+
+### 1. Perbaikan Overflow Rating Bintang
+- **Isu**: Komponen pemilihan rating bintang (1–5) pada `HotelFormScreen` dan `PropertyFormScreen` sebelumnya menggunakan `IconButton` standar Material (lebar minimum 48px). Pada layar perangkat mobile (< 380px), kombinasi `Row` + label + `Spacer` + 5 `IconButton` (total 240px + 100px = 340px) menyebabkan RenderFlex Overflow di tepi kanan layar.
+- **Solusi**: Diganti menggunakan kombinasi `Row(mainAxisAlignment: MainAxisAlignment.spaceBetween)` dengan `Flexible(child: Text(...))` dan `Wrap(spacing: 2)` yang berisi `InkWell` dengan padding 4px dan ukuran icon 26px (`Colors.amber`). Layout kini 100% fleksibel, rapi, dan bebas overflow di semua resolusi layar mobile.
+
+### 2. Picker Peta Interaktif Terintegrasi (`GoogleMapPickerScreen`)
+- Disediakan file baru `lib/screens/common/google_map_picker_screen.dart` yang dapat dibuka dari tombol **"Buka Google Maps / Pilih Titik di Peta"** di bawah field Latitude & Longitude pada `PropertyFormScreen` dan `HotelFormScreen`.
+- **Fitur Utama**:
+  1. **Interactive WebView Leaflet Map**: Menampilkan peta interaktif tanpa ketergantungan API key berbayar, dilengkapi center-pin indicator tetap di tengah peta. Mengirim pergeseran koordinat secara real-time via `JavaScriptChannel('FlutterMapChannel')`.
+  2. **Auto-Search Geocoding**: Kolom pencarian di bagian atas yang terhubung ke Nominatim API untuk mencari nama tempat, alamat, atau gedung secara langsung.
+  3. **Tautan Eksternal Google Maps**: Tombol "Buka di GMaps" menggunakan `url_launcher` untuk membuka titik lokasi di aplikasi native Google Maps perangkat host.
+  4. **Tempel Link / Parse Koordinat**: Fitur parser fleksibel yang membaca link Google Maps (format `@lat,lng`, `?q=lat,lng`, atau teks koordinat mentah) dari clipboard atau input manual.
+  5. **Auto-Attempt & Sinkronisasi Form Terpadu**:
+     - Saat pengguna menekan **"Gunakan Titik Lokasi Ini"**, picker secara otomatis:
+       - Mengisi nilai `_latitudeCtrl` dengan latitude terpilih (format 6 desimal).
+       - Mengisi nilai `_longitudeCtrl` dengan longitude terpilih (format 6 desimal).
+       - Mengisi nilai `_mapPreviewCtrl` dengan URL Google Maps (`https://maps.google.com/?q={lat},{lng}`).
+       - Melakukan reverse geocoding via Nominatim secara otomatis untuk mengisi/memperbarui `_addressCtrl` jika teks alamat belum terisi atau berubah.
+
+### 3. Simplifikasi Dropdown Gedung (`_buildingLists`) & Otomatisasi `building_name`
+- **Isu**: Sebelumnya terdapat input teks `_buildingNameCtrl` ("Detail Nama Gedung / Tower") yang ditampilkan langsung di bawah dropdown `_buildingLists`. Hal ini membingungkan dan menambah redundansi form.
+- **Solusi Terbaik (Clean UI & SSoT Parity)**:
+  1. Input `TextFormField(_buildingNameCtrl)` disembunyikan sepenuhnya dari UI, sehingga form hanya menampilkan dropdown `Gedung / Komplek / Apartemen` dengan tombol `+` untuk menambah gedung baru secara interaktif.
+  2. Ketika pengguna memilih gedung dari dropdown `_buildingLists` (atau menambahkan baru via `showBuildingFormSheet`), nama gedung otomatis disinkronkan ke state controller `_buildingNameCtrl`.
+  3. Disediakan helper method `_getBuildingName()` yang memprioritaskan nama dari `_buildingLists` terpilih, dan jatuh kembali ke nilai `_buildingNameCtrl` bila ada data lama.
+  4. Pada saat submit ke endpoint API `host/accommodations`, field `'building_name'` dan `'building_list_id'` tetap dikirim secara utuh dan valid sehingga konsistensi data di tabel `accommodations` backend Laravel tetap terjaga 100%.

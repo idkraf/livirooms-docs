@@ -29,6 +29,12 @@ const files = [
     output: 'user-manual-mobile-app.pdf',
     title: 'User Manual Mobile App - Livirooms',
     category: 'MANUAL SISTEM & ARSITEKTUR MOBILE APP'
+  },
+  {
+    input: 'user_guide_worker.md',
+    output: 'user_guide_worker.pdf',
+    title: 'User Guide Worker & Scheduler - Livirooms',
+    category: 'PANDUAN OPERASIONAL WORKER & SCHEDULER'
   }
 ];
 
@@ -318,7 +324,7 @@ files.forEach(({ input, output, title, category }) => {
   fs.writeFileSync(tempHtmlPath, fullHtml, 'utf-8');
 
   console.log(`[2/3] Merender ke PDF via Headless Chrome Engine...`);
-  const cmd = `"${CHROME_PATH}" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="${outputPath}" "${tempHtmlPath}"`;
+  const cmd = `"${CHROME_PATH}" --headless --disable-gpu --enable-local-file-access --no-pdf-header-footer --print-to-pdf="${outputPath}" "${tempHtmlPath}"`;
   
   try {
     execSync(cmd, { stdio: 'pipe' });

@@ -166,3 +166,14 @@ Model transaksi dan akun pengguna (`User`, `Booking`, `Order`, `Payment`) mengim
 - **Tab Activity & Wishlist**: Daftar favorit akomodasi, device tokens aktif, dan log audit terkini.
 - **Tab Security**: Tampilan status kredensial akun, 2FA, dan channel langganan notifikasi email (read-only).
 
+### Validasi Identitas Host Admin (`admin/user-management/user-validation`)
+- **Route & Controller**:
+  - `GET /admin/user-management/user-validation` &rarr; `UserValidationController::index` (merender DataTable dan passing koleksi `$users` untuk form pembuatan modal).
+  - `POST /admin/user-management/user-validation` &rarr; `UserValidationController::store` (`admin.user-management.user-validation.store`), memproses dokumen KTP, foto selfie, dan status validasi KYC host.
+- **Modal Add Validasi**:
+  - Target modal: `#kt_modal_add_user-validation` pada `index.blade.php`.
+  - Mengunggah berkas gambar ke direktori `public/validations/`.
+  - Melakukan sinkronisasi peran (`Spatie\Permission`): Jika validasi disetujui (`is_validate=1`), role `host` diberikan dan role `consumer` dicabut.
+  - Interaksi AJAX transparan dengan pembaruan instan pada tabel Yajra DataTables (`user-validation-table`).
+
+
