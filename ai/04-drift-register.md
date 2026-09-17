@@ -26,8 +26,14 @@
 > 4. **Flutter `property_form_screen.dart` & `hotel_form_screen.dart`:** Penambahan pass pengunggahan gambar lokal via `uploadGallery()` sebelum submit agar database menerima URL server yang valid; migrasi seluruh parsing angka ke `Formatters.parseInt`/`parseDouble` untuk mencegah `TypeError`; pembersihan seluruh linting dan deprecation.
 > 5. **Flutter `availability_price_edit_screen.dart`:** Parser angka defensif terhadap Postgres numeric strings dan injeksi `HostService` untuk pengujian widget terisolasi (`availability_price_edit_screen_test.dart`). Seluruh 44 test Flutter mitra dan 18 test Laravel lolos 100%.
 > **Update per 2026-09-16:** Penambahan method alias `Formatters.formatIdr(num? amount)` pada `Formatters` (`lib/utils/formatters.dart`) yang mendelegasikan ke `Formatters.rupiah(amount)`. Menyelaraskan seluruh pemanggilan format mata uang pada `hotel_form_screen.dart`, `property_form_screen.dart`, dan `availability_price_edit_screen.dart` agar konsisten dan bebas error `undefined_method`.
-
-
+> **Update per 2026-09-17:** Penguatan keamanan IDOR, konkurensi, rekonsiliasi parameter galeri, dan integritas data pada 3 layar form mitra (`availability_price_edit_screen.dart`, `hotel_form_screen.dart`, `property_form_screen.dart`) beserta API Laravel terkait:
+> 1. **Laravel `UnitTypePriceController` (IDOR & Race Condition Fix):** Memperketat otorisasi pada method `show()` dan `update()` (`if (! $user || ! $accommodation || $accommodation->host_id !== $user->id)` kecuali admin), menutup celah IDOR di mana record dengan `host_id = null` sebelumnya dapat disunting pihak non-admin. Method `update()` kini dibungkus transaksi database dengan pessimistic row lock (`UnitTypePrice::lockForUpdate()`), menjamin atomisitas saat update konkuren.
+> 2. **Laravel `PropertyController` & `HostHotelController` (Gallery Delete Parameter Drift):** Endpoint `deleteGallery` dan `deleteGalleryTemp` diperbarui untuk menerima query parameter `image` (yang dikirim oleh Flutter `HostService`) maupun `path`, serta dilengkapi sanitasi `basename()` guna mencegah path traversal.
+> 3. **Flutter `availability_price_edit_screen.dart`:** Menghilangkan fallback berbahaya yang sebelumnya meneruskan `unit_type_id` sebagai `price_id` saat `price_id` absen pada data room type. Menambahkan validasi dan SnackBar peringatan, serta mempertahankan seluruh skema harga lain dalam `prices` saat mengupdate tarif harian.
+> 4. **Flutter `hotel_form_screen.dart` & `property_form_screen.dart`:**
+>    - Sanitasi parsing `deposit_amount` dengan menghilangkan tanda titik pemisah ribuan standar Indonesia (`500.000` -> `500000.0`) sebelum `double.tryParse` agar tidak terpotong menjadi pecahan (`500.0`).
+>    - Pembersihan path lokal yang gagal/belum terunggah (`removeWhere`) dari galeri foto properti dan foto tipe kamar sebelum submit ke backend.
+>    - Rehidrasi state form hotel (`_loadRemoteDetail`) setelah `_saveInitialStep` agar tipe kamar memperoleh ID dan `price_id` server yang valid sebelum tab berikutnya diakses.
 
 ---
 

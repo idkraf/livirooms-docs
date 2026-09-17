@@ -92,10 +92,10 @@ Setiap wizard mengelola state transaksional yang aman (`DB::transaction`), uploa
 
 ## 6. Skill (Optional will added later)
 1. Adversarial 
-Mengui dan "menyerang" hasil kerjaan untuk mencari kelemahan, celah keamanan, bug, dan lain-lain
+Mengulitii dan "menyerang" hasil kerjaan untuk mencari kelemahan, celah keamanan, bug, dan lain-lain
 
 2. Multi-Agent Debate
-Beberpaa agent mencoba pendekatan berbeda dan saling mengkritik sebelum mengambil kesimpulan
+Beberapa agent mencoba pendekatan berbeda dan saling mengkritik sebelum mengambil kesimpulan
 
 3. Safety Net
 Membaut checkpoint supaya perubahan berisiko bisa di rollback kalau ada error
