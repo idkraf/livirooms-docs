@@ -35,7 +35,7 @@ Peta rute dokumentasi proyek: **Topik → File Dokumentasi → Implementasi Kode
 | **Sistem Pembayaran Midtrans Snap & Webhook** | [payments/system.md](payments/system.md) + [features/payments.md](features/payments.md) |
 | **Sistem Referral & Reward** | [features/referral.md](features/referral.md) |
 | **Sampel Response API & Master Contract** | [response/detail-property.json](response/detail-property.json), [response/hotels.json](response/hotels.json), [response/home.json](response/home.json) |
-| **Alur Eksekusi API & Workflows** | [workflows/run_api_sequence.xml](workflows/run_api_sequence.xml) |
+| **Agentic Workflows & Ekosistem AI** | [workflows/agent-architecture.md](workflows/agent-architecture.md) (Arsitektur Agent), [workflows/code-review-sop.md](workflows/code-review-sop.md) (SOP Review), [workflows/safety-net-rollback.md](workflows/safety-net-rollback.md) (Safety Net), [workflows/execution-roadmap.md](workflows/execution-roadmap.md) (Roadmap), [workflows/run_api_sequence.xml](workflows/run_api_sequence.xml) (API Sequence) |
 
 ---
 

@@ -110,6 +110,7 @@
 - `POST host/accommodations` (`PropertyController::store`) — `host_service.dart:23` — Buat listing akomodasi mitra baru (Mendukung `intro`, `description_extra_heading`, `description_extra` array paragraf, otomatis membuat relasi `accommodation_description_paragraphs`)
 - `GET host/accommodations/{property}` (`PropertyController::hostShow`) — `host_service.dart:116` — Detail akomodasi host (Eager-load `descriptionParagraphs` + fallback kolom JSONB)
 - `PUT host/accommodations/{property}` (`PropertyController::update`) — `host_service.dart:28` — Update akomodasi host (Sinkronisasi penuh `intro`, `description_extra_heading`, dan `description_extra`)
+- `PUT host/accommodations/{property}/price` (`PropertyController::updatePrice`) — `host_service.dart:36` — Update harga coret / listing (`price_original`), caption (`price_caption`), dan ketentuan pajak (`tax_percentage`, `tax_calculation`). Tersedia alias `PUT host/properties/{property}/price`. Otomatis menyinkronkan `unit_types.price_original` dan mengembalikan `AccommodationResource` terbaru.
 - `DELETE host/accommodations/{property}` (`PropertyController::destroy`) — `host_service.dart:121` — Hapus akomodasi host
 - `GET host/orders` (`OrderController::forHost`) — `host_service.dart:33` — **FIXED:** Orders with nested `booking` object; query supports `page`, `status`, `booking_status`. Returns `Paginated<Order>`.
 - `GET host/orders/{order}` (`OrderController::showForHost`) — `host_service.dart:41` — Host order detail

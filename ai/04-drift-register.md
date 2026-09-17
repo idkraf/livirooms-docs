@@ -34,6 +34,19 @@
 >    - Sanitasi parsing `deposit_amount` dengan menghilangkan tanda titik pemisah ribuan standar Indonesia (`500.000` -> `500000.0`) sebelum `double.tryParse` agar tidak terpotong menjadi pecahan (`500.0`).
 >    - Pembersihan path lokal yang gagal/belum terunggah (`removeWhere`) dari galeri foto properti dan foto tipe kamar sebelum submit ke backend.
 >    - Rehidrasi state form hotel (`_loadRemoteDetail`) setelah `_saveInitialStep` agar tipe kamar memperoleh ID dan `price_id` server yang valid sebelum tab berikutnya diakses.
+> **Update per 2026-09-17 (Sistem Alur Kerja Agentic):** Pembentukan spesifikasi ekosistem AI multi-agent lintas workspace (`laravel/`, `flutter/`, dan `docs/`):
+> 1. **`docs/workflows/agent-architecture.md`:** Pendefinisian 4 persona agen spesialis (`@security-auditor`, `@backend-optimizer`, `@mobile-specialist`, `@architect-judge`), protokol debat multi-agent, schema diff JSON event-driven, dan sinkronisasi kontrak API.
+> 2. **`docs/workflows/code-review-sop.md`:** Standard Operating Procedure adversarial code review 4 sudut (Security/IDOR, Correctness/Logic, Real-Data/Formatting, Concurrency/Async), matriks severitas & format pelaporan bug `BL-FAIL`, serta checklist otomatisasi PR.
+> 3. **`docs/workflows/safety-net-rollback.md`:** Panduan teknis zero-downtime database migration (expand-and-contract), implementasi Redis circuit breaker untuk gateway pihak ketiga (Midtrans/Asuransi), arsitektur Remote Config feature flag kill-switch Flutter, dan audit dependensi berkala (`composer audit`, `flutter pub outdated`).
+> 4. **`docs/workflows/execution-roadmap.md`:** Roadmap implementasi 4 fase (Fase 1: Fondasi, Fase 2: Tooling & Review Bot, Fase 3: Circuit Breaker & Feature Flags, Fase 4: Self-Healing & Governance) beserta KPI keberhasilan.
+> **Update per 2026-09-17 (Integrasi `price_original` Livewire Wizard):** Sinkronisasi dan persistensi field harga coret / normal (`price_original`) pada Livewire `Accommodations\WizardForm`:
+> 1. **Blade Template (`wizard_form.blade.php`):** Menghapus batasan kondisional `@if($booking_mode === 'unit')` yang sebelumnya menyembunyikan input `price_original` di Tab 3 pada Room (Hotel) mode. Menambahkan blok pesan validasi `@error('price_original')` dan `@error('price_caption')` pada mode Unit dan Room.
+> 2. **Komponen Livewire (`WizardForm.php`):**
+>    - Mendaftarkan aturan validasi `'price_original' => 'nullable|numeric|min:0'` dan `'price_caption' => 'nullable|string|max:255'` pada method `rules()`.
+>    - Mengisi `$this->price_original` saat `edit()` dari atribut `$accommodation->price_original` (dengan fallback ke `unit_types.price_original`).
+>    - Menyertakan `'price_original' => $priceOriginalVal` pada array `$data` saat pemanggilan `Accommodation::create()` / `Accommodation::update()`, dengan fallback cerdas ke tipe kamar pertama pada Room mode jika tidak diisi secara eksplisit.
+>    - Memastikan pembaruan `accommodations.price_original` selalu sinkron di `saveUnitMode()` dan `saveRoomMode()`.
+> 3. **Pengujian Otomatis:** Menambahkan 3 test case di `AccommodationWizardFormTest.php` (`test_save_unit_mode_persists_price_original`, `test_save_room_mode_persists_price_original`, `test_edit_loads_price_original`). Seluruh 15 test suite Livewire lolos 100%.
 
 ---
 
@@ -121,3 +134,10 @@ Stok kamar hotel sepenuhnya menggunakan counter `unit_types.remaining` (real-tim
 - `AccommodationResource`: N+1 risk pada `question_count` → fixed dengan `whenLoaded()`
 - `AccommodationHotelListResource`: null-cast pada `rating_label` → fixed
 - `AccommodationListResource`: N+1 risk pada `city`, `rating` accessors → fixed
+
+### 4. Harga Coret & Ketentuan Pajak (Fixed & Synchronized)
+- Kolom `price_original` (decimal 14,2 nullable) kini ditambahkan ke tabel `accommodations` via migration `2026_09_17_000001_add_price_original_to_accommodations_table.php`.
+- Endpoint `PUT host/accommodations/{property}/price` (dan alias `PUT host/properties/{property}/price`) diimplementasikan di `PropertyController::updatePrice` untuk memperbarui `price_original`, `price_caption`, `tax_percentage`, dan `tax_calculation` di tabel `accommodations` dan menyinkronkan `unit_types.price_original`.
+- Endpoint `POST host/accommodations` (`PropertyController::store`) dan `PUT host/accommodations/{id}` (`PropertyController::update`) kini menyimpan dan memperbarui `price_original` langsung ke tabel `accommodations` (serta menyinkronkan ke `unit_types`).
+- Layar Flutter `availability_price_edit_screen.dart` memanggil `HostService.updatePropertyPrice` dan menyegarkan tampilan baik saat simpan berhasil maupun saat trigger refresh (`_loadDetail` / `RefreshIndicator`).
+
