@@ -38,7 +38,53 @@
 > 1. **`docs/workflows/agent-architecture.md`:** Pendefinisian 4 persona agen spesialis (`@security-auditor`, `@backend-optimizer`, `@mobile-specialist`, `@architect-judge`), protokol debat multi-agent, schema diff JSON event-driven, dan sinkronisasi kontrak API.
 > 2. **`docs/workflows/code-review-sop.md`:** Standard Operating Procedure adversarial code review 4 sudut (Security/IDOR, Correctness/Logic, Real-Data/Formatting, Concurrency/Async), matriks severitas & format pelaporan bug `BL-FAIL`, serta checklist otomatisasi PR.
 > 3. **`docs/workflows/safety-net-rollback.md`:** Panduan teknis zero-downtime database migration (expand-and-contract), implementasi Redis circuit breaker untuk gateway pihak ketiga (Midtrans/Asuransi), arsitektur Remote Config feature flag kill-switch Flutter, dan audit dependensi berkala (`composer audit`, `flutter pub outdated`).
+> **Update per 2026-09-18 (Sinkronisasi Search & Filter Hotel):** Audit dan refactoring menyeluruh pada endpoint pencarian hotel OTA `GET /api/v1/hotels` (`HotelApiController::index`) dan Flutter `HotelResultsScreen` (`hotel_results_screen.dart`):
+> 1. **Kueri Kondisional Eloquent (`->when()`):** Mengganti `whereHas` monolitik dan raw `join`/`groupBy` dengan kueri kondisional berbasis `->when()` yang aman di PostgreSQL.
+> 2. **Filter Lokasi & Kota:** Menangani `city_id` eksplisit, pencarian `city_name` (nama kota, alamat, nama properti), serta pengecualian defensif terhadap string lokasi sementara `"Lokasi Saat Ini"`.
+> 3. **Filter Tanggal & Ketersediaan:** Menghubungkan `check_in` dan `check_out` dengan ketersediaan kamar aktif (`unitTypes` berstatus `is_active` dan `remaining > 0`).
+> 4. **Filter Rentang Harga:** Filter independen `base_price` minimal dan maksimal (`min_price`, `max_price`) tanpa mengganggu filter kapasitas.
+> 5. **Filter Bintang (`star_rating`):** Mengakomodasi variasi input array (`star_rating[0]=4`), CSV (`star_rating=4,5`), maupun integer tunggal via subquery agregat ulasan (`havingRaw("ROUND(CAST(AVG(reviews.rating) AS FLOAT) / 2) IN (...)")`).
+> 6. **Filter Fasilitas (`facilities`):** Pencarian multi-fasilitas berdasarkan ID maupun string nama fasilitas pada `facilityItems` dan `facilityGroups.items`.
+> 7. **Sorting & Eager Loading:** Menghilangkan `SQLSTATE[42703]` (`reviews_avg_rating` column does not exist) dengan menambahkan `withAvg('reviews', 'rating')` pada base query. Sorting `price_asc`/`price_desc` menggunakan `withMin()` non-blocking, serta sorting `distance` berbasis koordinat `lat`/`lng`. Output konsisten dengan `ApiResponse::paginated()`.
+> 8. **Flutter `HotelResultsScreen` Overhaul:**
+>    - **Deseleksi & Reset Lokasi:** Memperbaiki bug di mana deseleksi lokasi sebelumnya fallback ke query lama; kini dapat mereset dan mencari semua lokasi secara bebas.
+>    - **Daftar Kota Dinamis & Input Lokasi:** Mengintegrasikan `CityService.getCities()` untuk mengisi daftar kota dan ID secara dinamis, serta mendukung pencarian nama kota atau lokasi kustom di `_showLocationSheet`.
+>    - **Retensi Geolocation:** Mempertahankan koordinat `originLat` & `originLng` pada `_applyFilters()` agar pengurutan jarak server (`distance`) tetap berfungsi.
+>    - **Pengurutan Rating Numerik:** Memperbaiki bug perbandingan string (`b.score.compareTo(a.score)` -> `(b.rating ?? 0.0).compareTo(a.rating ?? 0.0)`).
+>    - **Preservasi Batas Harga:** Mencegah `_loadFilterMetadata()` menimpa filter harga pengguna secara sepihak, serta melakukan clamping defensif pada `RangeSlider`.
+>    - **Sinkronisasi Sarapan:** Menyelaraskan opsi `'Termasuk sarapan'` pada filter kebutuhan dengan boolean `breakfastIncluded`.
+>    - **Indikator Filter Chips:** Chip filter kini menampilkan label dinamis (nama kota terpilih, mode urut aktif) dengan highlight status `isActive` yang presisi.
 > 4. **`docs/workflows/execution-roadmap.md`:** Roadmap implementasi 4 fase (Fase 1: Fondasi, Fase 2: Tooling & Review Bot, Fase 3: Circuit Breaker & Feature Flags, Fase 4: Self-Healing & Governance) beserta KPI keberhasilan.
+> **Update per 2026-09-18 (Sinkronisasi Search & Filter Properti Unit):** Audit dan perbaikan menyeluruh endpoint properti `GET /api/v1/properties` (`PropertyController::index` & `PropertyController::getFilterMetadata`) dan layar Flutter `PropertyResultsScreen` (`property_results_screen.dart`):
+> 1. **Perbaikan Studio Apartment Bedroom Bug:** Menghilangkan filter `bedrooms >= $rooms` mutlak ketika `rooms_count = 1`, sehingga unit studio berstatus `bedrooms = 0` atau `null` tidak lagi tereliminasi dari pencarian default properti.
+> 2. **Multi-Selection Tipe Properti:** Mengizinkan input array dan string CSV (contoh: `apartment,villa`) pada Laravel dengan `whereIn('property_type', $types)`. Layar Flutter kini mengirim seluruh tipe properti terpilih (`_selectedPropertyTypes.join(',')`), bukan hanya elemen pertama.
+> 3. **Perbaikan Sorting Rating & Harga:** Menambahkan `withAvg('reviews', 'rating')` dan mengurutkan berdasarkan `reviews_avg_rating` saat `sort = 'rating'` (sebelumnya fallback keliru ke `latest('id')`). Sorting harga (`price_asc`, `price_desc`) kini mengunci relasi unit tipe aktif (`where('is_active', true)`), serta menambahkan dukungan pengurutan `distance` berbasis koordinat `lat`/`lng`.
+> 4. **Pencarian Lokasi & Fallback Nama Kota:** Menghubungkan filter `city_name` dengan fallback pencarian `address` dan `name` properti, serta membersihkan label placeholder (`"Semua Lokasi"`, `"Semua Kota"`, `"Lokasi Saat Ini"`) secara case-insensitive.
+> 5. **Penghapusan Constraint Timezone 422:** Menghapus `after_or_equal:today` pada validasi `check_in` di backend untuk mencegah error 422 saat terjadi perbedaan zona waktu antara klien lokal (WIB) dan server UTC.
+> 6. **Flutter `PropertyResultsScreen` Enhancements:**
+>    - Preservasi batas harga pada `_loadFilterMetadata()` agar rentang pilihan pengguna tidak tertimpa metadata.
+>    - Pemicu otomatis `_loadFilterMetadata()` saat lokasi berubah di `_showLocationSheet()` dan saat reset filter.
+>    - Opsi pencarian kota/destinasi kustom (`Gunakan "[keyword]"`) di bottom sheet lokasi jika nama kota tidak ada dalam daftar default.
+>    - Penambahan label dinamis pada chip filter di bagian atas layar dan format nominal Rupiah standar via `Formatters.rupiah()`.
+>    - Perbaikan perbandingan pengurutan lokal di Dart yang tangguh terhadap `null` dan nilai float.
+>    - Retensi field `flexDays`, `originLat`, dan `originLng` pada `_applyFilters()`.
+> **Update per 2026-09-18 (Audit & Penyelarasan Total Search & Results Layar Hotel & Properti):** Rekonsiliasi penuh antara 4 layar Flutter (`hotel_search_screen.dart`, `hotel_results_screen.dart`, `property_search_screen.dart`, `property_results_screen.dart`) dan 2 Controller Laravel (`HotelApiController.php`, `PropertyController.php`):
+> 1. **Paritas Query & Sanitasi Lokasi Global:**
+>    - `HotelApiController::index()` dan `HotelApiController::getFilterMetadata()` kini membersihkan label lokasi umum (`'lokasi saat ini'`, `'semua lokasi'`, `'semua kota'`, `'semua kota, indonesia'`), mencegah eksekusi kueri `WHERE city.name ILIKE '%Semua Lokasi%'` yang sebelumnya mengembalikan nol hasil.
+>    - Pilihan lokasi "Semua Lokasi" kini tersedia di seluruh modal pemilih lokasi (`_openLocationPicker` dan `_showLocationSheet`).
+>    - Penambahan opsi pencarian custom / fallback destinasi `Gunakan "[keyword]"` pada kedua layar pencarian sehingga pengguna dapat mencari nama akomodasi, jalan, atau distrik yang tidak terdaftar di daftar kota master.
+> 2. **Perbaikan Batas & Filter Harga (Price Capping Bug):**
+>    - Menghilangkan capping batas harga hardcode `2.500.000` di `hotel_search_screen.dart` yang sebelumnya selalu terkirim ke API meski pengguna tidak menyentuh filter harga (mengabaikan hotel di atas 2,5 juta IDR).
+>    - `_onSearchSubmit()` hanya mengirim `min_price` jika `> 0` dan `max_price` jika pengguna membatasi harga secara spesifik di bawah `meta.priceMax`.
+> 3. **Responsivitas UX Pencarian (`_canSearch`):**
+>    - Inisialisasi awal `_canSearch = true` pada `hotel_search_screen.dart` dan `property_search_screen.dart`, mencegah tombol "Cari" terkunci saat koneksi lambat atau saat metadata filter sedang dimuat di latar belakang.
+> 4. **Tampilan Hasil Kosong & Reset State:**
+>    - Penambahan `EmptyView` dengan aksi tombol "Reset Filter" (`_resetFiltersAndReload`) pada `hotel_results_screen.dart` dan `property_results_screen.dart` saat kueri atau kombinasi filter menghasilkan nol akomodasi.
+>    - Pemicu otomatis `_loadFilterMetadata()` saat lokasi berubah di hasil pencarian agar batas harga dan fasilitas selalu relevan dengan lokasi aktif.
+> 5. **Pembersihan Lint & Deprecations:**
+>    - Migrasi seluruh pemanggilan `withOpacity(...)` ke `withValues(alpha: ...)`.
+>    - Analisis Flutter (`flutter analyze`) 100% bebas error dan warning pada seluruh 4 file layar.
+>    - Seluruh pengujian PHPUnit (36 tests Property, 98 tests Hotel) lolos 100%.
 > **Update per 2026-09-17 (Integrasi `price_original` Livewire Wizard):** Sinkronisasi dan persistensi field harga coret / normal (`price_original`) pada Livewire `Accommodations\WizardForm`:
 > 1. **Blade Template (`wizard_form.blade.php`):** Menghapus batasan kondisional `@if($booking_mode === 'unit')` yang sebelumnya menyembunyikan input `price_original` di Tab 3 pada Room (Hotel) mode. Menambahkan blok pesan validasi `@error('price_original')` dan `@error('price_caption')` pada mode Unit dan Room.
 > 2. **Komponen Livewire (`WizardForm.php`):**
@@ -47,6 +93,14 @@
 >    - Menyertakan `'price_original' => $priceOriginalVal` pada array `$data` saat pemanggilan `Accommodation::create()` / `Accommodation::update()`, dengan fallback cerdas ke tipe kamar pertama pada Room mode jika tidak diisi secara eksplisit.
 >    - Memastikan pembaruan `accommodations.price_original` selalu sinkron di `saveUnitMode()` dan `saveRoomMode()`.
 > 3. **Pengujian Otomatis:** Menambahkan 3 test case di `AccommodationWizardFormTest.php` (`test_save_unit_mode_persists_price_original`, `test_save_room_mode_persists_price_original`, `test_edit_loads_price_original`). Seluruh 15 test suite Livewire lolos 100%.
+> **Update per 2026-09-17 (Tampilan `price_original` di DataTable Admin & List Properti Flutter):**
+> 1. **Laravel Admin DataTable (`PropertyDataTable.php`):**
+>    - Menambahkan kolom `price_original` ("Harga Coret") dan memformat kolom `price_from` dengan tampilan bertingkat: harga sewa aktif di atas dan harga coret tercoret (`text-decoration-line-through`) di bawahnya.
+>    - Mendaftarkan `price_from` dan `price_original` ke `rawColumns` untuk rendering HTML yang aman dan rapi.
+> 2. **Flutter Workspace:**
+>    - **Model (`property.dart` & `accommodation.dart`):** Menambahkan getter `hasDiscount` dan `discountPercent` pada class `Property`, serta memastikan `Accommodation::toProperty()` menyalurkan `priceOriginal` (sebelumnya terlewat sehingga bernilai null saat konversi).
+>    - **Widget Kartu Properti (`property_card.dart`):** Memperbarui `PropertyCard` dan `PropertyCardCompact` untuk menampilkan harga coret merah (`TextDecoration.lineThrough`) jika properti memiliki diskon (`hasDiscount`). Memperbaiki toleransi `_hasDiscount` pada `AccommodationCardItem`.
+>    - **Pengujian:** Menambahkan unit dan widget test `test/widgets/property_card_test.dart` (4 test lolos 100%).
 
 ---
 
@@ -140,4 +194,12 @@ Stok kamar hotel sepenuhnya menggunakan counter `unit_types.remaining` (real-tim
 - Endpoint `PUT host/accommodations/{property}/price` (dan alias `PUT host/properties/{property}/price`) diimplementasikan di `PropertyController::updatePrice` untuk memperbarui `price_original`, `price_caption`, `tax_percentage`, dan `tax_calculation` di tabel `accommodations` dan menyinkronkan `unit_types.price_original`.
 - Endpoint `POST host/accommodations` (`PropertyController::store`) dan `PUT host/accommodations/{id}` (`PropertyController::update`) kini menyimpan dan memperbarui `price_original` langsung ke tabel `accommodations` (serta menyinkronkan ke `unit_types`).
 - Layar Flutter `availability_price_edit_screen.dart` memanggil `HostService.updatePropertyPrice` dan menyegarkan tampilan baik saat simpan berhasil maupun saat trigger refresh (`_loadDetail` / `RefreshIndicator`).
+
+### 5. DataTable Harga Coret & Suffix Sesuai Property Card (Synchronized)
+- Laravel `PropertyDataTable.php` (`price_from` & `price_original`) disinkronkan persis dengan logika display di Flutter `property_card.dart` (lines 151, 170, 177):
+  1. Line 151 (`hasDiscount`): Harga coret `price_original` ditampilkan di bagian atas dengan styling merah coret (`text-danger text-decoration-line-through`) jika dan hanya jika `price_original > activePrice` dan `activePrice > 0`.
+  2. Line 170: Harga aktif dihitung dari `price_from > 0 ? price_from : (price_original > 0 ? price_original : '-')`.
+  3. Line 177: Jika `booking_mode === 'room'` (hotel), ditambahkan suffix ` / malam`. Jika bukan room (`unit`), tanpa suffix.
+  4. Kolom `booking_mode` ditampilkan dengan badge Metronic (`Room (Hotel)` vs `Unit (Property)`).
+
 

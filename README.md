@@ -90,18 +90,48 @@ Pendaftaran dan pengeditan akomodasi dilakukan melalui form wizard multi-step ya
 
 Setiap wizard mengelola state transaksional yang aman (`DB::transaction`), upload multi-file foto, validasi per-tab, dan otorisasi role Spatie.
 
-## 6. Skill (Optional will added later)
-1. Adversarial 
-Mengulitii dan "menyerang" hasil kerjaan untuk mencari kelemahan, celah keamanan, bug, dan lain-lain
+## 6. Ground Rules Livirooms: 5 Pilar Protokol Pengembangan Tingkat Lanjut (Mandatory Engineering Protocols)
 
-2. Multi-Agent Debate
-Beberapa agent mencoba pendekatan berbeda dan saling mengkritik sebelum mengambil kesimpulan
+Seluruh proses analisis, perancangan arsitektur, penulisan kode, refactoring, dan audit pada ekosistem **Livirooms (`com.liviroom.app`)** — baik pada backend Laravel maupun mobile Flutter — wajib tunduk pada **5 Pilar Protokol Pengembangan Tingkat Lanjut Livirooms**:
 
-3. Safety Net
-Membaut checkpoint supaya perubahan berisiko bisa di rollback kalau ada error
+### 1. Adversarial (Critical Code Review & Vulnerability Hunt)
+- **Tujuan:** Menguji batas (*boundary testing*), menguliti, dan secara kritis "menyerang" implementasi kode sendiri sebelum disetujui (*zero-tolerance regression*).
+- **Fokus Pemeriksaan:**
+  - **Keamanan & Autorisasi:** Validasi IDOR pada seluruh endpoint berbasis resource (`host_id === auth()->id()`), perlindungan SQL injection, mass assignment guard (`$fillable`), dan integritas token Sanctum / Midtrans.
+  - **Memory Leak & Resource Management:** Pembersihan `StreamSubscription`, `TextEditingController`, `AnimationController`, dan `ScrollController` pada lifecycle `dispose()` Flutter, serta pembersihan listener dan koneksi unclosed.
+  - **State Machine Integrity:** Verifikasi state transitions (Provider, Livewire reactive state, status booking/order) agar terbebas dari race condition atau state yatim piatu (*orphaned state*).
+  - **Android 14/15 Permission & OS Limits:** Penanganan izin granular (`READ_MEDIA_IMAGES`), `POST_NOTIFICATIONS`, Foreground Service Types terdaftar di AndroidManifest (`android:foregroundServiceType`), Photo Picker fallback, serta adaptasi Doze Mode.
+- **Rujukan Operasional:** [`workflows/code-review-sop.md`](workflows/code-review-sop.md).
 
-4. Skill Security Scan
-Memeriksa skill/plugin pihak ketiga sebelum kamu install
+### 2. Multi-Agent Debate (Multi-Perspective Architecture Discussion)
+- **Tujuan:** Mengkaji dan mendebat keputusan arsitektur kompleks dari berbagai sudut pandang sebelum satu baris kode pun ditulis.
+- **Perspektif / Agen yang Terlibat:**
+  - **Performance Optimization Expert:** Menilai latensi jaringan, query N+1 Eloquent, efisiensi indexing PostgreSQL, caching layer (Redis), widget rebuild cost di Flutter, dan target rendering 60/120 FPS.
+  - **Security & Privacy Advocate:** Menilai kepatuhan privasi (UU PDP / GDPR), enkripsi data sensitif (at rest via `flutter_secure_storage` & in transit TLS), pembatasan akses hak istimewa (least privilege), dan integritas webhook Midtrans S2S.
+  - **UX & Frontend Specialist:** Memastikan responsivitas UI, penanganan error state yang informatif bagi pengguna, konsistensi design tokens, dan kelancaran navigasi antar-layar (deep linking & tab preservation).
+- **Hasil Wajib:** Sintesis konsensus arsitektural yang mendokumentasikan tradeoff yang dipilih sebelum eksekusi.
+- **Rujukan Operasional:** [`workflows/agent-architecture.md`](workflows/agent-architecture.md).
 
-5. Scheduled SOP 
-Mengubah workflow/SOP menjadi routine yang bisa di jalankan secara terjadwal
+### 3. Safety Net (Checkpoint & Rollback Strategy)
+- **Tujuan:** Menjamin stabilitas sistem dengan memecah setiap modifikasi skala menengah hingga besar menjadi langkah-langkah modular yang terisolasi dan dapat dibatalkan (*reversible*).
+- **Mekanisme Penerapan:**
+  - **Atomic Modular Steps:** Hindari perubahan monolitik; pecah perubahan menjadi modul-modul independen (misal: integrasi Media3 Transformer, pembaruan Foreground Service, atau refactoring skema pembayaran).
+  - **Comprehensive Error Boundaries & Fallback:** Setiap service call wajib membungkus operasi berisiko tinggi dengan `try-catch`, menyediakan safe fallback data/UI, serta mencatat telemetry log yang jelas tanpa membuat aplikasi crash.
+  - **Checkpoint & Rollback Plan:** Sebelum menerapkan perubahan berisiko tinggi, tetapkan checkpoint (Git branching/tagging atau commit isolasi) sehingga jika terjadi regresi atau kegagalan kompatibilitas, rollback dapat dilakukan seketika tanpa merusak modul yang sudah stabil.
+- **Rujukan Operasional:** [`workflows/safety-net-rollback.md`](workflows/safety-net-rollback.md).
+
+### 4. Skill & Dependency Security Scan
+- **Tujuan:** Memvalidasi kredibilitas, keamanan, dan efisiensi setiap dependensi atau plugin pihak ketiga sebelum dimasukkan ke dalam `pubspec.yaml` (Flutter) atau `composer.json` (Laravel).
+- **Parameter Audit Wajib:**
+  - **Kredibilitas & Maintenance:** Memeriksa reputasi publisher, skor pub.dev / Packagist, riwayat rilis, dan aktivitas maintenance dalam 6 bulan terakhir.
+  - **Kompatibilitas Platform:** Mendukung penuh Dart 3 *sound null-safety*, kompatibilitas dengan Android SDK 34/35+ (Java 17/Kotlin modern), serta kestabilan pada iOS.
+  - **Dampak Ukuran & Performa:** Menghitung estimasi pertambahan ukuran binary (APK/AAB/IPA) serta overhead konsumsi RAM/CPU saat runtime. Hindari library berukuran besar untuk utilitas sepele.
+  - **Audit Kerentanan (CVE):** Bebas dari kerentanan keamanan yang dilaporkan, lisensi open source yang aman (MIT/Apache 2.0/BSD), dan tidak menyisipkan pelacak/telemetri tersembunyi.
+
+### 5. Scheduled SOP (Routine Workflow Enforcement)
+- **Tujuan:** Menjalankan 4 fase alur kerja berjenjang secara berurutan dan terdisiplin pada setiap siklus implementasi atau refactoring modul:
+  - **Fase 1: Analisis & Perdebatan (Multi-Agent Debate)** — Bedah requirement, bandingkan pendekatan arsitektural (Performance vs Security vs UX), tentukan solusi terbaik sebelum pengkodean.
+  - **Fase 2: Pembuatan Kode Modular dengan Checkpoint (Safety Net)** — Implementasikan kode secara modular, pasang try-catch/fallback guards, dan siapkan titik isolasi rollback yang aman.
+  - **Fase 3: Pemeriksaan Keamanan & Dependensi (Skill Security Scan)** — Audit library/plugin yang dibutuhkan sebelum `pub get` atau `composer require`, pastikan null-safety, ukuran, dan perizinan telah teruji.
+  - **Fase 4: Pengujian Celah & Ketahanan Kode (Adversarial Audit)** — Lakukan uji batas kritis, periksa kebocoran memori, audit siklus hidup state/controller, verifikasi izin Android 14/15, serta jalankan `flutter analyze` / `flutter test` / `php artisan test`.
+- **Rujukan Operasional:** [`workflows/execution-roadmap.md`](workflows/execution-roadmap.md).
