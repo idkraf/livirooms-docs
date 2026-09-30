@@ -3,6 +3,11 @@
 > **Fungsi file ini.** Daftar status selisih terverifikasi, perbaikan arsitektur data modeling, dan catatan integrasi sistem.
 >
 > **Status per 2026-08-26:** Flutter→Laravel accommodation creation flow audit selesai. Drift kritis ditemukan dan direkonsiliasi.
+> **Update per 2026-09-23 (Pembersihan Linter & Dead Code LoginScreen Flutter):**
+> 1. **Eliminasi `avoid_print`:** Menghapus 8 instruksi `print()` produksi di `login_screen.dart` (`dispose`, `_submit`, `build`) yang melanggar aturan linter `avoid_print` dan berpotensi menyebabkan I/O overhead serta kebocoran informasi state autentikasi.
+> 2. **Pembersihan Dead Code `_soon`:** Menghapus method `_soon()` yang tidak direferensikan (sebelumnya dipakai untuk dialog placeholder 'Lupa kata sandi?', yang kini sudah tersambung resmi ke `Routes.forgotPassword`).
+> 3. **Pembersihan Unreferenced Social Widgets:** Menghapus komponen mati `_OrDivider`, `_SocialRow`, dan `_SocialButton` yang ditinggalkan sejak penonaktifan social login.
+> 4. **Hasil Audit & Verifikasi:** `flutter analyze lib/screens/auth/login_screen.dart` menghasilkan 0 issues (bersih dari 11 issue sebelumnya), dan widget test `LoginScreen builds` lolos 100%.
 > **Update per 2026-09-23 (Eksekusi Protokol Livirooms — Opsi 1 Hardening Keamanan Backend):** Audit adversarial mendalam dan penutupan celah keamanan kritis pada API Laravel:
 > 1. **Perbaikan Route Sanctum:** Rute mutasi akomodasi `POST accommodations` dan `PUT accommodations/{id}` dipindahkan ke dalam grup `auth:sanctum`.
 > 2. **Mitigasi IDOR AccommodationController:** Menambahkan pengecekan kepemilikan host (`$accommodation->host_id === $user->id || $user->hasRole('admin')`) pada `update()`, dan mencegah pemalsuan `host_id` pada `store()` dengan meng-override langsung dari `$request->user()->id`.

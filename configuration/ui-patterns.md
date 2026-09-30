@@ -505,4 +505,36 @@ npm run prod
 
 ---
 
+## 16. Pola Page Tutorial Modal (Panduan Halaman Admin)
+
+Sistem tutorial langsung pada setiap halaman admin untuk menjelaskan fungsi halaman (*What & For What*), alur kerja operasional (*How It Works*), dan aturan bisnis serta batasan keamanan (*Rules & Invariants*).
+
+### 16.1 Penempatan Tombol di Card Toolbar
+Tombol ditempatkan berdampingan dengan tombol aksi utama pada `card-toolbar`:
+```blade
+<div class="card-toolbar">
+    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+        <!-- Tombol Panduan Halaman -->
+        <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_{module}_tutorial">
+            {!! getIcon('information-5', 'fs-4 me-1') !!}
+            Panduan Halaman
+        </button>
+
+        <!-- Tombol Aksi Utama -->
+        <button type="button" class="btn btn-primary" ...>
+            ...
+        </button>
+    </div>
+</div>
+```
+
+### 16.2 Struktur Modal Panduan Standar
+Modal menggunakan ID `#kt_modal_{module}_tutorial` dengan 3 tab utama:
+1. **Tujuan & Peran / Apa & Untuk Apa:** Menjelaskan fungsi halaman, entitas yang dikelola, dan manfaat operasional bagi Admin/Host.
+2. **Cara Kerja & Operasional:** Timeline berurutan langkah demi langkah mulai dari input, pencarian, hingga eksekusi aksi.
+3. **Aturan & Keamanan:** Invariants backend, sinkronisasi peran Spatie, proteksi SoftDeletes, dan validasi basis data.
+
+---
+
 *Dokumen ini dibuat berdasarkan pola yang ada di `resources/views/admin/user-management/` dan modul admin lainnya.*
+

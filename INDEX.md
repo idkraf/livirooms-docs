@@ -32,8 +32,10 @@ Peta rute dokumentasi proyek: **Topik → File Dokumentasi → Implementasi Kode
 | **User Manual Web Administrator** | [manual/user-manual-web-administrator.md](manual/user-manual-web-administrator.md) |
 | **User Manual Mobile App** | [manual/user-manual-mobile-app.md](manual/user-manual-mobile-app.md) |
 | **Livewire Form Wizards (Add/Edit Property & Hotel)** | [configuration/admin-panel.md](configuration/admin-panel.md) + [configuration/ui-patterns.md](configuration/ui-patterns.md) |
+| **Panduan Halaman Admin & Sistem Tutorial Modal** | [configuration/admin-tutorial-system.md](configuration/admin-tutorial-system.md) + [configuration/ui-patterns.md](configuration/ui-patterns.md) |
 | **Sistem Pembayaran Midtrans Snap & Webhook** | [payments/system.md](payments/system.md) + [features/payments.md](features/payments.md) |
 | **Sistem Referral & Reward** | [features/referral.md](features/referral.md) |
+| **Demo Presentation Multi-Platform** | [features/demo-presentation.md](features/demo-presentation.md) |
 | **Sampel Response API & Master Contract** | [response/detail-property.json](response/detail-property.json), [response/hotels.json](response/hotels.json), [response/home.json](response/home.json) |
 | **Agentic Workflows & Ekosistem AI** | [workflows/agent-architecture.md](workflows/agent-architecture.md) (Arsitektur Agent), [workflows/code-review-sop.md](workflows/code-review-sop.md) (SOP Review), [workflows/safety-net-rollback.md](workflows/safety-net-rollback.md) (Safety Net), [workflows/execution-roadmap.md](workflows/execution-roadmap.md) (Roadmap), [workflows/run_api_sequence.xml](workflows/run_api_sequence.xml) (API Sequence) |
 
