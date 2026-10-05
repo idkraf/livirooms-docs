@@ -234,4 +234,11 @@ Stok kamar hotel sepenuhnya menggunakan counter `unit_types.remaining` (real-tim
   3. Line 177: Jika `booking_mode === 'room'` (hotel), ditambahkan suffix ` / malam`. Jika bukan room (`unit`), tanpa suffix.
   4. Kolom `booking_mode` ditampilkan dengan badge Metronic (`Room (Hotel)` vs `Unit (Property)`).
 
+### 6. Demo Presentation — Tab Alur Proses Bisnis & Monetisasi Arus Kas (Added)
+- Halaman presentasi multi-platform [`demo.blade.php`](file:///d:/Project/Fastwork/rental.apartemen/laravel/resources/views/front/demo.blade.php) diperkaya dengan tab pertama aktif secara default: **`Model Bisnis & Cashflow`** (`#tab-business` & `#view-business`).
+- Menyajikan 4 tahap siklus proses bisnis end-to-end dengan stepper interaktif dan fitur *Auto-Tour*.
+- Menyajikan kalkulator simulasi arus kas (cashflow waterfall) interaktif: GTV, hak bersih mitra host (85%–90%), komisi platform take-rate (8%–15%), premi asuransi Stay Protection, dan biaya payment gateway Midtrans Snap.
+- Dokumentasi lengkap diarsipkan pada: [`docs/domain/business-flow-monetization.md`](file:///d:/Project/Fastwork/rental.apartemen/docs/domain/business-flow-monetization.md).
+
+
 
